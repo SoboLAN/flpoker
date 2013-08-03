@@ -5,7 +5,7 @@
 }
 
 body {
-	background:#AFCAD8;
+	background:#BCD5E1;
 	font: 14px Verdana;
 	min-height: 800px;
 }
@@ -92,12 +92,12 @@ ul.claybricks li a:hover, ul.claybricks li a.selected
 {
 	color:#E1D022;
 	background: #c61d1d;
-	background: -moz-linear-gradient(top, #5d4137 0%, #41251b 12%, #c61d1d 100%); /* moz syntax for CSS3 gradient */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5d4137), color-stop(12%,#41251b), color-stop(100%,#c61d1d));
-	background: -webkit-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%); /* webkit syntax for CSS3 gradient */
-	background: -o-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%); /* opera syntax for CSS3 gradient */
-	background: -ms-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%);
-	background: linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%);
+	background: -moz-linear-gradient(top, #5d4137 0%, #41251b 12%, #1579A9 100%); /* moz syntax for CSS3 gradient */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5d4137), color-stop(12%,#41251b), color-stop(100%,#1579A9));
+	background: -webkit-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%); /* webkit syntax for CSS3 gradient */
+	background: -o-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%); /* opera syntax for CSS3 gradient */
+	background: -ms-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%);
+	background: linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%);
 	-moz-box-shadow: 0 0 5px #595959; /* moz syntax for CSS3 box shadows */
 	-webkit-box-shadow: 0 0 5px #595959;
 	box-shadow: 0 0 5px #595959;
