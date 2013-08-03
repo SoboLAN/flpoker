@@ -1,0 +1,123 @@
+* {
+	border:0;
+	margin:0;
+	padding:0;
+}
+
+body {
+	background:#AFCAD8;
+	font: 14px Verdana;
+	min-height: 800px;
+}
+
+#container {
+	
+}
+
+#language_panel {
+	position:absolute;
+	right:15px;
+	top:20px;
+}
+
+#language_panel img {
+	vertical-align: middle;
+}
+
+#language_panel .active_lang {
+	border:solid 2px #444;
+	padding: 5px;
+}
+
+#title
+{
+	width: 1000px;
+	height: 35px;
+	margin: 0 auto;
+	background-color: #7EA3B5;
+	font: 1.75em Verdana;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 12px;
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
+#content {
+	padding: 10px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+#logo {
+	position: absolute;
+	top: 0;
+	left: 11px;
+	width: 500px;
+	margin-right: 20px;
+}
+
+#logo img {
+	vertical-align:top;
+}
+
+ul.claybricks
+{ /* main menu UL */
+	font-weight: bold;
+	width: 1000px;
+	background: #2C1F1F;
+	padding: 6px 0 6px 0; /* padding of the 4 sides of the menu */
+	margin: 0 auto;
+	text-align: center; /* set value to "left", "center", or "right" to align menu accordingly */
+	border-bottom-right-radius: 12px;
+	border-bottom-left-radius: 12px;
+}
+
+ul.claybricks li
+{
+	display: inline;
+}
+
+ul.claybricks li a
+{
+	color: #FADD82;
+	padding: 6px 8px 4px 8px; /* padding of the 4 sides of each menu link */
+	margin-right: 20px; /* spacing between each menu link */
+	text-decoration: none;
+	font: 1.1em Verdana;
+	font-weight: bold;
+}
+
+ul.claybricks li a:hover, ul.claybricks li a.selected
+{
+	color:#E1D022;
+	background: #c61d1d;
+	background: -moz-linear-gradient(top, #5d4137 0%, #41251b 12%, #c61d1d 100%); /* moz syntax for CSS3 gradient */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5d4137), color-stop(12%,#41251b), color-stop(100%,#c61d1d));
+	background: -webkit-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%); /* webkit syntax for CSS3 gradient */
+	background: -o-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%); /* opera syntax for CSS3 gradient */
+	background: -ms-linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%);
+	background: linear-gradient(top, #5d4137 0%,#41251b 12%,#c61d1d 100%);
+	-moz-box-shadow: 0 0 5px #595959; /* moz syntax for CSS3 box shadows */
+	-webkit-box-shadow: 0 0 5px #595959;
+	box-shadow: 0 0 5px #595959;
+	padding-top: 12px; /* large padding to get menu item to protrude upwards */
+	padding-bottom: 6px;
+}
+
+.enclosing_box {
+	font-size: 110%;
+	border-top:solid 2px #444;
+	border-bottom:solid 2px #444;
+	border-left:solid 2px #444;
+	border-right:solid 2px #444;
+	padding:10px;
+}
+
+#footer {
+   margin-top: 50px;
+   text-align:center;
+   padding:20px;
+   font:11px Verdana,sans-serif;
+   border-top:1px solid #666666; 
+}
