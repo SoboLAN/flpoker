@@ -7,18 +7,21 @@ class Cache
 	public static $topPlayersBonusKey = 'top_players_bonus';
 	public static $topFivePlayersMonthKey = 'top_five_players_month';
 
-	private static $classicViewLifetime = 3600 x 12;
-	private static $topPlayersSixMonthsLifetime = 3600 x 12;
-	private static $topPlayersAllTimeLifetime = 3600 x 12;
-	private static $topPlayersBonusLifetime = 3600 x 24;
-	private static $topFivePlayersMonthLifetime = 3600 x 12;
-
+	//will return true or false
+	//will tell if the cache with the key $key contains data
+	//if it contains and the data is expired, then the data will
+	//be deleted and function will return false
 	public function isInCache($key)
 	{
 	
 	}
 
 	public function saveToCache($key, $content)
+	{
+	
+	}
+	
+	public function flush($key)
 	{
 	
 	}
