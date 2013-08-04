@@ -1,6 +1,5 @@
 <?php
-require_once 'config/db.config.php';
-	
+
 class Database
 {
 	private static $__instance;
@@ -17,8 +16,10 @@ class Database
 		return self::$__instance;
 	}
 
-	private __construct()
+	private function __construct()
 	{
+		require_once 'config/db.config.php';
+		
 		$emulate_prepares_below_version = '5.1.17';
 
 		$dsndefaults = array_fill_keys(array('host', 'port', 'unix_socket', 'dbname', 'charset'), null);
