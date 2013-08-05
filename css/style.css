@@ -11,7 +11,7 @@ body {
 }
 
 #container {
-	
+	/* Added this ID in case some styling is needed in the future */
 }
 
 #language_panel {
@@ -47,6 +47,11 @@ body {
 	padding: 10px;
 	width: 90%;
 	margin: 0 auto;
+}
+
+#content p {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #logo {
@@ -116,8 +121,17 @@ ul.claybricks li a:hover, ul.claybricks li a.selected
 
 #footer {
    margin-top: 50px;
-   text-align:center;
+   text-align:left;
    padding:20px;
    font:11px Verdana,sans-serif;
    border-top:1px solid #666666; 
+}
+
+#contact-button {
+	float: right;
+	display: inline;
+}
+
+#contact-button img {
+	vertical-align: middle;
 }

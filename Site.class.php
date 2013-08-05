@@ -1,4 +1,5 @@
 <?php
+require_once 'config/Config.class.php';
 
 class Site
 {
@@ -16,16 +17,11 @@ class Site
 	);
 	
 	private $lang;
-	private $config;
 	private $wording;
 	
 	public function __construct ()
 	{
-		require_once 'config/site.config.php';
-		
-		$this->config = $siteConfig;
-		
-		if(! $this->config['online'])
+		if(! Config::getConfig()->getValue('online'))
 		{
 			die ('The site is currently down for maintenance. Will be back at ' . $this->config['online_eta']);
 		}
@@ -44,7 +40,7 @@ class Site
 	
 	private function fillLanguage ()
 	{
-		$cookiename = $this->config['lang_cookie_name'];
+		$cookiename = Config::getConfig()->getValue('lang_cookie_name');
 	
 		if (isset ($_COOKIE[$cookiename]))
 		{
@@ -57,18 +53,13 @@ class Site
 		}
 		else
 		{
-			$this->lang = $this->config['default_lang'];
+			$this->lang = Config::getConfig()->getValue('default_lang');
 		}
 	}
 	
 	public function getLanguage ()
 	{
 		return $this->lang;
-	}
-	
-	public function getConfig ($key)
-	{
-		return $this->config[$key];
 	}
 	
 	public function getWord ($key)
@@ -111,7 +102,7 @@ class Site
 		
 		$out .= '</head><body>';
 		
-		if ($this->config['enable_google_analytics'])
+		if (Config::getConfig()->getValue('enable_google_analytics'))
 		{
 			require_once 'analytics.google.php';
 			
