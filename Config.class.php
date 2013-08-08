@@ -30,6 +30,7 @@ class Config
 			'cache_lifetime_top_alltime' => 12 * 3600,
 			'cache_lifetime_top_bonus' => 24 * 3600,
 			'cache_lifetime_five' => 12 * 3600,
+			'excel_nr_recent_tournaments' => 2,
 		);
 	}
 	

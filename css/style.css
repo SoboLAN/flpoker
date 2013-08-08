@@ -119,6 +119,24 @@ ul.claybricks li a:hover, ul.claybricks li a.selected
 	padding:10px;
 }
 
+.presentation-table {
+	border-collapse: collapse;
+}
+
+.presentation-table th {
+	text-align: center;
+	font-weight: bold;
+	padding: 2px;
+	border: 1px solid #999;
+	text-decoration:underline;
+}
+
+.presentation-table td {
+	padding: 2px;
+	border: 1px solid #999;
+	text-align: center;
+}
+
 #footer {
    margin-top: 50px;
    text-align:left;

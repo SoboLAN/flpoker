@@ -1,5 +1,5 @@
 <?php
-require_once 'config/Config.class.php';
+require_once 'Config.class.php';
 
 class Site
 {
@@ -7,7 +7,7 @@ class Site
 	
 	private static $jQueryDependency = array (
 		'index.php'			=> false,
-		'classic.view.php'	=> true,
+		'excel.view.php'	=> true,
 		'statistics.php'	=> true,
 		'players.php'		=> true,
 		'tournaments.php'	=> true,
@@ -75,7 +75,7 @@ class Site
 		switch($page)
 		{
 			case 'index.php': 			$pageTitle = $this->wording['menu_home']; break;
-			case 'classic.view.php': 	$pageTitle = $this->wording['menu_classic']; break;
+			case 'excel.view.php':		$pageTitle = $this->wording['menu_excel']; break;
 			case 'statistics.php': 		$pageTitle = $this->wording['menu_statistics']; break;
 			case 'players.php': 		$pageTitle = $this->wording['menu_players']; break;
 			case 'tournaments.php': 	$pageTitle = $this->wording['menu_tournaments']; break;
@@ -115,8 +115,8 @@ class Site
 		$out .= '<li><a href="index.php" ' . (($page == 'index.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_home'] . '</a></li>';
 		
-		$out .= '<li><a href="classic.view.php" ' . (($page == 'classic.view.php.php') ? 'class="selected">' : '>') .
-				$this->wording['menu_classic'] . '</a></li>';
+		$out .= '<li><a href="excel.view.php" ' . (($page == 'excel.view.php.php') ? 'class="selected">' : '>') .
+				$this->wording['menu_excel'] . '</a></li>';
 		
 		$out .= '<li><a href="statistics.php" ' . (($page == 'statistics.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_statistics'] . '</a></li>';
