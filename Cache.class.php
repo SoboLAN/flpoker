@@ -1,7 +1,9 @@
 <?php
 require_once 'config/site.config.php';
 
-class Cache
+require_once 'CacheInterface.php';
+
+class CacheFile implements CacheInterface
 {
 	private static $basedir = 'cache/';
 	
@@ -15,7 +17,7 @@ class Cache
 	//will tell if the cache with the key $key contains data
 	//if it contains and the data is expired, then the data will
 	//be deleted and function will return false
-	public function isInCache($key)
+	public function contains($key)
 	{
 		$timeFile = self::$basedir . $key . '_timestamp';
 		if(!file_exists($timeFile))
@@ -43,7 +45,7 @@ class Cache
 		
 	}
 
-	public function saveToCache($key, $content)
+	public function save($key, $content)
 	{
 	
 	}

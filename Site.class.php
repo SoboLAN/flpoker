@@ -175,6 +175,8 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
+			FileList Poker Points v1.0 Alpha.
+			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
 			Project Author and Site Design: Radu Murzea.
