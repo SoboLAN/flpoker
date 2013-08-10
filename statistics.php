@@ -8,6 +8,8 @@ $site = new Site();
 
 function getTournamentGraph($tournaments)
 {
+	global $site;
+
 	$tournamentParticipants = array();
 	$tournamentAverage = array();
 	foreach ($tournaments as $tournament)
@@ -29,10 +31,10 @@ function getTournamentGraph($tournaments)
                 type: 'spline'
             },
             title: {
-                text: 'Players Count per Tournament'
+                text: '" . $site->getWord('statistics_tournaments_charttitle') . "'
             },
             subtitle: {
-                text: 'The evolution of the number of players per tournament, together with the average value'
+                text: '" . $site->getWord('statistics_tournaments_chartsubtitle') . "'
             },
             xAxis: {
                 type: 'datetime',
@@ -43,7 +45,7 @@ function getTournamentGraph($tournaments)
             },
             yAxis: {
                 title: {
-                    text: 'Number of players'
+                    text: '" . $site->getWord('statistics_tournaments_playersline') . "'
                 },
                 min: 0
             },
@@ -55,13 +57,13 @@ function getTournamentGraph($tournaments)
             },
             
             series: [{
-                name: 'Number of Players',
+                name: '" . $site->getWord('statistics_tournaments_playersline') . "',
                 // Note that in JavaScript, months start at 0 for January, 1 for February etc.
                 data: [
                     $tournamentParticipants
                 ]
             }, {
-                name: 'Average',
+                name: '" . $site->getWord('statistics_tournaments_averageline') . "',
                 data: [
                     $tournamentAverage
                 ]
@@ -69,6 +71,32 @@ function getTournamentGraph($tournaments)
         });
     });
 	</script>";
+	
+	return $out;
+}
+
+function getPlayersAllTime($content)
+{
+	global $site;
+
+	$out = '<table class="presentation-table" style="width:90%">
+			<tr>
+			<th><strong>' . $site->getWord('players_pokerstars_name') . '</strong></th>
+			<th><strong>' . $site->getWord('players_filelist_name') . '</strong></th>
+			<th><strong>' . $site->getWord('players_points_all_time') . '</strong></th>
+			</tr>';
+
+	foreach ($content as $player)
+	{
+		$out .=
+		'<tr>
+			<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
+			<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
+			<td>' . $player['points'] . '</td>
+		</tr>';	
+	}
+
+	$out .= '</table>';
 	
 	return $out;
 }
@@ -81,6 +109,7 @@ $htmlout .= '<div id="content">';
 
 $statisticsPage = new StatisticsPage();
 $tournaments = $statisticsPage->getTournamentsGraph();
+$topAllTime = $statisticsPage->getTopPlayersAllTime();
 
 $htmlout .=
 	'<div id="tabs">
@@ -93,7 +122,8 @@ $htmlout .=
 			<li><a href="#tabs-6">' . $site->getWord('statistics_tab_tournaments') . '</a></li>
 		</ul>
 		<div id="tabs-1">
-			<p>' . $site->getWord('statistics_top_all_time_text') . '.</p>
+			<p>' . $site->getWord('statistics_top_all_time_text') . '</p>
+			' . getPlayersAllTime($topAllTime) . '
 		</div>
 		<div id="tabs-2">
 			<p>' . $site->getWord('statistics_top_6_months_text') . '</p>

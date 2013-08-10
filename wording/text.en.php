@@ -15,12 +15,19 @@
 		'players_pokerstars_name' => 'PokerStars Name',
 		'players_filelist_name' => 'FileList Name',
 		'players_current_points' => 'Current Points',
+		'players_points_all_time' => 'Points All Time',
 		'statistics_tab_top_all_time' => 'Top Players All Time',
 		'statistics_tab_top_6_months' => 'Top Players Last 6 Months',
 		'statistics_tab_top_spending' => 'Top Spending Players',
 		'statistics_tab_most_active' => 'Most Active Players',
 		'statistics_tab_top_bonus' => 'Top Players by Bonus',
 		'statistics_tab_tournaments' => 'Tournaments',
+		'tournaments_tournament_date' => 'Tournament Date',
+		'tournaments_type' => 'Type',
+		'tournaments_participants' => 'Number of Players',
+		'tournaments_more_details' => 'More Details',
+		'tournaments_regular' => 'regular',
+		'tournaments_special' => 'special',
 		'statistics_top_all_time_text' =>
 			'This table shows the players and the total number of points they\'ve earned since they entered the club.',
 		'statistics_top_6_months_text' =>
@@ -34,5 +41,10 @@
 		'statistics_tournaments_text' =>
 			'Here, you can see the evolution of participants in tournaments over time. One line ' .
 			'represents the number of players per tournament, while the other represents the ' .
-			'evolution of the average number of players.'
+			'evolution of the average number of players.',
+		'statistics_tournaments_charttitle' => 'Players Count per Tournament',
+		'statistics_tournaments_chartsubtitle' =>
+			'The evolution of the number of players per tournament, together with the average value',
+		'statistics_tournaments_playersline' => 'Number of Players',
+		'statistics_tournaments_averageline' => 'Average'
 	);
