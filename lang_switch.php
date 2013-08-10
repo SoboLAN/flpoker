@@ -1,11 +1,15 @@
 <?php
-require_once 'config/site.config.php';
-	
+require_once 'Config.class.php';
+
 if ($_GET['lang'] !== 'ro' && $_GET['lang'] !== 'en')
 {
 	header('Location: index.php');
 }
+
+$config = Config::getConfig();
+$cookieName = $config->getValue('lang_cookie_name');
+$cookieDuration = $config->getValue('lang_cookie_duration');
 	
-setcookie($siteConfig['lang_cookie_name'], $_GET['lang'], time() + $siteConfig['lang_cookie_duration']);
-	
+setcookie($cookieName, $_GET['lang'], time() + $cookieDuration);
+
 header('Location: index.php');

@@ -7,12 +7,21 @@ class Site
 	
 	private static $jQueryDependency = array (
 		'index.php'			=> false,
-		'excel.view.php'	=> true,
 		'statistics.php'	=> true,
 		'players.php'		=> true,
 		'tournaments.php'	=> true,
 		'rules.php'			=> false,
 		'ask.prize.php'		=> true,
+		'contact.php'		=> false,
+	);
+	
+	private static $highChartsDependency = array (
+		'index.php'			=> false,
+		'statistics.php'	=> true,
+		'players.php'		=> true,
+		'tournaments.php'	=> true,
+		'rules.php'			=> false,
+		'ask.prize.php'		=> false,
 		'contact.php'		=> false,
 	);
 	
@@ -74,14 +83,13 @@ class Site
 		$pageTitle = '';
 		switch($page)
 		{
-			case 'index.php': 			$pageTitle = $this->wording['menu_home']; break;
-			case 'excel.view.php':		$pageTitle = $this->wording['menu_excel']; break;
-			case 'statistics.php': 		$pageTitle = $this->wording['menu_statistics']; break;
-			case 'players.php': 		$pageTitle = $this->wording['menu_players']; break;
-			case 'tournaments.php': 	$pageTitle = $this->wording['menu_tournaments']; break;
-			case 'rules.php': 			$pageTitle = $this->wording['menu_rules']; break;
-			case 'ask.prize.php':		$pageTitle = $this->wording['menu_askprize']; break;
-			case 'contact.php':			$pageTitle = $this->wording['menu_contact']; break;
+			case 'index.php': 		$pageTitle = $this->wording['menu_home']; break;
+			case 'statistics.php': 	$pageTitle = $this->wording['menu_statistics']; break;
+			case 'players.php': 	$pageTitle = $this->wording['menu_players']; break;
+			case 'tournaments.php': $pageTitle = $this->wording['menu_tournaments']; break;
+			case 'rules.php': 		$pageTitle = $this->wording['menu_rules']; break;
+			case 'ask.prize.php':	$pageTitle = $this->wording['menu_askprize']; break;
+			case 'contact.php':		$pageTitle = $this->wording['menu_contact']; break;
 			default: die('Invalid Page');
 		}
 		
@@ -98,7 +106,15 @@ class Site
 			$out .= '<script src="js/jquery-1.9.1.js"></script>';
 			$out .= '<script src="js/jquery-ui-1.10.3.custom.min.js"></script>';
 			$out .= '<link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />';
+
+			if (self::$highChartsDependency[$page])
+			{
+				$out .= '<script src="js/highcharts/highcharts.js"></script>';
+				$out .= '<script src="js/highcharts/modules/exporting.js"></script>';
+				$out .= '<script src="js/highcharts/themes/dark-blue.js"></script>';
+			}
 		}
+		
 		
 		$out .= '</head><body>';
 		
@@ -114,9 +130,6 @@ class Site
 		
 		$out .= '<li><a href="index.php" ' . (($page == 'index.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_home'] . '</a></li>';
-		
-		$out .= '<li><a href="excel.view.php" ' . (($page == 'excel.view.php.php') ? 'class="selected">' : '>') .
-				$this->wording['menu_excel'] . '</a></li>';
 		
 		$out .= '<li><a href="statistics.php" ' . (($page == 'statistics.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_statistics'] . '</a></li>';
