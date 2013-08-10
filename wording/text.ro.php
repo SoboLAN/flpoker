@@ -15,6 +15,7 @@ $siteLabels = array (
 	'players_pokerstars_name' => 'Nume PokerStars',
 	'players_filelist_name' => 'Nume FileList',
 	'players_current_points' => 'Puncte curente',
+	'players_registration_date' => 'Data înregistrării în Club',
 	'players_points_all_time' => 'Total Puncte All Time',
 	'statistics_tab_top_all_time' => 'Top Jucători',
 	'statistics_tab_top_6_months' => 'Top Jucători 6 Luni',

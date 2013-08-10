@@ -15,6 +15,7 @@
 		'players_pokerstars_name' => 'PokerStars Name',
 		'players_filelist_name' => 'FileList Name',
 		'players_current_points' => 'Current Points',
+		'players_registration_date' => 'Club Register Date',
 		'players_points_all_time' => 'Points All Time',
 		'statistics_tab_top_all_time' => 'Top Players All Time',
 		'statistics_tab_top_6_months' => 'Top Players Last 6 Months',

@@ -27,7 +27,10 @@ class PlayersPage
 		//the formula is initial_accumulated_points + results + bonuses - new prizes
 		try
 		{
-			$players = $db->query ('SELECT player_id, id_filelist, name_pokerstars, name_filelist, initial_accumulated_points ' .
+			$players = $db->query ('SELECT player_id, id_filelist, name_pokerstars, name_filelist, ' .
+								'initial_accumulated_points, MONTH(join_date) AS month, ' .
+								'DAYOFMONTH(join_date) AS day, YEAR(join_date) AS year, ' .
+								'member_type ' .
 								'FROM players ' .
 								'ORDER BY player_id ASC');
 
@@ -68,6 +71,10 @@ class PlayersPage
 									'id_filelist' => $player->id_filelist,
 									'name_pokerstars' => $player->name_pokerstars,
 									'name_filelist' => $player->name_filelist,
+									'member_type' => $player->member_type,
+									'year' => $player->year,
+									'month' => $player->month,
+									'day' => $player->day,
 									'points' => $playerPoints
 			);
 		}

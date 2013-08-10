@@ -137,6 +137,10 @@ ul.claybricks li a:hover, ul.claybricks li a.selected
 	text-align: center;
 }
 
+.admin-marker {
+	background-color: #96EC2D;
+}
+
 #footer {
    margin-top: 50px;
    text-align:left;
