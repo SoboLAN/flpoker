@@ -2,7 +2,7 @@
 
 require_once 'Site.class.php';
 
-require_once 'PlayersMonthPage.class.php';
+require_once 'DAO/PlayersMonthPage.php';
 
 $site = new Site();
 
@@ -10,7 +10,7 @@ $htmlout = $site->getHeader('players.month.php');
 
 $htmlout .= '<div id="title">' . $site->getWord('menu_players_of_the_month') . '</div>';
 
-$htmlout .= '<div id="content">';
+$htmlout .= '<div id="content-narrower">';
 
 $playersMonthPage = new PlayersMonthPage();
 $content = $playersMonthPage->getContent();

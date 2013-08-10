@@ -12,7 +12,6 @@ class Site
 		'tournaments.php'	=> true,
 		'players.month.php' => false,
 		'rules.php'			=> false,
-		'ask.prize.php'		=> true,
 		'contact.php'		=> false,
 	);
 	
@@ -23,7 +22,6 @@ class Site
 		'tournaments.php'	=> true,
 		'players.month.php' => false,
 		'rules.php'			=> false,
-		'ask.prize.php'		=> false,
 		'contact.php'		=> false,
 	);
 	
@@ -91,7 +89,6 @@ class Site
 			case 'tournaments.php':		$pageTitle = $this->wording['menu_tournaments']; break;
 			case 'players.month.php':	$pageTitle = $this->wording['menu_players_of_the_month']; break;
 			case 'rules.php':			$pageTitle = $this->wording['menu_rules']; break;
-			case 'ask.prize.php':		$pageTitle = $this->wording['menu_askprize']; break;
 			case 'contact.php':			$pageTitle = $this->wording['menu_contact']; break;
 			default: die('Invalid Page');
 		}
@@ -148,9 +145,6 @@ class Site
 		
 		$out .= '<li><a href="rules.php" ' . (($page == 'rules.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_rules'] . '</a></li>';
-		
-		$out .= '<li><a href="ask.prize.php" ' . (($page == 'ask.prize.php') ? 'class="selected">' : '>') .
-				$this->wording['menu_askprize'] . '</a></li>';
 
 		$out .= '</ul>
 		<p id="language_panel">';
@@ -159,14 +153,14 @@ class Site
 		{
 			$out .= '
 				<img class="active_lang" src="images/ro.gif" title="' . $this->wording['langpanel_ro'] .'" />
-			<a href="lang_switch.php?lang=en">
+			<a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">
 				<img src="images/us.gif" title="' . $this->wording['langpanel_en_switch'] . '" />
 			</a>';
 		}
 		else if ($this->lang == 'en')
 		{
 			$out .= '
-			<a href="lang_switch.php?lang=ro">
+			<a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">
 				<img src="images/ro.gif" title="' . $this->wording['langpanel_ro_switch'] .'" />
 			</a>
 				<img class="active_lang" src="images/us.gif" title="' . $this->wording['langpanel_en'] . '" />

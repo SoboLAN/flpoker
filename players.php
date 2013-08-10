@@ -2,7 +2,7 @@
 
 require_once 'Site.class.php';
 
-require_once 'PlayersPage.class.php';
+require_once 'DAO/PlayersPage.php';
 
 $site = new Site();
 
@@ -12,8 +12,8 @@ $htmlout .= '<div id="title">' . $site->getWord('menu_players') . '</div>';
 
 $htmlout .= '<div id="content">';
 
-$excelPage = new PlayersPage();
-$content = $excelPage->getContent();
+$playersPage = new PlayersPage();
+$content = $playersPage->getContent();
 
 $htmlout .= '<table class="presentation-table" style="width:100%">
 			<tr>

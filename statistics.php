@@ -2,7 +2,7 @@
 
 require_once 'Site.class.php';
 
-require_once 'StatisticsPage.class.php';
+require_once 'DAO/StatisticsPage.php';
 
 $site = new Site();
 

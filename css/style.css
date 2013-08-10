@@ -54,16 +54,33 @@ body {
 	margin-bottom: 10px;
 }
 
-#logo {
-	position: absolute;
-	top: 0;
-	left: 11px;
-	width: 500px;
-	margin-right: 20px;
+#content-narrower {
+	padding: 10px;
+	width: 1000px;
+	margin: 0 auto;
 }
 
-#logo img {
-	vertical-align:top;
+#content-narrower p {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.subtitle {
+	font: 1.40em Verdana;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-left: 20px;
+}
+
+.bigger_label {
+	font: 1.1em Verdana;
+	font-weight: bold;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.faded {
+	color: #A68F8F;
 }
 
 ul.claybricks
@@ -87,7 +104,7 @@ ul.claybricks li a
 {
 	color: #FADD82;
 	padding: 6px 8px 4px 8px; /* padding of the 4 sides of each menu link */
-	margin-right: 35px; /* spacing between each menu link */
+	margin-right: 30px; /* spacing between each menu link */
 	text-decoration: none;
 	font: 1.1em Verdana;
 	font-weight: bold;

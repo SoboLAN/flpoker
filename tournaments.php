@@ -2,7 +2,7 @@
 
 require_once 'Site.class.php';
 
-require_once 'TournamentsPage.class.php';
+require_once 'DAO/TournamentsPage.php';
 
 $site = new Site();
 
@@ -10,7 +10,7 @@ $htmlout = $site->getHeader('tournaments.php');
 
 $htmlout .= '<div id="title">' . $site->getWord('menu_tournaments') . '</div>';
 
-$htmlout .= '<div id="content">';
+$htmlout .= '<div id="content-narrower">';
 
 $tournamentsPage = new TournamentsPage();
 $content = $tournamentsPage->getContent();
