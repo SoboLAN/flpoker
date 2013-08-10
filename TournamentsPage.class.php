@@ -15,7 +15,8 @@ class TournamentsPage
 
 		try
 		{
-			$tmptournaments = $db->query ('SELECT tournament_id, tournament_date, ' .
+			$tmptournaments = $db->query ('SELECT tournament_id, YEAR(tournament_date) AS year, ' .
+										'MONTH(tournament_date) AS month, DAYOFMONTH(tournament_date) AS day, ' .
 										'tournament_type, participants ' .
 										'FROM tournaments ' .
 										'ORDER BY tournament_date DESC');
@@ -35,9 +36,11 @@ class TournamentsPage
 		
 		foreach ($tournaments as $tournament)
 		{
-			$final_result[] = array('tournament_id' => $tournament->tournament_id,
-									'tournament_date' => $tournament->tournament_date,
-									'tournament_type' => $tournament->tournament_type,
+			$final_result[] = array('id' => $tournament->tournament_id,
+									'day' => $tournament->day,
+									'month' => $tournament->month,
+									'year' => $tournament->year,
+									'type' => $tournament->tournament_type,
 									'participants' => $tournament->participants
 			);
 		}

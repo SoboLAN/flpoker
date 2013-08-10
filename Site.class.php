@@ -10,6 +10,7 @@ class Site
 		'statistics.php'	=> true,
 		'players.php'		=> true,
 		'tournaments.php'	=> true,
+		'players.month.php' => false,
 		'rules.php'			=> false,
 		'ask.prize.php'		=> true,
 		'contact.php'		=> false,
@@ -20,6 +21,7 @@ class Site
 		'statistics.php'	=> true,
 		'players.php'		=> true,
 		'tournaments.php'	=> true,
+		'players.month.php' => false,
 		'rules.php'			=> false,
 		'ask.prize.php'		=> false,
 		'contact.php'		=> false,
@@ -83,13 +85,14 @@ class Site
 		$pageTitle = '';
 		switch($page)
 		{
-			case 'index.php': 		$pageTitle = $this->wording['menu_home']; break;
-			case 'statistics.php': 	$pageTitle = $this->wording['menu_statistics']; break;
-			case 'players.php': 	$pageTitle = $this->wording['menu_players']; break;
-			case 'tournaments.php': $pageTitle = $this->wording['menu_tournaments']; break;
-			case 'rules.php': 		$pageTitle = $this->wording['menu_rules']; break;
-			case 'ask.prize.php':	$pageTitle = $this->wording['menu_askprize']; break;
-			case 'contact.php':		$pageTitle = $this->wording['menu_contact']; break;
+			case 'index.php':			$pageTitle = $this->wording['menu_home']; break;
+			case 'statistics.php':		$pageTitle = $this->wording['menu_statistics']; break;
+			case 'players.php':			$pageTitle = $this->wording['menu_players']; break;
+			case 'tournaments.php':		$pageTitle = $this->wording['menu_tournaments']; break;
+			case 'players.month.php':	$pageTitle = $this->wording['menu_players_of_the_month']; break;
+			case 'rules.php':			$pageTitle = $this->wording['menu_rules']; break;
+			case 'ask.prize.php':		$pageTitle = $this->wording['menu_askprize']; break;
+			case 'contact.php':			$pageTitle = $this->wording['menu_contact']; break;
 			default: die('Invalid Page');
 		}
 		
@@ -139,6 +142,9 @@ class Site
 		
 		$out .= '<li><a href="tournaments.php" ' . (($page == 'tournaments.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_tournaments'] . '</a></li>';
+		
+		$out .= '<li><a href="players.month.php" ' . (($page == 'players.month.php') ? 'class="selected">' : '>') .
+				$this->wording['menu_players_of_the_month'] . '</a></li>';
 		
 		$out .= '<li><a href="rules.php" ' . (($page == 'rules.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_rules'] . '</a></li>';

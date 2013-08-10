@@ -1,10 +1,10 @@
 <?php
 $siteLabels = array (
 	'menu_home' => 'Acasă',
-	'menu_excel' => 'Vizualizare Excel',
 	'menu_statistics' => 'Statistici',
 	'menu_players' => 'Jucători',
 	'menu_tournaments' => 'Turnee',
+	'menu_players_of_the_month' => 'Jucătorii Lunii',
 	'menu_rules' => 'Reguli',
 	'menu_askprize' => 'Cere Premiu',
 	'menu_contact' => 'Contact',
@@ -15,7 +15,7 @@ $siteLabels = array (
 	'players_pokerstars_name' => 'Nume PokerStars',
 	'players_filelist_name' => 'Nume FileList',
 	'players_current_points' => 'Puncte curente',
-	'players_points_all_time' => 'Total Puncte de-a lungul timpului',
+	'players_points_all_time' => 'Total Puncte All Time',
 	'statistics_tab_top_all_time' => 'Top Jucători',
 	'statistics_tab_top_6_months' => 'Top Jucători 6 Luni',
 	'statistics_tab_top_spending' => 'Top Jucători Premii',
@@ -28,6 +28,9 @@ $siteLabels = array (
 	'tournaments_more_details' => 'Mai Multe Detalii',
 	'tournaments_regular' => 'obișnuit',
 	'tournaments_special' => 'special',
+	'players_month_pokerstars' => 'Nume PokerStars',
+	'players_month_filelist' => 'Nume FileList',
+	'players_month_date' => 'Pentru Luna',
 	'statistics_top_all_time_text' =>
 		'Acest tabel arată jucătorii și toate punctele care aceștia le-au obținut de când s-au ' .
 		'înregistrat în club.',
@@ -39,7 +42,7 @@ $siteLabels = array (
 		'Acest tabel arată care sunt cei mai activi jucători (adică cei care se înregistrează la ' .
 		'cât mai multe turnee).',
 	'statistics_top_bonus_text' =>
-		'Aici puteți vedea cine primește cele mai multe puncte bonus..',
+		'Aici puteți vedea cine primește cele mai multe puncte bonus.',
 	'statistics_tournaments_text' =>
 		'Aici se poate vedea evoluția numărului de participanți la turnee. Prima linie ' .
 		'reprezintă numărul propriu-zis de participanți iar a doua reprezintă evoluția numărului ' .

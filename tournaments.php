@@ -25,14 +25,17 @@ $htmlout .= '<table class="presentation-table" style="width:100%">
 
 foreach ($content as $tournament)
 {
-	$typeLabelKey = $tournament['tournament_type'] == 'regular' ? 'tournaments_regular' : 'tournaments_special';
+	$typeLabelKey = $tournament['type'] == 'regular' ? 'tournaments_regular' : 'tournaments_special';
+	
+	$tournamentTime = mktime(0, 0, 0, $tournament['month'], $tournament['day'], $tournament['year']);
+	$tournamentDate = date('l, jS F Y', $tournamentTime);
 	
 	$htmlout .=
 	'<tr>
-		<td>' . $tournament['tournament_date'] . '</td>
+		<td>' . $tournamentDate . '</td>
 		<td>' . $site->getWord($typeLabelKey) . '</td>
 		<td>' . $tournament['participants'] . '</td>
-		<td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $site->getWord('tournaments_more_details') . '</a></td>
+		<td><a href="tournament.php?id=' . $tournament['id'] . '">' . $site->getWord('tournaments_more_details') . '</a></td>
 	</tr>';	
 }
 

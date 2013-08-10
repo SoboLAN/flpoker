@@ -1,10 +1,10 @@
 <?php
 	$siteLabels = array (
 		'menu_home' => 'Home Page',
-		'menu_excel' => 'Excel View',
 		'menu_statistics' => 'Statistics',
 		'menu_players' => 'Players',
 		'menu_tournaments' => 'Tournaments',
+		'menu_players_of_the_month' => 'Players of the Month',
 		'menu_rules' => 'Rules',
 		'menu_askprize' => 'Ask for Prize',
 		'menu_contact' => 'Contact',
@@ -28,6 +28,9 @@
 		'tournaments_more_details' => 'More Details',
 		'tournaments_regular' => 'regular',
 		'tournaments_special' => 'special',
+		'players_month_pokerstars' => 'PokerStars Name',
+		'players_month_filelist' => 'FileList Name',
+		'players_month_date' => 'For Month',
 		'statistics_top_all_time_text' =>
 			'This table shows the players and the total number of points they\'ve earned since they entered the club.',
 		'statistics_top_6_months_text' =>

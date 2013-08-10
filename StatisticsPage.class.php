@@ -110,6 +110,18 @@ class StatisticsPage
 		return $results;
 	}
 	
+	public function getMostActivePlayers()
+	{
+		/*
+		 	query:
+			SELECT count( points ) AS freq, player_id
+		   FROM results
+		   WHERE player_id IS NOT NULL
+		   GROUP BY player_id
+		   ORDER BY freq DESC
+		 */
+	}
+	
 	private function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)
 	{
 		$sort_col = array();
