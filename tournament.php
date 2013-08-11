@@ -46,6 +46,9 @@ $htmlout .=
 		<span class="bigger_label">Tournament Type: ' . $details['type'] . '</span>
 	</p>
 	<p>
+		<span class="bigger_label">Participants: ' . $details['participants'] . '</span>
+	</p>
+	<p>
 		<span class="subtitle">Results</span>
 	</p>';
 
@@ -60,7 +63,7 @@ $htmlout .= '<table class="presentation-table" style="width:100%">
 
 foreach ($results as $result)
 {
-	if (isset ($result['player_id']))
+	if (isset ($result['player_id']) AND isset ($result['name_pokerstars']))
 	{
 		$player = '<a href="player.php?id=' . $result['player_id'] . '">' . $result['name_pokerstars'] . '</a>';
 	}
