@@ -9,7 +9,7 @@ class Site
 		'index.php'			=> false,
 		'statistics.php'	=> true,
 		'players.php'		=> true,
-		'tournaments.php'	=> true,
+		'tournaments.php'	=> false,
 		'players.month.php' => false,
 		'rules.php'			=> false,
 		'contact.php'		=> false,
@@ -19,7 +19,7 @@ class Site
 		'index.php'			=> false,
 		'statistics.php'	=> true,
 		'players.php'		=> true,
-		'tournaments.php'	=> true,
+		'tournaments.php'	=> false,
 		'players.month.php' => false,
 		'rules.php'			=> false,
 		'contact.php'		=> false,
@@ -103,7 +103,7 @@ class Site
 		
 		if (self::$jQueryDependency[$page])
 		{
-			$out .= '<script src="js/jquery-1.9.1.js"></script>';
+			$out .= '<script src="js/jquery-1.9.1.min.js"></script>';
 			$out .= '<script src="js/jquery-ui-1.10.3.custom.min.js"></script>';
 			$out .= '<link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />';
 

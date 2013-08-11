@@ -47,7 +47,6 @@ class PlayersPage
 			
 			$tmpprizes = $db->query('SELECT SUM(cost) AS cost, player_id ' .
 								'FROM prizes ' .
-								'WHERE prize_type=\'new\'' .
 								'GROUP BY player_id ' .
 								'ORDER BY player_id ASC');
 		}
