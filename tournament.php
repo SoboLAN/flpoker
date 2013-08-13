@@ -17,7 +17,10 @@ if (! isset($_GET['id']))
 	die('You must specify a tournament ID');
 }
 //eliminate some junk... (people can put all sorts of stuff in this thing)...
-else if (strlen ($_GET['id']) > 4 || ! is_numeric ($_GET['id']) || strpos ($_GET['id'], '.') !== FALSE)
+else if (strlen ($_GET['id']) > 4 ||
+		! is_numeric ($_GET['id']) ||
+		strpos ($_GET['id'], '.') !== FALSE ||
+		strpos ($_GET['id'], "'") !== FALSE)
 {
 	die('Invalid tournament ID');
 }
