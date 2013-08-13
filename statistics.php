@@ -81,19 +81,24 @@ function getPlayersAllTime($content)
 
 	$out = '<table class="presentation-table" style="width:90%">
 			<tr>
+			<th><strong>Nr</strong></th>
 			<th><strong>' . $site->getWord('players_pokerstars_name') . '</strong></th>
 			<th><strong>' . $site->getWord('players_filelist_name') . '</strong></th>
 			<th><strong>' . $site->getWord('players_points_all_time') . '</strong></th>
 			</tr>';
 
+	$i = 1;
 	foreach ($content as $player)
 	{
 		$out .=
 		'<tr>
+			<td>' . $i . '</td>
 			<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
 			<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
 			<td>' . $player['points'] . '</td>
-		</tr>';	
+		</tr>';
+		
+		$i++;
 	}
 
 	$out .= '</table>';

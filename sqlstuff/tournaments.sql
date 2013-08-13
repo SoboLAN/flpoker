@@ -90,4 +90,5 @@ VALUES
 (NULL, '2013-07-16', 'regular', 49),
 (NULL, '2013-07-18', 'regular', 54),
 (NULL, '2013-07-23', 'regular', 38),
-(NULL, '2013-07-25', 'regular', 48);
+(NULL, '2013-07-25', 'regular', 48),
+(NULL, '2013-08-13', 'regular', 35);
