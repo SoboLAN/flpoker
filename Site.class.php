@@ -34,15 +34,14 @@ class Site
 		{
 			die ('The site is currently down for maintenance. Will be back at ' . $this->config['online_eta']);
 		}
-		
-		//wording must be AFTER language, because wording is filled based on language
+
 		$this->fillLanguage ();
-		$this->fillWording ();
+		$this->fillWording ($this->lang);
 	}
 	
-	private function fillWording ()
+	private function fillWording ($language)
 	{
-		require_once 'wording/text.' . $this->lang . '.php';
+		require_once 'wording/text.' . $language . '.php';
 
 		$this->wording = $siteLabels;
 	}
@@ -175,7 +174,7 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
-			FileList Poker Points v1.0 Alpha.
+			FileList Poker Points v0.9.
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
