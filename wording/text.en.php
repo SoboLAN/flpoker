@@ -42,10 +42,6 @@
 		'player_tab_thistory_title' => 'Tournament History',
 		'player_tab_bonuses_title' => 'Bonuses',
 		'player_tab_prizes_title' => 'Prizes',
-		'player_tab_general_text' => 'Here you can see General Information',
-		'player_tab_thistory_text' => 'Here you can see Tournament History',
-		'player_tab_bonuses_text' => 'Here you can see Bonuses',
-		'player_tab_prizes_text' => 'Here you can see Prizes',
 		'player_tab_general_pname' => 'PokerStars Name',
 		'player_tab_general_fname' => 'FileList Name',
 		'player_tab_general_regdate' => 'Club Registration Date',
@@ -55,6 +51,19 @@
 		'player_tab_general_gmedals' => 'Gold Medals',
 		'player_tab_general_smedals' => 'Silver Medals',
 		'player_tab_general_bmedals' => 'Bronze Medals',
+		
+		'player_tournament_tournament' => 'Tournament',
+		'player_tournament_points' => 'Points',
+		'player_tournament_position' => 'Position',
+		
+		'player_bonus_tournament' => 'Tournament',
+		'player_bonus_date' => 'Bonus Date',
+		'player_bonus_value' => 'Bonus Value',
+		'player_bonus_description' => 'Description',
+		
+		'player_prize_prize' => 'Prize',
+		'player_prize_date' => 'Date Bought',
+		'player_prize_cost' => 'Cost',
 		
 		'players_month_pokerstars' => 'PokerStars Name',
 		'players_month_filelist' => 'FileList Name',

@@ -4,12 +4,11 @@ require_once 'Site.class.php';
 
 $site = new Site();
 
-function getGeneralTemplate($info)
+function getGeneral($info)
 {
 	global $site;
-	
-	$regTime = mktime(0, 0, 0, $info['month'], $info['day'], $info['year']);
-	$regDate = date('j F Y', $regTime);
+
+	$regDate = date('j F Y', mktime(0, 0, 0, $info['month'], $info['day'], $info['year']));
 	
 	$out =
 	'<p>
@@ -61,29 +60,27 @@ function getGeneralTemplate($info)
 	return $out;
 }
 
-function getTournamentHistory()
+function getTournamentHistory($history)
 {
-	//tid
-	//tdate
-	//points
-	//position
-	
 	global $site;
 
 	$out = '<table class="presentation-table" style="width:90%">
 			<tr>
-			<th><strong>' . $site->getWord('players_pokerstars_name') . '</strong></th>
-			<th><strong>' . $site->getWord('players_filelist_name') . '</strong></th>
-			<th><strong>' . $site->getWord('players_points_all_time') . '</strong></th>
+			<th><strong>' . $site->getWord('player_tournament_tournament') . '</strong></th>
+			<th><strong>' . $site->getWord('player_tournament_points') . '</strong></th>
+			<th><strong>' . $site->getWord('player_tournament_position') . '</strong></th>
 			</tr>';
 
-	foreach ($content as $player)
+	foreach ($history as $tournament)
 	{
+		$tTime = mktime(0, 0, 0, $tournament['month'], $tournament['day'], $tournament['year']);
+		$tDate = date('j F Y', $tTime);
+		
 		$out .=
 		'<tr>
-			<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
-			<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
-			<td>' . $player['points'] . '</td>
+			<td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $tDate . '</a></td>
+			<td>' . $tournament['points'] . '</a></td>
+			<td>' . $tournament['position'] . '</td>
 		</tr>';	
 	}
 
@@ -92,14 +89,69 @@ function getTournamentHistory()
 	return $out;
 }
 
-function getBonuses()
+function getBonuses($bonuses)
 {
-	//total bonuses
+	global $site;
+
+	$out = '<table class="presentation-table" style="width:90%">
+			<tr>
+			<th><strong>' . $site->getWord('player_bonus_tournament') . '</strong></th>
+			<th><strong>' . $site->getWord('player_bonus_date') . '</strong></th>
+			<th><strong>' . $site->getWord('player_bonus_value') . '</strong></th>
+			<th><strong>' . $site->getWord('player_bonus_description') . '</strong></th>
+			</tr>';
+
+	foreach ($bonuses as $bonus)
+	{
+		$bDate = date('j F Y', mktime(0, 0, 0, $bonus['month'], $bonus['day'], $bonus['year']));
+		
+		$out .=
+		'<tr>
+			<td><a href="tournament.php?id=' . $bonus['tournament_id'] . '">' . $bonus['tournament_id'] . '</a></td>
+			<td>' . $bDate . '</a></td>
+			<td>' . $bonus['bonus_value'] . '</a></td>
+			<td>' . $bonus['description'] . '</td>
+		</tr>';	
+	}
+
+	$out .= '</table>';
+	
+	return $out;
 }
 
-function getPrizes()
+function getPrizes($prizes)
 {
-	//total prizes
+	global $site;
+
+	$out = '<table class="presentation-table" style="width:90%">
+			<tr>
+			<th><strong>' . $site->getWord('player_prize_prize') . '</strong></th>
+			<th><strong>' . $site->getWord('player_prize_date') . '</strong></th>
+			<th><strong>' . $site->getWord('player_prize_cost') . '</strong></th>
+			</tr>';
+
+	foreach ($prizes as $prize)
+	{
+		if (is_null($prize['day']) OR is_null($prize['month']) OR is_null($prize['year']))
+		{
+			$pDate = '<span class="faded">unknown</span>';
+		}
+		else
+		{
+			$pDate = date('j F Y', mktime(0, 0, 0, $prize['month'], $prize['day'], $prize['year']));
+		}
+		
+		$out .=
+		'<tr>
+			<td>' . $prize['prize'] . '</a></td>
+			<td>' . $pDate . '</a></td>
+			<td>' . $prize['cost'] . '</td>
+		</tr>';	
+	}
+
+	$out .= '</table>';
+	
+	return $out;
 }
 
 
@@ -113,7 +165,7 @@ if (! isset($_GET['id']))
 {
 	die('You must specify a player ID');
 }
-//eliminate some junk... (people can put all sorts of stuff in this thing)...
+//eliminate some junk... (people can put all sorts of crap in this thing)...
 else if (strlen ($_GET['id']) > 4 ||
 		! is_numeric ($_GET['id']) ||
 		strpos ($_GET['id'], '.') !== FALSE ||
@@ -128,7 +180,10 @@ require_once 'DAO/PlayerPage.php';
 
 $playerPage = new PlayerPage();
 
-$general = getGeneralTemplate($playerPage->getGeneral($player_id));
+$general = getGeneral($playerPage->getGeneral($player_id));
+$thistory = getTournamentHistory($playerPage->getTournamentHistory($player_id));
+$bonuses = getBonuses($playerPage->getBonuses($player_id));
+$prizes = getPrizes($playerPage->getPrizes($player_id));
 
 $htmlout .=
 	'<div id="tabs">
@@ -139,20 +194,16 @@ $htmlout .=
 			<li><a href="#tabs-4">' . $site->getWord('player_tab_prizes_title') . '</a></li>
 		</ul>
 		<div id="tabs-1">
-			<p>' . $site->getWord('player_tab_general_text') . '</p>
 			<p>' . $general . '</p>
 		</div>
 		<div id="tabs-2">
-			<p>' . $site->getWord('player_tab_thistory_text') . '</p>
-			<p>' . '' . '</p>
+			<p>' . $thistory . '</p>
 		</div>
 		<div id="tabs-3">
-			<p>' . $site->getWord('player_tab_bonuses_text') . '</p>
-			<p>' . '' . '</p>
+			<p>' . $bonuses . '</p>
 		</div>
 		<div id="tabs-4">
-			<p>' . $site->getWord('player_tab_prizes_text') . '</p>
-			<p>' . '' . '</p>
+			<p>' . $prizes . '</p>
 		</div>
 	</div>';
 

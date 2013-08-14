@@ -118,4 +118,119 @@ class PlayerPage
 		
 		return $final_result;
 	}
+	
+	public function getTournamentHistory($pid)
+	{
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			// TODO: implement this
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		$pidesc = $db->quote($pid);
+		
+		try
+		{
+			$history = $db->query ('SELECT t.tournament_id, DAYOFMONTH(t.tournament_date) AS day, ' .
+									'MONTH(t.tournament_date) AS month, YEAR(t.tournament_date) AS year, ' .
+									'r.points, r.position ' .
+									'FROM tournaments t ' .
+									'JOIN results r ON t.tournament_id=r.tournament_id ' .
+									'WHERE r.player_id=' . $pidesc .
+									'ORDER BY t.tournament_date DESC');
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries: ' . $e->getMessage());
+		}
+		
+		$final_result = array();
+		
+		foreach ($history as $tournament)
+		{
+			$final_result[] = array ('tournament_id' => $tournament->tournament_id,
+									'day' => $tournament->day,
+									'month' => $tournament->month,
+									'year' => $tournament->year,
+									'points' => $tournament->points,
+									'position' => $tournament->position
+							
+			);
+		}
+		
+		return $final_result;
+	}
+	
+	public function getBonuses($pid)
+	{		
+		$db = Database::getConnection()->getPDO();
+		
+		$pidesc = $db->quote($pid);
+		
+		try
+		{
+			$bonuses = $db->query ('SELECT bonus_value, tournament_id, bonus_description, ' .
+									'DAYOFMONTH(bonus_date) AS day, MONTH(bonus_date) AS month , ' .
+									'YEAR(bonus_date) AS year ' .
+									'FROM bonus_points ' .
+									'WHERE player_id=' . $pidesc);
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries: ' . $e->getMessage());
+		}
+		
+		$final_result = array();
+		
+		foreach ($bonuses as $bonus)
+		{
+			$final_result[] = array ('tournament_id' => $bonus->tournament_id,
+									'day' => $bonus->day,
+									'month' => $bonus->month,
+									'year' => $bonus->year,
+									'bonus_value' => $bonus->bonus_value,
+									'description' => $bonus->bonus_description
+							
+			);
+		}
+		
+		return $final_result;
+	}
+	
+	public function getPrizes($pid)
+	{		
+		$db = Database::getConnection()->getPDO();
+		
+		$pidesc = $db->quote($pid);
+		
+		try
+		{
+			$prizes = $db->query ('SELECT prize, cost, ' .
+									'DAYOFMONTH(date_bought) AS day, ' .
+									'MONTH(date_bought) AS month , ' .
+									'YEAR(date_bought) AS year ' .
+									'FROM prizes ' .
+									'WHERE player_id=' . $pidesc);
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries: ' . $e->getMessage());
+		}
+		
+		$final_result = array();
+		
+		foreach ($prizes as $prize)
+		{
+			$final_result[] = array ('prize' => $prize->prize,
+									'day' => $prize->day,
+									'month' => $prize->month,
+									'year' => $prize->year,
+									'cost' => $prize->cost
+							
+			);
+		}
+		
+		return $final_result;
+	}
 }
