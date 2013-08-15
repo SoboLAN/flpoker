@@ -151,18 +151,18 @@ class Site
 		if ($this->lang == 'ro')
 		{
 			$out .= '
-				<img class="active_lang" src="images/ro.gif" title="' . $this->wording['langpanel_ro'] .'" />
+				<img class="active_lang" src="images/ro.gif" title="' . $this->wording['langpanel_ro'] .'" alt="' . $this->wording['langpanel_ro'] .'" />
 			<a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">
-				<img src="images/us.gif" title="' . $this->wording['langpanel_en_switch'] . '" />
+				<img src="images/us.gif" title="' . $this->wording['langpanel_en_switch'] . '" alt="' . $this->wording['langpanel_en_switch'] . '" />
 			</a>';
 		}
 		else if ($this->lang == 'en')
 		{
 			$out .= '
 			<a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">
-				<img src="images/ro.gif" title="' . $this->wording['langpanel_ro_switch'] .'" />
+				<img src="images/ro.gif" title="' . $this->wording['langpanel_ro_switch'] .'" alt="' . $this->wording['langpanel_ro_switch'] .'" />
 			</a>
-				<img class="active_lang" src="images/us.gif" title="' . $this->wording['langpanel_en'] . '" />
+				<img class="active_lang" src="images/us.gif" title="' . $this->wording['langpanel_en'] . '" alt="' . $this->wording['langpanel_en'] . '" />
 			';
 		}
 			

@@ -79,7 +79,7 @@ function getTournamentHistory($history)
 		$out .=
 		'<tr>
 			<td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $tDate . '</a></td>
-			<td>' . $tournament['points'] . '</a></td>
+			<td>' . $tournament['points'] . '</td>
 			<td>' . $tournament['position'] . '</td>
 		</tr>';	
 	}
@@ -108,8 +108,8 @@ function getBonuses($bonuses)
 		$out .=
 		'<tr>
 			<td><a href="tournament.php?id=' . $bonus['tournament_id'] . '">' . $bonus['tournament_id'] . '</a></td>
-			<td>' . $bDate . '</a></td>
-			<td>' . $bonus['bonus_value'] . '</a></td>
+			<td>' . $bDate . '</td>
+			<td>' . $bonus['bonus_value'] . '</td>
 			<td>' . $bonus['description'] . '</td>
 		</tr>';	
 	}
@@ -143,8 +143,8 @@ function getPrizes($prizes)
 		
 		$out .=
 		'<tr>
-			<td>' . $prize['prize'] . '</a></td>
-			<td>' . $pDate . '</a></td>
+			<td>' . $prize['prize'] . '</td>
+			<td>' . $pDate . '</td>
 			<td>' . $prize['cost'] . '</td>
 		</tr>';	
 	}
@@ -194,16 +194,16 @@ $htmlout .=
 			<li><a href="#tabs-4">' . $site->getWord('player_tab_prizes_title') . '</a></li>
 		</ul>
 		<div id="tabs-1">
-			<p>' . $general . '</p>
+			' . $general . '
 		</div>
 		<div id="tabs-2">
-			<p>' . $thistory . '</p>
+			' . $thistory . '
 		</div>
 		<div id="tabs-3">
-			<p>' . $bonuses . '</p>
+			' . $bonuses . '
 		</div>
 		<div id="tabs-4">
-			<p>' . $prizes . '</p>
+			' . $prizes . '
 		</div>
 	</div>';
 
