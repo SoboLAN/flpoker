@@ -138,7 +138,7 @@ function getMostActivePlayers($players)
 function getPlayers6Months($players)
 {
 	global $site;
-
+/*
 	$out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
 			<tr>
 			<th><strong>Nr.</strong></th>
@@ -159,7 +159,9 @@ function getPlayers6Months($players)
 		$i++;
 	}
 
-	$out .= '</table>';
+	$out .= '</table>';*/
+	
+	$out = 'This feature is currently disabled.';
 	
 	return $out;
 }

@@ -21,7 +21,7 @@ $siteLabels = array (
 	'players_points_all_time' => 'Total Puncte All Time',
 	
 	'statistics_tab_general' => 'Statistici Generale',
-	'statistics_tab_top_all_time' => 'Top Jucători',
+	'statistics_tab_top_all_time' => 'Top Jucători All Time',
 	'statistics_tab_top_6_months' => 'Top 40 Jucători 6 Luni',
 	'statistics_tab_top_spending' => 'Top Jucători Premii',
 	'statistics_tab_most_active' => 'Cei mai activi 50 de jucători',
@@ -90,7 +90,7 @@ $siteLabels = array (
 	'statistics_top_spending_text' =>
 		'Acest clasament arată care jucători cheltuie cele mai multe puncte.',
 	'statistics_most_active_text' =>
-		'Acest tabel arată care sunt cei mai activi jucători (adică cei care se înregistrează la ' .
+		'Acest tabel arată care sunt cei mai activi jucători (adică cei care se intră în puncte la ' .
 		'cât mai multe turnee).',
 	'statistics_top_bonus_text' =>
 		'Aici puteți vedea cine primește cele mai multe puncte bonus.',

@@ -164,7 +164,8 @@ class StatisticsPage
 			'(SELECT player_id, SUM(points) AS points, tournament_id ' .
 			'FROM results ' .
 			'WHERE player_id IS NOT NULL ' .
-			'GROUP BY player_id) r ' .
+			'GROUP BY player_id ' .
+			'ORDER BY points DESC) r ' .
 			'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
 			'JOIN players p ON r.player_id = p.player_id ' .
 			'WHERE DATEDIFF(CURDATE(), t.tournament_date) <= 30*6 ' .

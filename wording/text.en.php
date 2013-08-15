@@ -84,7 +84,7 @@
 		'statistics_top_spending_text' =>
 			'This table shows the players that are spending the most points on prizes.',
 		'statistics_most_active_text' =>
-			'This table shows the number of tournaments each player has participated in.',
+			'This table shows the number of tournaments each player has cashed in.',
 		'statistics_top_bonus_text' =>
 			'This table shows the players that received the most bonus points.',
 		'statistics_tournaments_text' =>
