@@ -29,18 +29,20 @@ foreach ($content as $player)
 {
 	if (is_null($player['name_pokerstars']))
 	{
-		$regDate = '';
+		$regDate = $namePokerStars = '<span class="faded">unknown</span>';
 	}
 	else
 	{
 		$regTime = mktime(0, 0, 0, $player['month'], $player['day'], $player['year']);
 		$regDate = date('j F Y', $regTime);
+		
+		$namePokerStars = $player['name_pokerstars'];
 	}
 	
 	$htmlout .=
 	'<tr' . ($player['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
 		<td>' . $i . '</td>
-		<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
+		<td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
 		<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
 		<td>' . $regDate . '</td>
 		<td>' . $player['points'] . '</td>

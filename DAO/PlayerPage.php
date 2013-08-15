@@ -172,9 +172,11 @@ class PlayerPage
 		{
 			$bonuses = $db->query ('SELECT bonus_value, tournament_id, bonus_description, ' .
 									'DAYOFMONTH(bonus_date) AS day, MONTH(bonus_date) AS month , ' .
-									'YEAR(bonus_date) AS year ' .
+									'YEAR(bonus_date) AS year, ' .
+									'UNIX_TIMESTAMP(bonus_date) AS stamp ' .
 									'FROM bonus_points ' .
-									'WHERE player_id=' . $pidesc);
+									'WHERE player_id=' . $pidesc . ' ' .
+									'ORDER BY stamp ASC');
 		}
 		catch (PDOException $e)
 		{

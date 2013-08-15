@@ -143,7 +143,7 @@ $htmlout .=
 		<div id="tabs-5">
 			<p>' . $site->getWord('statistics_tournaments_text') . '</p>
 			' . getTournamentGraph($tournaments) . '
-			<div id="hcc" style="width:95%; height: 450px; margin: 0 auto;"></div>
+			<div id="hcc" style="width:90%; height: 450px; margin: 0 auto;"></div>
 		</div>
 	</div>';
 
