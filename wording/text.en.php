@@ -20,12 +20,21 @@
 		'players_registration_date' => 'Club Register Date',
 		'players_points_all_time' => 'Points All Time',
 		
+		'statistics_tab_general' => 'General Statistics',
 		'statistics_tab_top_all_time' => 'Top Players All Time',
-		'statistics_tab_top_6_months' => 'Top Players Last 6 Months',
+		'statistics_tab_top_6_months' => 'Top 40 Players Last 6 Months',
 		'statistics_tab_top_spending' => 'Top Spending Players',
-		'statistics_tab_most_active' => 'Most Active Players',
+		'statistics_tab_most_active' => 'Most Active 50 Players',
 		'statistics_tab_top_bonus' => 'Top Players by Bonus',
 		'statistics_tab_tournaments' => 'Tournaments',
+		
+		'statistics_general_totalpoints' => 'Total Points Accumulated in the Club',
+		
+		'statistics_mostactive_player' => 'Player',
+		'statistics_mostactive_count' => 'Tournament Count',
+		
+		'statistics_6months_player' => 'Player',
+		'statistics_6months_points' => 'Points',
 		
 		'tournaments_tournament_date' => 'Tournament Date',
 		'tournaments_type' => 'Type',

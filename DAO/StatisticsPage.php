@@ -110,16 +110,118 @@ class StatisticsPage
 		return $results;
 	}
 	
-	public function getMostActivePlayers()
+	public function getMostActive50Players()
 	{
-		/*
-		 	query:
-			SELECT count( points ) AS freq, player_id
-		   FROM results
-		   WHERE player_id IS NOT NULL
-		   GROUP BY player_id
-		   ORDER BY freq DESC
-		 */
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			// TODO: implement this
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$tmpactive = $db->query(
+			'SELECT r.count, p.name_pokerstars, p.player_id FROM ' .
+			'(SELECT COUNT(*) AS count, player_id FROM results ' .
+			'WHERE player_id IS NOT NULL ' .
+			'GROUP BY player_id ' .
+			'ORDER BY count DESC) r ' .
+			'JOIN players p ON p.player_id=r.player_id ' .
+			'LIMIT 50');
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries:' . $e->getMessage());
+		}
+		
+		$results = array();
+		foreach($tmpactive as $r)
+		{
+			$results[] = array('player_id' => $r->player_id,
+								'name_pokerstars' => $r->name_pokerstars,
+								'count' => $r->count
+			);
+		}
+		
+		return $results;
+	}
+	
+	public function getTop40Players6Months()
+	{
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			// TODO: implement this
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$tmpplayers = $db->query(
+			'SELECT r.player_id, r.points, p.name_pokerstars ' .
+			'FROM ' .
+			'(SELECT player_id, SUM(points) AS points, tournament_id ' .
+			'FROM results ' .
+			'WHERE player_id IS NOT NULL ' .
+			'GROUP BY player_id) r ' .
+			'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
+			'JOIN players p ON r.player_id = p.player_id ' .
+			'WHERE DATEDIFF(CURDATE(), t.tournament_date) <= 30*6 ' .
+			'ORDER BY r.points DESC ' .
+			'LIMIT 40');
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries:' . $e->getMessage());
+		}
+		
+		$results = array();
+		foreach($tmpplayers as $r)
+		{
+			$results[] = array('player_id' => $r->player_id,
+								'name_pokerstars' => $r->name_pokerstars,
+								'points' => $r->points
+			);
+		}
+		
+		return $results;
+	}
+	
+	public function getGeneralStatistics()
+	{
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			// TODO: implement this
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$tmpallpoints = $db->query(
+			'SELECT p.initial_accumulated_points + p.initial_spent_points + r.points + b.bonus_value ' .
+			'AS total_points ' .
+			'FROM ' .
+			'(SELECT SUM(initial_accumulated_points) AS initial_accumulated_points, ' .
+			'SUM(initial_spent_points) AS initial_spent_points ' .
+			'FROM players) p, ' .
+			'(SELECT SUM(points) AS points FROM results) r, ' .
+			'(SELECT SUM(bonus_value) AS bonus_value FROM bonus_points) b');
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries:' . $e->getMessage());
+		}
+		
+		foreach($tmpallpoints as $r)
+		{
+			$results = array('total_points' => $r->total_points
+				
+			);
+		}
+		
+		return $results;
 	}
 	
 	private function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)

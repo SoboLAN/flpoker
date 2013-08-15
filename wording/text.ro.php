@@ -20,12 +20,21 @@ $siteLabels = array (
 	'players_registration_date' => 'Data înregistrării în Club',
 	'players_points_all_time' => 'Total Puncte All Time',
 	
+	'statistics_tab_general' => 'Statistici Generale',
 	'statistics_tab_top_all_time' => 'Top Jucători',
-	'statistics_tab_top_6_months' => 'Top Jucători 6 Luni',
+	'statistics_tab_top_6_months' => 'Top 40 Jucători 6 Luni',
 	'statistics_tab_top_spending' => 'Top Jucători Premii',
-	'statistics_tab_most_active' => 'Cei mai activi jucători',
+	'statistics_tab_most_active' => 'Cei mai activi 50 de jucători',
 	'statistics_tab_top_bonus' => 'Top Jucători Bonus-uri',
 	'statistics_tab_tournaments' => 'Turnee',
+	
+	'statistics_general_totalpoints' => 'Numărul Total de Puncte acumulate în Club',
+	
+	'statistics_mostactive_player' => 'Jucător',
+	'statistics_mostactive_count' => 'Numărul de Turnee',
+	
+	'statistics_6months_player' => 'Jucător',
+	'statistics_6months_points' => 'Puncte',
 	
 	'tournaments_tournament_date' => 'Data Turneului',
 	'tournaments_type' => 'Tipul Turneului',
