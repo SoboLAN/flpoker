@@ -1,8 +1,8 @@
 <?php
 
 require_once 'Site.class.php';
-
-require_once 'DAO/TournamentPage.php';
+require_once 'TournamentRenderer.php';
+require_once 'TournamentPage.php';
 
 $site = new Site();
 
@@ -35,55 +35,13 @@ if (! isset($details['id']))
 	die('Tournament with that ID does not exist');
 }
 
-$tournamentTime = mktime(0, 0, 0, $details['month'], $details['day'], $details['year']);
-$tournamentDate = date('l, jS F Y', $tournamentTime);
+$renderer = new TournamentRenderer($site);
 
-$htmlout .=
-	'<p>
-		<span class="subtitle">Details</span>
-	</p>
-	<p>
-		<span class="bigger_label">Tournament Date: ' . $tournamentDate . '</span>
-	</p>
-	<p>
-		<span class="bigger_label">Tournament Type: ' . $details['type'] . '</span>
-	</p>
-	<p>
-		<span class="bigger_label">Participants: ' . $details['participants'] . '</span>
-	</p>
-	<p>
-		<span class="subtitle">Results</span>
-	</p>';
+$htmlout .= $renderer->renderDetails($details);
 
 $results = $tournamentPage->getTournamentResults($tid);
 
-$htmlout .= '<table class="presentation-table" style="width:100%">
-			<tr>
-			<th><strong>' . $site->getWord('tournament_player') . '</strong></th>
-			<th><strong>' . $site->getWord('tournament_points') . '</strong></th>
-			<th><strong>' . $site->getWord('tournament_position') . '</strong></th>
-			</tr>';
-
-foreach ($results as $result)
-{
-	if (isset ($result['player_id']) AND isset ($result['name_pokerstars']))
-	{
-		$player = '<a href="player.php?id=' . $result['player_id'] . '">' . $result['name_pokerstars'] . '</a>';
-	}
-	else
-	{
-		$player = '<span class="faded">unknown</span>';
-	}
-	
-	$htmlout .=
-	'<tr>
-		<td>' . $player . '</td>
-		<td>' . $result['points'] . '</td>
-		<td>' . $result['position'] . '</td>
-	</tr>';	
-}
-
-$htmlout .= '</table>';
+$htmlout .= $renderer->renderResults($results);
 
 $htmlout .= '</div>';
 	

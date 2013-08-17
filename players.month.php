@@ -1,8 +1,8 @@
 <?php
 
 require_once 'Site.class.php';
-
-require_once 'DAO/PlayersMonthPage.php';
+require_once 'PlayersMonthRenderer.php';
+require_once 'PlayersMonthPage.php';
 
 $site = new Site();
 
@@ -15,27 +15,9 @@ $htmlout .= '<div id="content-narrower">';
 $playersMonthPage = new PlayersMonthPage();
 $content = $playersMonthPage->getContent();
 
-$htmlout .= '<table class="presentation-table" style="width:100%">
-			<tr>
-			<th><strong>' . $site->getWord('players_month_pokerstars') . '</strong></th>
-			<th><strong>' . $site->getWord('players_month_filelist') . '</strong></th>
-			<th><strong>' . $site->getWord('players_month_date') . '</strong></th>
-			</tr>';
+$renderer = new PlayersMonthRenderer($site);
 
-foreach ($content as $award)
-{
-	$awardTime = mktime(0, 0, 0, $award['month'], 2, $award['year']);
-	$awardDate = date('F Y', $awardTime);
-	
-	$htmlout .=
-	'<tr>
-		<td><a href="player.php?id=' . $award['id'] . '">' . $award['name_pokerstars'] . '</a></td>
-		<td><a href="http://filelist.ro/userdetails.php?id=' . $award['id_filelist'] . '">' . $award['name_filelist'] . '</a></td>
-		<td>' . $awardDate . '</td>
-	</tr>';	
-}
-
-$htmlout .= '</table>';
+$htmlout .= $renderer->render($content);
 
 $htmlout .= '</div>';
 	

@@ -1,6 +1,6 @@
 <?php
-require_once '/../DB.class.php';
-require_once '/../Config.class.php';
+require_once 'DB.class.php';
+require_once 'Config.class.php';
 
 class PlayerPage
 {
@@ -93,6 +93,8 @@ class PlayerPage
 			$silver_medals = $medals->silver_medals;
 			$bronze_medals = $medals->bronze_medals;
 		}
+		
+		$final_result = array();
 
 		foreach ($playerInfo as $pInfo)
 		{

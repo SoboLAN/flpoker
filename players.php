@@ -1,8 +1,8 @@
 <?php
 
 require_once 'Site.class.php';
-
-require_once 'DAO/PlayersPage.php';
+require_once 'PlayersPage.php';
+require_once 'PlayersRenderer.php';
 
 $site = new Site();
 
@@ -15,43 +15,9 @@ $htmlout .= '<div id="content">';
 $playersPage = new PlayersPage();
 $content = $playersPage->getContent();
 
-$htmlout .= '<table class="presentation-table" style="width:100%">
-			<tr>
-			<th><strong>Nr.</strong></th>
-			<th><strong>' . $site->getWord('players_pokerstars_name') . '</strong></th>
-			<th><strong>' . $site->getWord('players_filelist_name') . '</strong></th>
-			<th><strong>' . $site->getWord('players_registration_date') . '</strong></th>
-			<th><strong>' . $site->getWord('players_current_points') . '</strong></th>
-			</tr>';
+$renderer = new PlayersRenderer($site);
 
-$i = 1;
-foreach ($content as $player)
-{
-	if (is_null($player['name_pokerstars']))
-	{
-		$regDate = $namePokerStars = '<span class="faded">unknown</span>';
-	}
-	else
-	{
-		$regTime = mktime(0, 0, 0, $player['month'], $player['day'], $player['year']);
-		$regDate = date('j F Y', $regTime);
-		
-		$namePokerStars = $player['name_pokerstars'];
-	}
-	
-	$htmlout .=
-	'<tr' . ($player['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
-		<td>' . $i . '</td>
-		<td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
-		<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
-		<td>' . $regDate . '</td>
-		<td>' . $player['points'] . '</td>
-	</tr>';
-	
-	$i++;
-}
-
-$htmlout .= '</table>';
+$htmlout .= $renderer->render($content);
 
 $htmlout .= '<p><span style="font-size:15px; font-family:Tahoma; background-color:#96EC2D; ' .
 			'padding-left:40px; border:1px solid black; overflow:hidden">&nbsp;</span> ' .

@@ -1,6 +1,6 @@
 <?php
-require_once '/../DB.class.php';
-require_once '/../Config.class.php';
+require_once 'DB.class.php';
+require_once 'Config.class.php';
 
 class TournamentsPage
 {
