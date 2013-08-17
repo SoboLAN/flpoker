@@ -29,6 +29,8 @@
 		'statistics_tab_tournaments' => 'Tournaments',
 		
 		'statistics_general_totalpoints' => 'Total Points Accumulated in the Club',
+		'statistics_general_nrusers' => 'Number of Players',
+		'statistics_general_nrtournaments' => 'Number of Tournaments',
 		
 		'statistics_mostactive_player' => 'Player',
 		'statistics_mostactive_count' => 'Tournament Count',
@@ -43,6 +45,13 @@
 		'tournaments_regular' => 'regular',
 		'tournaments_special' => 'special',
 		
+		'tournament_details' => 'Details',
+		'tournament_date' => 'Tournament Date',
+		'tournament_type' => 'Tournament Type',
+		'tournament_regular' => 'regular',
+		'tournament_special' => 'special',
+		'tournament_nrplayers' => 'Participants',
+		'tournament_results' => 'Results',
 		'tournament_player' => 'Player',
 		'tournament_points' => 'Points',
 		'tournament_position' => 'Position',

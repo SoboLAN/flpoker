@@ -39,9 +39,7 @@ $renderer = new TournamentRenderer($site);
 
 $htmlout .= $renderer->renderDetails($details);
 
-$results = $tournamentPage->getTournamentResults($tid);
-
-$htmlout .= $renderer->renderResults($results);
+$htmlout .= $renderer->renderResults($tournamentPage->getTournamentResults($tid));
 
 $htmlout .= '</div>';
 	
