@@ -14,7 +14,24 @@ class StatisticsRenderer extends GeneralRenderer
 	
 	public function renderGeneral($content)
 	{
-		return number_format($content['total_points']);
+		$out = '
+		<p>
+			<span class="bigger_label">' . $this->site->getWord('statistics_general_totalpoints') . ': ' .
+				number_format($content['total_points']) .
+			'</span>
+		</p>
+		<p>
+			<span class="bigger_label">' . $this->site->getWord('statistics_general_nrusers') . ': ' .
+				$content['total_players'] .
+			'</span>
+		</p>
+		<p>
+			<span class="bigger_label">' . $this->site->getWord('statistics_general_nrtournaments') . ': ' .
+				$content['total_tournaments'] .
+			'</span>
+		</p>';
+		
+		return $out;
 	}
 	
 	public function renderMostActivePlayers($content)

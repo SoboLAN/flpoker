@@ -149,7 +149,7 @@ class StatisticsPage
 	
 	public function getTop40Players6Months()
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		/*if (Config::getConfig()->getValue('enable_cache'))
 		{
 			// TODO: implement this
 		}
@@ -186,7 +186,9 @@ class StatisticsPage
 			);
 		}
 		
-		return $results;
+		return $results;*/
+		
+		return '';
 	}
 	
 	public function getGeneralStatistics()
@@ -209,16 +211,33 @@ class StatisticsPage
 			'FROM players) p, ' .
 			'(SELECT SUM(points) AS points FROM results) r, ' .
 			'(SELECT SUM(bonus_value) AS bonus_value FROM bonus_points) b');
+			
+			$tmpplayercount = $db->query('SELECT COUNT(*) AS count FROM players');
+			
+			$tmptournamentcount = $db->query('SELECT COUNT(*) AS count FROM tournaments');
 		}
 		catch (PDOException $e)
 		{
 			die('There was a problem while performing database queries:' . $e->getMessage());
 		}
 		
+		$totalPlayers = 0;
+		foreach ($tmpplayercount as $pCount)
+		{
+			$totalPlayers = $pCount->count;
+		}
+		
+		$totalTournaments = 0;
+		foreach ($tmptournamentcount as $tCount)
+		{
+			$totalTournaments = $tCount->count;
+		}
+		
 		foreach($tmpallpoints as $r)
 		{
-			$results = array('total_points' => $r->total_points
-				
+			$results = array('total_points' => $r->total_points,
+							'total_players' => $totalPlayers,
+							'total_tournaments' => $totalTournaments
 			);
 		}
 		

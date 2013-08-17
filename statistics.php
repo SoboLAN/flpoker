@@ -32,11 +32,7 @@ $htmlout .=
 			<li><a href="#tabs-5">' . $site->getWord('statistics_tab_tournaments') . '</a></li>
 		</ul>
 		<div id="tabs-1">
-			<p>
-			<span class="bigger_label">' . $site->getWord('statistics_general_totalpoints') . ': ' .
-				$general .
-			'</span>
-			</p>
+			' . $general . '
 		</div>
 		<div id="tabs-2">
 			<p>' . $site->getWord('statistics_top_all_time_text') . '</p>
