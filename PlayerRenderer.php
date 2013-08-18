@@ -14,7 +14,14 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderGeneral($content)
 	{
-		$regDate = date('j F Y', mktime(0, 0, 0, $content['month'], $content['day'], $content['year']));
+		if (is_null($content['month']) OR empty($content['month']))
+		{
+			$regDate = '<span class="faded">unknown</span>';
+		}
+		else
+		{
+			$regDate = date('j F Y', mktime(0, 0, 0, $content['month'], $content['day'], $content['year']));
+		}
 		
 		if ($this->site->getLanguage() !== 'en')
 		{

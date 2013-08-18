@@ -50,7 +50,7 @@ class StatisticsRenderer extends GeneralRenderer
 			'<tr>
 				<td>' . $i . '</td>
 				<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
-				<td>' . $player['count'] . '</a></td>
+				<td>' . $player['count'] . '</td>
 			</tr>';
 
 			$i++;
