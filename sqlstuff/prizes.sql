@@ -68,7 +68,12 @@ VALUES
 (NULL, 235, '500GB Upload', 70, NULL, 'old'),
 (NULL, 241, 'Rebuy Main Event', 5, NULL, 'old'),
 (NULL, 262, 'Donor Star', 150, NULL, 'old'),
-(NULL, 299, 'VIP 6 Months', 100, NULL, 'old');
+(NULL, 299, 'VIP 6 Months', 100, NULL, 'old'),
+(NULL, 307, '100GB Upload', 25, NULL, 'old'),
+(NULL, 424, 'Avatar Request', 12, NULL, 'old'),
+(NULL, 506, 'Rebuy Main Event', 5, NULL, 'old'),
+(NULL, 506, 'Donor Star', 80, NULL, 'old'),
+(NULL, 562, 'Permanent VIP', 250, NULL, 'old');
 
 INSERT INTO prizes (prize_id, player_id, prize, cost, date_bought, prize_type)
 VALUES
@@ -85,4 +90,6 @@ VALUES
 (NULL, 63, 'Sending Invitation', 50, NULL, 'new'),
 (NULL, 95, '2 Invitations', 50, NULL, 'new'),
 (NULL, 248, '2 Invitations', 50, NULL, 'new'),
-(NULL, 18, 'Avatar Request', 20, NULL, 'new');
+(NULL, 18, 'Avatar Request', 20, NULL, 'new'),
+(NULL, 506, 'Permanent VIP', 400, NULL, 'new');
+(NULL, 12, 'Permanent VIP', 400, '2013-08-16', 'new');

@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS players (
 player_id mediumint unsigned NOT NULL PRIMARY KEY AUTO_INCREMENT,
-name_pokerstars varchar(50) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
-name_filelist varchar(50) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+name_pokerstars varchar(50) CHARACTER SET ascii COLLATE ascii_general_ci,
+name_filelist varchar(50) CHARACTER SET ascii COLLATE ascii_general_ci,
 id_filelist mediumint,
 member_type enum('regular', 'admin') NOT NULL,
-initial_accumulated_points mediumint unsigned NOT NULL,
+initial_accumulated_points mediumint NOT NULL,
 initial_spent_points mediumint unsigned NOT NULL,
 join_date date,
 is_member_of_club tinyint(1) unsigned NOT NULL
