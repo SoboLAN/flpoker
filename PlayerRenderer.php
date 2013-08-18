@@ -21,13 +21,13 @@ class PlayerRenderer extends GeneralRenderer
 		else
 		{
 			$regDate = date('j F Y', mktime(0, 0, 0, $content['month'], $content['day'], $content['year']));
+			
+			if ($this->site->getLanguage() !== 'en')
+			{
+				$regDate = $this->translateDate($regDate, $this->site->getLanguage());
+			}
 		}
 		
-		if ($this->site->getLanguage() !== 'en')
-		{
-			$regDate = $this->translateDate($regDate, $this->site->getLanguage());
-		}
-	
 		$out =
 		'<p>
 			<span class="bigger_label">' . $this->site->getWord('player_tab_general_pname') . ': ' .
