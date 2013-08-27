@@ -58,6 +58,10 @@ body {
 	text-decoration: none;
 }
 
+#content a:hover {
+	text-decoration: underline;
+}
+
 #content-narrower {
 	padding: 10px;
 	width: 1000px;
@@ -71,6 +75,10 @@ body {
 
 #content-narrower a {
 	text-decoration: none;
+}
+
+#content-narrower a:hover {
+	text-decoration: underline;
 }
 
 .subtitle {
