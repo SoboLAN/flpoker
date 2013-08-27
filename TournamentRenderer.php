@@ -53,9 +53,9 @@ class TournamentRenderer extends GeneralRenderer
 	{
 		$out = '<table class="presentation-table" style="width:100%">
 			<tr>
+			<th><strong>' . $this->site->getWord('tournament_position') . '</strong></th>
 			<th><strong>' . $this->site->getWord('tournament_player') . '</strong></th>
 			<th><strong>' . $this->site->getWord('tournament_points') . '</strong></th>
-			<th><strong>' . $this->site->getWord('tournament_position') . '</strong></th>
 			</tr>';
 
 		foreach ($content as $result)
@@ -71,9 +71,9 @@ class TournamentRenderer extends GeneralRenderer
 
 			$out .=
 			'<tr>
+				<td>' . $result['position'] . '</td>
 				<td>' . $player . '</td>
 				<td>' . $result['points'] . '</td>
-				<td>' . $result['position'] . '</td>
 			</tr>';	
 		}
 
