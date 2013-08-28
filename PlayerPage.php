@@ -1,12 +1,25 @@
 <?php
 require_once 'DB.class.php';
 require_once 'Config.class.php';
+require_once 'CacheDB.class.php';
+require_once 'CacheFile.class.php';
 
 class PlayerPage
 {
+	private $cache;
+	
 	public function __construct()
 	{
-	
+		$cacheType = Config::getConfig()->getValue('cache_type');
+		
+		if($cacheType == 'db')
+		{
+			$this->cache = new CacheDB();
+		}
+		elseif ($cacheType == 'file')
+		{
+			$this->cache = new CacheFile();
+		}
 	}
 	
 	public function getGeneral($pid)
@@ -54,7 +67,7 @@ class PlayerPage
 									'AND player_id=' . $pidesc. ') AS gold_medals, ' .
 									'(SELECT COUNT(*) AS silver_medals ' .
 									'FROM results ' .
-									'WHERE position =2 ' .
+									'WHERE position=2 ' .
 									'AND player_id=' . $pidesc. ') AS silver_medals, ' .
 									'(SELECT COUNT(*) AS bronze_medals ' .
 									'FROM results ' .

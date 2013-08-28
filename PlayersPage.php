@@ -2,9 +2,13 @@
 
 require_once 'DB.class.php';
 require_once 'Config.class.php';
+require_once 'CacheDB.class.php';
+require_once 'CacheFile.class.php';
 
 class PlayersPage
 {
+	private $cache;
+	
 	private $results;
 	private $bonuses;
 	private $prizes;
@@ -14,13 +18,34 @@ class PlayersPage
 		$this->results = array();
 		$this->bonuses = array();
 		$this->prizes = array();
+		
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			$cacheType = Config::getConfig()->getValue('cache_type');
+		
+			if($cacheType == 'db')
+			{
+				$this->cache = new CacheDB();
+			}
+			elseif ($cacheType == 'file')
+			{
+				$this->cache = new CacheFile();
+			}
+		}
 	}
 	
 	public function getContent()
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_players');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
@@ -80,6 +105,14 @@ class PlayersPage
 		}
 		
 		$this->array_sort_by_column($final_result, 'points');
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_players');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players');
+			
+			$this->cache->save($key, json_encode($final_result), $lifetime);
+		}
 		
 		return $final_result;
 	}
