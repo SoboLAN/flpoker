@@ -77,7 +77,7 @@ class PlayersPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$this->fillArrays($tmpresults, $tmpbonuses, $tmpprizes);
@@ -109,9 +109,8 @@ class PlayersPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_players');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_players');
 			
-			$this->cache->save($key, json_encode($final_result), $lifetime);
+			$this->cache->save($key, json_encode($final_result));
 		}
 		
 		return $final_result;

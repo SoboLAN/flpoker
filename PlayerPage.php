@@ -10,125 +10,141 @@ class PlayerPage
 	
 	public function __construct()
 	{
-		$cacheType = Config::getConfig()->getValue('cache_type');
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			$cacheType = Config::getConfig()->getValue('cache_type');
 		
-		if($cacheType == 'db')
-		{
-			$this->cache = new CacheDB();
-		}
-		elseif ($cacheType == 'file')
-		{
-			$this->cache = new CacheFile();
+			if($cacheType == 'db')
+			{
+				$this->cache = new CacheDB();
+			}
+			elseif ($cacheType == 'file')
+			{
+				$this->cache = new CacheFile();
+			}
 		}
 	}
 	
 	public function getGeneral($pid)
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_player_general');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
-		
-		$pidesc = $db->quote($pid);
-		
+
 		try
 		{
-			$playerInfo = $db->query ('SELECT id_filelist, name_pokerstars, name_filelist, ' .
+			$playerInfoSt = $db->prepare ('SELECT id_filelist, name_pokerstars, name_filelist, ' .
 								'initial_accumulated_points, initial_spent_points, ' .
 								'MONTH(join_date) AS month, ' .
 								'DAYOFMONTH(join_date) AS day, YEAR(join_date) AS year, ' .
 								'member_type ' .
 								'FROM players ' .
-								'WHERE player_id=' . $pidesc . ' ' .
+								'WHERE player_id=? ' .
 								'ORDER BY player_id ASC');
 
-			$tmpresults = $db->query('SELECT SUM(points) AS points ' .
+			$resultsSt = $db->prepare('SELECT SUM(points) AS points ' .
 								'FROM results ' .
-								'WHERE player_id=' . $pid);
+								'WHERE player_id=?');
 
-			$tmpbonuses = $db->query('SELECT SUM(bonus_value) AS bonus_value ' .
+			$bonusesSt = $db->prepare('SELECT SUM(bonus_value) AS bonus_value ' .
 								'FROM bonus_points ' .
-								'WHERE player_id=' . $pidesc);
-			
-			$tmpprizes = $db->query('SELECT SUM(cost) AS cost ' .
+								'WHERE player_id=?');
+
+			$prizesSt = $db->prepare('SELECT SUM(cost) AS cost ' .
 								'FROM prizes ' .
-								'WHERE player_id=' . $pidesc);
-			
-			$tmpfinaltables = $db->query('SELECT COUNT(*) AS final_tables ' .
+								'WHERE player_id=?');
+
+			$finalTablesSt = $db->prepare('SELECT COUNT(*) AS final_tables ' .
 								'FROM results ' .
-								'WHERE position <= 9 AND player_id=' . $pidesc);
-			
-			$tmpmedals = $db->query('SELECT * FROM (' .
+								'WHERE position <= 9 AND player_id=?');
+
+			$medalsSt = $db->prepare('SELECT * FROM (' .
 									'SELECT COUNT(*) AS gold_medals ' .
 									'FROM results ' .
 									'WHERE position=1 ' .
-									'AND player_id=' . $pidesc. ') AS gold_medals, ' .
+									'AND player_id=?) AS gold_medals, ' .
 									'(SELECT COUNT(*) AS silver_medals ' .
 									'FROM results ' .
 									'WHERE position=2 ' .
-									'AND player_id=' . $pidesc. ') AS silver_medals, ' .
+									'AND player_id=?) AS silver_medals, ' .
 									'(SELECT COUNT(*) AS bronze_medals ' .
 									'FROM results ' .
 									'WHERE position=3 ' .
-									'AND player_id=' . $pidesc. ') AS bronze_medals');
+									'AND player_id=?) AS bronze_medals');
+			
+			$playerInfoSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$playerInfoSt->execute ();
+			$playerInfo = $playerInfoSt->fetch (PDO::FETCH_OBJ);
+			
+			$resultsSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$resultsSt->execute ();
+			$results = $resultsSt->fetch (PDO::FETCH_OBJ)->points;
+			
+			$bonusesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$bonusesSt->execute ();
+			$bonuses = $bonusesSt->fetch (PDO::FETCH_OBJ)->bonus_value;
+			
+			$prizesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$prizesSt->execute ();
+			$prizes = $prizesSt->fetch (PDO::FETCH_OBJ)->cost;
+			
+			$finalTablesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$finalTablesSt->execute ();
+			$finalTables = $finalTablesSt->fetch (PDO::FETCH_OBJ)->final_tables;
+			
+			$medalsSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$medalsSt->bindParam (2, $pid, PDO::PARAM_INT);
+			$medalsSt->bindParam (3, $pid, PDO::PARAM_INT);
+			$medalsSt->execute ();
+			$medalsObj = $medalsSt->fetch (PDO::FETCH_OBJ);
+			$gold_medals = $medalsObj->gold_medals;
+			$silver_medals = $medalsObj->silver_medals;
+			$bronze_medals = $medalsObj->bronze_medals;
 		}
 		catch (PDOException $e)
 		{
 			die('There was a problem while performing database queries: ' . $e->getMessage());
 		}
-		
-		$results = 0;
-		$bonuses = 0;
-		$prizes = 0;
-		$final_tables = 0;
-		$gold_medals = $silver_medals = $bronze_medals = 0;
-		foreach ($tmpresults as $r)
-		{
-			$results = $r->points;
-		}
-		foreach ($tmpbonuses as $b)
-		{
-			$bonuses = $b->bonus_value;
-		}
-		foreach ($tmpprizes as $p)
-		{
-			$prizes = $p->cost;
-		}
-		foreach ($tmpfinaltables as $f)
-		{
-			$final_tables = $f->final_tables;
-		}
-		foreach ($tmpmedals as $medals)
-		{
-			$gold_medals = $medals->gold_medals;
-			$silver_medals = $medals->silver_medals;
-			$bronze_medals = $medals->bronze_medals;
-		}
-		
-		$final_result = array();
 
-		foreach ($playerInfo as $pInfo)
+		if(count($playerInfo) == 0)
 		{
-			$points = $pInfo->initial_accumulated_points + $results + $bonuses - $prizes;
-			$pointsAllTime = $pInfo->initial_accumulated_points + $pInfo->initial_spent_points + 
+			return array();
+		}
+
+		$points = $playerInfo->initial_accumulated_points + $results + $bonuses - $prizes;
+		$pointsAllTime = $playerInfo->initial_accumulated_points + $playerInfo->initial_spent_points + 
 							$results + $bonuses;
 					
-			$final_result = array ('id_filelist' => $pInfo->id_filelist,
-									'name_pokerstars' => $pInfo->name_pokerstars,
-									'name_filelist' => $pInfo->name_filelist,
-									'month' => $pInfo->month,
-									'day' => $pInfo->day,
-									'year' => $pInfo->year,
-									'member_type' => $pInfo->member_type,
-									'points' => $points,
-									'final_tables' => $final_tables,
-									'gold_medals' => $gold_medals,
-									'silver_medals' => $silver_medals,
-									'bronze_medals' => $bronze_medals,
-									'points_all_time' => $pointsAllTime
-			);
+		$final_result = array ('id_filelist' => $playerInfo->id_filelist,
+								'name_pokerstars' => $playerInfo->name_pokerstars,
+								'name_filelist' => $playerInfo->name_filelist,
+								'month' => $playerInfo->month,
+								'day' => $playerInfo->day,
+								'year' => $playerInfo->year,
+								'member_type' => $playerInfo->member_type,
+								'points' => $points,
+								'final_tables' => $finalTables,
+								'gold_medals' => $gold_medals,
+								'silver_medals' => $silver_medals,
+								'bronze_medals' => $bronze_medals,
+								'points_all_time' => $pointsAllTime
+		);
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
+			
+			$this->cache->save($key, json_encode($final_result));
 		}
 		
 		return $final_result;

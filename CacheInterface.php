@@ -6,7 +6,7 @@ interface CacheInterface
 	
 	public function getContent($key);
 	
-	public function save($key, $value, $lifetime);
+	public function save($key, $value);
 	
 	public function flush($key);
 }

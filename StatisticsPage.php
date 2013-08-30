@@ -1,19 +1,42 @@
 <?php
 require_once 'DB.class.php';
 require_once 'Config.class.php';
+require_once 'CacheDB.class.php';
+require_once 'CacheFile.class.php';
 
 class StatisticsPage
 {
+	private $cache;
+	
 	public function __construct()
 	{
+		if (Config::getConfig()->getValue('enable_cache'))
+		{
+			$cacheType = Config::getConfig()->getValue('cache_type');
 		
+			if($cacheType == 'db')
+			{
+				$this->cache = new CacheDB();
+			}
+			elseif ($cacheType == 'file')
+			{
+				$this->cache = new CacheFile();
+			}
+		}
 	}
 	
 	public function getTopPlayersAllTime()
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_players_alltime');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_alltime');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
@@ -38,7 +61,7 @@ class StatisticsPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$results = array();
@@ -72,11 +95,30 @@ class StatisticsPage
 		
 		$this->array_sort_by_column($final_result, 'points');
 		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_players_alltime');
+			
+			$this->cache->save($key, json_encode($final_result));
+		}
+		
 		return $final_result;
 	}
 	
 	public function getTournamentsGraph()
 	{
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_tournament_graph');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_tournament_graph');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
+		}
+		
 		$db = Database::getConnection()->getPDO();
 		
 		try
@@ -92,7 +134,7 @@ class StatisticsPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$results = array();
@@ -107,14 +149,28 @@ class StatisticsPage
 			);
 		}
 		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_tournament_graph');
+			
+			$this->cache->save($key, json_encode($results));
+		}
+		
 		return $results;
 	}
 	
 	public function getMostActive50Players()
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_players_mostactive');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_mostactive');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
@@ -132,7 +188,7 @@ class StatisticsPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$results = array();
@@ -142,6 +198,13 @@ class StatisticsPage
 								'name_pokerstars' => $r->name_pokerstars,
 								'count' => $r->count
 			);
+		}
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_players_mostactive');
+			
+			$this->cache->save($key, json_encode($results));
 		}
 		
 		return $results;
@@ -193,9 +256,16 @@ class StatisticsPage
 	
 	public function getGeneralStatistics()
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_general_stats');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_general_stats');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
@@ -218,7 +288,7 @@ class StatisticsPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$totalPlayers = 0;
@@ -239,6 +309,13 @@ class StatisticsPage
 							'total_players' => $totalPlayers,
 							'total_tournaments' => $totalTournaments
 			);
+		}
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_general_stats');
+			
+			$this->cache->save($key, json_encode($results));
 		}
 		
 		return $results;

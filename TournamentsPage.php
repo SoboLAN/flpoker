@@ -23,7 +23,7 @@ class TournamentsPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$tournaments = array();

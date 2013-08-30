@@ -14,20 +14,27 @@ class CacheDB implements CacheInterface
 	
 	public function contains($key, $lifetime)
 	{
-		$result = $this->DB->query ("SELECT value, entry_time FROM cache WHERE cache_key='$key'");
-		if ($result->rowCount () == 0)
+		try
+		{
+			$statement = $this->DB->prepare('SELECT value, entry_time FROM cache WHERE cache_key=?');
+			$statement->execute(array($key));
+		}
+		catch (PDOException $e)
+		{
+			die ('There was an error while displaying the page');
+		}
+		
+		if ($statement->rowCount () == 0)
 		{
 			return false;
 		}
-		elseif ($result->rowCount() > 1)
+		elseif ($statement->rowCount() > 1)
 		{
 			die('There was an error while displaying the page.');
 		}
 		
-		foreach ($result as $row)
-		{
-			$time = $row->entry_time;
-		}
+		$row = $statement->fetch(PDO::FETCH_OBJ);
+		$time = $row->entry_time;
 		
 		if (time() - $time > $lifetime)
 		{
@@ -40,36 +47,49 @@ class CacheDB implements CacheInterface
 
 	public function flush($key)
 	{
-		$result = $this->DB->exec ("DELETE FROM cache WHERE cache_key='$key'");
+		try
+		{
+			$statement = $this->DB->exec ('DELETE FROM cache WHERE cache_key=?');
+			$statement->execute (array ($key));
+		}
+		catch (PDOException $e)
+		{
+			die ('There was an error while displaying the page');
+		}
 	}
 
 	public function getContent($key)
 	{
-		$result = $this->DB->query ("SELECT value FROM cache WHERE cache_key='$key'");
-		
-		foreach ($result as $row)
+		try
 		{
-			$value = $row->value;
-			return $value;
-		}
-	}
-
-	public function save($key, $value, $lifetime)
-	{
-		$this->DB->beginTransaction();
-		
-		$time = time () + $lifetime;
-		
-		$statement = $this->DB->prepare('INSERT INTO cache(cache_key, value, entry_time) VALUES (?, ?, ?)');
-		
-		try{
-		
-			$statement->execute (array ($key, $value, $time));
+			$statement = $this->DB->prepare ('SELECT value FROM cache WHERE cache_key=?');
+			$statement->execute (array ($key));
 		}
 		catch (PDOException $e)
 		{
-			var_dump($e->getMessage());
+			die ('There was an error while displaying the page');
 		}
+		
+		$row = $statement->fetch (PDO::FETCH_OBJ);
+		
+		return $row->value;
+	}
+
+	public function save($key, $value)
+	{
+		$this->DB->beginTransaction();
+		
+		$statement = $this->DB->prepare('INSERT INTO cache(cache_key, value, entry_time) VALUES (?, ?, ?)');
+		
+		try
+		{
+			$statement->execute (array ($key, $value, time ()));
+		}
+		catch (PDOException $e)
+		{
+			die ('There was an error while displaying the page');
+		}
+		
 		if ($statement->rowCount () !== 1)
 		{
 			die ('There was an error while displaying the page');
