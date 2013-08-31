@@ -25,16 +25,9 @@ class TournamentsPage
 		{
 			die('There was a problem while performing database queries');
 		}
-		
-		$tournaments = array();
-		foreach ($tmptournaments as $tournament)
-		{
-			$tournaments[] = $tournament;
-		}
-		
+
 		$final_result = array();
-		
-		foreach ($tournaments as $tournament)
+		foreach ($tmptournaments as $tournament)
 		{
 			$final_result[] = array('id' => $tournament->tournament_id,
 									'day' => $tournament->day,
@@ -44,7 +37,7 @@ class TournamentsPage
 									'participants' => $tournament->participants
 			);
 		}
-		
+
 		return $final_result;
 	}
 }

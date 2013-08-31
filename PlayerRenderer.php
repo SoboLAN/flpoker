@@ -14,6 +14,11 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderGeneral($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		if (is_null($content['month']) OR empty($content['month']))
 		{
 			$regDate = '<span class="faded">unknown</span>';
@@ -81,7 +86,7 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function rendererTHistory($content)
 	{
-		$out = '<table class="presentation-table" style="width:90%">
+		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_tournament_tournament') . '</strong></th>
 			<th><strong>' . $this->site->getWord('player_tournament_points') . '</strong></th>
@@ -113,7 +118,7 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderBonuses($content)
 	{
-		$out = '<table class="presentation-table" style="width:90%">
+		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_bonus_tournament') . '</strong></th>
 			<th><strong>' . $this->site->getWord('player_bonus_date') . '</strong></th>
@@ -146,7 +151,7 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderPrizes($content)
 	{
-		$out = '<table class="presentation-table" style="width:90%">
+		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_prize_prize') . '</strong></th>
 			<th><strong>' . $this->site->getWord('player_prize_date') . '</strong></th>

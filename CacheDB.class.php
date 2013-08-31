@@ -21,7 +21,7 @@ class CacheDB implements CacheInterface
 		}
 		catch (PDOException $e)
 		{
-			die ('There was an error while displaying the page');
+			die ('There was an error while displaying the page1');
 		}
 		
 		if ($statement->rowCount () == 0)
@@ -30,7 +30,7 @@ class CacheDB implements CacheInterface
 		}
 		elseif ($statement->rowCount() > 1)
 		{
-			die('There was an error while displaying the page.');
+			die('There was an error while displaying the page2');
 		}
 		
 		$row = $statement->fetch(PDO::FETCH_OBJ);
@@ -49,12 +49,12 @@ class CacheDB implements CacheInterface
 	{
 		try
 		{
-			$statement = $this->DB->exec ('DELETE FROM cache WHERE cache_key=?');
+			$statement = $this->DB->prepare ('DELETE FROM cache WHERE cache_key=?');
 			$statement->execute (array ($key));
 		}
 		catch (PDOException $e)
 		{
-			die ('There was an error while displaying the page');
+			die ('There was an error while displaying the page3');
 		}
 	}
 
@@ -67,7 +67,7 @@ class CacheDB implements CacheInterface
 		}
 		catch (PDOException $e)
 		{
-			die ('There was an error while displaying the page');
+			die ('There was an error while displaying the page4');
 		}
 		
 		$row = $statement->fetch (PDO::FETCH_OBJ);
@@ -87,12 +87,12 @@ class CacheDB implements CacheInterface
 		}
 		catch (PDOException $e)
 		{
-			die ('There was an error while displaying the page');
+			die ('There was an error while displaying the page5');
 		}
 		
 		if ($statement->rowCount () !== 1)
 		{
-			die ('There was an error while displaying the page');
+			die ('There was an error while displaying the page6');
 		}
 		
 		$this->DB->commit ();

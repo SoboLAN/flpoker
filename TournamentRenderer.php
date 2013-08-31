@@ -14,6 +14,11 @@ class TournamentRenderer extends GeneralRenderer
 	
 	public function renderDetails($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		$tournamentTime = mktime(0, 0, 0, $content['month'], $content['day'], $content['year']);
 		$tournamentDate = date('l, j F Y', $tournamentTime);
 		
@@ -51,6 +56,11 @@ class TournamentRenderer extends GeneralRenderer
 	
 	public function renderResults($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		$out = '<table class="presentation-table" style="width:100%">
 			<tr>
 			<th><strong>' . $this->site->getWord('tournament_position') . '</strong></th>

@@ -84,7 +84,7 @@ class PlayerPage
 			
 			$playerInfoSt->bindParam (1, $pid, PDO::PARAM_INT);
 			$playerInfoSt->execute ();
-			$playerInfo = $playerInfoSt->fetch (PDO::FETCH_OBJ);
+			$playerInfo = $playerInfoSt->rowCount () == 0 ? false : $playerInfoSt->fetch (PDO::FETCH_OBJ);
 			
 			$resultsSt->bindParam (1, $pid, PDO::PARAM_INT);
 			$resultsSt->execute ();
@@ -113,10 +113,10 @@ class PlayerPage
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries: ' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 
-		if(count($playerInfo) == 0)
+		if(! $playerInfo)
 		{
 			return array();
 		}
@@ -152,28 +152,30 @@ class PlayerPage
 	
 	public function getTournamentHistory($pid)
 	{
-		if (Config::getConfig()->getValue('enable_cache'))
-		{
-			// TODO: implement this
-		}
-		
 		$db = Database::getConnection()->getPDO();
-		
-		$pidesc = $db->quote($pid);
 		
 		try
 		{
-			$history = $db->query ('SELECT t.tournament_id, DAYOFMONTH(t.tournament_date) AS day, ' .
+			$historySt = $db->prepare ('SELECT t.tournament_id, DAYOFMONTH(t.tournament_date) AS day, ' .
 									'MONTH(t.tournament_date) AS month, YEAR(t.tournament_date) AS year, ' .
 									'r.points, r.position ' .
 									'FROM tournaments t ' .
 									'JOIN results r ON t.tournament_id=r.tournament_id ' .
-									'WHERE r.player_id=' . $pidesc .
+									'WHERE r.player_id=? ' .
 									'ORDER BY t.tournament_date DESC');
+			
+			$historySt->bindParam (1, $pid, PDO::PARAM_INT);
+			$historySt->execute ();
+			
+			$history = array ();
+			while ($row = $historySt->fetch (PDO::FETCH_OBJ))
+			{
+				$history[] = $row;
+			}
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries: ' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$final_result = array();
@@ -197,21 +199,28 @@ class PlayerPage
 	{		
 		$db = Database::getConnection()->getPDO();
 		
-		$pidesc = $db->quote($pid);
-		
 		try
 		{
-			$bonuses = $db->query ('SELECT bonus_value, tournament_id, bonus_description, ' .
+			$bonusesSt = $db->prepare ('SELECT bonus_value, tournament_id, bonus_description, ' .
 									'DAYOFMONTH(bonus_date) AS day, MONTH(bonus_date) AS month , ' .
 									'YEAR(bonus_date) AS year, ' .
 									'UNIX_TIMESTAMP(bonus_date) AS stamp ' .
 									'FROM bonus_points ' .
-									'WHERE player_id=' . $pidesc . ' ' .
+									'WHERE player_id=? ' .
 									'ORDER BY stamp ASC');
+			
+			$bonusesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$bonusesSt->execute ();
+			
+			$bonuses = array ();
+			while ($row = $bonusesSt->fetch (PDO::FETCH_OBJ))
+			{
+				$bonuses[] = $row;
+			}
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries: ' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$final_result = array();
@@ -224,7 +233,6 @@ class PlayerPage
 									'year' => $bonus->year,
 									'bonus_value' => $bonus->bonus_value,
 									'description' => $bonus->bonus_description
-							
 			);
 		}
 		
@@ -234,21 +242,28 @@ class PlayerPage
 	public function getPrizes($pid)
 	{		
 		$db = Database::getConnection()->getPDO();
-		
-		$pidesc = $db->quote($pid);
-		
+
 		try
 		{
-			$prizes = $db->query ('SELECT prize, cost, ' .
+			$prizesSt = $db->prepare ('SELECT prize, cost, ' .
 									'DAYOFMONTH(date_bought) AS day, ' .
 									'MONTH(date_bought) AS month , ' .
 									'YEAR(date_bought) AS year ' .
 									'FROM prizes ' .
-									'WHERE player_id=' . $pidesc);
+									'WHERE player_id=?');
+			
+			$prizesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$prizesSt->execute ();
+			
+			$prizes = array ();
+			while ($row = $prizesSt->fetch (PDO::FETCH_OBJ))
+			{
+				$prizes[] = $row;
+			}
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries: ' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$final_result = array();

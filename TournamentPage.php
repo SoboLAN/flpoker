@@ -13,51 +13,57 @@ class TournamentPage
 	{		
 		$db = Database::getConnection()->getPDO();
 		
-		//just beeing extra-safe
-		$tidesc = $db->quote($tid);
-
 		try
 		{
-			$tmptournament = $db->query ('SELECT tournament_id, YEAR(tournament_date) AS year, ' .
+			$tournamentSt = $db->prepare ('SELECT tournament_id, YEAR(tournament_date) AS year, ' .
 										'MONTH(tournament_date) AS month, DAYOFMONTH(tournament_date) AS day, ' .
 										'tournament_type, participants ' .
 										'FROM tournaments ' .
-										'WHERE tournament_id=' . $tidesc);
+										'WHERE tournament_id=?');
+			
+			$tournamentSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$tournamentSt->execute ();
+			$tournament = $tournamentSt->rowCount () == 0 ? false : $tournamentSt->fetch (PDO::FETCH_OBJ);
 		}
 		catch (PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
 		
-		$final_result = array();
-		foreach ($tmptournament as $t)
+		if (! $tournament)
 		{
-			$final_result = array('id' => $t->tournament_id,
-								'day' => $t->day,
-								'month' => $t->month,
-								'year' => $t->year,
-								'type' => $t->tournament_type,
-								'participants' => $t->participants
-			);
+			return array ();
 		}
-
-		return $final_result;
+		
+		return array('id' => $tournament->tournament_id,
+					'day' => $tournament->day,
+					'month' => $tournament->month,
+					'year' => $tournament->year,
+					'type' => $tournament->tournament_type,
+					'participants' => $tournament->participants
+		);
 	}
 	
 	public function getTournamentResults($tid)
 	{		
 		$db = Database::getConnection()->getPDO();
 		
-		//just beeing extra-safe
-		$tidesc = $db->quote($tid);
-
 		try
 		{
-			$results = $db->query ('SELECT r.player_id, p.name_pokerstars, r.points, r.position ' .
+			$resultsSt = $db->prepare ('SELECT r.player_id, p.name_pokerstars, r.points, r.position ' .
 									'FROM results r ' .
 									'LEFT JOIN players p ON r.player_id = p.player_id ' .
-									'WHERE r.tournament_id=' . $tidesc .
+									'WHERE r.tournament_id=? ' .
 									'ORDER BY r.position ASC');
+			
+			$resultsSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$resultsSt->execute ();
+			
+			$results = array();
+			while ($row = $resultsSt->fetch (PDO::FETCH_OBJ))
+			{
+				$results[] = $row;
+			}
 		}
 		catch (PDOException $e)
 		{

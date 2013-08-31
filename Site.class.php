@@ -18,7 +18,7 @@ class Site
 	private static $highChartsDependency = array (
 		'index.php'			=> false,
 		'statistics.php'	=> true,
-		'players.php'		=> true,
+		'players.php'		=> false,
 		'tournaments.php'	=> false,
 		'players.month.php' => false,
 		'rules.php'			=> false,
@@ -174,7 +174,7 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
-			FileList Poker Points v0.93.
+			FileList Poker Points v0.96.
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
