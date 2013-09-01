@@ -23,7 +23,7 @@ class Config
 			
 			'default_lang' => 'ro',
 			'enable_google_analytics' => false,
-			'enable_cache' => true,
+			'enable_cache' => false,
 			'cache_type' => 'db',
 			
 			'lang_cookie_name' => 'lang',
