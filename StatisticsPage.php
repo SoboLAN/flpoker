@@ -212,46 +212,55 @@ class StatisticsPage
 	
 	public function getTop40Players6Months()
 	{
-		/*if (Config::getConfig()->getValue('enable_cache'))
+		if (! is_null ($this->cache))
 		{
-			// TODO: implement this
+			$key = Config::getConfig()->getValue('cache_key_players_6months');
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_6months');
+			if ($this->cache->contains ($key, $lifetime))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
 		}
 		
 		$db = Database::getConnection()->getPDO();
 		
 		try
 		{
-			$tmpplayers = $db->query(
-			'SELECT r.player_id, r.points, p.name_pokerstars ' .
-			'FROM ' .
-			'(SELECT player_id, SUM(points) AS points, tournament_id ' .
-			'FROM results ' .
-			'WHERE player_id IS NOT NULL ' .
-			'GROUP BY player_id ' .
-			'ORDER BY points DESC) r ' .
-			'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
+			$tmp6months = $db->query(
+			'SELECT r.player_id, SUM(r.points) AS totalp, p.name_pokerstars ' .
+			'FROM results r ' .
+			'JOIN tournaments t ON r.tournament_id = t.tournament_id ' .
 			'JOIN players p ON r.player_id = p.player_id ' .
-			'WHERE DATEDIFF(CURDATE(), t.tournament_date) <= 30*6 ' .
-			'ORDER BY r.points DESC ' .
+			'WHERE DATEDIFF(CURDATE(), tournament_date) <= 30 *6 ' .
+			'GROUP BY r.player_id ' .
+			'ORDER BY totalp DESC ' .
 			'LIMIT 40');
+			
 		}
 		catch (PDOException $e)
 		{
-			die('There was a problem while performing database queries:' . $e->getMessage());
+			die('There was a problem while performing database queries');
 		}
 		
 		$results = array();
-		foreach($tmpplayers as $r)
+		foreach($tmp6months as $r)
 		{
 			$results[] = array('player_id' => $r->player_id,
 								'name_pokerstars' => $r->name_pokerstars,
-								'points' => $r->points
+								'totalp' => $r->totalp
 			);
 		}
 		
-		return $results;*/
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_players_6months');
+			
+			$this->cache->save($key, json_encode($results));
+		}
 		
-		return '';
+		return $results;
 	}
 	
 	public function getGeneralStatistics()

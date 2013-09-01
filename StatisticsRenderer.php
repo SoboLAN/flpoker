@@ -159,30 +159,27 @@ class StatisticsRenderer extends GeneralRenderer
 	
 	public function render6Months($content)
 	{
-		/*
 		$out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
-				<tr>
-				<th><strong>Nr.</strong></th>
-				<th><strong>' . $site->getWord('statistics_6months_player') . '</strong></th>
-				<th><strong>' . $site->getWord('statistics_6months_points') . '</strong></th>
-				</tr>';
+			<tr>
+			<th><strong>Nr</strong></th>
+			<th><strong>' . $this->site->getWord('statistics_6months_player') . '</strong></th>
+			<th><strong>' . $this->site->getWord('statistics_6months_points') . '</strong></th>
+			</tr>';
 
 		$i = 1;
-		foreach ($players as $player)
-		{		
+		foreach ($content as $player)
+		{
 			$out .=
 			'<tr>
 				<td>' . $i . '</td>
 				<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
-				<td>' . $player['points'] . '</a></td>
+				<td>' . $player['totalp'] . '</td>
 			</tr>';
 
 			$i++;
 		}
 
-		$out .= '</table>';*/
-
-		$out = 'This feature is currently disabled.';
+		$out .= '</table>';
 
 		return $out;
 	}

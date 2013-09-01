@@ -39,13 +39,15 @@ class Config
 			'cache_lifetime_players_mostactive' => 24 * 3600,
 			'cache_lifetime_tournament_graph' => 24 * 3600,
 			'cache_lifetime_general_stats' => 24 * 3600,
+			'cache_lifetime_players_6months' => 24 * 3600,
 			
 			'cache_key_players' => 'players',
 			'cache_key_player_general' => 'player_general_',
 			'cache_key_players_alltime' => 'players_alltime',
 			'cache_key_players_mostactive' => 'players_most_active',
 			'cache_key_tournament_graph' => 'tournament_graph',
-			'cache_key_general_stats' => 'general_stats'
+			'cache_key_general_stats' => 'general_stats',
+			'cache_key_players_6months' => 'players_6months'
 		);
 	}
 	
