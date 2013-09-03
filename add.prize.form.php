@@ -31,10 +31,10 @@ $db = Database::getConnection()->getPDO ();
 try
 {
 	$result = $db->query (
-		'SELECT name_pokerstars ' .
+		'SELECT name_filelist ' .
 		'FROM players ' .
-		'WHERE name_pokerstars IS NOT NULL ' .
-		'ORDER BY name_pokerstars ASC');
+		'WHERE name_filelist IS NOT NULL ' .
+		'ORDER BY name_filelist ASC');
 }
 catch (PDOException $e)
 {
@@ -44,7 +44,7 @@ catch (PDOException $e)
 $names = array();
 foreach ($result as $name)
 {
-	$names[] = $name->name_pokerstars;
+	$names[] = $name->name_filelist;
 	
 }
 

@@ -19,7 +19,7 @@ $db = Database::getConnection()->getPDO ();
 
 try
 {
-	$getIdStatement = $db->prepare ('SELECT player_id FROM players WHERE name_pokerstars=?');
+	$getIdStatement = $db->prepare ('SELECT player_id FROM players WHERE name_filelist=?');
 	$getIdStatement->bindParam (1, $_POST['player'], PDO::PARAM_STR);
 	$getIdStatement->execute ();
 
