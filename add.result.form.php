@@ -38,7 +38,7 @@ try
 }
 catch (PDOException $e)
 {
-	die ('There was an error: ' . $e->getMessage());
+	die ('There was an error');
 }
 
 $names = array();

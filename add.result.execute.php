@@ -9,39 +9,46 @@ require_once 'DB.class.php';
 
 $db = Database::getConnection()->getPDO ();
 
-$i = 1;
-$getIdStatement = $db->prepare ('SELECT player_id FROM players WHERE name_pokerstars=?');
-$insertResults = array();
-$tid = $_POST['tournamentid'];
-while (true)
+try
 {
-	if (! isset($_POST["player$i"]) or empty($_POST["player$i"]))
+	$i = 1;
+	$getIdStatement = $db->prepare ('SELECT player_id FROM players WHERE name_pokerstars=?');
+	$insertResults = array();
+	$tid = $_POST['tournamentid'];
+	while (true)
 	{
-		break;
-	}
-	
-	$getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
-	$getIdStatement->execute ();
-	
-	if ($getIdStatement->rowCount () !== 1)
-	{
-		break;
-	}
-	else
-	{
-		$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
-	}
-	
-	$points = $_POST['points' . $i];
-	$position = $_POST['position' . $i];
-	
-	$insertResults[] = "($id, $tid, $points, $position)";
-	
-	$i++;
-}
+		if (! isset($_POST["player$i"]) or empty($_POST["player$i"]))
+		{
+			break;
+		}
 
-$result = $db->exec ('INSERT INTO results(player_id, tournament_id, points, position) ' .
-					'VALUES ' .
-					implode (',', $insertResults));
+		$getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
+		$getIdStatement->execute ();
+
+		if ($getIdStatement->rowCount () !== 1)
+		{
+			break;
+		}
+		else
+		{
+			$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
+		}
+
+		$points = $_POST['points' . $i];
+		$position = $_POST['position' . $i];
+
+		$insertResults[] = "($id, $tid, $points, $position)";
+
+		$i++;
+	}
+
+	$result = $db->exec ('INSERT INTO results(player_id, tournament_id, points, position) ' .
+						'VALUES ' .
+						implode (',', $insertResults));
+}
+catch (PDOException $e)
+{
+	die ('There was an error while executing the script');
+}
 
 echo "Inserted $result rows.";

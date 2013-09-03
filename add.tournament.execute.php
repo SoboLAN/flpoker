@@ -22,7 +22,7 @@ try
 	$insertSt = $db->prepare (
 		'INSERT INTO tournaments (tournament_id, tournament_date, tournament_type, participants, ' .
 		'duration_hours, duration_minutes) ' .
-		'VALUES' .
+		'VALUES ' .
 		'(NULL, ?, \'regular\', ?, ?, ?)');
 	
 	$insertSt->bindParam (1, $_POST['tournamentdate'], PDO::PARAM_STR);
@@ -44,7 +44,7 @@ try
 }
 catch (PDOException $e)
 {
-	die ('There was an error while executing the script: ' . $e->getMessage());
+	die ('There was an error while executing the script');
 }
 
 echo "Added tournament with ID $id ({$_POST['tournamentdate']}).";
