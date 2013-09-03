@@ -91,5 +91,5 @@ VALUES
 (NULL, 95, '2 Invitations', 50, NULL, 'new'),
 (NULL, 248, '2 Invitations', 50, NULL, 'new'),
 (NULL, 18, 'Avatar Request', 20, NULL, 'new'),
-(NULL, 506, 'Permanent VIP', 400, NULL, 'new');
+(NULL, 506, 'Permanent VIP', 400, NULL, 'new'),
 (NULL, 12, 'Permanent VIP', 400, '2013-08-16', 'new');

@@ -90,4 +90,9 @@ INSERT INTO tournaments (tournament_id, tournament_date, tournament_type, partic
 (95, '2013-07-18', 'regular', 54),
 (96, '2013-07-23', 'regular', 38),
 (97, '2013-07-25', 'regular', 48),
-(98, '2013-08-13', 'regular', 35);
+(98, '2013-08-13', 'regular', 35),
+(99, '2013-08-15', 'regular', 28),
+(100, '2013-08-20', 'regular', 44),
+(101, '2013-08-22', 'regular', 44),
+(102, '2013-08-27', 'regular', 45),
+(103, '2013-08-29', 'regular', 41);

@@ -3,75 +3,40 @@ keep in mind if trouble in the end
 
 !!!!!!! PokerKidCCU ==?== PokerCCURO ==(confirmed)== CypryanCCU
 
-Cezar Med: transfer prize value from players to prizes ??//no, it messes up the points
-
 vezi ce e cu mexicanu1990
-
-C.A1905 - VIP permanent 16 aug 2013 - 400 de puncte//done
 
 final table bonus jan 2013 PokerCCURO ??
 final table bonus jan 2013 relyus ??
 final table bonus feb 2013 pokerkidccu ??
-final table bonus mar 2013 s1r.fl ??//done
-final table bonus apr 2013 s1r.fl ??//done
-final table bonus may 2013 s1r.fl ??//done
-final table bonus june 2013 s1r.fl ??//done
 final table bonus june 2013 geobosss ??
 
-2 pct bonus straight flush 13 sep 2012 sobolan//done
-2 pct bonus straight flush 20 sep 2012 finalecupe//done
-2 pct bonus straight flush 9 oct 2012 eurostar//done
-2 pct bonus straight flush 25 oct 2012 mtoader//done
-2 pct bonus straight flush 15 nov 2012 carmelo//done
-2 pct bonus straight flush 20 dec 2012 sansir//done
-2 pct bonus straight flush 27 dec 2012 crisstiname//done
-
 la turneul 1 jan 2013:
-- 2 pct bonus lui rebelu07 (nu stiu ptr ce)
-- 2 pct bonus lui C.A1905 pentru primul turneu jucat//done
-- 2 pct bonus lui b1nlad3en (nu stiu ptr ce)//done
 - 2 pct bonus lui relyus (nu stiu ptr ce)
 
-2 pct lui Xeenophob 03 jan 2013 (nu stiu ptr ce)//done
-2 pct lui eurostar 08 jan 2013 (nu stiu ptr ce)//done
-2 pct lui PokerCCURO 10 jan 2013 (nu stiu ptr ce)//done
-2 pct lui bogdan0 17 jan 2013 (nu stiu ptr ce)//done
-2 pct lui now019 17 jan 2013 (nu stiu ptr ce)//done
 
-2 pct lui pac3191 22 jan 2013 (nu stiu ptr ce)
-2 pct lui Floris79 22 jan 2013 (nu stiu ptr ce)
-2 pct lui Ghosty18 22 jan 2013 (nu stiu ptr ce)//done
+4 pct y2kkk nu stiu ptr ce 13 jun 2013 13//done
+6 pct bogdan0 top turneu mai 2013 13 jun 2013 83//done
+4 pct vlaadvladus top turneu mai 2013 13 jun 2013 112//done
 
-2 pct lui ddanny 24 jan 2013 (nu stiu ptr ce)//done
+6 pct mariusss top turneu iunie 2013 11 jul 2013 1//done
+4 pct redd0g top turneu iunie 2013 11 jul 2013 25//done
 
-2 pct lui daniD93 05 feb 2013 (nu stiu ptr ce)
-2 pct lui punctuletz 05 feb 2013 (nu stiu ptr ce)//done
-4 pct lui mariusss 05 feb 2013 (turneu top jan 2013)//done
-4 pct lui subvii 05 feb 2013 (royal flush)//done
-6 pct lui fanzone 05 feb 2013 (turneu top jan 2013)//done
+2 pct bogdan0 straight flush 16 jul 2013 83//done
 
-2 pct lui euRO.star 07 feb 2013 (nu stiu ptr ce)//done
-2 pct lui no name 07 feb 2013 (nu stiu ptr ce)//done
-2 pct lui akkad 07 feb 2013 (nu stiu ptr ce)//done
-2 pct lui jdey0 07 feb 2013 (nu stiu ptr ce)
-4 pct lui carmelo 07 feb 2013 (nu stiu ptr ce)//done
+2 pct mikygigi straight flush  23 jul 2013 27//done
 
-2 pct lui [ro]adygeo 12 feb 2013 (nu stiu ptr ce)
+2 pct ag3nt00 straight flush 22 aug 2013 379//done
+2 pct m4g1cplayer straight flush 22 aug 2013 34//done
 
-6 pct m4gicplayer 05 mar 2013 turneu top feb 2013
-4 pct constanti 05 mar 2013 turneu top feb 2013
-2 pct gaby_zarny 05 mar 2013 primul turneu - maybe
-2 pct maximus094 05 mar 2013 primul turneu- maybe
-2 pct eterno-ro 05 mar 2013 primul turneu- maybe
-2 pct thek-paxian 05 mar 2013 primul turneu- maybe
-
-
-
-
-
+2 pct ex1t-s straight flush 27 aug 2013
+~ex1t-s~ - 3 mese finale august 2013 - 10 puncte
 2 pct ~ex1t-s~ 18 jul 2013 primul turneu
 
 
+
+insert into bonus_points(bonus_id, player_id, bonus_value, tournament_id, bonus_description, bonus_date)
+values
+(NULL, , , , NULL, '2013--'),
 
 
 
