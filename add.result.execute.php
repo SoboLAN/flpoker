@@ -21,19 +21,28 @@ try
 		{
 			break;
 		}
-
-		$getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
-		$getIdStatement->execute ();
-
-		if ($getIdStatement->rowCount () !== 1)
+		
+		if ($_POST["player$i"] == 'NULL')
 		{
-			break;
+			$id = 'NULL';
 		}
 		else
 		{
-			$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
-		}
+			$getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
+			$getIdStatement->execute ();
 
+			if ($getIdStatement->rowCount () !== 1)
+			{
+				break;
+			}
+			else
+			{
+				$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
+			}
+			
+			$getIdStatement->closeCursor();
+		}
+		
 		$points = $_POST['points' . $i];
 		$position = $_POST['position' . $i];
 

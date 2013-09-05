@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>FileList Poker Add Tournament</title>
+<title>FileList Poker Add Player</title>
  
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -25,32 +25,32 @@
 
 <body>
  
-<h1>FileList Poker Add Tournament</h1>
+<h1>FileList Poker Add Player</h1>
  
 <script type="text/javascript">
  
 $(document).ready(function()
 {
-	$('#tournamentdate').datepicker ({dateFormat: 'yy-mm-dd'});
+	$('#registrationdate').datepicker ({dateFormat: 'yy-mm-dd'});
 });
 </script>
 
-<form action="add.tournament.execute.php" method="POST" target="_blank">
+<form action="add.player.execute.php" method="POST" target="_blank">
 	<div>
-		<label>Tournament Date: </label>
-		<input type="text" name="tournamentdate" id="tournamentdate" value="" />
+		<label>Registration Date: </label>
+		<input type="text" name="registrationdate" id="registrationdate" value="" />
 	</div>
 	<div>
-		<label>Participants: </label>
-		<input type="text" name="participants" id="participants" value="" />
+		<label>Name Pokerstars: </label>
+		<input type="text" name="nameps" id="nameps" value="" />
 	</div>
 	<div>
-		<label>Duration Hours: </label>
-		<input type="text" name="hours" id="hours" value="" />
+		<label>Name FileList: </label>
+		<input type="text" name="namefl" id="namefl" value="" />
 	</div>
 	<div>
-		<label>Duration Minutes: </label>
-		<input type="text" name="minutes" id="minutes" value="" />
+		<label>ID FileList: </label>
+		<input type="text" name="idfl" id="idfl" value="" />
 	</div>
 	<p>
 		<label>Password: </label>
