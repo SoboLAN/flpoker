@@ -55,6 +55,9 @@
 		'tournament_player' => 'Player',
 		'tournament_points' => 'Points',
 		'tournament_position' => 'Position',
+		'tournament_bonuses' => 'Bonuses obtained in this tournament',
+		'tournament_bonus' => 'Bonus Value',
+		'tournament_bonus_description' => 'Bonus Description',
 		
 		'player_tab_general_title' => 'General Information',
 		'player_tab_thistory_title' => 'Tournament History',

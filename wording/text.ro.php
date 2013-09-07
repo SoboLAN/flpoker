@@ -55,6 +55,9 @@ $siteLabels = array (
 	'tournament_player' => 'Jucător',
 	'tournament_points' => 'Puncte',
 	'tournament_position' => 'Poziție',
+	'tournament_bonuses' => 'Bonusuri obținute în acest turneu',
+	'tournament_bonus' => 'Valoarea Bonus-ului',
+	'tournament_bonus_description' => 'Descrierea Bonus-ului',
 	
 	'player_tab_general_title' => 'Informații Generale',
 	'player_tab_thistory_title' => 'Istoria Turneelor',

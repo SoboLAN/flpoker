@@ -16,7 +16,7 @@ class CacheDB implements CacheInterface
 	{
 		try
 		{
-			$statement = $this->DB->prepare('SELECT value, entry_time FROM cache WHERE cache_key=?');
+			$statement = $this->DB->prepare('SELECT 1 FROM cache WHERE cache_key=?');
 			$statement->execute(array($key));
 		}
 		catch (PDOException $e)

@@ -82,4 +82,37 @@ class TournamentPage
 		
 		return $final_result;
 	}
+	
+	public function getTournamentBonuses($tid)
+	{
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$bonusesSt = $db->prepare ('SELECT b.player_id, b.bonus_value, b.bonus_description, p.name_pokerstars ' .
+										'FROM bonus_points b ' .
+										'LEFT JOIN players p ON b.player_id = p.player_id ' .
+										'WHERE b.tournament_id=? ' .
+										'ORDER BY b.bonus_value ASC');
+			
+			$bonusesSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$bonusesSt->execute ();
+			
+			$bonuses = array();
+			while ($row = $bonusesSt->fetch (PDO::FETCH_OBJ))
+			{
+				$bonuses[] = array('player_id' => $row->player_id,
+									'name_pokerstars' => $row->name_pokerstars,
+									'bonus_value' => $row->bonus_value,
+									'bonus_description' => $row->bonus_description
+				);
+			}
+		}
+		catch (PDOException $e)
+		{
+			die('There was a problem while performing database queries');
+		}
+		
+		return $bonuses;
+	}
 }

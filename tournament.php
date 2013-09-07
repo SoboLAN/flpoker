@@ -29,6 +29,8 @@ $tid = $_GET['id'];
 
 $tournamentPage = new TournamentPage();
 $details = $tournamentPage->getTournamentDetails($tid);
+$results = $tournamentPage->getTournamentResults($tid);
+$bonuses = $tournamentPage->getTournamentBonuses($tid);
 
 if (! isset($details['id']))
 {
@@ -39,7 +41,9 @@ $renderer = new TournamentRenderer($site);
 
 $htmlout .= $renderer->renderDetails($details);
 
-$htmlout .= $renderer->renderResults($tournamentPage->getTournamentResults($tid));
+$htmlout .= $renderer->renderResults($results);
+
+$htmlout .= $renderer->renderBonuses($bonuses);
 
 $htmlout .= '</div>';
 	

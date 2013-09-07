@@ -46,9 +46,6 @@ class TournamentRenderer extends GeneralRenderer
 			<p>
 				<span class="bigger_label">' . $this->site->getWord('tournament_nrplayers') . ': ' .
 					$content['participants'] . '</span>
-			</p>
-			<p>
-				<span class="subtitle">' . $this->site->getWord('tournament_results') . '</span>
 			</p>';
 		
 		return $out;
@@ -61,7 +58,11 @@ class TournamentRenderer extends GeneralRenderer
 			return '';
 		}
 		
-		$out = '<table class="presentation-table" style="width:100%">
+		$out = '<p>
+				<span class="subtitle">' . $this->site->getWord('tournament_results') . '</span>
+			</p>';
+		
+		$out .= '<table class="presentation-table" style="width:100%">
 			<tr>
 			<th><strong>' . $this->site->getWord('tournament_position') . '</strong></th>
 			<th><strong>' . $this->site->getWord('tournament_player') . '</strong></th>
@@ -84,6 +85,45 @@ class TournamentRenderer extends GeneralRenderer
 				<td>' . $result['position'] . '</td>
 				<td>' . $player . '</td>
 				<td>' . $result['points'] . '</td>
+			</tr>';	
+		}
+
+		$out .= '</table>';
+		
+		return $out;
+	}
+	
+	public function renderBonuses ($content)
+	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
+		$out = '<p>
+				<span class="subtitle">' . $this->site->getWord('tournament_bonuses') . '</span>
+			</p>';
+		
+		$out .= '<table class="presentation-table" style="width:100%">
+			<tr>
+			<th><strong>' . $this->site->getWord('tournament_player') . '</strong></th>
+			<th><strong>' . $this->site->getWord('tournament_bonus') . '</strong></th>
+			<th><strong>' . $this->site->getWord('tournament_bonus_description') . '</strong></th>
+			</tr>';
+
+		foreach ($content as $bonus)
+		{
+			$descr = isset ($bonus['bonus_description']) ?
+							$bonus['bonus_description'] :
+							'<span class="faded">unknown</span>';
+			
+			$player = '<a href="player.php?id=' . $bonus['player_id'] . '">' . $bonus['name_pokerstars'] . '</a>';
+			
+			$out .=
+			'<tr>
+				<td>' . $player . '</td>
+				<td>' . $bonus['bonus_value'] . '</td>
+				<td>' . $descr . '</td>
 			</tr>';	
 		}
 
