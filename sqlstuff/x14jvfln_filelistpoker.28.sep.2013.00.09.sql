@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 01, 2013 at 01:13 PM
+-- Generation Time: Sep 28, 2013 at 12:08 AM
 -- Server version: 5.1.70-cll
 -- PHP Version: 5.3.17
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=223 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=248 ;
 
 --
 -- Dumping data for table `bonus_points`
@@ -264,7 +264,31 @@ INSERT INTO `bonus_points` (`bonus_id`, `player_id`, `bonus_value`, `tournament_
 (219, 169, 5, 103, '2 Final Tables in August 2013', '2013-08-29'),
 (220, 27, 5, 103, '2 Final Tables in August 2013', '2013-08-29'),
 (221, 342, 5, 103, '2 Final Tables in August 2013', '2013-08-29'),
-(222, 34, 5, 103, '2 Final Tables in August 2013', '2013-08-29');
+(222, 34, 5, 103, '2 Final Tables in August 2013', '2013-08-29'),
+(223, 18, 10, 47, '3 Final Tables in January 2013', '2013-01-31'),
+(224, 83, 2, 79, NULL, '2013-02-19'),
+(225, 18, 4, 79, NULL, '2013-02-19'),
+(226, 18, 5, 55, '2 Final Tables in February 2013', '2013-02-28'),
+(227, 24, 5, 103, '2 Final Tables in August 2013', '2013-08-29'),
+(228, 59, 4, 105, 'Royal Flush', '2013-09-04'),
+(229, 12, 2, 110, 'Straight Flush', '2013-09-19'),
+(231, 2, 2, 110, 'Straight Flush', '2013-09-19'),
+(232, 97, 2, 110, 'Straight Flush', '2013-09-19'),
+(233, 76, 2, 112, 'Straight Flush', '2013-09-26'),
+(234, 76, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(235, 53, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(236, 32, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(237, 116, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(238, 24, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(239, 34, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(240, 18, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(241, 504, 5, 112, '2 Final Tables in September 2013', '2013-09-26'),
+(242, 21, 10, 112, '3 Final Tables in September 2013', '2013-09-26'),
+(243, 79, 10, 112, '3 Final Tables in September 2013', '2013-09-26'),
+(244, 169, 20, 112, '4 Final Tables in September 2013', '2013-09-26'),
+(245, 154, 20, 112, '4 Final Tables in September 2013', '2013-09-26'),
+(246, 10, 30, 112, '5 Final Tables in September 2013', '2013-09-26'),
+(247, 154, 20, 112, 'Player of the Month in September 2013', '2013-09-26');
 
 -- --------------------------------------------------------
 
@@ -278,8 +302,6 @@ CREATE TABLE IF NOT EXISTS `cache` (
   `entry_time` int(11) NOT NULL,
   UNIQUE KEY `cache_key` (`cache_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `players`
@@ -320,7 +342,7 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (15, 'bratu uzzy', 'bratu94', 933736, 'regular', 38, 0, '2012-05-08', 1),
 (16, 'calin1973', 'Emanuela09', 252255, 'regular', 97, 0, '2012-03-12', 1),
 (17, 'euRO.stAr99', 'euRO17', 641452, 'regular', 236, 45, '2012-09-07', 1),
-(18, 'PokerCCURO', 'cypryan11', 1031222, 'regular', 0, 0, '2013-02-09', 1),
+(18, 'Cypry@nCCU', 'cypryan11', 1031222, 'regular', 0, 0, '2013-01-10', 1),
 (19, 'mnemosyN1', 'mnemosyN1', 846264, 'regular', 106, 80, '2012-08-21', 1),
 (20, 'mrallex361', 'tm_35', 527496, 'regular', 64, 0, '2012-08-21', 1),
 (21, 'turba1722', 'turba1722', 190958, 'regular', 51, 0, '2011-07-20', 1),
@@ -517,7 +539,7 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (212, 'FLsunlight', 'sunlight', 117074, 'regular', 15, 85, '2012-09-21', 1),
 (213, 'carabasa90', 'Madalin2901', 843845, 'regular', 30, 0, '2012-01-19', 1),
 (214, 'Soldier6661', 'Soldier666', 496815, 'regular', 30, 0, '2011-07-20', 1),
-(215, 'niposs2', '<N/A>', -1, 'regular', 0, 0, '2012-10-11', 1),
+(215, 'niposs2', NULL, -1, 'regular', 0, 0, '2012-10-11', 1),
 (216, 'radacina19', 'zbenghi', 644276, 'regular', 216, 0, '2011-08-02', 1),
 (217, 'andreismiley', 'andreismiley', 244081, 'regular', 29, 0, '2012-03-18', 1),
 (218, NULL, 'MiNNNNNT', 312251, 'regular', 29, 0, NULL, 0),
@@ -917,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `players_of_the_month` (
   `award_year` year(4) NOT NULL,
   PRIMARY KEY (`player_of_the_month_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `players_of_the_month`
@@ -931,7 +953,8 @@ INSERT INTO `players_of_the_month` (`player_of_the_month_id`, `player_id`, `awar
 (5, 12, 5, 2013),
 (6, 25, 6, 2013),
 (7, 10, 7, 2013),
-(8, 76, 8, 2013);
+(8, 76, 8, 2013),
+(9, 154, 9, 2013);
 
 -- --------------------------------------------------------
 
@@ -948,7 +971,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=91 ;
 
 --
 -- Dumping data for table `prizes`
@@ -1043,7 +1066,8 @@ INSERT INTO `prizes` (`prize_id`, `player_id`, `prize`, `cost`, `date_bought`, `
 (86, 248, '2 Invitations', 50, NULL, 'new'),
 (87, 18, 'Avatar Request', 20, NULL, 'new'),
 (88, 506, 'Permanent VIP', 400, NULL, 'new'),
-(89, 12, 'Permanent VIP', 400, '2013-08-16', 'new');
+(89, 12, 'Permanent VIP', 400, '2013-08-16', 'new'),
+(90, 18, 'Permanent VIP', 400, '2013-09-01', 'new');
 
 -- --------------------------------------------------------
 
@@ -3081,7 +3105,165 @@ INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUE
 (76, 103, 23, 4),
 (404, 103, 25, 3),
 (17, 103, 27, 2),
-(169, 103, 30, 1);
+(169, 103, 30, 1),
+(11, 104, 30, 1),
+(21, 104, 27, 2),
+(NULL, 104, 25, 3),
+(NULL, 104, 23, 4),
+(154, 104, 21, 5),
+(NULL, 104, 19, 6),
+(10, 104, 17, 7),
+(28, 104, 15, 8),
+(NULL, 104, 13, 9),
+(NULL, 104, 10, 11),
+(169, 104, 9, 12),
+(NULL, 104, 8, 13),
+(172, 104, 7, 14),
+(504, 104, 6, 15),
+(34, 104, 5, 16),
+(2, 104, 4, 17),
+(379, 104, 3, 18),
+(3, 104, 2, 19),
+(46, 104, 1, 20),
+(408, 105, 0, 1),
+(79, 105, 0, 2),
+(169, 105, 0, 3),
+(193, 105, 0, 4),
+(59, 105, 0, 5),
+(NULL, 105, 0, 6),
+(NULL, 106, 30, 1),
+(169, 106, 27, 2),
+(10, 106, 25, 3),
+(NULL, 106, 23, 4),
+(NULL, 106, 21, 5),
+(NULL, 106, 19, 6),
+(167, 106, 17, 7),
+(53, 106, 15, 8),
+(90, 106, 13, 9),
+(NULL, 106, 10, 10),
+(76, 106, 9, 11),
+(7, 106, 8, 12),
+(21, 106, 7, 13),
+(27, 106, 6, 14),
+(NULL, 106, 5, 15),
+(104, 106, 4, 16),
+(69, 106, 3, 17),
+(34, 106, 2, 18),
+(204, 106, 1, 19),
+(504, 107, 30, 1),
+(34, 107, 27, 2),
+(NULL, 107, 25, 3),
+(24, 107, 23, 4),
+(79, 107, 21, 5),
+(261, 107, 19, 6),
+(10, 107, 17, 7),
+(172, 107, 15, 10),
+(154, 107, 13, 12),
+(2, 107, 10, 13),
+(NULL, 107, 9, 14),
+(NULL, 107, 8, 15),
+(76, 107, 7, 16),
+(82, 107, 6, 17),
+(18, 107, 5, 18),
+(32, 107, 4, 19),
+(37, 107, 3, 20),
+(163, 107, 2, 21),
+(97, 107, 1, 22),
+(32, 108, 30, 1),
+(179, 108, 27, 2),
+(NULL, 108, 25, 3),
+(79, 108, 23, 4),
+(169, 108, 21, 5),
+(18, 108, 19, 6),
+(21, 108, 17, 7),
+(154, 108, 15, 8),
+(NULL, 108, 13, 9),
+(25, 108, 10, 10),
+(204, 108, 9, 11),
+(212, 108, 8, 13),
+(504, 108, 7, 14),
+(NULL, 108, 6, 15),
+(20, 108, 5, 16),
+(NULL, 108, 4, 17),
+(76, 108, 3, 18),
+(10, 108, 2, 19),
+(172, 108, 1, 20),
+(1, 109, 30, 1),
+(76, 109, 27, 2),
+(154, 109, 25, 3),
+(10, 109, 23, 4),
+(32, 109, 21, 5),
+(169, 109, 19, 6),
+(NULL, 109, 17, 7),
+(18, 109, 15, 8),
+(504, 109, 13, 9),
+(NULL, 109, 10, 10),
+(37, 109, 9, 12),
+(204, 109, 8, 13),
+(83, 109, 7, 14),
+(NULL, 109, 6, 15),
+(212, 109, 5, 16),
+(NULL, 109, 4, 17),
+(NULL, 109, 3, 19),
+(33, 109, 2, 20),
+(27, 109, 1, 21),
+(2, 110, 30, 1),
+(NULL, 110, 27, 2),
+(NULL, 110, 25, 3),
+(83, 110, 23, 4),
+(20, 110, 21, 5),
+(98, 110, 19, 6),
+(258, 110, 17, 7),
+(NULL, 110, 15, 8),
+(12, 110, 13, 9),
+(NULL, 110, 10, 10),
+(NULL, 110, 9, 11),
+(6, 110, 8, 13),
+(NULL, 110, 7, 14),
+(69, 110, 6, 16),
+(NULL, 110, 5, 17),
+(32, 110, 4, 18),
+(17, 110, 3, 19),
+(154, 110, 2, 20),
+(24, 110, 1, 21),
+(154, 111, 30, 1),
+(116, 111, 27, 2),
+(157, 111, 25, 3),
+(NULL, 111, 23, 4),
+(204, 111, 21, 5),
+(53, 111, 19, 6),
+(175, 111, 17, 7),
+(97, 111, 15, 8),
+(21, 111, 13, 9),
+(NULL, 111, 10, 10),
+(34, 111, 9, 11),
+(NULL, 111, 8, 12),
+(27, 111, 7, 13),
+(NULL, 111, 6, 14),
+(256, 111, 5, 15),
+(2, 111, 4, 16),
+(10, 111, 3, 17),
+(82, 111, 2, 18),
+(7, 111, 1, 19),
+(116, 112, 30, 1),
+(34, 112, 27, 2),
+(248, 112, 25, 3),
+(24, 112, 23, 4),
+(76, 112, 21, 5),
+(61, 112, 19, 6),
+(NULL, 112, 17, 7),
+(6, 112, 15, 8),
+(10, 112, 13, 9),
+(NULL, 112, 10, 10),
+(230, 112, 9, 11),
+(47, 112, 8, 12),
+(172, 112, 7, 13),
+(9, 112, 6, 14),
+(262, 112, 5, 15),
+(175, 112, 4, 16),
+(98, 112, 3, 17),
+(212, 112, 2, 18),
+(309, 112, 1, 19);
 
 -- --------------------------------------------------------
 
@@ -3097,7 +3279,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `duration_hours` smallint(5) unsigned DEFAULT NULL,
   `duration_minutes` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=113 ;
 
 --
 -- Dumping data for table `tournaments`
@@ -3200,7 +3382,16 @@ INSERT INTO `tournaments` (`tournament_id`, `tournament_date`, `tournament_type`
 (100, '2013-08-20', 'regular', 44, 2, 54),
 (101, '2013-08-22', 'regular', 44, 2, 55),
 (102, '2013-08-27', 'regular', 45, 3, 50),
-(103, '2013-08-29', 'regular', 41, 3, 33);
+(103, '2013-08-29', 'regular', 41, 3, 33),
+(104, '2013-09-03', 'regular', 56, 3, 31),
+(105, '2013-09-04', 'special', 24, 2, 45),
+(106, '2013-09-05', 'regular', 44, 3, 37),
+(107, '2013-09-10', 'regular', 52, 3, 35),
+(108, '2013-09-12', 'regular', 54, 3, 41),
+(109, '2013-09-17', 'regular', 59, 3, 40),
+(110, '2013-09-19', 'regular', 68, 3, 45),
+(111, '2013-09-24', 'regular', 72, 3, 14),
+(112, '2013-09-26', 'regular', 74, 2, 54);
 
 --
 -- Constraints for dumped tables
@@ -3235,3 +3426,4 @@ ALTER TABLE `results`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+         
