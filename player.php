@@ -31,7 +31,7 @@ $playerPage = new PlayerPage();
 
 $general = $playerPage->getGeneral($player_id);
 
-if (! isset($general['points']) OR empty($general['points']))
+if (count($general) === 0)
 {
 	die('There is no player with that ID.');
 }
