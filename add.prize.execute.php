@@ -1,6 +1,6 @@
 <?php
 
-if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'flpoker1234doprize')
+if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myflpass1234do')
 {
 	die ('nice try.');
 }
