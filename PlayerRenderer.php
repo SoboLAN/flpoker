@@ -19,6 +19,23 @@ class PlayerRenderer extends GeneralRenderer
 			return '';
 		}
 		
+		$namePokerStars = (is_null($content['name_pokerstars']) OR empty($content['name_pokerstars'])) ?
+							'<span class="faded">unknown</span>' :
+							$content['name_pokerstars'];
+			
+		if (is_null($content['name_filelist']) OR empty($content['name_filelist']))
+		{
+			$nameFilelist = '<span class="faded">unknown</span>';
+			$flURL = $nameFilelist;
+		}
+		else
+		{
+			$nameFilelist = $content['name_filelist'];
+			$flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $content['id_filelist'] . '">' .
+					$nameFilelist . '</a>';
+		}
+						
+		
 		if (is_null($content['month']) OR empty($content['month']))
 		{
 			$regDate = '<span class="faded">unknown</span>';
@@ -36,14 +53,12 @@ class PlayerRenderer extends GeneralRenderer
 		$out =
 		'<p>
 			<span class="bigger_label">' . $this->site->getWord('player_tab_general_pname') . ': ' .
-				$content['name_pokerstars'] .
+				$namePokerStars .
 			'</span>
 		</p>
 		<p>
 			<span class="bigger_label">' . $this->site->getWord('player_tab_general_fname') . ': ' .
-				'<a href="http://filelist.ro/userdetails.php?id=' . $content['id_filelist'] . '">' .
-					$content['name_filelist'] . '</a>' .
-			'</span>
+				$flURL . '</span>
 		</p>
 		<p>
 			<span class="bigger_label">' . $this->site->getWord('player_tab_general_regdate') . ': ' .
@@ -86,6 +101,11 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function rendererTHistory($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_tournament_tournament') . '</strong></th>
@@ -118,6 +138,11 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderBonuses($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_bonus_tournament') . '</strong></th>
@@ -151,6 +176,11 @@ class PlayerRenderer extends GeneralRenderer
 	
 	public function renderPrizes($content)
 	{
+		if (empty ($content))
+		{
+			return '';
+		}
+		
 		$out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
 			<tr>
 			<th><strong>' . $this->site->getWord('player_prize_prize') . '</strong></th>

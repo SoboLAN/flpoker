@@ -141,11 +141,27 @@ class StatisticsRenderer extends GeneralRenderer
 		$i = 1;
 		foreach ($content as $player)
 		{
+			$namePokerStars = (is_null($player['name_pokerstars']) OR empty($player['name_pokerstars'])) ?
+							'<span class="faded">unknown</span>' :
+							$player['name_pokerstars'];
+			
+			if (is_null($player['name_filelist']) OR empty($player['name_filelist']))
+			{
+				$nameFilelist = '<span class="faded">unknown</span>';
+				$flURL = $nameFilelist;
+			}
+			else
+			{
+				$nameFilelist = $player['name_filelist'];
+				$flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' .
+						$nameFilelist . '</a>';
+			}
+			
 			$out .=
 			'<tr>
 				<td>' . $i . '</td>
-				<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
-				<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
+				<td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
+				<td>' . $flURL . '</td>
 				<td>' . $player['points'] . '</td>
 			</tr>';
 

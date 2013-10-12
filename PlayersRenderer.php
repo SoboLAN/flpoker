@@ -26,9 +26,25 @@ class PlayersRenderer extends GeneralRenderer
 		$i = 1;
 		foreach ($content as $player)
 		{
-			if (is_null($player['name_pokerstars']) OR empty($player['name_pokerstars']))
+			$namePokerStars = (is_null($player['name_pokerstars']) OR empty($player['name_pokerstars'])) ?
+							'<span class="faded">unknown</span>' :
+							$player['name_pokerstars'];
+			
+			if (is_null($player['name_filelist']) OR empty($player['name_filelist']))
 			{
-				$regDate = $namePokerStars = '<span class="faded">unknown</span>';
+				$nameFilelist = '<span class="faded">unknown</span>';
+				$flURL = $nameFilelist;
+			}
+			else
+			{
+				$nameFilelist = $player['name_filelist'];
+				$flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' .
+						$nameFilelist . '</a>';
+			}
+			
+			if (is_null($player['year']) OR empty($player['year']))
+			{
+				$regDate = '<span class="faded">unknown</span>';
 			}
 			else
 			{
@@ -39,15 +55,13 @@ class PlayersRenderer extends GeneralRenderer
 				{
 					$regDate = $this->translateDate($regDate, $this->site->getLanguage());
 				}
-
-				$namePokerStars = $player['name_pokerstars'];
 			}
 
 			$out .=
 			'<tr' . ($player['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
 				<td>' . $i . '</td>
 				<td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
-				<td><a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' . $player['name_filelist'] . '</a></td>
+				<td>' . $flURL . '</td>
 				<td>' . $regDate . '</td>
 				<td>' . $player['points'] . '</td>
 			</tr>';

@@ -102,7 +102,7 @@ class Site
 		
 		if (self::$jQueryDependency[$page])
 		{
-			$out .= '<script src="js/jquery-1.9.1.min.js"></script>';
+			$out .= '<script src="js/jquery-1.10.2.min.js"></script>';
 			$out .= '<script src="js/jquery-ui-1.10.3.custom.min.js"></script>';
 			$out .= '<link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />';
 
@@ -174,7 +174,7 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
-			FileList Poker Points v0.99.
+			FileList Poker Points v1.0.
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
