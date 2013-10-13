@@ -3,7 +3,7 @@
 <head>
 <title>FileList Poker Add Result</title>
  
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
 <link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />
  
