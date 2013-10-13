@@ -30,8 +30,8 @@ class PlayerPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_player_general');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -144,7 +144,9 @@ class PlayerPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
 			
-			$this->cache->save($key, json_encode($final_result));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_player_general');
+			
+			$this->cache->save($key, json_encode($final_result), $lifetime);
 		}
 		
 		return $final_result;

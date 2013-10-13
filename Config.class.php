@@ -23,7 +23,7 @@ class Config
 			
 			'default_lang' => 'ro',
 			'enable_google_analytics' => false,
-			'enable_cache' => false,
+			'enable_cache' => true,
 			'cache_type' => 'db',
 			
 			'lang_cookie_name' => 'lang',
@@ -33,13 +33,13 @@ class Config
 			'recaptcha_private_key' => '6LeaOOYSAAAAAAV0ARQJxLiL4_rPiLGXfsmNP_gh',
 			'contact_email' => 'contact@flpoker.javafling.org',
 			
-			'cache_lifetime_players' => 24 * 3600,
-			'cache_lifetime_player_general' => 12 * 3600,
-			'cache_lifetime_players_alltime' => 24 * 3600,
-			'cache_lifetime_players_mostactive' => 24 * 3600,
-			'cache_lifetime_tournament_graph' => 24 * 3600,
-			'cache_lifetime_general_stats' => 24 * 3600,
-			'cache_lifetime_players_6months' => 24 * 3600,
+			'cache_lifetime_players' => 60,
+			'cache_lifetime_player_general' => 60,
+			'cache_lifetime_players_alltime' => 60,
+			'cache_lifetime_players_mostactive' => 60,
+			'cache_lifetime_tournament_graph' => 60,
+			'cache_lifetime_general_stats' => 60,
+			'cache_lifetime_players_6months' => 60,
 			
 			'cache_key_players' => 'players',
 			'cache_key_player_general' => 'player_general_',

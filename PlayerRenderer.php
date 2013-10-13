@@ -122,12 +122,16 @@ class PlayerRenderer extends GeneralRenderer
 			{
 				$tDate = $this->translateDate($tDate, $this->site->getLanguage());
 			}
+			
+			$position = (is_null($tournament['position']) or empty($tournament['position'])) ?
+						'<span class="faded">unknown</span>' :
+						$tournament['position'];
 
 			$out .=
 			'<tr>
 				<td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $tDate . '</a></td>
 				<td>' . $tournament['points'] . '</td>
-				<td>' . $tournament['position'] . '</td>
+				<td>' . $position . '</td>
 			</tr>';	
 		}
 
@@ -159,13 +163,17 @@ class PlayerRenderer extends GeneralRenderer
 			{
 				$bDate = $this->translateDate($bDate, $this->site->getLanguage());
 			}
+			
+			$description = (is_null($bonus['description']) or empty($bonus['description'])) ?
+							'<span class="faded">unknown</span>' :
+							$bonus['description'];
 
 			$out .=
 			'<tr>
 				<td><a href="tournament.php?id=' . $bonus['tournament_id'] . '">' . $bonus['tournament_id'] . '</a></td>
 				<td>' . $bDate . '</td>
 				<td>' . $bonus['bonus_value'] . '</td>
-				<td>' . $bonus['description'] . '</td>
+				<td>' . $description . '</td>
 			</tr>';	
 		}
 
@@ -203,10 +211,14 @@ class PlayerRenderer extends GeneralRenderer
 					$pDate = $this->translateDate($pDate, $this->site->getLanguage());
 				}
 			}
+			
+			$prizeText = (is_null($prize['prize']) or empty($prize['prize'])) ?
+						'<span class="faded">unknown</span>' :
+						$prize['prize'];
 
 			$out .=
 			'<tr>
-				<td>' . $prize['prize'] . '</td>
+				<td>' . $prizeText . '</td>
 				<td>' . $pDate . '</td>
 				<td>' . $prize['cost'] . '</td>
 			</tr>';	

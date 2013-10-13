@@ -12,11 +12,11 @@ class CacheDB implements CacheInterface
 		$this->DB = Database::getConnection()->getPDO();
 	}
 	
-	public function contains($key, $lifetime)
+	public function contains($key)
 	{
 		try
 		{
-			$statement = $this->DB->prepare('SELECT entry_time FROM cache WHERE cache_key=?');
+			$statement = $this->DB->prepare('SELECT entry_time, lifetime FROM cache WHERE cache_key=?');
 			$statement->execute(array($key));
 		}
 		catch (PDOException $e)
@@ -34,9 +34,10 @@ class CacheDB implements CacheInterface
 		}
 		
 		$row = $statement->fetch(PDO::FETCH_OBJ);
-		$time = $row->entry_time;
+		$entryTime = $row->entry_time;
+		$lifeTime = $row->lifetime;
 		
-		if (time() - $time > $lifetime)
+		if (time() - $entryTime > $lifeTime)
 		{
 			$this->flush($key);
 			return false;
@@ -75,15 +76,15 @@ class CacheDB implements CacheInterface
 		return $row->value;
 	}
 
-	public function save($key, $value)
+	public function save($key, $value, $lifetime)
 	{
 		$this->DB->beginTransaction();
 		
-		$statement = $this->DB->prepare('INSERT INTO cache(cache_key, value, entry_time) VALUES (?, ?, ?)');
+		$statement = $this->DB->prepare('INSERT INTO cache(cache_key, value, entry_time, lifetime) VALUES (?, ?, ?, ?)');
 		
 		try
 		{
-			$statement->execute (array ($key, $value, time ()));
+			$statement->execute (array ($key, $value, time (), $lifetime));
 		}
 		catch (PDOException $e)
 		{

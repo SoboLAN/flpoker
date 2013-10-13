@@ -30,8 +30,8 @@ class StatisticsPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_alltime');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_alltime');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -99,7 +99,9 @@ class StatisticsPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_alltime');
 			
-			$this->cache->save($key, json_encode($final_result));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_alltime');
+			
+			$this->cache->save($key, json_encode($final_result), $lifetime);
 		}
 		
 		return $final_result;
@@ -110,8 +112,8 @@ class StatisticsPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_tournament_graph');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_tournament_graph');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -153,7 +155,9 @@ class StatisticsPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_tournament_graph');
 			
-			$this->cache->save($key, json_encode($results));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_tournament_graph');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
 		}
 		
 		return $results;
@@ -164,8 +168,8 @@ class StatisticsPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_mostactive');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_mostactive');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -204,7 +208,9 @@ class StatisticsPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_mostactive');
 			
-			$this->cache->save($key, json_encode($results));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_mostactive');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
 		}
 		
 		return $results;
@@ -215,8 +221,8 @@ class StatisticsPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_6months');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_6months');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -257,7 +263,9 @@ class StatisticsPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_players_6months');
 			
-			$this->cache->save($key, json_encode($results));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_players_6months');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
 		}
 		
 		return $results;
@@ -268,8 +276,8 @@ class StatisticsPage
 		if (! is_null ($this->cache))
 		{
 			$key = Config::getConfig()->getValue('cache_key_general_stats');
-			$lifetime = Config::getConfig()->getValue('cache_lifetime_general_stats');
-			if ($this->cache->contains ($key, $lifetime))
+			
+			if ($this->cache->contains ($key))
 			{
 				$content = json_decode ($this->cache->getContent($key), true);
 				
@@ -324,7 +332,9 @@ class StatisticsPage
 		{
 			$key = Config::getConfig()->getValue('cache_key_general_stats');
 			
-			$this->cache->save($key, json_encode($results));
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_general_stats');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
 		}
 		
 		return $results;

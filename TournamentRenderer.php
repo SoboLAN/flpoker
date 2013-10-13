@@ -79,10 +79,14 @@ class TournamentRenderer extends GeneralRenderer
 			{
 				$player = '<span class="faded">unknown</span>';
 			}
+			
+			$position = (is_null($result['position']) or empty($result['position'])) ?
+						'<span class="faded">unknown</span>' :
+						$result['position'];
 
 			$out .=
 			'<tr>
-				<td>' . $result['position'] . '</td>
+				<td>' . $position . '</td>
 				<td>' . $player . '</td>
 				<td>' . $result['points'] . '</td>
 			</tr>';	
