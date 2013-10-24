@@ -29,6 +29,8 @@ $siteLabels = array (
 	'statistics_tab_tournaments' => 'Turnee',
 	
 	'statistics_general_totalpoints' => 'Numărul Total de Puncte acumulate în Club',
+	'statistics_general_spent' => 'Numărul Total de Puncte cheltuite în Club',
+	'statistics_general_outoftotal' => 'din total',
 	'statistics_general_nrusers' => 'Număr de Jucători',
 	'statistics_general_nrtournaments' => 'Număr de Turnee',
 	
@@ -51,6 +53,7 @@ $siteLabels = array (
 	'tournament_regular' => 'obișnuit',
 	'tournament_special' => 'special',
 	'tournament_nrplayers' => 'Numărul de Jucători',
+	'tournament_duration' => 'Durata',
 	'tournament_results' => 'Rezultate',
 	'tournament_player' => 'Jucător',
 	'tournament_points' => 'Puncte',

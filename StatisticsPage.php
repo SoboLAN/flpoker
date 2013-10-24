@@ -302,6 +302,10 @@ class StatisticsPage
 			$tmpplayercount = $db->query('SELECT COUNT(*) AS count FROM players');
 			
 			$tmptournamentcount = $db->query('SELECT COUNT(*) AS count FROM tournaments');
+			
+			$tmpspent1 = $db->query('SELECT SUM(initial_spent_points) AS players_spent FROM players');
+			
+			$tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
 		}
 		catch (PDOException $e)
 		{
@@ -320,11 +324,23 @@ class StatisticsPage
 			$totalTournaments = $tCount->count;
 		}
 		
+		$totalSpent = 0;
+		foreach ($tmpspent1 as $spent)
+		{
+			$totalSpent += $spent->players_spent;
+		}
+		
+		foreach ($tmpspent2 as $spent)
+		{
+			$totalSpent += $spent->cost;
+		}
+		
 		foreach($tmpallpoints as $r)
 		{
 			$results = array('total_points' => $r->total_points,
 							'total_players' => $totalPlayers,
-							'total_tournaments' => $totalTournaments
+							'total_tournaments' => $totalTournaments,
+							'total_spent' => $totalSpent
 			);
 		}
 		

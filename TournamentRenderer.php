@@ -48,6 +48,15 @@ class TournamentRenderer extends GeneralRenderer
 					$content['participants'] . '</span>
 			</p>';
 		
+		if (! empty($content['duration_hours']) and ! empty($content['duration_minutes']))
+		{
+			$out .= 
+			'<p>
+				<span class="bigger_label">' . $this->site->getWord('tournament_duration') . ': ' .
+					$content['duration_hours'] . 'h, ' . $content['duration_minutes'] . 'min</span>
+			</p>';
+		}
+		
 		return $out;
 	}
 	

@@ -14,10 +14,18 @@ class StatisticsRenderer extends GeneralRenderer
 	
 	public function renderGeneral($content)
 	{
+		$percentage = number_format((100.0 * $content['total_spent']) / $content['total_points'], 2);
+		
 		$out = '
 		<p>
 			<span class="bigger_label">' . $this->site->getWord('statistics_general_totalpoints') . ': ' .
 				number_format($content['total_points']) .
+			'</span>
+		</p>
+		<p>
+			<span class="bigger_label">' . $this->site->getWord('statistics_general_spent') . ': ' .
+				number_format($content['total_spent']) .
+				' (' . $percentage . ' % ' . $this->site->getWord('statistics_general_outoftotal') . ')' .
 			'</span>
 		</p>
 		<p>

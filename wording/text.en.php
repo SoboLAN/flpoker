@@ -29,6 +29,8 @@
 		'statistics_tab_tournaments' => 'Tournaments',
 		
 		'statistics_general_totalpoints' => 'Total Points Accumulated in the Club',
+		'statistics_general_spent' => 'Total Points Spent in the Club',
+		'statistics_general_outoftotal' => 'out of total',
 		'statistics_general_nrusers' => 'Number of Players',
 		'statistics_general_nrtournaments' => 'Number of Tournaments',
 		
@@ -51,6 +53,7 @@
 		'tournament_regular' => 'regular',
 		'tournament_special' => 'special',
 		'tournament_nrplayers' => 'Participants',
+		'tournament_duration' => 'Duration',
 		'tournament_results' => 'Results',
 		'tournament_player' => 'Player',
 		'tournament_points' => 'Points',
