@@ -1,8 +1,11 @@
 <?php
-require_once 'DB.class.php';
-require_once 'Config.class.php';
-require_once 'CacheDB.class.php';
-require_once 'CacheFile.class.php';
+
+namespace FileListPoker\Pages;
+
+use FileListPoker\Main\Database;
+use FileListPoker\Main\Config;
+use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\CacheFile;
 
 class StatisticsPage
 {
@@ -59,7 +62,7 @@ class StatisticsPage
 								'GROUP BY player_id ' .
 								'ORDER BY player_id ASC');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -134,7 +137,7 @@ class StatisticsPage
 			'FROM tournaments ext ' .
 			'ORDER BY tournament_id ASC');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -190,7 +193,7 @@ class StatisticsPage
 			'JOIN players p ON p.player_id=r.player_id ' .
 			'LIMIT 50');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -245,7 +248,7 @@ class StatisticsPage
 			'LIMIT 40');
 			
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -307,7 +310,7 @@ class StatisticsPage
 			
 			$tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}

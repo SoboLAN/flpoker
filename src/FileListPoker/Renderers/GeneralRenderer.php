@@ -1,5 +1,7 @@
 <?php
 
+namespace FileListPoker\Renderers;
+
 abstract class GeneralRenderer
 {
 	/**

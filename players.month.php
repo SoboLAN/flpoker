@@ -1,8 +1,10 @@
 <?php
 
-require_once 'Site.class.php';
-require_once 'PlayersMonthRenderer.php';
-require_once 'PlayersMonthPage.php';
+require_once 'autoload.php';
+
+use FileListPoker\Pages\PlayersMonthPage;
+use FileListPoker\Main\Site;
+use FileListPoker\Renderers\PlayersMonthRenderer;
 
 $site = new Site();
 

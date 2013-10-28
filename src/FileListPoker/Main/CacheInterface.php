@@ -1,5 +1,7 @@
 <?php
 
+namespace FileListPoker\Main;
+
 interface CacheInterface
 {
 	public function contains($key);

@@ -13,7 +13,8 @@ if (! isset ($_POST['tournamentdate']) or
 	die ('Some data is missing.');
 }
 
-require_once 'DB.class.php';
+require_once 'autoload.php';
+use FileListPoker\Main\Database;
 
 $db = Database::getConnection()->getPDO ();
 
@@ -25,10 +26,10 @@ try
 		'VALUES ' .
 		'(NULL, ?, \'regular\', ?, ?, ?)');
 	
-	$insertSt->bindParam (1, $_POST['tournamentdate'], PDO::PARAM_STR);
-	$insertSt->bindParam (2, $_POST['participants'], PDO::PARAM_INT);
-	$insertSt->bindParam (3, $_POST['hours'], PDO::PARAM_INT);
-	$insertSt->bindParam (4, $_POST['minutes'], PDO::PARAM_INT);
+	$insertSt->bindParam (1, $_POST['tournamentdate'], \PDO::PARAM_STR);
+	$insertSt->bindParam (2, $_POST['participants'], \PDO::PARAM_INT);
+	$insertSt->bindParam (3, $_POST['hours'], \PDO::PARAM_INT);
+	$insertSt->bindParam (4, $_POST['minutes'], \PDO::PARAM_INT);
 	
 	$insertSt->execute ();
 
@@ -40,9 +41,9 @@ try
 	$getIdStatement = $db->prepare ('SELECT MAX(tournament_id) AS tournament_id FROM tournaments');
 	$getIdStatement->execute ();
 	
-	$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->tournament_id;
+	$id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->tournament_id;
 }
-catch (PDOException $e)
+catch (\PDOException $e)
 {
 	die ('There was an error while executing the script');
 }

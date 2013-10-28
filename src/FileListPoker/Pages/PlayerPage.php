@@ -1,8 +1,11 @@
 <?php
-require_once 'DB.class.php';
-require_once 'Config.class.php';
-require_once 'CacheDB.class.php';
-require_once 'CacheFile.class.php';
+
+namespace FileListPoker\Pages;
+
+use FileListPoker\Main\Database;
+use FileListPoker\Main\Config;
+use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\CacheFile;
 
 class PlayerPage
 {
@@ -82,36 +85,36 @@ class PlayerPage
 									'WHERE position=3 ' .
 									'AND player_id=?) AS bronze_medals');
 			
-			$playerInfoSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$playerInfoSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$playerInfoSt->execute ();
-			$playerInfo = $playerInfoSt->rowCount () == 0 ? false : $playerInfoSt->fetch (PDO::FETCH_OBJ);
+			$playerInfo = $playerInfoSt->rowCount () == 0 ? false : $playerInfoSt->fetch (\PDO::FETCH_OBJ);
 			
-			$resultsSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$resultsSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$resultsSt->execute ();
-			$results = $resultsSt->fetch (PDO::FETCH_OBJ)->points;
+			$results = $resultsSt->fetch (\PDO::FETCH_OBJ)->points;
 			
-			$bonusesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$bonusesSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$bonusesSt->execute ();
-			$bonuses = $bonusesSt->fetch (PDO::FETCH_OBJ)->bonus_value;
+			$bonuses = $bonusesSt->fetch (\PDO::FETCH_OBJ)->bonus_value;
 			
-			$prizesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$prizesSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$prizesSt->execute ();
-			$prizes = $prizesSt->fetch (PDO::FETCH_OBJ)->cost;
+			$prizes = $prizesSt->fetch (\PDO::FETCH_OBJ)->cost;
 			
-			$finalTablesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$finalTablesSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$finalTablesSt->execute ();
-			$finalTables = $finalTablesSt->fetch (PDO::FETCH_OBJ)->final_tables;
+			$finalTables = $finalTablesSt->fetch (\PDO::FETCH_OBJ)->final_tables;
 			
-			$medalsSt->bindParam (1, $pid, PDO::PARAM_INT);
-			$medalsSt->bindParam (2, $pid, PDO::PARAM_INT);
-			$medalsSt->bindParam (3, $pid, PDO::PARAM_INT);
+			$medalsSt->bindParam (1, $pid, \PDO::PARAM_INT);
+			$medalsSt->bindParam (2, $pid, \PDO::PARAM_INT);
+			$medalsSt->bindParam (3, $pid, \PDO::PARAM_INT);
 			$medalsSt->execute ();
-			$medalsObj = $medalsSt->fetch (PDO::FETCH_OBJ);
+			$medalsObj = $medalsSt->fetch (\PDO::FETCH_OBJ);
 			$gold_medals = $medalsObj->gold_medals;
 			$silver_medals = $medalsObj->silver_medals;
 			$bronze_medals = $medalsObj->bronze_medals;
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -166,16 +169,16 @@ class PlayerPage
 									'WHERE r.player_id=? ' .
 									'ORDER BY t.tournament_date DESC');
 			
-			$historySt->bindParam (1, $pid, PDO::PARAM_INT);
+			$historySt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$historySt->execute ();
 			
 			$history = array ();
-			while ($row = $historySt->fetch (PDO::FETCH_OBJ))
+			while ($row = $historySt->fetch (\PDO::FETCH_OBJ))
 			{
 				$history[] = $row;
 			}
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -211,16 +214,16 @@ class PlayerPage
 									'WHERE player_id=? ' .
 									'ORDER BY stamp ASC');
 			
-			$bonusesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$bonusesSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$bonusesSt->execute ();
 			
 			$bonuses = array ();
-			while ($row = $bonusesSt->fetch (PDO::FETCH_OBJ))
+			while ($row = $bonusesSt->fetch (\PDO::FETCH_OBJ))
 			{
 				$bonuses[] = $row;
 			}
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -254,16 +257,16 @@ class PlayerPage
 									'FROM prizes ' .
 									'WHERE player_id=?');
 			
-			$prizesSt->bindParam (1, $pid, PDO::PARAM_INT);
+			$prizesSt->bindParam (1, $pid, \PDO::PARAM_INT);
 			$prizesSt->execute ();
 			
 			$prizes = array ();
-			while ($row = $prizesSt->fetch (PDO::FETCH_OBJ))
+			while ($row = $prizesSt->fetch (\PDO::FETCH_OBJ))
 			{
 				$prizes[] = $row;
 			}
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}

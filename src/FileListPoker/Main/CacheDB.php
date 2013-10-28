@@ -1,7 +1,9 @@
 <?php
 
-require_once 'DB.class.php';
-require_once 'CacheInterface.php';
+namespace FileListPoker\Main;
+
+use FileListPoker\Main\Database;
+use FileListPoker\Main\CacheInterface;
 
 class CacheDB implements CacheInterface
 {
@@ -19,7 +21,7 @@ class CacheDB implements CacheInterface
 			$statement = $this->DB->prepare('SELECT entry_time, lifetime FROM cache WHERE cache_key=?');
 			$statement->execute(array($key));
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die ('There was an error while displaying the page1');
 		}
@@ -33,7 +35,7 @@ class CacheDB implements CacheInterface
 			die('There was an error while displaying the page2');
 		}
 		
-		$row = $statement->fetch(PDO::FETCH_OBJ);
+		$row = $statement->fetch(\PDO::FETCH_OBJ);
 		$entryTime = $row->entry_time;
 		$lifeTime = $row->lifetime;
 		
@@ -53,7 +55,7 @@ class CacheDB implements CacheInterface
 			$statement = $this->DB->prepare ('DELETE FROM cache WHERE cache_key=?');
 			$statement->execute (array ($key));
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die ('There was an error while displaying the page3');
 		}
@@ -66,12 +68,12 @@ class CacheDB implements CacheInterface
 			$statement = $this->DB->prepare ('SELECT value FROM cache WHERE cache_key=?');
 			$statement->execute (array ($key));
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die ('There was an error while displaying the page4');
 		}
 		
-		$row = $statement->fetch (PDO::FETCH_OBJ);
+		$row = $statement->fetch (\PDO::FETCH_OBJ);
 		
 		return $row->value;
 	}
@@ -86,7 +88,7 @@ class CacheDB implements CacheInterface
 		{
 			$statement->execute (array ($key, $value, time (), $lifetime));
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die ('There was an error while displaying the page5');
 		}

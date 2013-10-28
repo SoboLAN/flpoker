@@ -1,6 +1,8 @@
 <?php
-require_once 'DB.class.php';
-require_once 'Config.class.php';
+
+namespace FileListPoker\Pages;
+
+use FileListPoker\Main\Database;
 
 class TournamentPage
 {
@@ -21,11 +23,11 @@ class TournamentPage
 										'FROM tournaments ' .
 										'WHERE tournament_id=?');
 			
-			$tournamentSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$tournamentSt->bindParam (1, $tid, \PDO::PARAM_INT);
 			$tournamentSt->execute ();
-			$tournament = $tournamentSt->rowCount () == 0 ? false : $tournamentSt->fetch (PDO::FETCH_OBJ);
+			$tournament = $tournamentSt->rowCount () == 0 ? false : $tournamentSt->fetch (\PDO::FETCH_OBJ);
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -58,16 +60,16 @@ class TournamentPage
 									'WHERE r.tournament_id=? ' .
 									'ORDER BY r.position ASC');
 			
-			$resultsSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$resultsSt->bindParam (1, $tid, \PDO::PARAM_INT);
 			$resultsSt->execute ();
 			
 			$results = array();
-			while ($row = $resultsSt->fetch (PDO::FETCH_OBJ))
+			while ($row = $resultsSt->fetch (\PDO::FETCH_OBJ))
 			{
 				$results[] = $row;
 			}
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}
@@ -97,11 +99,11 @@ class TournamentPage
 										'WHERE b.tournament_id=? ' .
 										'ORDER BY b.bonus_value ASC');
 			
-			$bonusesSt->bindParam (1, $tid, PDO::PARAM_INT);
+			$bonusesSt->bindParam (1, $tid, \PDO::PARAM_INT);
 			$bonusesSt->execute ();
 			
 			$bonuses = array();
-			while ($row = $bonusesSt->fetch (PDO::FETCH_OBJ))
+			while ($row = $bonusesSt->fetch (\PDO::FETCH_OBJ))
 			{
 				$bonuses[] = array('player_id' => $row->player_id,
 									'name_pokerstars' => $row->name_pokerstars,
@@ -110,7 +112,7 @@ class TournamentPage
 				);
 			}
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}

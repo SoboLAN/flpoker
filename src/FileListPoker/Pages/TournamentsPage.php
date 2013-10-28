@@ -1,6 +1,8 @@
 <?php
-require_once 'DB.class.php';
-require_once 'Config.class.php';
+
+namespace FileListPoker\Pages;
+
+use FileListPoker\Main\Database;
 
 class TournamentsPage
 {
@@ -21,7 +23,7 @@ class TournamentsPage
 										'FROM tournaments ' .
 										'ORDER BY tournament_date DESC');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}

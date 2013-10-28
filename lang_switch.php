@@ -1,5 +1,7 @@
 <?php
-require_once 'Config.class.php';
+
+require_once 'autoload.php';
+use FileListPoker\Main\Config;
 
 if ($_GET['lang'] !== 'ro' && $_GET['lang'] !== 'en')
 {

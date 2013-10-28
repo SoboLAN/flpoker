@@ -1,8 +1,10 @@
 <?php
 
-require_once 'Site.class.php';
-require_once 'StatisticsRenderer.php';
-require_once 'StatisticsPage.php';
+require_once 'autoload.php';
+
+use FileListPoker\Pages\StatisticsPage;
+use FileListPoker\Main\Site;
+use FileListPoker\Renderers\StatisticsRenderer;
 
 $site = new Site();
 

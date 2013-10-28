@@ -1,8 +1,10 @@
 <?php
 
-require_once 'Site.class.php';
-require_once 'PlayersPage.php';
-require_once 'PlayersRenderer.php';
+require_once 'autoload.php';
+
+use FileListPoker\Pages\PlayersPage;
+use FileListPoker\Main\Site;
+use FileListPoker\Renderers\PlayersRenderer;
 
 $site = new Site();
 

@@ -1,7 +1,9 @@
 <?php
 
-require_once 'GeneralRenderer.php';
-require_once 'Site.class.php';
+namespace FileListPoker\Renderers;
+
+use FileListPoker\Renderers\GeneralRenderer;
+use FileListPoker\Main\Site;
 
 class PlayersMonthRenderer extends GeneralRenderer
 {

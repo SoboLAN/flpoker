@@ -1,8 +1,10 @@
 <?php
 
-require_once 'Site.class.php';
-require_once 'TournamentRenderer.php';
-require_once 'TournamentPage.php';
+require_once 'autoload.php';
+
+use FileListPoker\Pages\TournamentPage;
+use FileListPoker\Main\Site;
+use FileListPoker\Renderers\TournamentRenderer;
 
 $site = new Site();
 

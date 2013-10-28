@@ -5,7 +5,8 @@ if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myfladm
 	die ('nice try.');
 }
 
-require_once 'DB.class.php';
+require_once 'autoload.php';
+use FileListPoker\Main\Database;
 
 $db = Database::getConnection()->getPDO ();
 
@@ -28,7 +29,7 @@ try
 		}
 		else
 		{
-			$getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
+			$getIdStatement->bindParam (1, $_POST["player$i"], \PDO::PARAM_STR);
 			$getIdStatement->execute ();
 
 			if ($getIdStatement->rowCount () !== 1)
@@ -37,7 +38,7 @@ try
 			}
 			else
 			{
-				$id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
+				$id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->player_id;
 			}
 			
 			$getIdStatement->closeCursor();
@@ -55,7 +56,7 @@ try
 						'VALUES ' .
 						implode (',', $insertResults));
 }
-catch (PDOException $e)
+catch (\PDOException $e)
 {
 	die ('There was an error while executing the script');
 }

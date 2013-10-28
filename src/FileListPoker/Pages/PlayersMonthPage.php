@@ -1,6 +1,8 @@
 <?php
-require_once 'DB.class.php';
-require_once 'Config.class.php';
+
+namespace FileListPoker\Pages;
+
+use FileListPoker\Main\Database;
 
 class PlayersMonthPage
 {
@@ -21,7 +23,7 @@ class PlayersMonthPage
 									'JOIN players p ON m.player_id = p.player_id ' .
 									'ORDER BY award_year DESC , award_month DESC');
 		}
-		catch (PDOException $e)
+		catch (\PDOException $e)
 		{
 			die('There was a problem while performing database queries');
 		}

@@ -24,7 +24,8 @@
 </head>
 
 <?php
-require_once 'DB.class.php';
+require_once 'autoload.php';
+use FileListPoker\Main\Database;
 
 $db = Database::getConnection()->getPDO ();
 
@@ -36,7 +37,7 @@ try
 		'WHERE name_filelist IS NOT NULL ' .
 		'ORDER BY name_filelist ASC');
 }
-catch (PDOException $e)
+catch (\PDOException $e)
 {
 	die ('There was an error');
 }

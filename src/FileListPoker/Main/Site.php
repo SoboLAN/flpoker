@@ -1,5 +1,8 @@
 <?php
-require_once 'Config.class.php';
+
+namespace FileListPoker\Main;
+
+use FileListPoker\Main\Config;
 
 class Site
 {
@@ -119,9 +122,7 @@ class Site
 		
 		if (Config::getConfig()->getValue('enable_google_analytics'))
 		{
-			require_once 'analytics.google.php';
-			
-			$out .= getAnalyticsScript();
+			$out .= $this->getAnalyticsScript();
 		}
 		
 		$out .= '<div id="container">
@@ -185,6 +186,28 @@ class Site
 		</div>';
 		
 		$out .= '</div>'; //closing id="container" too
+		
+		return $out;
+	}
+	
+	private function getAnalyticsScript ()
+	{
+		$out = "<script>
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-40294384-2', 'javafling.org');
+			ga('send', 'pageview');
+		</script>";
 		
 		return $out;
 	}

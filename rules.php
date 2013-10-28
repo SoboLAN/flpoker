@@ -1,5 +1,8 @@
 <?php
-require_once 'Site.class.php';
+
+require_once 'autoload.php';
+
+use FileListPoker\Main\Site;
 
 $site = new Site();
 
