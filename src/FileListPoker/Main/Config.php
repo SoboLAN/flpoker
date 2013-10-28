@@ -22,7 +22,7 @@ class Config
 	{
 		$this->siteConfig = array (
 			'online' => true,
-			'online_eta' => '9 PM on Tuesday',
+			'online_eta' => 'at 9 PM on Tuesday',
 			
 			'default_lang' => 'ro',
 			'enable_google_analytics' => false,

@@ -35,7 +35,7 @@ class Site
 	{
 		if(! Config::getConfig()->getValue('online'))
 		{
-			die ('The site is currently down for maintenance. Will be back at ' . Config::getConfig()->getValue('online_eta'));
+			die ('The site is currently down for maintenance. Will be back ' . Config::getConfig()->getValue('online_eta'));
 		}
 
 		$this->fillLanguage ();
@@ -175,7 +175,7 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
-			FileList Poker Points v1.0.3.
+			FileList Poker Points v1.0.5.
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
