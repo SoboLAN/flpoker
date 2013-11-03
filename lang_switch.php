@@ -18,11 +18,11 @@ $redirpage = '';
 switch($_GET['returnpage'])
 {
 	case 'index.php':			$redirpage = 'index.php'; break;
-	case 'statistics.php':		$redirpage = 'statistics.php'; break;
 	case 'players.php':			$redirpage = 'players.php'; break;
 	case 'tournaments.php':		$redirpage = 'tournaments.php'; break;
+	case 'rankings.php':		$redirpage = 'rankings.php'; break;
+	case 'statistics.php':		$redirpage = 'statistics.php'; break;
 	case 'players.month.php':	$redirpage = 'players.month.php'; break;
-	case 'rules.php':			$redirpage = 'rules.php'; break;
 	case 'contact.php':			$redirpage = 'contact.php'; break;
 	default:					$redirpage = 'index.php';
 }

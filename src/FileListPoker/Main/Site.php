@@ -10,21 +10,21 @@ class Site
 	
 	private static $jQueryDependency = array (
 		'index.php'			=> false,
-		'statistics.php'	=> true,
-		'players.php'		=> true,
+		'players.php'		=> false,
 		'tournaments.php'	=> false,
+		'rankings.php'		=> true,
+		'statistics.php'	=> true,
 		'players.month.php' => false,
-		'rules.php'			=> false,
 		'contact.php'		=> false,
 	);
 	
 	private static $highChartsDependency = array (
 		'index.php'			=> false,
-		'statistics.php'	=> true,
 		'players.php'		=> false,
 		'tournaments.php'	=> false,
+		'rankings.php'		=> false,
+		'statistics.php'	=> true,
 		'players.month.php' => false,
-		'rules.php'			=> false,
 		'contact.php'		=> false,
 	);
 	
@@ -85,12 +85,12 @@ class Site
 		$pageTitle = '';
 		switch($page)
 		{
-			case 'index.php':			$pageTitle = $this->wording['menu_home']; break;
-			case 'statistics.php':		$pageTitle = $this->wording['menu_statistics']; break;
+			case 'index.php':			$pageTitle = $this->wording['menu_home']; break;	
 			case 'players.php':			$pageTitle = $this->wording['menu_players']; break;
 			case 'tournaments.php':		$pageTitle = $this->wording['menu_tournaments']; break;
+			case 'rankings.php':		$pageTitle = $this->wording['menu_rankings']; break;	
+			case 'statistics.php':		$pageTitle = $this->wording['menu_statistics']; break;
 			case 'players.month.php':	$pageTitle = $this->wording['menu_players_of_the_month']; break;
-			case 'rules.php':			$pageTitle = $this->wording['menu_rules']; break;
 			case 'contact.php':			$pageTitle = $this->wording['menu_contact']; break;
 			default: die('Invalid Page');
 		}
@@ -131,20 +131,20 @@ class Site
 		$out .= '<li><a href="index.php" ' . (($page == 'index.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_home'] . '</a></li>';
 		
-		$out .= '<li><a href="statistics.php" ' . (($page == 'statistics.php') ? 'class="selected">' : '>') .
-				$this->wording['menu_statistics'] . '</a></li>';
-		
 		$out .= '<li><a href="players.php" ' . (($page == 'players.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_players'] . '</a></li>';
 		
 		$out .= '<li><a href="tournaments.php" ' . (($page == 'tournaments.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_tournaments'] . '</a></li>';
 		
+		$out .= '<li><a href="rankings.php" ' . (($page == 'rankings.php') ? 'class="selected">' : '>') .
+				$this->wording['menu_rankings'] . '</a></li>';
+		
+		$out .= '<li><a href="statistics.php" ' . (($page == 'statistics.php') ? 'class="selected">' : '>') .
+				$this->wording['menu_statistics'] . '</a></li>';
+		
 		$out .= '<li><a href="players.month.php" ' . (($page == 'players.month.php') ? 'class="selected">' : '>') .
 				$this->wording['menu_players_of_the_month'] . '</a></li>';
-		
-		$out .= '<li><a href="rules.php" ' . (($page == 'rules.php') ? 'class="selected">' : '>') .
-				$this->wording['menu_rules'] . '</a></li>';
 
 		$out .= '</ul>
 		<p id="language_panel">';
@@ -175,7 +175,7 @@ class Site
 	public function getFooter ()
 	{
 		$out = '<div id="footer">
-			FileList Poker Points v1.0.5.
+			FileList Poker Points v1.0.8.
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />

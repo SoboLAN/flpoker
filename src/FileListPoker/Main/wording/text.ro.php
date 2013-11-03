@@ -1,12 +1,11 @@
 <?php
 $siteLabels = array (
 	'menu_home' => 'Acasă',
+	'menu_rankings' => 'Clasamente',
 	'menu_statistics' => 'Statistici',
 	'menu_players' => 'Jucători',
 	'menu_tournaments' => 'Turnee',
 	'menu_players_of_the_month' => 'Jucătorii Lunii',
-	'menu_rules' => 'Reguli',
-	'menu_askprize' => 'Cere Premiu',
 	'menu_contact' => 'Contact',
 	
 	'langpanel_ro' => 'Română',
