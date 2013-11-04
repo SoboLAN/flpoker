@@ -26,6 +26,7 @@ $siteLabels = array (
 	'statistics_tab_most_active' => 'Most Active 50 Players',
 	'statistics_tab_top_bonus' => 'Top Players by Bonus',
 	'statistics_tab_tournaments' => 'Tournaments',
+	'statistics_tab_registrations' => 'Club Registrations',
 		
 	'statistics_general_totalpoints' => 'Total Points Accumulated in the Club',
 	'statistics_general_spent' => 'Total Points Spent in the Club',
@@ -109,5 +110,12 @@ $siteLabels = array (
 	'statistics_tournaments_chartsubtitle' =>
 		'The evolution of the number of players per tournament, together with the average value',
 	'statistics_tournaments_playersline' => 'Number of Players',
-	'statistics_tournaments_averageline' => 'Average'
+	'statistics_tournaments_averageline' => 'Average',
+	'statistics_registrations_text' =>
+		'Here, you can see how the number of club registrations evolved over time. ' .
+		'The evolution is on a per month basis.',
+	'statistics_registrations_charttitle' => 'Players Registration Evolution',
+	'statistics_registrations_chartsubtitle' =>
+		'The evolution of the number of players that joined the club each month',
+	'statistics_registrations_nrplayersline' => 'Number of Registered Players'
 );

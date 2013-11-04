@@ -84,6 +84,59 @@ class StatisticsPage
 		return $results;
 	}
 	
+	public function getRegistrationsGraph()
+	{
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_registrations_graph');
+			
+			if ($this->cache->contains ($key))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$tmpresults = $db->query(
+			'SELECT COUNT(player_id) AS nr_players, YEAR(join_date) AS join_year, ' .
+			'MONTH(join_date) AS join_month, ' .
+			'CONCAT(YEAR(join_date), \'-\', MONTH(join_date)) AS glued ' .
+			'FROM players ' .
+			'WHERE join_date IS NOT NULL ' .
+			'GROUP BY glued ' .
+			'ORDER BY join_year ASC, join_month ASC');
+		}
+		catch (\PDOException $e)
+		{
+			die('There was a problem while performing database queries');
+		}
+		
+		$results = array();
+		foreach($tmpresults as $r)
+		{
+			$results[] = array('nr_players' => $r->nr_players,
+								'join_year' => $r->join_year,
+								'join_month' => $r->join_month
+			);
+		}
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_registrations_graph');
+			
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_registrations_graph');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
+		}
+		
+		return $results;
+	}
+	
 	public function getGeneralStatistics()
 	{
 		if (! is_null ($this->cache))

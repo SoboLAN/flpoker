@@ -110,4 +110,60 @@ class StatisticsRenderer extends GeneralRenderer
 
 		return $out;
 	}
+	
+	public function renderRegistrationsGraph($content)
+	{
+		$clubRegistrants = array();
+		foreach ($content as $record)
+		{
+			$clubRegistrants[] =
+			"[Date.UTC({$record['join_year']}, {$record['join_month']} - 1, 1), {$record['nr_players']}]";
+		}
+
+		$clubRegistrants = implode(",\n", $clubRegistrants);
+
+		$out = "<script type=\"text/javascript\">
+		$(function () {
+			$('#highc-reg').highcharts({
+				chart: {
+					type: 'spline'
+				},
+				title: {
+					text: '" . $this->site->getWord('statistics_registrations_charttitle') . "'
+				},
+				subtitle: {
+					text: '" . $this->site->getWord('statistics_registrations_chartsubtitle') . "'
+				},
+				xAxis: {
+					type: 'datetime',
+					dateTimeLabelFormats: { // don't display the dummy year
+						month: '%e. %b',
+						year: '%b'
+					}
+				},
+				yAxis: {
+					title: {
+						text: '" . $this->site->getWord('statistics_registrations_nrplayersline') . "'
+					},
+					min: 0
+				},
+				tooltip: {
+					formatter: function() {
+							return '<b>'+ this.series.name +'</b><br/>'+
+							Highcharts.dateFormat('%b %Y', this.x) +': '+ this.y;
+					}
+				},
+				series: [{
+					name: '" . $this->site->getWord('statistics_registrations_nrplayersline') . "',
+					// Note that in JavaScript, months start at 0 for January, 1 for February etc.
+					data: [
+						$clubRegistrants
+					]
+				}]
+			});
+		});
+		</script>";
+
+		return $out;
+	}
 }

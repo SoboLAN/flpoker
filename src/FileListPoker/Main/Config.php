@@ -22,7 +22,6 @@ class Config
 	{
 		$this->siteConfig = array (
 			'online' => true,
-			'online_eta' => 'at 9 PM on Tuesday',
 			
 			'default_lang' => 'ro',
 			'enable_google_analytics' => false,
@@ -43,6 +42,7 @@ class Config
 			'cache_lifetime_tournament_graph' => 60,
 			'cache_lifetime_general_stats' => 60,
 			'cache_lifetime_players_6months' => 60,
+			'cache_lifetime_registrations_graph' => 60,
 			
 			'cache_key_players' => 'players',
 			'cache_key_player_general' => 'player_general_',
@@ -50,7 +50,8 @@ class Config
 			'cache_key_players_mostactive' => 'players_most_active',
 			'cache_key_tournament_graph' => 'tournament_graph',
 			'cache_key_general_stats' => 'general_stats',
-			'cache_key_players_6months' => 'players_6months'
+			'cache_key_players_6months' => 'players_6months',
+			'cache_key_registrations_graph' => 'registrations_graph'
 		);
 	}
 	

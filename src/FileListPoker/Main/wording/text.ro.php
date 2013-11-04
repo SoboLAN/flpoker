@@ -26,6 +26,7 @@ $siteLabels = array (
 	'statistics_tab_most_active' => 'Cei mai activi 50 de jucători',
 	'statistics_tab_top_bonus' => 'Top Jucători Bonus-uri',
 	'statistics_tab_tournaments' => 'Turnee',
+	'statistics_tab_registrations' => 'Înscrieri în Club',
 	
 	'statistics_general_totalpoints' => 'Numărul Total de Puncte acumulate în Club',
 	'statistics_general_spent' => 'Numărul Total de Puncte cheltuite în Club',
@@ -116,5 +117,12 @@ $siteLabels = array (
 		'statistics_tournaments_chartsubtitle' =>
 			'Evoluția numărului de jucători per turneu, împreună cu evoluția numărului mediu de jucători',
 		'statistics_tournaments_playersline' => 'Numărul de Jucători',
-		'statistics_tournaments_averageline' => 'Numărul mediu de Jucători'
+		'statistics_tournaments_averageline' => 'Numărul mediu de Jucători',
+	'statistics_registrations_text' =>
+		'Aici poți vedea cum a evoluat în timp numărul de înscrieri în club. ' .
+		'Evoluția este reprezentată pentru fiecare lună.',
+	'statistics_registrations_charttitle' => 'Evoluția Numărului de Înscrieri ale Jucătorilor',
+	'statistics_registrations_chartsubtitle' =>
+		'Evoluția numărului de jucători care s-au înscris în club în fiecare lună',
+	'statistics_registrations_nrplayersline' => 'Numărul de Jucători Înscriși'
 );
