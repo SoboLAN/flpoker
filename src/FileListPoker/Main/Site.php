@@ -10,7 +10,7 @@ class Site
 	
 	private static $jQueryDependency = array (
 		'index.php'			=> false,
-		'players.php'		=> false,
+		'players.php'		=> true,
 		'tournaments.php'	=> false,
 		'rankings.php'		=> true,
 		'statistics.php'	=> true,
