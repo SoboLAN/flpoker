@@ -7,10 +7,9 @@ $db = Database::getConnection()->getPDO();
 
 try
 {
-	//delete cache entries older than 2 days
-	$age = 2 * 24 * 3600;
-	$result = $db->prepare ('DELETE FROM cache WHERE UNIX_TIMESTAMP(NOW()) - entry_time > ?');
-	$result->bindParam (1, $age, \PDO::PARAM_INT);
+	//delete expired cache entries
+	$result = $db->prepare ('DELETE FROM cache WHERE entry_time + lifetime < ?');
+	$result->bindParam (1, time(), \PDO::PARAM_INT);
 	$result->execute ();
 }
 catch (\PDOException $e)
