@@ -21,6 +21,7 @@ $renderer = new RankingsRenderer($site);
 $topAllTime = $renderer->renderTopAllTime($rankingsPage->getTopPlayersAllTime());
 $mostActive = $renderer->renderMostActivePlayers($rankingsPage->getMostActive50Players());
 $top6Months = $renderer->render6Months($rankingsPage->getTop40Players6Months());
+$finalTables = $renderer->renderFinalTables($rankingsPage->getTop50FinalTables());
 
 $htmlout .=
 	'<div id="tabs">
@@ -28,6 +29,7 @@ $htmlout .=
 			<li><a href="#tabs-1">' . $site->getWord('statistics_tab_top_all_time') . '</a></li>
 			<li><a href="#tabs-2">' . $site->getWord('statistics_tab_top_6_months') . '</a></li>
 			<li><a href="#tabs-3">' . $site->getWord('statistics_tab_most_active') . '</a></li>
+			<li><a href="#tabs-4">' . $site->getWord('statistics_tab_final_tables') . '</a></li>
 		</ul>
 		<div id="tabs-1">
 			<p>' . $site->getWord('statistics_top_all_time_text') . '</p>
@@ -40,6 +42,10 @@ $htmlout .=
 		<div id="tabs-3">
 			<p>' . $site->getWord('statistics_most_active_text') . '</p>
 			' . $mostActive . '
+		</div>
+		<div id="tabs-4">
+			<p>' . $site->getWord('statistics_final_tables_text') . '</p>
+			' . $finalTables . '
 		</div>
 	</div>';
 

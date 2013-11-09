@@ -218,6 +218,60 @@ class RankingsPage
 		return $results;
 	}
 	
+	public function getTop50FinalTables()
+	{
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_final_tables');
+			
+			if ($this->cache->contains ($key))
+			{
+				$content = json_decode ($this->cache->getContent($key), true);
+				
+				return $content;
+			}
+		}
+		
+		$db = Database::getConnection()->getPDO();
+		
+		try
+		{
+			$tmpfinaltables = $db->query(
+			'SELECT count(r.tournament_id) AS final_tables, r.player_id, p.name_pokerstars ' .
+			'FROM results r ' .
+			'JOIN players p ON p.player_id = r.player_id ' .
+			'WHERE position <= 9 ' .
+			'GROUP BY player_id ' .
+			'ORDER BY final_tables DESC ' .
+			'LIMIT 50');
+			
+		}
+		catch (\PDOException $e)
+		{
+			die('There was a problem while performing database queries');
+		}
+		
+		$results = array();
+		foreach($tmpfinaltables as $r)
+		{
+			$results[] = array('player_id' => $r->player_id,
+								'name_pokerstars' => $r->name_pokerstars,
+								'final_tables' => $r->final_tables
+			);
+		}
+		
+		if (! is_null ($this->cache))
+		{
+			$key = Config::getConfig()->getValue('cache_key_final_tables');
+			
+			$lifetime = Config::getConfig()->getValue('cache_lifetime_final_tables');
+			
+			$this->cache->save($key, json_encode($results), $lifetime);
+		}
+		
+		return $results;
+	}
+	
 	private function array_sort_by_column(&$arr, $col, $dir = SORT_DESC)
 	{
 		$sort_col = array();

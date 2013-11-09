@@ -27,6 +27,7 @@ $siteLabels = array (
 	'statistics_tab_top_bonus' => 'Top Players by Bonus',
 	'statistics_tab_tournaments' => 'Tournaments',
 	'statistics_tab_registrations' => 'Club Registrations',
+	'statistics_tab_final_tables' => 'Top 50 Final Tables',
 		
 	'statistics_general_totalpoints' => 'Total Points Accumulated in the Club',
 	'statistics_general_spent' => 'Total Points Spent in the Club',
@@ -39,6 +40,9 @@ $siteLabels = array (
 		
 	'statistics_6months_player' => 'Player',
 	'statistics_6months_points' => 'Points',
+	
+	'statistics_final_tables_player' => 'Player',
+	'statistics_final_tables_tables' => 'Final Tables',
 		
 	'tournaments_tournament_date' => 'Tournament Date',
 	'tournaments_type' => 'Type',
@@ -106,6 +110,8 @@ $siteLabels = array (
 		'Here, you can see the evolution of participants in tournaments over time. One line ' .
 		'represents the number of players per tournament, while the other represents the ' .
 		'evolution of the average number of players.',
+	'statistics_final_tables_text' =>
+		'This table shows the 50 players that have reached the most final tables.',
 	'statistics_tournaments_charttitle' => 'Players Count per Tournament',
 	'statistics_tournaments_chartsubtitle' =>
 		'The evolution of the number of players per tournament, together with the average value',

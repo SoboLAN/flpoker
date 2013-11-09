@@ -27,6 +27,7 @@ $siteLabels = array (
 	'statistics_tab_top_bonus' => 'Top Jucători Bonus-uri',
 	'statistics_tab_tournaments' => 'Turnee',
 	'statistics_tab_registrations' => 'Înscrieri în Club',
+	'statistics_tab_final_tables' => 'Top 50 Mese Finale',
 	
 	'statistics_general_totalpoints' => 'Numărul Total de Puncte acumulate în Club',
 	'statistics_general_spent' => 'Numărul Total de Puncte cheltuite în Club',
@@ -39,6 +40,9 @@ $siteLabels = array (
 	
 	'statistics_6months_player' => 'Jucător',
 	'statistics_6months_points' => 'Puncte',
+	
+	'statistics_final_tables_player' => 'Jucător',
+	'statistics_final_tables_tables' => 'Mese Finale',
 	
 	'tournaments_tournament_date' => 'Data Turneului',
 	'tournaments_type' => 'Tipul Turneului',
@@ -113,6 +117,8 @@ $siteLabels = array (
 		'Aici se poate vedea evoluția numărului de participanți la turnee. Prima linie ' .
 		'reprezintă numărul propriu-zis de participanți iar a doua reprezintă evoluția numărului ' .
 		'mediu de participanți până la acel punct în timp.',
+	'statistics_final_tables_text' =>
+		'Acest tabel arată cei 50 de jucători care au ajuns la cele mai multe mese finale.',
 	'statistics_tournaments_charttitle' => 'Numărul de jucători per turneu',
 		'statistics_tournaments_chartsubtitle' =>
 			'Evoluția numărului de jucători per turneu, împreună cu evoluția numărului mediu de jucători',

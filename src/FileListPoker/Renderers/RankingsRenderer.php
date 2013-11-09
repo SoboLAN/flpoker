@@ -112,4 +112,31 @@ class RankingsRenderer extends GeneralRenderer
 
 		return $out;
 	}
+	
+	public function renderFinalTables($content)
+	{
+		$out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
+			<tr>
+			<th><strong>Nr</strong></th>
+			<th><strong>' . $this->site->getWord('statistics_final_tables_player') . '</strong></th>
+			<th><strong>' . $this->site->getWord('statistics_final_tables_tables') . '</strong></th>
+			</tr>';
+
+		$i = 1;
+		foreach ($content as $player)
+		{
+			$out .=
+			'<tr>
+				<td>' . $i . '</td>
+				<td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
+				<td>' . $player['final_tables'] . '</td>
+			</tr>';
+
+			$i++;
+		}
+
+		$out .= '</table>';
+
+		return $out;
+	}
 }
