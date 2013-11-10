@@ -12,8 +12,8 @@ class StatisticsPage
     
     public function __construct()
     {
-        if (Config::getConfig()->getValue('enable_cache')) {
-            $cacheType = Config::getConfig()->getValue('cache_type');
+        if (Config::getValue('enable_cache')) {
+            $cacheType = Config::getValue('cache_type');
         
             if ($cacheType == 'db') {
                 $this->cache = new CacheDB();
@@ -24,7 +24,7 @@ class StatisticsPage
     public function getTournamentsGraph()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_tournament_graph');
+            $key = Config::getValue('cache_key_tournament_graph');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -62,9 +62,9 @@ class StatisticsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_tournament_graph');
+            $key = Config::getValue('cache_key_tournament_graph');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_tournament_graph');
+            $lifetime = Config::getValue('cache_lifetime_tournament_graph');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
@@ -75,7 +75,7 @@ class StatisticsPage
     public function getRegistrationsGraph()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_registrations_graph');
+            $key = Config::getValue('cache_key_registrations_graph');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -110,9 +110,9 @@ class StatisticsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_registrations_graph');
+            $key = Config::getValue('cache_key_registrations_graph');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_registrations_graph');
+            $lifetime = Config::getValue('cache_lifetime_registrations_graph');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
@@ -123,7 +123,7 @@ class StatisticsPage
     public function getGeneralStatistics()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_general_stats');
+            $key = Config::getValue('cache_key_general_stats');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -186,31 +186,13 @@ class StatisticsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_general_stats');
+            $key = Config::getValue('cache_key_general_stats');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_general_stats');
+            $lifetime = Config::getValue('cache_lifetime_general_stats');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
         
         return $results;
-    }
-    
-    private function arrayBinarySearch($array, $type, $elem)
-    {
-        $top = sizeof($array) - 1;
-        $bot = 0;
-        while ($top >= $bot) {
-            $p = floor(($top + $bot) / 2);
-            if ($array[$p]->player_id < $elem) {
-                $bot = $p + 1;
-            } elseif ($array[$p]->player_id > $elem) {
-                $top = $p - 1;
-            } else {
-                return $array[$p]->$type;
-            }
-        }
-       
-        return 0;
     }
 }

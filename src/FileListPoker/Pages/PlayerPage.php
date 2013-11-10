@@ -20,8 +20,8 @@ class PlayerPage
     {
         //set cache field with an apropiate cache instance (based on type), but only
         //if caching is enabled
-        if (Config::getConfig()->getValue('enable_cache')) {
-            $cacheType = Config::getConfig()->getValue('cache_type');
+        if (Config::getValue('enable_cache')) {
+            $cacheType = Config::getValue('cache_type');
         
             if ($cacheType == 'db') {
                 $this->cache = new CacheDB();
@@ -52,7 +52,7 @@ class PlayerPage
     public function getGeneral($pid)
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
+            $key = Config::getValue('cache_key_player_general') . $pid;
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -168,9 +168,9 @@ class PlayerPage
         );
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_player_general') . $pid;
+            $key = Config::getValue('cache_key_player_general') . $pid;
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_player_general');
+            $lifetime = Config::getValue('cache_lifetime_player_general');
             
             $this->cache->save($key, json_encode($final_result), $lifetime);
         }

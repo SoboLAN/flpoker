@@ -37,7 +37,7 @@ class Site
     
     public function __construct ()
     {
-        if (! Config::getConfig()->getValue('online')) {
+        if (! Config::getValue('online')) {
             die ('The site is currently down for maintenance.');
         }
 
@@ -54,7 +54,7 @@ class Site
     
     private function fillLanguage ()
     {
-        $cookiename = Config::getConfig()->getValue('lang_cookie_name');
+        $cookiename = Config::getValue('lang_cookie_name');
     
         if (isset ($_COOKIE[$cookiename])) {
             $userlang = $_COOKIE[$cookiename];
@@ -63,7 +63,7 @@ class Site
                 $this->lang = $userlang;
             }
         } else {
-            $this->lang = Config::getConfig()->getValue('default_lang');
+            $this->lang = Config::getValue('default_lang');
         }
     }
     
@@ -117,7 +117,7 @@ class Site
         
         $out .= '</head><body>';
         
-        if (Config::getConfig()->getValue('enable_google_analytics')) {
+        if (Config::getValue('enable_google_analytics')) {
             $out .= $this->getAnalyticsScript();
         }
         

@@ -19,7 +19,7 @@ class Database
      */
     public static function getConnection ()
     {
-        if (is_null(self::$__instance)) {
+        if (is_null(self::$instance)) {
             self::$instance = new Database();
         }
 

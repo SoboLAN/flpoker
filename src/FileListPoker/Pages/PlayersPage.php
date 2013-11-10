@@ -28,8 +28,8 @@ class PlayersPage
         
         //set cache field with an apropiate cache instance (based on type), but only
         //if caching is enabled
-        if (Config::getConfig()->getValue('enable_cache')) {
-            $cacheType = Config::getConfig()->getValue('cache_type');
+        if (Config::getValue('enable_cache')) {
+            $cacheType = Config::getValue('cache_type');
         
             if ($cacheType == 'db') {
                 $this->cache = new CacheDB();
@@ -55,7 +55,7 @@ class PlayersPage
     public function getContent()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players');
+            $key = Config::getValue('cache_key_players');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -128,9 +128,9 @@ class PlayersPage
         $this->arraySortByColumn($final_result, 'points');
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players');
+            $key = Config::getValue('cache_key_players');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_players');
+            $lifetime = Config::getValue('cache_lifetime_players');
             
             $this->cache->save($key, json_encode($final_result), $lifetime);
         }

@@ -17,8 +17,8 @@ class RankingsPage
     {
         //set cache field with an apropiate cache instance (based on type), but only
         //if caching is enabled
-        if (Config::getConfig()->getValue('enable_cache')) {
-            $cacheType = Config::getConfig()->getValue('cache_type');
+        if (Config::getValue('enable_cache')) {
+            $cacheType = Config::getValue('cache_type');
         
             if ($cacheType == 'db') {
                 $this->cache = new CacheDB();
@@ -41,7 +41,7 @@ class RankingsPage
     public function getTopPlayersAllTime()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_alltime');
+            $key = Config::getValue('cache_key_players_alltime');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -108,9 +108,9 @@ class RankingsPage
         $this->arraySortByColumn($final_result, 'points');
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_alltime');
+            $key = Config::getValue('cache_key_players_alltime');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_players_alltime');
+            $lifetime = Config::getValue('cache_lifetime_players_alltime');
             
             $this->cache->save($key, json_encode($final_result), $lifetime);
         }
@@ -132,7 +132,7 @@ class RankingsPage
     public function getMostActive50Players()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_mostactive');
+            $key = Config::getValue('cache_key_players_mostactive');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -167,9 +167,9 @@ class RankingsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_mostactive');
+            $key = Config::getValue('cache_key_players_mostactive');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_players_mostactive');
+            $lifetime = Config::getValue('cache_lifetime_players_mostactive');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
@@ -191,7 +191,7 @@ class RankingsPage
     public function getTop40Players6Months()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_6months');
+            $key = Config::getValue('cache_key_players_6months');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -228,9 +228,9 @@ class RankingsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_players_6months');
+            $key = Config::getValue('cache_key_players_6months');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_players_6months');
+            $lifetime = Config::getValue('cache_lifetime_players_6months');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
@@ -252,7 +252,7 @@ class RankingsPage
     public function getTop50FinalTables()
     {
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_final_tables');
+            $key = Config::getValue('cache_key_final_tables');
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -288,9 +288,9 @@ class RankingsPage
         }
         
         if (! is_null($this->cache)) {
-            $key = Config::getConfig()->getValue('cache_key_final_tables');
+            $key = Config::getValue('cache_key_final_tables');
             
-            $lifetime = Config::getConfig()->getValue('cache_lifetime_final_tables');
+            $lifetime = Config::getValue('cache_lifetime_final_tables');
             
             $this->cache->save($key, json_encode($results), $lifetime);
         }
