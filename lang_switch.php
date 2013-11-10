@@ -3,17 +3,21 @@
 require_once 'autoload.php';
 use FileListPoker\Main\Config;
 
+//if language is not OK, go away
 if ($_GET['lang'] !== 'ro' && $_GET['lang'] !== 'en')
 {
 	header('Location: index.php');
 }
 
+//language setting is stored in a cookie. so we need parameters for it
 $config = Config::getConfig();
 $cookieName = $config->getValue('lang_cookie_name');
 $cookieDuration = $config->getValue('lang_cookie_duration');
-	
+
+//set the new language in the cookie
 setcookie($cookieName, $_GET['lang'], time() + $cookieDuration);
 
+//figure out where the user is so you can send him back to the same page
 $redirpage = '';
 switch($_GET['returnpage'])
 {
@@ -27,4 +31,5 @@ switch($_GET['returnpage'])
 	default:					$redirpage = 'index.php';
 }
 
+//redirect the user
 header("Location: $redirpage");
