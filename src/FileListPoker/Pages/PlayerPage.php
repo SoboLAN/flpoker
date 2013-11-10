@@ -61,7 +61,7 @@ class PlayerPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
 
         try {
             $playerInfoSt = $db->prepare(
@@ -196,7 +196,7 @@ class PlayerPage
      */
     public function getTournamentHistory($pid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $historySt = $db->prepare(
@@ -255,7 +255,7 @@ class PlayerPage
      */
     public function getBonuses($pid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $bonusesSt = $db->prepare(
@@ -312,7 +312,7 @@ class PlayerPage
      */
     public function getPrizes($pid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
 
         try {
             $prizesSt = $db->prepare(

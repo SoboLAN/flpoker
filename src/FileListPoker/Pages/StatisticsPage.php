@@ -33,7 +33,7 @@ class StatisticsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmpresults = $db->query(
@@ -84,7 +84,7 @@ class StatisticsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmpresults = $db->query(
@@ -132,7 +132,7 @@ class StatisticsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmpallpoints = $db->query(

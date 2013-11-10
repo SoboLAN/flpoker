@@ -8,7 +8,7 @@ class TournamentPage
 {
     public function getTournamentDetails($tid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tournamentSt = $db->prepare(
@@ -44,7 +44,7 @@ class TournamentPage
     
     public function getTournamentResults($tid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $resultsSt = $db->prepare(
@@ -81,7 +81,7 @@ class TournamentPage
     
     public function getTournamentBonuses($tid)
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $bonusesSt = $db->prepare(

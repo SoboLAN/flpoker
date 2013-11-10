@@ -28,7 +28,7 @@
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 
-$db = Database::getConnection()->getPDO ();
+$db = Database::getConnection();
 
 try
 {

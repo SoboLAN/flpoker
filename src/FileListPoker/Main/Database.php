@@ -7,11 +7,10 @@ namespace FileListPoker\Main;
  */
 class Database
 {
-    //singleton
-    private static $instance;
-
+    private static $configPath = 'config/db.config.json';
+    
     //the database connection object
-    private $connection;
+    private static $connection;
 
     /**
      * Returns a database connection object. Always the same one.
@@ -19,18 +18,17 @@ class Database
      */
     public static function getConnection ()
     {
-        if (is_null(self::$instance)) {
-            self::$instance = new Database();
+        if (is_null(self::$connection)) {
+            self::buildConnection();
         }
 
-        return self::$instance;
+        return self::$connection;
     }
 
-    //constructor. made private because the class implements the Singleton pattern
-    private function __construct ()
+    private static function buildConnection()
     {
         //get database connection options
-        require_once 'db.config.php';
+        $dbConfig = json_decode(file_get_contents(self::$configPath), true);
         
         //versions of MySQL older than this don't support prepared statements.
         //they have to be simulated by PDO
@@ -61,23 +59,14 @@ class Database
 
         try {
             $dsn = 'mysql:' . implode(';', $dsnpairs);
-            $this->connection = new \PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
+            self::$connection = new \PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
 
             // Set prepared statement emulation depending on server version
-            $serverversion = $this->connection->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            $serverversion = self::$connection->getAttribute(\PDO::ATTR_SERVER_VERSION);
             $emulate_prepares = (version_compare($serverversion, $emulate_prepares_below_version, '<'));
-            $this->connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
+            self::$connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
         } catch (\PDOException $e) {
             die ($e->getMessage());
         }
-    }
-    
-    /**
-     * Returns the database connection object.
-     * @return object the database connection object.
-     */
-    public function getPDO()
-    {
-        return $this->connection;
     }
 }

@@ -64,7 +64,7 @@ class PlayersPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         //the formula is initial_accumulated_points + results + bonuses - new prizes
         try {

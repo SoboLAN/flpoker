@@ -7,7 +7,7 @@ namespace FileListPoker\Main;
  */
 class Config
 {
-    private static $configPath = 'src/FileListPoker/Main/main.config.json';
+    private static $configPath = 'config/main.config.json';
     
     //array containing configuration options
     private static $siteConfig;

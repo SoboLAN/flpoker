@@ -16,7 +16,7 @@ if (! isset ($_POST['player']) or
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 
-$db = Database::getConnection()->getPDO ();
+$db = Database::getConnection();
 
 try
 {

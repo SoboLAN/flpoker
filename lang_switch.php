@@ -10,9 +10,8 @@ if ($_GET['lang'] !== 'ro' && $_GET['lang'] !== 'en')
 }
 
 //language setting is stored in a cookie. so we need parameters for it
-$config = Config::getConfig();
-$cookieName = $config->getValue('lang_cookie_name');
-$cookieDuration = $config->getValue('lang_cookie_duration');
+$cookieName = Config::getValue('lang_cookie_name');
+$cookieDuration = Config::getValue('lang_cookie_duration');
 
 //set the new language in the cookie
 setcookie($cookieName, $_GET['lang'], time() + $cookieDuration);

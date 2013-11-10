@@ -23,7 +23,7 @@ class PlayersMonthPage
      */
     public function getContent()
     {
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
 
         try {
             $players = $db->query(

@@ -50,7 +50,7 @@ class RankingsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         //the formula is initial_accumulated_points + initial_prizes + results + bonuses
         try {
@@ -141,7 +141,7 @@ class RankingsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmpactive = $db->query(
@@ -200,7 +200,7 @@ class RankingsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmp6months = $db->query(
@@ -261,7 +261,7 @@ class RankingsPage
             }
         }
         
-        $db = Database::getConnection()->getPDO();
+        $db = Database::getConnection();
         
         try {
             $tmpfinaltables = $db->query(

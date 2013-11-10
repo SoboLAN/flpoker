@@ -12,13 +12,9 @@ $htmlout = $site->getHeader('contact.php');
 $htmlout .= '<div id="title">' . $site->getWord('menu_contact') . '</div>';
 	
 $htmlout .= '<div id="content-narrower">';
-	
-$config = Config::getConfig();
-	
+
 function getCaptcha ()
 {
-	global $config;
-	
 	$out = '<script type="text/javascript">
 		var RecaptchaOptions = {
 		theme : \'blackglass\'
@@ -27,7 +23,7 @@ function getCaptcha ()
 	
 	require_once ('recaptchalib.php');
 
-	$out .= recaptcha_get_html ($config->getValue('recaptcha_public_key'));
+	$out .= recaptcha_get_html (Config::getValue('recaptcha_public_key'));
 		
 	return $out;
 }
@@ -71,7 +67,7 @@ if (! isset ($_POST['is_submitted']))
 }
 	
 require_once ('recaptchalib.php');
-$resp = recaptcha_check_answer ($config->getValue('recaptcha_private_key'),
+$resp = recaptcha_check_answer (Config::getValue('recaptcha_private_key'),
 								$_SERVER["REMOTE_ADDR"],
 								$_POST["recaptcha_challenge_field"],
 								$_POST["recaptcha_response_field"]);
@@ -136,7 +132,7 @@ if (strlen ($_POST['email']) > 0)
 	
 $subject = $_POST['subject'];
 $message = $_POST['message'];
-$to = $config->getValue('contact_email');
+$to = Config::getValue('contact_email');
 	
 if (strlen ($subject) < 4 OR strlen ($message) < 10)
 {

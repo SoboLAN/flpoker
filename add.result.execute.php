@@ -8,7 +8,7 @@ if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myfladm
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 
-$db = Database::getConnection()->getPDO ();
+$db = Database::getConnection();
 
 try
 {
