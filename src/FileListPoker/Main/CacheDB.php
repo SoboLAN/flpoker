@@ -18,7 +18,7 @@ class CacheDB implements CacheInterface
      */
     public function __construct()
     {
-        $this->DB = Database::getConnection()->getPDO();
+        $this->DB = Database::getConnection();
     }
     
     /**
