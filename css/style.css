@@ -13,6 +13,12 @@ body {
 	/* Added this ID in case some styling is needed in the future */
 }
 
+#logo {
+	height:200px;
+	margin:0 auto;
+	width:1000px;
+}
+
 #language_panel {
 	position:absolute;
 	right:15px;

@@ -122,6 +122,7 @@ class Site
         }
         
         $out .= '<div id="container">
+            <div id="logo"><img src="images/logofl.png" /></div>
             <ul class="claybricks">';
         
         $out .= '<li><a href="index.php" ' . (($page == 'index.php') ? 'class="selected">' : '>') .
