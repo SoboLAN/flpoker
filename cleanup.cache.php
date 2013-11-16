@@ -8,9 +8,7 @@ $db = Database::getConnection();
 try
 {
 	//delete expired cache entries
-	$result = $db->prepare ('DELETE FROM cache WHERE entry_time + lifetime < ?');
-	$result->bindParam (1, time(), \PDO::PARAM_INT);
-	$result->execute ();
+	$result = $db->query ('DELETE FROM cache WHERE entry_time + lifetime < UNIX_TIMESTAMP(NOW())');
 }
 catch (\PDOException $e)
 {
