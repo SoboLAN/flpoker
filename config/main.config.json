@@ -31,5 +31,6 @@
 	"path_jqueryui_css": "css/jquery-ui-1.10.3.custom.css",
 	"path_jquery": "js/jquery-1.10.2.js",
 	"path_jqueryui": "js/jquery-ui-1.10.3.custom.js",
-	"path_highcharts": "js/highcharts/highcharts.src.js"
+	"path_highcharts": "js/highcharts/highcharts.src.js",
+	"path_highcharts_export": "js/highcharts/modules/exporting.src.js"
 }

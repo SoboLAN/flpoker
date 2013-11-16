@@ -99,7 +99,7 @@ class Site
         <head>
         <meta charset="utf-8">
         <title>FileList Poker Points - ' . $pageTitle . ' (JavaFling)</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="' . Config::getValue('path_general_css') . '" />
         <link rel="shortcut icon" href="favicon.ico" />';
         
         if (self::$jQueryDependency[$page]) {
@@ -109,7 +109,7 @@ class Site
 
             if (self::$highChartsDependency[$page]) {
                 $out .= '<script src="' . Config::getValue('path_highcharts') . '"></script>';
-                $out .= '<script src="js/highcharts/modules/exporting.src.js"></script>';
+                $out .= '<script src=' . Config::getValue('path_highcharts_export') . '></script>';
                 $out .= '<script src="js/highcharts/themes/dark-blue.js"></script>';
             }
         }
