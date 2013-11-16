@@ -2,11 +2,22 @@
 <html>
 <head>
 <title>FileList Poker Add Bonus</title>
- 
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-<link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css" />
- 
+
+<?php
+
+require_once 'autoload.php';
+use FileListPoker\Main\Database;
+use FileListPoker\Main\Config;
+
+$jQueryPath = Config::getValue('path_jquery');
+$jQueryUIPath = Config::getValue('path_jqueryui');
+$jQueryCSSPath = Config::getValue('path_jqueryui_css');
+
+echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
+echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";
+echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
+?>
+
 <style type="text/css">
 	div{
 		padding:8px;
@@ -24,9 +35,6 @@
 </head>
 
 <?php
-
-require_once 'autoload.php';
-use FileListPoker\Main\Database;
 
 $db = Database::getConnection();
 
