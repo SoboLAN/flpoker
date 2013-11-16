@@ -13,23 +13,23 @@ class Site
     private static $availableLangs = array('en', 'ro');
     
     private static $jQueryDependency = array (
-        'index.php'            => false,
-        'players.php'        => true,
-        'tournaments.php'    => false,
-        'rankings.php'        => true,
+        'index.php'         => false,
+        'players.php'       => true,
+        'tournaments.php'   => false,
+        'rankings.php'      => true,
         'statistics.php'    => true,
         'players.month.php' => false,
-        'contact.php'        => false,
+        'contact.php'       => false,
     );
     
     private static $highChartsDependency = array (
-        'index.php'            => false,
-        'players.php'        => false,
-        'tournaments.php'    => false,
-        'rankings.php'        => false,
+        'index.php'         => false,
+        'players.php'       => false,
+        'tournaments.php'   => false,
+        'rankings.php'      => false,
         'statistics.php'    => true,
         'players.month.php' => false,
-        'contact.php'        => false,
+        'contact.php'       => false,
     );
     
     private $lang;
@@ -103,13 +103,13 @@ class Site
         <link rel="shortcut icon" href="favicon.ico" />';
         
         if (self::$jQueryDependency[$page]) {
-            $out .= '<script src="js/jquery-1.10.2.min.js"></script>';
-            $out .= '<script src="js/jquery-ui-1.10.3.custom.min.js"></script>';
-            $out .= '<link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />';
+            $out .= '<script src="' . Config::getValue('path_jquery') . '"></script>';
+            $out .= '<script src="' . Config::getValue('path_jqueryui') . '"></script>';
+            $out .= '<link rel="stylesheet" href="' . Config::getValue('path_jqueryui_css') . '" />';
 
             if (self::$highChartsDependency[$page]) {
-                $out .= '<script src="js/highcharts/highcharts.js"></script>';
-                $out .= '<script src="js/highcharts/modules/exporting.js"></script>';
+                $out .= '<script src="' . Config::getValue('path_highcharts') . '"></script>';
+                $out .= '<script src="js/highcharts/modules/exporting.src.js"></script>';
                 $out .= '<script src="js/highcharts/themes/dark-blue.js"></script>';
             }
         }
@@ -169,7 +169,7 @@ class Site
     public function getFooter ()
     {
         $out = '<div id="footer">
-            FileList Poker Points v1.1.1 (currently in feature freeze).
+            FileList Poker Points v1.1.2 (currently in feature freeze).
             <br />
             Copyright &copy; 2013 Radu Murzea.
             <br />

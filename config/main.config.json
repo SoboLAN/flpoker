@@ -26,5 +26,10 @@
     "cache_key_general_stats": "general_stats",
     "cache_key_players_6months": "players_6months",
     "cache_key_registrations_graph": "registrations_graph",
-    "cache_key_final_tables": "final_tables"
+    "cache_key_final_tables": "final_tables",
+	"path_general_css": "css/style.css",
+	"path_jqueryui_css": "css/jquery-ui-1.10.3.custom.css",
+	"path_jquery": "js/jquery-1.10.2.js",
+	"path_jqueryui": "js/jquery-ui-1.10.3.custom.js",
+	"path_highcharts": "js/highcharts/highcharts.src.js"
 }

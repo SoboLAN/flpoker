@@ -5,7 +5,7 @@
  
 <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
-<link rel="stylesheet" href="css/dark-hive/jquery-ui-1.10.3.custom.min.css" />
+<link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css" />
  
 <style type="text/css">
 	div{
