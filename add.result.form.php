@@ -38,24 +38,19 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 
 $db = Database::getConnection();
 
-try
-{
+try {
 	$result = $db->query (
 		'SELECT name_pokerstars ' .
 		'FROM players ' .
 		'WHERE name_pokerstars IS NOT NULL ' .
 		'ORDER BY name_pokerstars ASC');
-}
-catch (\PDOException $e)
-{
+} catch (\PDOException $e) {
 	die ('There was an error');
 }
 
 $names = array();
-foreach ($result as $name)
-{
+foreach ($result as $name) {
 	$names[] = $name->name_pokerstars;
-	
 }
 
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
@@ -68,20 +63,14 @@ $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
  
 <script type="text/javascript">
  
-$(document).ready(function()
-{
+$(document).ready(function() {
 	<?php echo $nameList; ?>
 
-    var counter = 16;
+    var counter = 19;
  
-    $("#addButton").click(function ()
-	{
-		if (counter > 25)
-		{
-			alert("Maximum 25 textboxes allowed");
-			return false;
-		}   
-
+    $("#addButton").click(function () {
+        counter++;
+        
 		var newTextBoxDiv = $(document.createElement('div'))
 							.attr("id", 'TextBoxDiv' + counter)
 							.attr('class', 'ui-widget');
@@ -96,31 +85,23 @@ $(document).ready(function()
 
 		newTextBoxDiv.appendTo("#TextBoxesGroup");
 		
-		$('#player' + counter).autocomplete({
-			source: availableNames
-		});
-
-		counter++;
+		$('#player' + counter).autocomplete({source: availableNames});
      });
  
-	$("#removeButton").click(function ()
-	{
-		if(counter==1)
-		{
-			alert("No more textbox to remove");
+	$("#removeButton").click(function () {
+		if(counter === 0) {
+			alert("No more textboxes to remove");
 			return false;
-		}   
- 
-		counter--;
+		}
  
         $("#TextBoxDiv" + counter).remove();
+        
+        counter--;
      });
  
-     $("#getButtonValue").click(function ()
-	 {
+     $("#getButtonValue").click(function () {
 		var msg = '';
-		for (i = 1; i < counter; i++)
-		{
+		for (i = 1; i < counter; i++) {
 		  msg += "\n Position " + i + ": " + $('#position' + i).val();
 		  msg += "\n Player " + i + ": " + $('#player' + i).val();
 		  msg += "\n Points " + i + ": " + $('#points' + i).val();
@@ -128,11 +109,8 @@ $(document).ready(function()
 		alert(msg);
 	});
 	
-	for (j = 1; j < counter; j++)
-	{
-		$('#player' + j).autocomplete({
-			source: availableNames
-		});
+	for (j = 1; j < counter; j++) {
+		$('#player' + j).autocomplete({source: availableNames});
 	}
 });
 </script>
@@ -143,126 +121,46 @@ $(document).ready(function()
 		<input type="text" name="tournamentid" id="tournamentid" value="" />
 	</div>
 	<div id='TextBoxesGroup'>
-		<div id="TextBoxDiv1" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position1" id="position1" value="" />
-			<label>Player: </label>
-			<input type="text" name="player1" id="player1" value="" />
-			<label>Points: </label>
-			<input type="text" name="points1" id="points1" value="" />
-		</div>
-		<div id="TextBoxDiv2" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position2" id="position2" value="" />
-			<label>Player: </label>
-			<input type="text" name="player2" id="player2" value="" />
-			<label>Points: </label>
-			<input type="text" name="points2" id="points2" value="" />
-		</div>
-		<div id="TextBoxDiv3" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position3" id="position3" value="" />
-			<label>Player: </label>
-			<input type="text" name="player3" id="player3" value="" />
-			<label>Points: </label>
-			<input type="text" name="points3" id="points3" value="" />
-		</div>
-		<div id="TextBoxDiv4" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position4" id="position4" value="" />
-			<label>Player: </label>
-			<input type="text" name="player4" id="player4" value="" />
-			<label>Points: </label>
-			<input type="text" name="points4" id="points4" value="" />
-		</div>
-		<div id="TextBoxDiv5" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position5" id="position5" value="" />
-			<label>Player: </label>
-			<input type="text" name="player5" id="player5" value="" />
-			<label>Points: </label>
-			<input type="text" name="points5" id="points5" value="" />
-		</div>
-		<div id="TextBoxDiv6" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position6" id="position6" value="" />
-			<label>Player: </label>
-			<input type="text" name="player6" id="player6" value="" />
-			<label>Points: </label>
-			<input type="text" name="points6" id="points6" value="" />
-		</div>
-		<div id="TextBoxDiv7" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position7" id="position7" value="" />
-			<label>Player: </label>
-			<input type="text" name="player7" id="player7" value="" />
-			<label>Points: </label>
-			<input type="text" name="points7" id="points7" value="" />
-		</div>
-		<div id="TextBoxDiv8" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position8" id="position8" value="" />
-			<label>Player: </label>
-			<input type="text" name="player8" id="player8" value="" />
-			<label>Points: </label>
-			<input type="text" name="points8" id="points8" value="" />
-		</div>
-		<div id="TextBoxDiv9" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position9" id="position9" value="" />
-			<label>Player: </label>
-			<input type="text" name="player9" id="player9" value="" />
-			<label>Points: </label>
-			<input type="text" name="points9" id="points9" value="" />
-		</div>
-		<div id="TextBoxDiv10" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position10" id="position10" value="" />
-			<label>Player: </label>
-			<input type="text" name="player10" id="player10" value="" />
-			<label>Points: </label>
-			<input type="text" name="points10" id="points10" value="" />
-		</div>
-		<div id="TextBoxDiv11" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position11" id="position11" value="" />
-			<label>Player: </label>
-			<input type="text" name="player11" id="player11" value="" />
-			<label>Points: </label>
-			<input type="text" name="points11" id="points11" value="" />
-		</div>
-		<div id="TextBoxDiv12" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position12" id="position12" value="" />
-			<label>Player: </label>
-			<input type="text" name="player12" id="player12" value="" />
-			<label>Points: </label>
-			<input type="text" name="points12" id="points12" value="" />
-		</div>
-		<div id="TextBoxDiv13" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position13" id="position13" value="" />
-			<label>Player: </label>
-			<input type="text" name="player13" id="player13" value="" />
-			<label>Points: </label>
-			<input type="text" name="points13" id="points13" value="" />
-		</div>
-		<div id="TextBoxDiv14" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position14" id="position14" value="" />
-			<label>Player: </label>
-			<input type="text" name="player14" id="player14" value="" />
-			<label>Points: </label>
-			<input type="text" name="points14" id="points14" value="" />
-		</div>
-		<div id="TextBoxDiv15" class="ui-widget">
-			<label>Position: </label>
-			<input type="text" name="position15" id="position15" value="" />
-			<label>Player: </label>
-			<input type="text" name="player15" id="player15" value="" />
-			<label>Points: </label>
-			<input type="text" name="points15" id="points15" value="" />
-		</div>
+    
+    <?php
+    
+    function positionToPointsConverter($position) {
+        switch($position) {
+            case 1: return 30;
+            case 2: return 27;
+            case 3: return 25;
+            case 4: return 23;
+            case 5: return 21;
+            case 6: return 19;
+            case 7: return 17;
+            case 8: return 15;
+            case 9: return 13;
+            case 10: return 10;
+            case 11: return 9;
+            case 12: return 8;
+            case 13: return 7;
+            case 14: return 6;
+            case 15: return 5;
+            case 16: return 4;
+            case 17: return 3;
+            case 18: return 2;
+            case 19: return 1;
+            default: return 0;
+        }
+    }
+    
+    for ($i = 1; $i <= 19; $i++) {
+        echo "<div id=\"TextBoxDiv$i\" class=\"ui-widget\">
+            <label>Position: </label>
+            <input type=\"text\" name=\"position$i\" id=\"position$i\" value=\"$i\" />
+            <label>Player: </label>
+            <input type=\"text\" name=\"player$i\" id=\"player$i\" value=\"\" />
+            <label>Points: </label>
+            <input type=\"text\" name=\"points$i\" id=\"points$i\" value=\"" . positionToPointsConverter($i) . "\" />
+        </div>";
+    }
+    
+    ?>
 	</div>
 	<p>
 		<label>Password: </label>
