@@ -15,7 +15,9 @@ try {
         'AND MONTH(t.tournament_date) = MONTH(NOW()) ' .
         'AND YEAR(t.tournament_date) = YEAR(NOW()) ' .
         'GROUP BY r.player_id ' .
-        'ORDER BY final_tables DESC');
+        'HAVING final_tables > 1 ' .
+        'ORDER BY final_tables DESC'
+    );
 } catch (\PDOException $e) {
     die('Something went very wrong.');
 }

@@ -169,7 +169,7 @@ class Site
     public function getFooter ()
     {
         $out = '<div id="footer">
-            FileList Poker Points v1.1.2 (currently in feature freeze).
+            FileList Poker Points v1.1.3 (currently in feature freeze).
             <br />
             Copyright &copy; 2013 Radu Murzea.
             <br />
