@@ -3,6 +3,7 @@
 namespace FileListPoker\Main;
 
 use FileListPoker\Main\Config;
+use FileListPoker\Main\Dictionary;
 
 /**
  * Main class of the site. Handles logic about language, dependencies, Google Analytics
@@ -10,8 +11,6 @@ use FileListPoker\Main\Config;
  */
 class Site
 {
-    private static $availableLangs = array('en', 'ro');
-    
     private static $jQueryDependency = array (
         'index.php'         => false,
         'players.php'       => true,
@@ -33,7 +32,6 @@ class Site
     );
     
     private $lang;
-    private $wording;
     
     public function __construct ()
     {
@@ -41,29 +39,16 @@ class Site
             die ('The site is currently down for maintenance.');
         }
 
-        $this->fillLanguage();
-        $this->fillWording($this->lang);
-    }
+        $cookieName = Config::getValue('lang_cookie_name');
     
-    private function fillWording ($language)
-    {
-        require_once 'wording/text.' . $language . '.php';
-
-        $this->wording = $siteLabels;
-    }
-    
-    private function fillLanguage ()
-    {
-        $cookiename = Config::getValue('lang_cookie_name');
-    
-        if (isset ($_COOKIE[$cookiename])) {
-            $userlang = $_COOKIE[$cookiename];
-            
-            if (in_array($userlang, self::$availableLangs)) {
-                $this->lang = $userlang;
-            }
+        if (isset ($_COOKIE[$cookieName]) and Dictionary::isValidLanguage($_COOKIE[$cookieName])) {
+            $this->lang = $_COOKIE[$cookieName];
         } else {
             $this->lang = Config::getValue('default_lang');
+            
+            $cookieDuration = Config::getValue('lang_cookie_duration');
+            
+            setcookie($cookieName, $this->lang, time() + $cookieDuration);
         }
     }
     
@@ -74,7 +59,7 @@ class Site
     
     public function getWord ($key)
     {
-        return $this->wording[$key];
+        return Dictionary::getWord($key, $this->lang);
     }
     
     //one of the very few functions that contain template information (the other one is getFooter)
@@ -84,13 +69,13 @@ class Site
         $pageTitle = '';
         switch($page)
         {
-            case 'index.php':            $pageTitle = $this->wording['menu_home']; break;
-            case 'players.php':            $pageTitle = $this->wording['menu_players']; break;
-            case 'tournaments.php':        $pageTitle = $this->wording['menu_tournaments']; break;
-            case 'rankings.php':        $pageTitle = $this->wording['menu_rankings']; break;    
-            case 'statistics.php':        $pageTitle = $this->wording['menu_statistics']; break;
-            case 'players.month.php':    $pageTitle = $this->wording['menu_players_of_the_month']; break;
-            case 'contact.php':            $pageTitle = $this->wording['menu_contact']; break;
+            case 'index.php':          $pageTitle = Dictionary::getWord('menu_home', $this->lang); break;
+            case 'players.php':        $pageTitle = Dictionary::getWord('menu_players', $this->lang); break;
+            case 'tournaments.php':    $pageTitle = Dictionary::getWord('menu_tournaments', $this->lang); break;
+            case 'rankings.php':       $pageTitle = Dictionary::getWord('menu_rankings', $this->lang); break;    
+            case 'statistics.php':     $pageTitle = Dictionary::getWord('menu_statistics', $this->lang); break;
+            case 'players.month.php':  $pageTitle = Dictionary::getWord('menu_players_of_the_month', $this->lang); break;
+            case 'contact.php':        $pageTitle = Dictionary::getWord('menu_contact', $this->lang); break;
             default: die('Invalid Page');
         }
         
@@ -126,38 +111,38 @@ class Site
             <ul class="claybricks">';
         
         $out .= '<li><a href="index.php" ' . (($page == 'index.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_home'] . '</a></li>';
+                Dictionary::getWord('menu_home', $this->lang) . '</a></li>';
         
         $out .= '<li><a href="players.php" ' . (($page == 'players.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_players'] . '</a></li>';
+                Dictionary::getWord('menu_players', $this->lang) . '</a></li>';
         
         $out .= '<li><a href="tournaments.php" ' . (($page == 'tournaments.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_tournaments'] . '</a></li>';
+                Dictionary::getWord('menu_tournaments', $this->lang) . '</a></li>';
         
         $out .= '<li><a href="rankings.php" ' . (($page == 'rankings.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_rankings'] . '</a></li>';
+                Dictionary::getWord('menu_rankings', $this->lang) . '</a></li>';
         
         $out .= '<li><a href="statistics.php" ' . (($page == 'statistics.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_statistics'] . '</a></li>';
+                Dictionary::getWord('menu_statistics', $this->lang) . '</a></li>';
         
         $out .= '<li><a href="players.month.php" ' . (($page == 'players.month.php') ? 'class="selected">' : '>') .
-                $this->wording['menu_players_of_the_month'] . '</a></li>';
+                Dictionary::getWord('menu_players_of_the_month', $this->lang) . '</a></li>';
 
         $out .= '</ul>
         <p id="language_panel">';
         
         if ($this->lang == 'ro') {
             $out .= '
-                <img class="active_lang" src="images/ro.gif" title="' . $this->wording['langpanel_ro'] .'" alt="' . $this->wording['langpanel_ro'] .'" />
+                <img class="active_lang" src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" />
             <a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">
-                <img src="images/us.gif" title="' . $this->wording['langpanel_en_switch'] . '" alt="' . $this->wording['langpanel_en_switch'] . '" />
+                <img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" />
             </a>';
         } elseif ($this->lang == 'en') {
             $out .= '
             <a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">
-                <img src="images/ro.gif" title="' . $this->wording['langpanel_ro_switch'] .'" alt="' . $this->wording['langpanel_ro_switch'] .'" />
+                <img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" />
             </a>
-                <img class="active_lang" src="images/us.gif" title="' . $this->wording['langpanel_en'] . '" alt="' . $this->wording['langpanel_en'] . '" />
+                <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en', $this->lang) . '" />
             ';
         }
             
@@ -169,7 +154,7 @@ class Site
     public function getFooter ()
     {
         $out = '<div id="footer">
-            FileList Poker Points v1.1.3 (currently in feature freeze).
+            FileList Poker Points v1.1.4 (currently in feature freeze).
             <br />
             Copyright &copy; 2013 Radu Murzea.
             <br />
