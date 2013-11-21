@@ -109,7 +109,7 @@ $(document).ready(function() {
 		alert(msg);
 	});
 	
-	for (j = 1; j < counter; j++) {
+	for (j = 1; j <= counter; j++) {
 		$('#player' + j).autocomplete({source: availableNames});
 	}
 });
