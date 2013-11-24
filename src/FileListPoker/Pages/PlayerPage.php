@@ -5,6 +5,8 @@ namespace FileListPoker\Pages;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about a particular player.
@@ -56,6 +58,12 @@ class PlayerPage
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
+                
+                if (is_null($content)) {
+                    $message = "cached value for key $key is invalid";
+                    Logger::log($message);
+                    throw new FLPokerException($message, FLPokerException::ERROR);
+                }
                 
                 return $content;
             }
@@ -140,7 +148,9 @@ class PlayerPage
             $silver_medals = $medalsObj->silver_medals;
             $bronze_medals = $medalsObj->bronze_medals;
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayerPage::getGeneral with player id $pid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
 
         if (! $playerInfo) {
@@ -150,7 +160,7 @@ class PlayerPage
         $points = $playerInfo->initial_accumulated_points + $results + $bonuses - $prizes;
         $pointsAllTime = $playerInfo->initial_accumulated_points + $playerInfo->initial_spent_points +
                             $results + $bonuses;
-                    
+        
         $final_result = array (
             'id_filelist' => $playerInfo->id_filelist,
             'name_pokerstars' => $playerInfo->name_pokerstars,
@@ -217,7 +227,9 @@ class PlayerPage
                 $history[] = $row;
             }
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayerPage::getTournamentHistory with player id $pid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $final_result = array();
@@ -276,7 +288,9 @@ class PlayerPage
                 $bonuses[] = $row;
             }
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayerPage::getBonuses with player id $pid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $final_result = array();
@@ -332,7 +346,9 @@ class PlayerPage
                 $prizes[] = $row;
             }
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayerPage::getPrizes with player id $pid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $final_result = array();

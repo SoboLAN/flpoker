@@ -4,6 +4,7 @@ namespace FileListPoker\Main;
 
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Dictionary;
+use FileListPoker\Main\FLPokerException;
 
 /**
  * Main class of the site. Handles logic about language, dependencies, Google Analytics
@@ -36,7 +37,7 @@ class Site
     public function __construct ()
     {
         if (! Config::getValue('online')) {
-            die ('The site is currently down for maintenance.');
+            throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_DOWN);
         }
 
         $cookieName = Config::getValue('lang_cookie_name');
@@ -76,7 +77,10 @@ class Site
             case 'statistics.php':     $pageTitle = Dictionary::getWord('menu_statistics', $this->lang); break;
             case 'players.month.php':  $pageTitle = Dictionary::getWord('menu_players_of_the_month', $this->lang); break;
             case 'contact.php':        $pageTitle = Dictionary::getWord('menu_contact', $this->lang); break;
-            default: die('Invalid Page');
+            default:
+                $message = "Site::getHeader received an invalid page: $page";
+                Logger::log($message);
+                throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $out = '<!DOCTYPE html>
@@ -145,7 +149,7 @@ class Site
                 <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en', $this->lang) . '" />
             ';
         }
-            
+        
         $out .= '</p>';
         
         return $out;

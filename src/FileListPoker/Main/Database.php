@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Main;
 
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
+
 /**
  * Handles the construction of an object capable of performing database operations.
  */
@@ -27,8 +30,20 @@ class Database
 
     private static function buildConnection()
     {
+        if (! is_readable(self::$configPath)) {
+            $ex = new FLPokerException('config file is inaccessible', FLPokerException::ERROR);
+            Logger::log($ex->getMessage());
+            throw $ex;
+        }
+        
         //get database connection options
         $dbConfig = json_decode(file_get_contents(self::$configPath), true);
+        
+        if (is_null($dbConfig)) {
+             $ex = new FLPokerException('config file is corrupt', FLPokerException::ERROR);
+             Logger::log($ex->getMessage());
+             throw $ex;
+        }
         
         //versions of MySQL older than this don't support prepared statements.
         //they have to be simulated by PDO
@@ -50,23 +65,23 @@ class Database
         }
         $dsnpairs = array();
         foreach ($dsnarr as $k => $v) {
-            if ($v===null) {
-                continue;
+            if (! is_null($v)) {
+                $dsnpairs[] = "{$k}={$v}";
             }
-            
-            $dsnpairs[] = "{$k}={$v}";
         }
 
         try {
             $dsn = 'mysql:' . implode(';', $dsnpairs);
             self::$connection = new \PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
 
-            // Set prepared statement emulation depending on server version
+            //set prepared statement emulation depending on server version
             $serverversion = self::$connection->getAttribute(\PDO::ATTR_SERVER_VERSION);
             $emulate_prepares = (version_compare($serverversion, $emulate_prepares_below_version, '<'));
             self::$connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
         } catch (\PDOException $e) {
-            die ($e->getMessage());
+            $ex = new FLPokerException($e->getMessage(), FLPokerException::ERROR);
+            Logger::log($ex->getMessage());
+            throw $ex;
         }
     }
 }

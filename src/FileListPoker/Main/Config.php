@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Main;
 
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
+
 /**
  * This class contains configuration options for the site.
  */
@@ -21,11 +24,22 @@ class Config
     public static function getValue($key)
     {
         if (is_null(self::$siteConfig)) {
-            //fill the array with key => value pairs. you can easily deduce the purpose
-            //of each one by the key names
+            
+            if (! is_readable(self::$configPath)) {
+                $ex = new FLPokerException('config file is inaccessible', FLPokerException::ERROR);
+                Logger::log($ex->getMessage());
+                throw $ex;
+            }
+            
             self::$siteConfig = json_decode(file_get_contents(self::$configPath), true);
+            
+            if (is_null(self::$siteConfig)) {
+                $ex = new FLPokerException('config file is corrupt', FLPokerException::ERROR);
+                Logger::log($ex->getMessage());
+                throw $ex;
+            }
         }
         
-        return isset(self::$siteConfig[$key]) ? self::$siteConfig[$key] : null;
+        return array_key_exists($key, self::$siteConfig) ? self::$siteConfig[$key] : null;
     }
 }

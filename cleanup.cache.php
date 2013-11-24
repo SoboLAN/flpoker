@@ -2,6 +2,7 @@
 
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
+use FileListPoker\Main\Logger;
 
 $db = Database::getConnection();
 
@@ -12,5 +13,5 @@ try
 }
 catch (\PDOException $e)
 {
-	die('There was a problem while performing database queries');
+	Logger::log('cache cleanup failed: ' . $e->getMessage());
 }
