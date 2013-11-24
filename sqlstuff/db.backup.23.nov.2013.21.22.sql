@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 16, 2013 at 01:11 PM
+-- Generation Time: Nov 23, 2013 at 09:21 PM
 -- Server version: 5.1.70-cll
 -- PHP Version: 5.3.17
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=282 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=283 ;
 
 --
 -- Dumping data for table `bonus_points`
@@ -322,7 +322,8 @@ INSERT INTO `bonus_points` (`bonus_id`, `player_id`, `bonus_value`, `tournament_
 (278, 133, 30, 122, '5 Final Tables in October 2013', '2013-10-31'),
 (279, 12, 30, 122, '5 Final Tables in October 2013', '2013-10-31'),
 (280, 133, 20, 122, 'Player of the Month in October 2013', '2013-10-31'),
-(281, 860, 2, 123, 'Straight Flush', '2013-11-05');
+(281, 860, 2, 123, 'Straight Flush', '2013-11-05'),
+(282, 258, 2, 127, 'Straight Flush', '2013-11-19');
 
 -- --------------------------------------------------------
 
@@ -1314,7 +1315,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=109 ;
 
 --
 -- Dumping data for table `prizes`
@@ -1427,7 +1428,8 @@ INSERT INTO `prizes` (`prize_id`, `player_id`, `prize`, `cost`, `date_bought`, `
 (104, 10, '1 TB Upload', 200, '2013-11-05', 'new'),
 (105, 32, 'Permanent VIP', 400, '2013-11-05', 'new'),
 (106, 15, 'Permanent VIP', 400, '2013-11-07', 'new'),
-(107, 25, 'Vip Permanent', 400, '2013-11-13', 'new');
+(107, 25, 'Vip Permanent', 400, '2013-11-13', 'new'),
+(108, 20, 'Vip Permanent', 400, '2013-11-23', 'new');
 
 -- --------------------------------------------------------
 
@@ -3889,7 +3891,45 @@ INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUE
 (138, 126, 4, 16),
 (11, 126, 3, 17),
 (20, 126, 2, 18),
-(10, 126, 1, 19);
+(10, 126, 1, 19),
+(79, 127, 30, 1),
+(13, 127, 27, 2),
+(8, 127, 25, 3),
+(27, 127, 23, 4),
+(34, 127, 21, 5),
+(53, 127, 19, 6),
+(11, 127, 17, 7),
+(172, 127, 15, 8),
+(76, 127, 13, 9),
+(1, 127, 10, 10),
+(890, 127, 9, 11),
+(872, 127, 8, 12),
+(900, 127, 7, 13),
+(154, 127, 6, 14),
+(15, 127, 5, 15),
+(10, 127, 4, 16),
+(18, 127, 3, 17),
+(171, 127, 2, 18),
+(17, 127, 1, 19),
+(895, 128, 30, 1),
+(511, 128, 27, 2),
+(20, 128, 25, 3),
+(76, 128, 23, 4),
+(27, 128, 21, 5),
+(651, 128, 19, 6),
+(887, 128, 17, 7),
+(7, 128, 15, 8),
+(41, 128, 13, 10),
+(258, 128, 10, 11),
+(271, 128, 9, 12),
+(10, 128, 8, 13),
+(33, 128, 7, 14),
+(283, 128, 6, 15),
+(77, 128, 5, 16),
+(874, 128, 4, 17),
+(79, 128, 3, 18),
+(18, 128, 2, 19),
+(856, 128, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -3905,7 +3945,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `duration_hours` smallint(5) unsigned DEFAULT NULL,
   `duration_minutes` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
 
 --
 -- Dumping data for table `tournaments`
@@ -4031,7 +4071,9 @@ INSERT INTO `tournaments` (`tournament_id`, `tournament_date`, `tournament_type`
 (123, '2013-11-05', 'regular', 67, 3, 32),
 (124, '2013-11-07', 'regular', 57, 3, 45),
 (125, '2013-11-12', 'special', 75, 1, 35),
-(126, '2013-11-14', 'regular', 67, 4, 8);
+(126, '2013-11-14', 'regular', 67, 4, 8),
+(127, '2013-11-19', 'special', 59, 1, 41),
+(128, '2013-11-21', 'regular', 61, 2, 34);
 
 --
 -- Constraints for dumped tables
