@@ -107,6 +107,8 @@ class RankingsPage
         
         $this->arraySortByColumn($final_result, 'points');
         
+        $final_result = array_slice($final_result, 0, 200, true);
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_alltime');
             
