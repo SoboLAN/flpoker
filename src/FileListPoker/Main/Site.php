@@ -133,24 +133,24 @@ class Site
                 Dictionary::getWord('menu_players_of_the_month', $this->lang) . '</a></li>';
 
         $out .= '</ul>
-        <p id="language_panel">';
+        <div id="language_panel">';
         
         if ($this->lang == 'ro') {
             $out .= '
                 <img class="active_lang" src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" />
-            <a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">
-                <img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" />
-            </a>';
+            <a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">' .
+                '<img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" />' .
+            '</a>';
         } elseif ($this->lang == 'en') {
             $out .= '
-            <a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">
-                <img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" />
-            </a>
+            <a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">' .
+                '<img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" />' .
+            '</a>
                 <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en', $this->lang) . '" />
             ';
         }
         
-        $out .= '</p>';
+        $out .= '</div>';
         
         return $out;
     }
@@ -158,7 +158,7 @@ class Site
     public function getFooter ()
     {
         $out = '<div id="footer">
-            FileList Poker Points v1.1.5 (currently in feature freeze).
+            FileList Poker Points v1.1.6 (currently in feature freeze).
             <br />
             Copyright &copy; 2013 Radu Murzea.
             <br />

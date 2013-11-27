@@ -12,7 +12,7 @@ $htmlout = $site->getHeader('players.php');
 
 $htmlout .= '<div id="title">' . $site->getWord('menu_players') . '</div>';
 
-$htmlout .= '<div id="content">';
+$htmlout .= '<div id="content-narrower">';
 
 $playersPage = new PlayersPage();
 $content = $playersPage->getContent();

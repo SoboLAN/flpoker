@@ -12,7 +12,7 @@ $htmlout = $site->getHeader('rankings.php');
 
 $htmlout .= '<div id="title">' . $site->getWord('menu_rankings') . '</div>';
 
-$htmlout .= '<div id="content">';
+$htmlout .= '<div id="content-narrower">';
 
 $rankingsPage = new RankingsPage();
 

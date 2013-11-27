@@ -46,9 +46,6 @@ class PlayersPage
      * <li>FileList Name</li>
      * <li>PokerStars Name</li>
      * <li>account Type (regular or admin)</li>
-     * <li>day of join date</li>
-     * <li>month of join date</li>
-     * <li>year of join date</li>
      * <li>current points</li>
      * </ul>
      */
@@ -70,8 +67,7 @@ class PlayersPage
         try {
             $players = $db->query(
                 'SELECT player_id, id_filelist, name_pokerstars, name_filelist, ' .
-                'initial_accumulated_points, MONTH(join_date) AS month, ' .
-                'DAYOFMONTH(join_date) AS day, YEAR(join_date) AS year, ' .
+                'initial_accumulated_points, ' .
                 'member_type ' .
                 'FROM players ' .
                 'ORDER BY player_id ASC'
@@ -118,9 +114,6 @@ class PlayersPage
                 'name_pokerstars' => $player->name_pokerstars,
                 'name_filelist' => $player->name_filelist,
                 'member_type' => $player->member_type,
-                'year' => $player->year,
-                'month' => $player->month,
-                'day' => $player->day,
                 'points' => $playerPoints
             );
         }
