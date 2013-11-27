@@ -5,6 +5,8 @@ namespace FileListPoker\Pages;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return various rankings of players.
@@ -75,7 +77,9 @@ class RankingsPage
                 'ORDER BY player_id ASC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling RankingsPage::getTopPlayersAllTime failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();
@@ -156,7 +160,9 @@ class RankingsPage
                 'LIMIT 50'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling RankingsPage::getMostActive50Players failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();
@@ -217,7 +223,9 @@ class RankingsPage
             );
             
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling RankingsPage::getTop40Players6Months failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();
@@ -277,7 +285,9 @@ class RankingsPage
             );
             
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling RankingsPage::getTop50FinalTables failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();

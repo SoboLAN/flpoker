@@ -5,6 +5,8 @@ namespace FileListPoker\Pages;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about all the players.
@@ -94,7 +96,9 @@ class PlayersPage
                 'ORDER BY player_id ASC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayersPage::getContent failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $this->fillArrays($tmpresults, $tmpbonuses, $tmpprizes);

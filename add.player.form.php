@@ -18,17 +18,17 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 ?>
  
 <style type="text/css">
-	div{
-		padding:8px;
-	}
-	
-	div label {
-		padding: 8px;
-	}
-	
-	body {
-		background:#BCD5E1;
-	}
+    div{
+        padding:8px;
+    }
+    
+    div label {
+        padding: 8px;
+    }
+    
+    body {
+        background:#BCD5E1;
+    }
 </style>
  
 </head>
@@ -41,32 +41,32 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
  
 $(document).ready(function()
 {
-	$('#registrationdate').datepicker ({dateFormat: 'yy-mm-dd'});
+    $('#registrationdate').datepicker ({dateFormat: 'yy-mm-dd'});
 });
 </script>
 
 <form action="add.player.execute.php" method="POST" target="_blank">
-	<div>
-		<label>Registration Date: </label>
-		<input type="text" name="registrationdate" id="registrationdate" value="" />
-	</div>
-	<div>
-		<label>Name Pokerstars: </label>
-		<input type="text" name="nameps" id="nameps" value="" />
-	</div>
-	<div>
-		<label>Name FileList: </label>
-		<input type="text" name="namefl" id="namefl" value="" />
-	</div>
-	<div>
-		<label>ID FileList: </label>
-		<input type="text" name="idfl" id="idfl" value="" />
-	</div>
-	<p>
-		<label>Password: </label>
-		<input type='password' name='flpokerpassword' id='flpokerpassword' value ='' />
-	</p>
-	<input type='submit' value='Submit' id='submitbutton' />
+    <div>
+        <label>Registration Date: </label>
+        <input type="text" name="registrationdate" id="registrationdate" value="" />
+    </div>
+    <div>
+        <label>Name Pokerstars: </label>
+        <input type="text" name="nameps" id="nameps" value="" />
+    </div>
+    <div>
+        <label>Name FileList: </label>
+        <input type="text" name="namefl" id="namefl" value="" />
+    </div>
+    <div>
+        <label>ID FileList: </label>
+        <input type="text" name="idfl" id="idfl" value="" />
+    </div>
+    <p>
+        <label>Password: </label>
+        <input type='password' name='flpokerpassword' id='flpokerpassword' value ='' />
+    </p>
+    <input type='submit' value='Submit' id='submitbutton' />
 </form>
 <h2 style="font-weight:bold; color: red">WARNING: This cannot be undone. Be VERY SURE before submitting.</h2>
 

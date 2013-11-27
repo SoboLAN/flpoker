@@ -3,6 +3,8 @@
 namespace FileListPoker\Pages;
 
 use FileListPoker\Main\Database;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 class TournamentsPage
 {
@@ -19,7 +21,9 @@ class TournamentsPage
                 'ORDER BY tournament_date DESC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling TournamentsPage::getContent failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
 
         $final_result = array();

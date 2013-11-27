@@ -3,6 +3,8 @@
 namespace FileListPoker\Pages;
 
 use FileListPoker\Main\Database;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 class TournamentPage
 {
@@ -23,7 +25,9 @@ class TournamentPage
             $tournamentSt->execute();
             $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(\PDO::FETCH_OBJ);
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling TournamentPage::getTournamentDetails with tournament id $tid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         if (! $tournament) {
@@ -63,7 +67,9 @@ class TournamentPage
                 $results[] = $row;
             }
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling TournamentPage::getTournamentResults with tournament id $tid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $final_result = array();
@@ -105,7 +111,9 @@ class TournamentPage
                 );
             }
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling TournamentPage::getTournamentBonuses with tournament id $tid failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         return $bonuses;

@@ -22,13 +22,13 @@ $renderer = new PlayersRenderer($site);
 $htmlout .= $renderer->render($content);
 
 $htmlout .= '<p><span style="font-size:15px; font-family:Tahoma; background-color:#96EC2D; ' .
-			'padding-left:40px; border:1px solid black; overflow:hidden">&nbsp;</span> ' .
-			'&#61; FileList Poker Administrator</p>';
+            'padding-left:40px; border:1px solid black; overflow:hidden">&nbsp;</span> ' .
+            '&#61; FileList Poker Administrator</p>';
 
 $htmlout .= '</div>';
-	
+    
 $htmlout .= $site->getFooter();
 
 $htmlout .= '</body></html>';
-	
+    
 echo $htmlout;

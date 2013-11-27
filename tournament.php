@@ -16,15 +16,15 @@ $htmlout .= '<div id="content-narrower">';
 
 if (! isset($_GET['id']))
 {
-	die('You must specify a tournament ID');
+    die('You must specify a tournament ID');
 }
 //eliminate some junk... (people can put all sorts of stuff in this thing)...
 else if (strlen ($_GET['id']) > 4 ||
-		! is_numeric ($_GET['id']) ||
-		strpos ($_GET['id'], '.') !== FALSE ||
-		strpos ($_GET['id'], "'") !== FALSE)
+        ! is_numeric ($_GET['id']) ||
+        strpos ($_GET['id'], '.') !== FALSE ||
+        strpos ($_GET['id'], "'") !== FALSE)
 {
-	die('Invalid tournament ID');
+    die('Invalid tournament ID');
 }
 
 $tid = $_GET['id'];
@@ -36,7 +36,7 @@ $bonuses = $tournamentPage->getTournamentBonuses($tid);
 
 if (! isset($details['id']))
 {
-	die('Tournament with that ID does not exist');
+    die('Tournament with that ID does not exist');
 }
 
 $renderer = new TournamentRenderer($site);
@@ -48,9 +48,9 @@ $htmlout .= $renderer->renderResults($results);
 $htmlout .= $renderer->renderBonuses($bonuses);
 
 $htmlout .= '</div>';
-	
+    
 $htmlout .= $site->getFooter();
 
 $htmlout .= '</body></html>';
-	
+    
 echo $htmlout;

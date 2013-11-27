@@ -8,6 +8,7 @@
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
+use FileListPoker\Main\Logger;
 
 $jQueryPath = Config::getValue('path_jquery');
 $jQueryUIPath = Config::getValue('path_jqueryui');
@@ -19,38 +20,39 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 ?>
  
 <style type="text/css">
-	div{
-		padding:8px;
-	}
-	
-	div label {
-		padding: 8px;
-	}
-	
-	body {
-		background:#BCD5E1;
-	}
+    div{
+        padding:8px;
+    }
+    
+    div label {
+        padding: 8px;
+    }
+    
+    body {
+        background:#BCD5E1;
+    }
 </style>
  
 </head>
 
 <?php
 
-$db = Database::getConnection();
-
 try {
-	$result = $db->query (
-		'SELECT name_pokerstars ' .
-		'FROM players ' .
-		'WHERE name_pokerstars IS NOT NULL ' .
-		'ORDER BY name_pokerstars ASC');
+    $db = Database::getConnection();
+    
+    $result = $db->query (
+        'SELECT name_pokerstars ' .
+        'FROM players ' .
+        'WHERE name_pokerstars IS NOT NULL ' .
+        'ORDER BY name_pokerstars ASC');
 } catch (\PDOException $e) {
-	die ('There was an error');
+    Logger::log('rendering add.result.form failed: ' . $e->getMessage());
+    die('There was an error');
 }
 
 $names = array();
 foreach ($result as $name) {
-	$names[] = $name->name_pokerstars;
+    $names[] = $name->name_pokerstars;
 }
 
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
@@ -64,35 +66,35 @@ $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
 <script type="text/javascript">
  
 $(document).ready(function() {
-	<?php echo $nameList; ?>
+    <?php echo $nameList; ?>
 
     var counter = 19;
  
     $("#addButton").click(function () {
         counter++;
         
-		var newTextBoxDiv = $(document.createElement('div'))
-							.attr("id", 'TextBoxDiv' + counter)
-							.attr('class', 'ui-widget');
+        var newTextBoxDiv = $(document.createElement('div'))
+                            .attr("id", 'TextBoxDiv' + counter)
+                            .attr('class', 'ui-widget');
 
-		newTextBoxDiv.after().html(
-		'<label>Position: </label>' +
-			  '<input type="text" name="position' + counter + '" id="position' + counter + '" value="" />' +
-		  '<label>Player: </label>' +
-			  '<input type="text" name="player' + counter + '" id="player' + counter + '" value="" />' +
-		  '<label>Points: </label>' +
-			  '<input type="text" name="points' + counter + '" id="points' + counter + '" value="" />');
+        newTextBoxDiv.after().html(
+        '<label>Position: </label>' +
+              '<input type="text" name="position' + counter + '" id="position' + counter + '" value="" />' +
+          '<label>Player: </label>' +
+              '<input type="text" name="player' + counter + '" id="player' + counter + '" value="" />' +
+          '<label>Points: </label>' +
+              '<input type="text" name="points' + counter + '" id="points' + counter + '" value="" />');
 
-		newTextBoxDiv.appendTo("#TextBoxesGroup");
-		
-		$('#player' + counter).autocomplete({source: availableNames});
+        newTextBoxDiv.appendTo("#TextBoxesGroup");
+        
+        $('#player' + counter).autocomplete({source: availableNames});
      });
  
-	$("#removeButton").click(function () {
-		if(counter === 0) {
-			alert("No more textboxes to remove");
-			return false;
-		}
+    $("#removeButton").click(function () {
+        if(counter === 0) {
+            alert("No more textboxes to remove");
+            return false;
+        }
  
         $("#TextBoxDiv" + counter).remove();
         
@@ -100,27 +102,27 @@ $(document).ready(function() {
      });
  
      $("#getButtonValue").click(function () {
-		var msg = '';
-		for (i = 1; i < counter; i++) {
-		  msg += "\n Position " + i + ": " + $('#position' + i).val();
-		  msg += "\n Player " + i + ": " + $('#player' + i).val();
-		  msg += "\n Points " + i + ": " + $('#points' + i).val();
-		}
-		alert(msg);
-	});
-	
-	for (j = 1; j <= counter; j++) {
-		$('#player' + j).autocomplete({source: availableNames});
-	}
+        var msg = '';
+        for (i = 1; i < counter; i++) {
+          msg += "\n Position " + i + ": " + $('#position' + i).val();
+          msg += "\n Player " + i + ": " + $('#player' + i).val();
+          msg += "\n Points " + i + ": " + $('#points' + i).val();
+        }
+        alert(msg);
+    });
+    
+    for (j = 1; j <= counter; j++) {
+        $('#player' + j).autocomplete({source: availableNames});
+    }
 });
 </script>
 
 <form action="add.result.execute.php" method="POST" target="_blank">
-	<div>
-		<label>Tournament ID: </label>
-		<input type="text" name="tournamentid" id="tournamentid" value="" />
-	</div>
-	<div id='TextBoxesGroup'>
+    <div>
+        <label>Tournament ID: </label>
+        <input type="text" name="tournamentid" id="tournamentid" value="" />
+    </div>
+    <div id='TextBoxesGroup'>
     
     <?php
     
@@ -161,15 +163,15 @@ $(document).ready(function() {
     }
     
     ?>
-	</div>
-	<p>
-		<label>Password: </label>
-		<input type='password' name='flpokerpassword' id='flpokerpassword' value ='' />
-	</p>
-	<input type='button' value='Add' id='addButton' />
-	<input type='button' value='Remove' id='removeButton' />
-	<input type='button' value='Get TextBox Value' id='getButtonValue' />
-	<input type='submit' value='Submit' id='submitbutton' />
+    </div>
+    <p>
+        <label>Password: </label>
+        <input type='password' name='flpokerpassword' id='flpokerpassword' value ='' />
+    </p>
+    <input type='button' value='Add' id='addButton' />
+    <input type='button' value='Remove' id='removeButton' />
+    <input type='button' value='Get TextBox Value' id='getButtonValue' />
+    <input type='submit' value='Submit' id='submitbutton' />
 </form>
 <h2 style="font-weight:bold; color: red">WARNING: This cannot be undone. Be VERY SURE before submitting.</h2>
 

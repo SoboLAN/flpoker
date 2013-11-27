@@ -5,6 +5,8 @@ namespace FileListPoker\Pages;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 class StatisticsPage
 {
@@ -38,7 +40,7 @@ class StatisticsPage
         try {
             $tmpresults = $db->query(
                 'SELECT ext.tournament_id, ext.participants, MONTH(ext.tournament_date) AS month, ' .
-                'YEAR(ext.tournament_date) AS year, DAYOFMONTH( ext.tournament_date ) AS day, ' .
+                'YEAR(ext.tournament_date) AS year, DAYOFMONTH(ext.tournament_date) AS day, ' .
                 '(SELECT avg(internal.participants) ' .
                 'FROM tournaments internal ' .
                 'WHERE internal.tournament_id <= ext.tournament_id) AS average_participants ' .
@@ -46,7 +48,9 @@ class StatisticsPage
                 'ORDER BY tournament_id ASC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling StatisticsPage::getTournamentsGraph failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();
@@ -97,7 +101,9 @@ class StatisticsPage
                 'ORDER BY join_year ASC, join_month ASC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling StatisticsPage::getRegistrationsGraph failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $results = array();
@@ -154,7 +160,9 @@ class StatisticsPage
             
             $tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling StatisticsPage::getGeneralStatistics failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $totalPlayers = 0;

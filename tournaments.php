@@ -22,9 +22,9 @@ $renderer = new TournamentsRenderer($site);
 $htmlout .= $renderer->render($content);
 
 $htmlout .= '</div>';
-	
+    
 $htmlout .= $site->getFooter();
 
 $htmlout .= '</body></html>';
-	
+    
 echo $htmlout;

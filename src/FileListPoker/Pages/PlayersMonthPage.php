@@ -3,6 +3,8 @@
 namespace FileListPoker\Pages;
 
 use FileListPoker\Main\Database;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about the Players of the Month.
@@ -34,7 +36,9 @@ class PlayersMonthPage
                 'ORDER BY award_year DESC , award_month DESC'
             );
         } catch (\PDOException $e) {
-            die('There was a problem while performing database queries');
+            $message = "calling PlayersMonthPage::getContent failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         $final_result = array();
