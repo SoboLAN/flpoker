@@ -21,7 +21,6 @@ class PlayersRenderer extends GeneralRenderer
             <th><strong>Nr.</strong></th>
             <th><strong>' . $this->site->getWord('players_pokerstars_name') . '</strong></th>
             <th><strong>' . $this->site->getWord('players_filelist_name') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_registration_date') . '</strong></th>
             <th><strong>' . $this->site->getWord('players_current_points') . '</strong></th>
             </tr>';
         
@@ -39,24 +38,12 @@ class PlayersRenderer extends GeneralRenderer
                 $flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' .
                         $nameFilelist . '</a>';
             }
-            
-            if (is_null($player['year']) or empty($player['year'])) {
-                $regDate = '<span class="faded">unknown</span>';
-            } else {
-                $regTime = mktime(0, 0, 0, $player['month'], $player['day'], $player['year']);
-                $regDate = date('j F Y', $regTime);
-                
-                if ($this->site->getLanguage() !== 'en') {
-                    $regDate = $this->translateDate($regDate, $this->site->getLanguage());
-                }
-            }
 
             $out .=
             '<tr' . ($player['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
                 <td>' . $flURL . '</td>
-                <td>' . $regDate . '</td>
                 <td>' . $player['points'] . '</td>
             </tr>';
 
