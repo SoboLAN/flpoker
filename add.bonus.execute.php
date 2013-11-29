@@ -15,7 +15,7 @@ if (! isset ($_POST['player']) or
 
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
-use FileListPoker\Main\Logger;  
+use FileListPoker\Main\Logger;
 
 try {
     $db = Database::getConnection();
@@ -44,7 +44,7 @@ try {
     $rows = $insertSt->rowCount ();
 } catch (\PDOException $e) {
     Logger::log('adding bonus failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
-    die('There was an error');
+    header('Location: 500.shtml');
 }
 
 echo "Added $rows bonus(es)";

@@ -48,7 +48,7 @@ try {
                         implode (',', $insertResults));
 } catch (\PDOException $e) {
     Logger::log('adding result failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
-    die('There was an error');
+    header('Location: 500.shtml');
 }
 
 echo "Inserted $result rows.";

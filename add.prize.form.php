@@ -10,9 +10,14 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Logger;
 
-$jQueryPath = Config::getValue('path_jquery');
-$jQueryUIPath = Config::getValue('path_jqueryui');
-$jQueryCSSPath = Config::getValue('path_jqueryui_css');
+try {
+    $jQueryPath = Config::getValue('path_jquery');
+    $jQueryUIPath = Config::getValue('path_jqueryui');
+    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
+} catch (FLPokerException $ex) {
+    Logger::log("rendering add.bonus.form failed: " . $e->getMessage());
+    header('Location: 500.shtml');
+}
 
 echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";
@@ -47,7 +52,7 @@ try {
         'ORDER BY name_filelist ASC');
 } catch (\PDOException $e) {
     Logger::log('rendering add.prize.form failed: ' . $e->getMessage());
-    die('There was an error');
+    header('Location: 500.shtml');
 }
 
 $names = array();

@@ -55,7 +55,7 @@ try {
     $id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->player_id;
 } catch (\PDOException $e) {
     Logger::log('adding player failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
-    die('There was an error');
+    header('Location: 500.shtml');
 }
 
 echo "Added player with ID $id ({$_POST['nameps']}).";

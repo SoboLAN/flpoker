@@ -2,6 +2,7 @@
 
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
+use FileListPoker\Main\Logger;
 
 $db = Database::getConnection();
 
@@ -18,7 +19,8 @@ try {
         'ORDER BY points DESC'
     );
 } catch (\PDOException $e) {
-    die('Something went very wrong.');
+    Logger::log('accessing current.standings.php failed');
+    header('Location: 500.shtml');
 }
 
 $rows = array();

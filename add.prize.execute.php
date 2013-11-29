@@ -42,7 +42,7 @@ try {
     $rows = $insertSt->rowCount ();
 } catch (\PDOException $e) {
     Logger::log('adding prize failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
-    die('There was an error');
+    header('Location: 500.shtml');
 }
 
 echo "Added $rows prize(s)";

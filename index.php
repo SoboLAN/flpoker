@@ -1,15 +1,28 @@
 <?php
 require_once 'autoload.php';
 use FileListPoker\Main\Site;
+use FileListPoker\Main\FLPokerException;
 
-$site = new Site();
-    
-$htmlout = $site->getHeader();
-    
-$htmlout .= '<div id="title">' . $site->getWord('menu_home') . '</div>';
-    
-$htmlout .= '<div id="content">';
-    
+try {
+    $site = new Site();
+
+    $htmlout = $site->getHeader();
+
+    $htmlout .= '<div id="title">' . $site->getWord('menu_home') . '</div>
+                <div id="content">';
+} catch (FLPokerException $ex) {
+    switch ($ex->getType()) {
+        case FLPokerException::ERROR:
+            header('Location: 500.shtml');
+            break;
+        case FLPokerException::SITE_DOWN:
+            header('Location: maintenance.shtml');
+            break;
+        default:
+            header('Location: 500.shtml');
+    }
+}
+
 if ($site->getLanguage() == 'ro')
 {
     $htmlout .=

@@ -7,10 +7,17 @@
 
 require_once 'autoload.php';
 use FileListPoker\Main\Config;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
-$jQueryPath = Config::getValue('path_jquery');
-$jQueryUIPath = Config::getValue('path_jqueryui');
-$jQueryCSSPath = Config::getValue('path_jqueryui_css');
+try {
+    $jQueryPath = Config::getValue('path_jquery');
+    $jQueryUIPath = Config::getValue('path_jqueryui');
+    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
+} catch (FLPokerException $ex) {
+    Logger::log("rendering add.bonus.form failed: " . $e->getMessage());
+    header('Location: 500.shtml');
+}
 
 echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";
