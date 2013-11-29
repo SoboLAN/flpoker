@@ -10,7 +10,7 @@ class Logger
     
     public static function log($message)
     {
-        if (Config::getValue('enable_logging') and is_readable(self::$errorFile)) {
+        if (Config::getValue('enable_logging') and is_writable(self::$errorFile)) {
             file_put_contents(
                 self::$errorFile,
                 date('[Y-m-d H:i:s]', time()) . " $message\n",
