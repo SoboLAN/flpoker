@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
 	<head>
-		<title>TODO supply a title</title>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
+		<title>FileList Poker - Bad Request</title>
+		<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+		<style type="text/css">
+			body {
+				background-color: #BCD5E1;
+				font: 0.85em Verdana;
+			}
+		</style>
 	</head>
 	<body>
-		<div>TODO write content</div>
+		<h1>400 - Bad Request</h1>
+		<p>You provided invalid information when performing a request.</p>
+		<p>If you believe your request was actually valid, contact the webmaster
+		and inform him of the situation.</p>
+		<p>It would be best to provide as many details as possible, including the exact
+		time when you made the request.</p>
 	</body>
 </html>
