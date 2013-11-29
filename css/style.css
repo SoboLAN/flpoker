@@ -185,12 +185,3 @@ ul.claybricks li a:hover, ul.claybricks li a.selected {
    font:11px Verdana,sans-serif;
    border-top:1px solid #666666; 
 }
-
-#contact-button {
-	float: right;
-	display: inline;
-}
-
-#contact-button img {
-	vertical-align: middle;
-}

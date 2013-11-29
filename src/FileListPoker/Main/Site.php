@@ -18,8 +18,7 @@ class Site
         'tournaments.php'   => false,
         'rankings.php'      => true,
         'statistics.php'    => true,
-        'players.month.php' => false,
-        'contact.php'       => false,
+        'players.month.php' => false
     );
     
     private static $highChartsDependency = array (
@@ -28,8 +27,7 @@ class Site
         'tournaments.php'   => false,
         'rankings.php'      => false,
         'statistics.php'    => true,
-        'players.month.php' => false,
-        'contact.php'       => false,
+        'players.month.php' => false
     );
     
     private $lang;
@@ -158,14 +156,11 @@ class Site
     public function getFooter ()
     {
         $out = '<div id="footer">
-            FileList Poker Points v1.1.7 (currently in feature freeze).
+            FileList Poker v1.1.8 (currently in feature freeze).
             <br />
             Copyright &copy; 2013 Radu Murzea.
             <br />
             Project Author and Site Design: Radu Murzea.
-            <div id="contact-button">
-                    <a href="contact.php"><img alt="Contact" src="images/contact-button.jpg" /></a>
-                </div>
         </div>';
         
         $out .= '</div>'; //closing id="container" too
