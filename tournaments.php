@@ -9,18 +9,16 @@ use FileListPoker\Main\FLPokerException;
 
 try {
     $site = new Site();
-
-    $htmlout = $site->getHeader('tournaments.php');
-
-    $htmlout .= '<div id="title">' . $site->getWord('menu_tournaments') . '</div>
-                <div id="content-narrower">';
-
+    
     $tournamentsPage = new TournamentsPage();
-    $content = $tournamentsPage->getContent();
+    $tournaments = $tournamentsPage->getContent();
     
     $renderer = new TournamentsRenderer($site);
+    
+    $pageContent = file_get_contents('templates/tournaments.tpl');
+    $pageContent = $renderer->render($pageContent, $tournaments);
 
-    $htmlout .= $renderer->render($content);
+    $htmlout = $site->getFullPageTemplate('tournaments.php');
     
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
@@ -38,10 +36,10 @@ try {
     }
 }
 
-$htmlout .= '</div>';
-    
-$htmlout .= $site->getFooter();
-
-$htmlout .= '</body></html>';
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content-narrower', $pageContent, ''),
+    $htmlout
+);
     
 echo $htmlout;

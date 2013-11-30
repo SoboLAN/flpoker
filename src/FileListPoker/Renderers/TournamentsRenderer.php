@@ -14,16 +14,27 @@ class TournamentsRenderer extends GeneralRenderer
         $this->site = $site;
     }
 
-    public function render($content)
+    public function render($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:100%">
-            <tr>
-            <th><strong>' . $this->site->getWord('tournaments_tournament_date') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournaments_type') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournaments_participants') . '</strong></th>
-            <th><strong> </strong></th>
-            </tr>';
-
+        if (empty ($content)) {
+            return '';
+        }
+        
+        $tournamentsTpl = str_replace(
+            array(
+                '{tournaments_tournament_date}',
+                '{tournaments_type}',
+                '{tournaments_participants}'
+            ),
+            array(
+                $this->site->getWord('tournaments_tournament_date'),
+                $this->site->getWord('tournaments_type'),
+                $this->site->getWord('tournaments_participants')
+            ),
+            $template
+        );
+        
+        $tournamentsList = '';
         foreach ($content as $tournament) {
             $typeLabelKey = $tournament['type'] == 'regular' ? 'tournaments_regular' : 'tournaments_special';
 
@@ -35,7 +46,7 @@ class TournamentsRenderer extends GeneralRenderer
                 $tournamentDate = $this->translateDay($tournamentDate, $this->site->getLanguage());
             }
 
-            $out .=
+            $tournamentsList .=
             '<tr>
                 <td>' . $tournamentDate . '</td>
                 <td>' . $this->site->getWord($typeLabelKey) . '</td>
@@ -48,8 +59,6 @@ class TournamentsRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $out .= '</table>';
-        
-        return $out;
+        return str_replace('{tournaments_list}', $tournamentsList, $tournamentsTpl);
     }
 }
