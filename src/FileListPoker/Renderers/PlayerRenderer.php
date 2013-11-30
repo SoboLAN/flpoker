@@ -121,9 +121,7 @@ class PlayerRenderer extends GeneralRenderer
             return '';
         }
         
-        $bonusesTpl = $template;
-        
-        $template = str_replace(
+        $bonusesTpl = str_replace(
             array(
                 '{player_bonus_tournament}',
                 '{player_bonus_date}',
@@ -136,7 +134,7 @@ class PlayerRenderer extends GeneralRenderer
                 $this->site->getWord('player_bonus_value'),
                 $this->site->getWord('player_bonus_description')
             ),
-            $bonusesTpl
+            $template
         );
         
         $bonusList = '';
