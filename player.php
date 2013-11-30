@@ -72,9 +72,6 @@ try {
     );
     
     $htmlout = $site->getFullPageTemplate('player.php');
-    
-    $htmlout = str_replace('{content_type_id}', 'content-narrower', $htmlout);
-    $htmlout = str_replace('{page_content}', $pageContent, $htmlout);
 
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
@@ -98,6 +95,10 @@ $bottomScript = '<script>
         });
     </script>';
 
-$htmlout = str_replace('{bottom_page_scripts}', $bottomScript, $htmlout);
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content-narrower', $pageContent, $bottomScript),
+    $htmlout
+);
 
 echo $htmlout;

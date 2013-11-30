@@ -14,15 +14,27 @@ class PlayersMonthRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function render($content)
+    public function render($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:100%">
-            <tr>
-            <th><strong>' . $this->site->getWord('players_month_pokerstars') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_month_filelist') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_month_date') . '</strong></th>
-            </tr>';
-
+        if (empty ($content)) {
+            return '';
+        }
+        
+        $pMonthTpl = str_replace(
+            array(
+                '{players_month_pokerstars}',
+                '{players_month_filelist}',
+                '{players_month_date}'
+            ),
+            array(
+                $this->site->getWord('players_month_pokerstars'),
+                $this->site->getWord('players_month_filelist'),
+                $this->site->getWord('players_month_date')
+            ),
+            $template
+        );
+        
+        $playersList = '';
         foreach ($content as $award) {
             $awardTime = mktime(0, 0, 0, $award['month'], 2, $award['year']);
             $awardDate = date('F Y', $awardTime);
@@ -31,7 +43,7 @@ class PlayersMonthRenderer extends GeneralRenderer
                 $awardDate = $this->translateDate($awardDate, $this->site->getLanguage());
             }
 
-            $out .=
+            $playersList .=
             '<tr>
                 <td><a href="player.php?id=' . $award['id'] . '">' . $award['name_pokerstars'] . '</a></td>
                 <td>
@@ -42,8 +54,6 @@ class PlayersMonthRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $out .= '</table>';
-        
-        return $out;
+        return str_replace('{players_of_the_month_list}', $playersList, $pMonthTpl);
     }
 }

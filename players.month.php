@@ -10,18 +10,16 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
 
-    $htmlout = $site->getHeader('players.month.php');
-
-    $htmlout .= '<div id="title">' . $site->getWord('menu_players_of_the_month') . '</div>
-                <div id="content-narrower">';
-
     $playersMonthPage = new PlayersMonthPage();
-    $content = $playersMonthPage->getContent();
+    $players = $playersMonthPage->getContent();
     
     $renderer = new PlayersMonthRenderer($site);
 
-    $htmlout .= $renderer->render($content);
+    $pageContent = file_get_contents('templates/player.month.tpl');
+    $pageContent = $renderer->render($pageContent, $players);
     
+    $htmlout = $site->getFullPageTemplate('players.month.php');
+
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
         case FLPokerException::ERROR:
@@ -38,10 +36,10 @@ try {
     }
 }
 
-$htmlout .= '</div>';
-    
-$htmlout .= $site->getFooter();
-
-$htmlout .= '</body></html>';
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content-narrower', $pageContent, ''),
+    $htmlout
+);
     
 echo $htmlout;

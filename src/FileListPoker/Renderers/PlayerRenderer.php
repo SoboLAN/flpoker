@@ -75,7 +75,7 @@ class PlayerRenderer extends GeneralRenderer
             return '';
         }
         
-        $tHistoryTpl = file_get_contents('templates/player/player_tournament_history.tpl');
+        $tHistoryTpl = $template;
         
         $tHistoryTpl = str_replace(
             array(
@@ -121,9 +121,9 @@ class PlayerRenderer extends GeneralRenderer
             return '';
         }
         
-        $bonusesTpl = file_get_contents('templates/player/player_bonuses.tpl');
+        $bonusesTpl = $template;
         
-        $bonusesTpl = str_replace(
+        $template = str_replace(
             array(
                 '{player_bonus_tournament}',
                 '{player_bonus_date}',
@@ -169,7 +169,7 @@ class PlayerRenderer extends GeneralRenderer
             return '';
         }
         
-        $prizesTpl = file_get_contents('templates/player/player_prizes.tpl');
+        $prizesTpl = $template;
         
         $prizesTpl = str_replace(
             array(
