@@ -7,8 +7,6 @@
     "lang_cookie_name": "lang",
     "lang_cookie_duration": 2592000,
 	"enable_logging": true,
-    "recaptcha_public_key": "6LeaOOYSAAAAAKC2CLhZa1jXiSPm2gIc2k8M1qzq",
-    "recaptcha_private_key": "6LeaOOYSAAAAAAV0ARQJxLiL4_rPiLGXfsmNP_gh",
     "contact_email": "contact@flpoker.javafling.org",
     "cache_lifetime_players": 60,
     "cache_lifetime_player_general": 60,
