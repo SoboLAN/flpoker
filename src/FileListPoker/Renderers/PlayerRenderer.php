@@ -72,25 +72,22 @@ class PlayerRenderer extends GeneralRenderer
     public function rendererTHistory($template, $content)
     {
         if (empty ($content)) {
-            $result = str_replace('{player_tab_tournament_history}', '', $template);
-            return $result;
+            return '';
         }
         
         $tHistoryTpl = file_get_contents('templates/player/player_tournament_history.tpl');
         
         $tHistoryTpl = str_replace(
-            '{player_tournament_tournament}',
-            $this->site->getWord('player_tournament_tournament'),
-            $tHistoryTpl
-        );
-        $tHistoryTpl = str_replace(
-            '{player_tournament_points}',
-            $this->site->getWord('player_tournament_points'),
-            $tHistoryTpl
-        );
-        $tHistoryTpl = str_replace(
-            '{player_tournament_position}',
-            $this->site->getWord('player_tournament_position'),
+            array(
+                '{player_tournament_tournament}',
+                '{player_tournament_points}',
+                '{player_tournament_position}'
+            ),
+            array(
+                $this->site->getWord('player_tournament_tournament'),
+                $this->site->getWord('player_tournament_points'),
+                $this->site->getWord('player_tournament_position')
+            ),
             $tHistoryTpl
         );
 
@@ -115,38 +112,30 @@ class PlayerRenderer extends GeneralRenderer
             </tr>';
         }
         
-        $tHistoryTpl = str_replace('{player_tournament_list}', $tournamentsList, $tHistoryTpl);
-
-        return str_replace('{player_tab_tournament_history}', $tHistoryTpl, $template);
+        return str_replace('{player_tournament_list}', $tournamentsList, $tHistoryTpl);
     }
     
     public function renderBonuses($template, $content)
     {
         if (empty ($content)) {
-            $result = str_replace('{player_tab_bonuses}', '', $template);
-            return $result;
+            return '';
         }
         
         $bonusesTpl = file_get_contents('templates/player/player_bonuses.tpl');
         
         $bonusesTpl = str_replace(
-            '{player_bonus_tournament}',
-            $this->site->getWord('player_bonus_tournament'),
-            $bonusesTpl
-        );
-        $bonusesTpl = str_replace(
-            '{player_bonus_date}',
-            $this->site->getWord('player_bonus_date'),
-            $bonusesTpl
-        );
-        $bonusesTpl = str_replace(
-            '{player_bonus_value}',
-            $this->site->getWord('player_bonus_value'),
-            $bonusesTpl
-        );
-        $bonusesTpl = str_replace(
-            '{player_bonus_description}',
-            $this->site->getWord('player_bonus_description'),
+            array(
+                '{player_bonus_tournament}',
+                '{player_bonus_date}',
+                '{player_bonus_value}',
+                '{player_bonus_description}'
+            ),
+            array(
+                $this->site->getWord('player_bonus_tournament'),
+                $this->site->getWord('player_bonus_date'),
+                $this->site->getWord('player_bonus_value'),
+                $this->site->getWord('player_bonus_description')
+            ),
             $bonusesTpl
         );
         
@@ -171,36 +160,31 @@ class PlayerRenderer extends GeneralRenderer
             </tr>';
         }
         
-        $bonusesTpl = str_replace('{player_bonuses_list}', $bonusList, $bonusesTpl);
-
-        return str_replace('{player_tab_bonuses}', $bonusesTpl, $template);
+        return str_replace('{player_bonuses_list}', $bonusList, $bonusesTpl);
     }
     
     public function renderPrizes($template, $content)
     {
         if (empty ($content)) {
-            $result = str_replace('{player_tab_prizes}', '', $template);
-            return $result;
+            return '';
         }
         
         $prizesTpl = file_get_contents('templates/player/player_prizes.tpl');
         
         $prizesTpl = str_replace(
-            '{player_prize_prize}',
-            $this->site->getWord('player_prize_prize'),
+            array(
+                '{player_prize_prize}',
+                '{player_prize_date}',
+                '{player_prize_cost}',
+            ),
+            array(
+                $this->site->getWord('player_prize_prize'),
+                $this->site->getWord('player_prize_date'),
+                $this->site->getWord('player_prize_cost'),
+            ),
             $prizesTpl
         );
-        $prizesTpl = str_replace(
-            '{player_prize_date}',
-            $this->site->getWord('player_prize_date'),
-            $prizesTpl
-        );
-        $prizesTpl = str_replace(
-            '{player_prize_cost}',
-            $this->site->getWord('player_prize_cost'),
-            $prizesTpl
-        );
-
+        
         $prizeList = '';
         foreach ($content as $prize) {
             if (is_null($prize['day']) or is_null($prize['month']) or is_null($prize['year'])) {
@@ -225,8 +209,6 @@ class PlayerRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $prizesTpl = str_replace('{player_prizes_list}', $prizeList, $prizesTpl);
-
-        return str_replace('{player_tab_bonuses}', $prizesTpl, $template);
+        return str_replace('{player_prizes_list}', $prizeList, $prizesTpl);
     }
 }

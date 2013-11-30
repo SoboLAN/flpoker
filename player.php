@@ -8,7 +8,6 @@ use FileListPoker\Renderers\PlayerRenderer;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
-
 try {
     $site = new Site();
 
@@ -42,30 +41,35 @@ try {
     $renderer = new PlayerRenderer($site);
     
     $pageContent = str_replace(
-        '{player_tab_general_title}',
-        $site->getWord('player_tab_general_title'),
-        $pageContent
-    );
-    $pageContent = str_replace(
-        '{player_tab_thistory_title}',
-        $site->getWord('player_tab_thistory_title'),
-        $pageContent
-    );
-    $pageContent = str_replace(
-        '{player_tab_bonuses_title}',
-        $site->getWord('player_tab_bonuses_title'),
-        $pageContent
-    );
-    $pageContent = str_replace(
-        '{player_tab_prizes_title}',
-        $site->getWord('player_tab_prizes_title'),
+        array(
+            '{player_tab_general_title}',
+            '{player_tab_thistory_title}',
+            '{player_tab_bonuses_title}',
+            '{player_tab_prizes_title}',
+        ),
+        array(
+            $site->getWord('player_tab_general_title'),
+            $site->getWord('player_tab_thistory_title'),
+            $site->getWord('player_tab_bonuses_title'),
+            $site->getWord('player_tab_prizes_title'),
+        ),
         $pageContent
     );
     
+    $tHistoryTemplate = file_get_contents('templates/player/player_tournament_history.tpl');
+    $bonusesTemplate = file_get_contents('templates/player/player_bonuses.tpl');
+    $prizesTemplate = file_get_contents('templates/player/player_prizes.tpl');
+    
     $pageContent = $renderer->renderGeneral($pageContent, $general);
-    $pageContent = $renderer->rendererTHistory($pageContent, $tournamentHistory);
-    $pageContent = $renderer->renderBonuses($pageContent, $bonuses);
-    $pageContent = $renderer->renderPrizes($pageContent, $prizes);
+    $tHistoryTemplate = $renderer->rendererTHistory($tHistoryTemplate, $tournamentHistory);
+    $bonusesTemplate = $renderer->renderBonuses($bonusesTemplate, $bonuses);
+    $prizesTemplate = $renderer->renderPrizes($prizesTemplate, $prizes);
+    
+    $pageContent = str_replace(
+        array('{player_tab_tournament_history}', '{player_tab_bonuses}', '{player_tab_prizes}'),
+        array($tHistoryTemplate, $bonusesTemplate, $prizesTemplate),
+        $pageContent
+    );
     
     $htmlout = $site->getFullPageTemplate('player.php');
     
