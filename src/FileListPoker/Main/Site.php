@@ -19,9 +19,7 @@ class Site
     //and also used in the templates. so they have a double role. be careful when changing them
     private static $pages = array (
         'index.php'         => 'menu_home',
-        'player.php'        => 'menu_players',
         'players.php'       => 'menu_players',
-        'tournament.php'    => 'menu_tournaments',
         'tournaments.php'   => 'menu_tournaments',
         'rankings.php'      => 'menu_rankings',
         'statistics.php'    => 'menu_statistics',
@@ -30,9 +28,7 @@ class Site
     
     private static $jQueryDependency = array (
         'index.php'         => false,
-        'player.php'        => true,
-        'players.php'       => false,
-        'tournament.php'    => false,
+        'players.php'       => true,
         'tournaments.php'   => false,
         'rankings.php'      => true,
         'statistics.php'    => true,
@@ -41,9 +37,7 @@ class Site
     
     private static $highChartsDependency = array (
         'index.php'         => false,
-        'player.php'        => false,
         'players.php'       => false,
-        'tournament.php'    => false,
         'tournaments.php'   => false,
         'rankings.php'      => false,
         'statistics.php'    => true,
@@ -119,9 +113,7 @@ class Site
         
         foreach (self::$pages as $key => $value) {
             $tpl = str_replace('{' . $value . '}', Dictionary::getWord($value, $this->lang), $tpl);
-        }
-        
-        foreach (self::$pages as $key => $value) {
+            
             $tpl = str_replace('{selected_' . $value . '}', ($page == $key) ? 'class="selected"' : '', $tpl);
         }
 

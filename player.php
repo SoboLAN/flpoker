@@ -71,7 +71,7 @@ try {
         $pageContent
     );
     
-    $htmlout = $site->getFullPageTemplate('player.php');
+    $htmlout = $site->getFullPageTemplate('players.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {

@@ -14,16 +14,27 @@ class PlayersRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function render($content)
+    public function render($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:100%">
-            <tr>
-            <th><strong>Nr.</strong></th>
-            <th><strong>' . $this->site->getWord('players_pokerstars_name') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_filelist_name') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_current_points') . '</strong></th>
-            </tr>';
+        if (empty ($content)) {
+            return '';
+        }
         
+        $playersTpl = str_replace(
+            array(
+                '{players_pokerstars_name}',
+                '{players_filelist_name}',
+                '{players_current_points}'
+            ),
+            array(
+                $this->site->getWord('players_pokerstars_name'),
+                $this->site->getWord('players_filelist_name'),
+                $this->site->getWord('players_current_points')
+            ),
+            $template
+        );
+        
+        $playersList = '';
         $i = 1;
         foreach ($content as $player) {
             $namePokerStars = (is_null($player['name_pokerstars']) or empty($player['name_pokerstars'])) ?
@@ -39,7 +50,7 @@ class PlayersRenderer extends GeneralRenderer
                         $nameFilelist . '</a>';
             }
 
-            $out .=
+            $playersList .=
             '<tr' . ($player['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
@@ -50,8 +61,6 @@ class PlayersRenderer extends GeneralRenderer
             $i++;
         }
 
-        $out .= '</table>';
-        
-        return $out;
+        return str_replace('{players_list}', $playersList, $playersTpl);
     }
 }
