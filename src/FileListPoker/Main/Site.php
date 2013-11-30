@@ -12,9 +12,27 @@ use FileListPoker\Main\FLPokerException;
  */
 class Site
 {
+    private static $siteVersion = '1.1.8';
+    
+    //keys represent the list of valid pages
+    //the values represent the keys used for obtaining menu strings from the dictionary
+    //and also used in the templates. so they have a double role. be careful when changing them
+    private static $pages = array (
+        'index.php'         => 'menu_home',
+        'player.php'        => 'menu_players',
+        'players.php'       => 'menu_players',
+        'tournament.php'    => 'menu_tournaments',
+        'tournaments.php'   => 'menu_tournaments',
+        'rankings.php'      => 'menu_rankings',
+        'statistics.php'    => 'menu_statistics',
+        'players.month.php' => 'menu_players_of_the_month'
+    );
+    
     private static $jQueryDependency = array (
         'index.php'         => false,
-        'players.php'       => true,
+        'player.php'        => true,
+        'players.php'       => false,
+        'tournament.php'    => false,
         'tournaments.php'   => false,
         'rankings.php'      => true,
         'statistics.php'    => true,
@@ -23,7 +41,9 @@ class Site
     
     private static $highChartsDependency = array (
         'index.php'         => false,
+        'player.php'        => false,
         'players.php'       => false,
+        'tournament.php'    => false,
         'tournaments.php'   => false,
         'rankings.php'      => false,
         'statistics.php'    => true,
@@ -32,7 +52,7 @@ class Site
     
     private $lang;
     
-    public function __construct ()
+    public function __construct()
     {
         if (! Config::getValue('online')) {
             throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_DOWN);
@@ -51,15 +71,96 @@ class Site
         }
     }
     
-    public function getLanguage ()
+    public function getLanguage()
     {
         return $this->lang;
     }
     
-    public function getWord ($key)
+    public function getWord($key)
     {
         return Dictionary::getWord($key, $this->lang);
     }
+    
+    public function getFullPageTemplate($page)
+    {
+        if (! in_array($page, array_keys(self::$pages))) {
+            $message = "Site::getFullPageTemplate received an invalid page: $page";
+            Logger::log($message);
+            throw new FLPokerException($message, FLPokerException::ERROR);
+        }
+        
+        $tpl = file_get_contents('templates/fullpage.tpl');
+        
+        $tpl = str_replace('{html_title}', 'FileList Poker - ' . Dictionary::getWord(self::$pages[$page], $this->lang), $tpl);
+        
+        $cssFiles = '<link rel="stylesheet" type="text/css" href="' . Config::getValue('path_general_css') . '" />';
+        $scriptFiles = '';
+        
+        if (self::$jQueryDependency[$page]) {
+            $scriptFiles .= '<script src="' . Config::getValue('path_jquery') . '"></script>';
+            $scriptFiles .= '<script src="' . Config::getValue('path_jqueryui') . '"></script>';
+            $cssFiles .= '<link rel="stylesheet" href="' . Config::getValue('path_jqueryui_css') . '" />';
+
+            if (self::$highChartsDependency[$page]) {
+                $scriptFiles .= '<script src="' . Config::getValue('path_highcharts') . '"></script>';
+                $scriptFiles .= '<script src=' . Config::getValue('path_highcharts_export') . '></script>';
+                $scriptFiles .= '<script src="js/highcharts/themes/dark-blue.js"></script>';
+            }
+        }
+        
+        $tpl = str_replace('{css_files}', $cssFiles, $tpl);
+        $tpl = str_replace('{js_files}', $scriptFiles, $tpl);
+        
+        if (Config::getValue('enable_google_analytics')) {
+            $tpl = str_replace('{google_analytics_script}', file_get_contents('templates/google_analytics.tpl'), $tpl);     
+        } else {
+            $tpl = str_replace('{google_analytics_script}', '', $tpl);
+        }
+        
+        foreach (self::$pages as $key => $value) {
+            $tpl = str_replace('{' . $value . '}', Dictionary::getWord($value, $this->lang), $tpl);
+        }
+        
+        foreach (self::$pages as $key => $value) {
+            $tpl = str_replace('{selected_' . $value . '}', ($page == $key) ? 'class="selected"' : '', $tpl);
+        }
+
+        $langPanel = '';
+        
+        if ($this->lang == 'ro') {
+            $langPanel .= '
+                <img class="active_lang" src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro', $this->lang) .'" />
+            <a href="lang_switch.php?lang=en&amp;returnpage=' . $page . '">' .
+                '<img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $this->lang) . '" />' .
+            '</a>';
+        } elseif ($this->lang == 'en') {
+            $langPanel .= '
+            <a href="lang_switch.php?lang=&amp;returnpage=' . $page . '">' .
+                '<img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $this->lang) .'" />' .
+            '</a>
+            <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $this->lang) . '" alt="' . Dictionary::getWord('langpanel_en', $this->lang) . '" />
+            ';
+        }
+        
+        $tpl = str_replace('{language_panel_content}', $langPanel, $tpl);
+        
+        $tpl = str_replace('{title}', Dictionary::getWord(self::$pages[$page], $this->lang), $tpl);
+        
+        $tpl = str_replace('{version}', self::$siteVersion, $tpl);
+        
+        return $tpl;
+    }
+    
+    public function isValidID($id)
+    {
+        return (strlen($id) <= 4 and ctype_digit($id));
+    }
+    
+    
+    
+    
+    
+    
     
     //one of the very few functions that contain template information (the other one is getFooter)
     //not a good practice, but I made an exception this time
@@ -152,7 +253,7 @@ class Site
         
         return $out;
     }
-
+    
     public function getFooter ()
     {
         $out = '<div id="footer">
@@ -164,28 +265,6 @@ class Site
         </div>';
         
         $out .= '</div>'; //closing id="container" too
-        
-        return $out;
-    }
-    
-    private function getAnalyticsScript ()
-    {
-        $out = "<script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-40294384-2', 'javafling.org');
-            ga('send', 'pageview');
-        </script>";
         
         return $out;
     }

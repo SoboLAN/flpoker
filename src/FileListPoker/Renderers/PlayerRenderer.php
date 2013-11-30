@@ -14,23 +14,16 @@ class PlayerRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function renderGeneral($content)
+    public function renderGeneral($template, $content)
     {
-        if (empty ($content)) {
-            return '';
-        }
-        
         $namePokerStars = (is_null($content['name_pokerstars']) or empty($content['name_pokerstars'])) ?
                             '<span class="faded">unknown</span>' :
                             $content['name_pokerstars'];
             
         if (is_null($content['name_filelist']) or empty($content['name_filelist'])) {
             $nameFilelist = '<span class="faded">unknown</span>';
-            $flURL = $nameFilelist;
         } else {
             $nameFilelist = $content['name_filelist'];
-            $flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $content['id_filelist'] . '">' .
-                    $nameFilelist . '</a>';
         }
         
         if (is_null($content['month']) or empty($content['month'])) {
@@ -43,68 +36,65 @@ class PlayerRenderer extends GeneralRenderer
             }
         }
         
-        $out =
-        '<p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_pname') . ': ' .
-                $namePokerStars .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_fname') . ': ' .
-                $flURL . '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_regdate') . ': ' .
-                $regDate .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_points') . ': ' .
-                $content['points'] .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_allpoints') . ': ' .
-                $content['points_all_time'] .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_ftables') . ': ' .
-                $content['final_tables'] .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_gmedals') . ': ' .
-                $content['gold_medals'] .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_smedals') . ': ' .
-                $content['silver_medals'] .
-            '</span>
-        </p>
-        <p>
-            <span class="bigger_label">' . $this->site->getWord('player_tab_general_bmedals') . ': ' .
-                $content['bronze_medals'] .
-            '</span>
-        </p>';
+        $result = $template;
         
-        return $out;
+        $result = str_replace('{player_tab_general_pname}', $this->site->getWord('player_tab_general_pname'), $result);
+        $result = str_replace('{pname}', $namePokerStars, $result);
+        
+        $result = str_replace('{player_tab_general_fname}', $this->site->getWord('player_tab_general_fname'), $result);
+        $result = str_replace('{flname}', $nameFilelist, $result);
+        $result = str_replace('{flid}', $content['id_filelist'], $result);
+        
+        $result = str_replace('{player_tab_general_regdate}', $this->site->getWord('player_tab_general_regdate'), $result);
+        $result = str_replace('{regdate}', $regDate, $result);
+        
+        $result = str_replace('{player_tab_general_points}', $this->site->getWord('player_tab_general_points'), $result);
+        $result = str_replace('{general_points}', $content['points'], $result);
+        
+        $result = str_replace('{player_tab_general_allpoints}', $this->site->getWord('player_tab_general_allpoints'), $result);
+        $result = str_replace('{all_points}', $content['points_all_time'], $result);
+        
+        $result = str_replace('{player_tab_general_ftables}', $this->site->getWord('player_tab_general_ftables'), $result);
+        $result = str_replace('{ftables}', $content['final_tables'], $result);
+        
+        $result = str_replace('{player_tab_general_gmedals}', $this->site->getWord('player_tab_general_gmedals'), $result);
+        $result = str_replace('{gmedals}', $content['gold_medals'], $result);
+        
+        $result = str_replace('{player_tab_general_smedals}', $this->site->getWord('player_tab_general_smedals'), $result);
+        $result = str_replace('{smedals}', $content['silver_medals'], $result);
+        
+        $result = str_replace('{player_tab_general_bmedals}', $this->site->getWord('player_tab_general_bmedals'), $result);
+        $result = str_replace('{bmedals}', $content['bronze_medals'], $result);
+        
+        return $result;
     }
     
-    public function rendererTHistory($content)
+    public function rendererTHistory($template, $content)
     {
         if (empty ($content)) {
-            return '';
+            $result = str_replace('{player_tab_tournament_history}', '', $template);
+            return $result;
         }
         
-        $out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
-            <tr>
-            <th><strong>' . $this->site->getWord('player_tournament_tournament') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_tournament_points') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_tournament_position') . '</strong></th>
-            </tr>';
+        $tHistoryTpl = file_get_contents('templates/player/player_tournament_history.tpl');
+        
+        $tHistoryTpl = str_replace(
+            '{player_tournament_tournament}',
+            $this->site->getWord('player_tournament_tournament'),
+            $tHistoryTpl
+        );
+        $tHistoryTpl = str_replace(
+            '{player_tournament_points}',
+            $this->site->getWord('player_tournament_points'),
+            $tHistoryTpl
+        );
+        $tHistoryTpl = str_replace(
+            '{player_tournament_position}',
+            $this->site->getWord('player_tournament_position'),
+            $tHistoryTpl
+        );
 
+        $tournamentsList = '';
         foreach ($content as $tournament) {
             $tTime = mktime(0, 0, 0, $tournament['month'], $tournament['day'], $tournament['year']);
             $tDate = date('j F Y', $tTime);
@@ -117,33 +107,50 @@ class PlayerRenderer extends GeneralRenderer
                         '<span class="faded">unknown</span>' :
                         $tournament['position'];
 
-            $out .=
+            $tournamentsList .=
             '<tr>
                 <td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $tDate . '</a></td>
                 <td>' . $tournament['points'] . '</td>
                 <td>' . $position . '</td>
             </tr>';
         }
+        
+        $tHistoryTpl = str_replace('{player_tournament_list}', $tournamentsList, $tHistoryTpl);
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{player_tab_tournament_history}', $tHistoryTpl, $template);
     }
     
-    public function renderBonuses($content)
+    public function renderBonuses($template, $content)
     {
         if (empty ($content)) {
-            return '';
+            $result = str_replace('{player_tab_bonuses}', '', $template);
+            return $result;
         }
         
-        $out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
-            <tr>
-            <th><strong>' . $this->site->getWord('player_bonus_tournament') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_bonus_date') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_bonus_value') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_bonus_description') . '</strong></th>
-            </tr>';
-
+        $bonusesTpl = file_get_contents('templates/player/player_bonuses.tpl');
+        
+        $bonusesTpl = str_replace(
+            '{player_bonus_tournament}',
+            $this->site->getWord('player_bonus_tournament'),
+            $bonusesTpl
+        );
+        $bonusesTpl = str_replace(
+            '{player_bonus_date}',
+            $this->site->getWord('player_bonus_date'),
+            $bonusesTpl
+        );
+        $bonusesTpl = str_replace(
+            '{player_bonus_value}',
+            $this->site->getWord('player_bonus_value'),
+            $bonusesTpl
+        );
+        $bonusesTpl = str_replace(
+            '{player_bonus_description}',
+            $this->site->getWord('player_bonus_description'),
+            $bonusesTpl
+        );
+        
+        $bonusList = '';
         foreach ($content as $bonus) {
             $bDate = date('j F Y', mktime(0, 0, 0, $bonus['month'], $bonus['day'], $bonus['year']));
             
@@ -155,7 +162,7 @@ class PlayerRenderer extends GeneralRenderer
                             '<span class="faded">unknown</span>' :
                             $bonus['description'];
 
-            $out .=
+            $bonusList .=
             '<tr>
                 <td><a href="tournament.php?id=' . $bonus['tournament_id'] . '">' . $bonus['tournament_id'] . '</a></td>
                 <td>' . $bDate . '</td>
@@ -163,25 +170,38 @@ class PlayerRenderer extends GeneralRenderer
                 <td>' . $description . '</td>
             </tr>';
         }
+        
+        $bonusesTpl = str_replace('{player_bonuses_list}', $bonusList, $bonusesTpl);
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{player_tab_bonuses}', $bonusesTpl, $template);
     }
     
-    public function renderPrizes($content)
+    public function renderPrizes($template, $content)
     {
         if (empty ($content)) {
-            return '';
+            $result = str_replace('{player_tab_prizes}', '', $template);
+            return $result;
         }
         
-        $out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
-            <tr>
-            <th><strong>' . $this->site->getWord('player_prize_prize') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_prize_date') . '</strong></th>
-            <th><strong>' . $this->site->getWord('player_prize_cost') . '</strong></th>
-            </tr>';
+        $prizesTpl = file_get_contents('templates/player/player_prizes.tpl');
+        
+        $prizesTpl = str_replace(
+            '{player_prize_prize}',
+            $this->site->getWord('player_prize_prize'),
+            $prizesTpl
+        );
+        $prizesTpl = str_replace(
+            '{player_prize_date}',
+            $this->site->getWord('player_prize_date'),
+            $prizesTpl
+        );
+        $prizesTpl = str_replace(
+            '{player_prize_cost}',
+            $this->site->getWord('player_prize_cost'),
+            $prizesTpl
+        );
 
+        $prizeList = '';
         foreach ($content as $prize) {
             if (is_null($prize['day']) or is_null($prize['month']) or is_null($prize['year'])) {
                 $pDate = '<span class="faded">unknown</span>';
@@ -197,7 +217,7 @@ class PlayerRenderer extends GeneralRenderer
                         '<span class="faded">unknown</span>' :
                         $prize['prize'];
 
-            $out .=
+            $prizeList .=
             '<tr>
                 <td>' . $prizeText . '</td>
                 <td>' . $pDate . '</td>
@@ -205,8 +225,8 @@ class PlayerRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $out .= '</table>';
+        $prizesTpl = str_replace('{player_prizes_list}', $prizeList, $prizesTpl);
 
-        return $out;
+        return str_replace('{player_tab_bonuses}', $prizesTpl, $template);
     }
 }

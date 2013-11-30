@@ -11,7 +11,7 @@ abstract class GeneralRenderer
      * @return string the new date translated in the new language. If the language is invalid, an empty
      * string is returned.
      */
-    public function translateDate($date, $lang)
+    protected function translateDate($date, $lang)
     {
         $newDate = '';
         if ($lang == 'ro') {
@@ -57,7 +57,7 @@ abstract class GeneralRenderer
         return $newDate;
     }
     
-    public function translateDay($date, $lang)
+    protected function translateDay($date, $lang)
     {
         $newDate = '';
         if ($lang == 'ro') {
