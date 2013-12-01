@@ -10,7 +10,7 @@
 <body>
 	{google_analytics_script}
 	<div id="container">
-        <div id="logo"><img src="images/logofl.png" /></div>
+        <div id="logo"><img src="images/logofl.png" alt="Logo" /></div>
             <ul class="claybricks">
 				<li><a href="index.php" {selected_menu_home}>{menu_home}</a></li>
 				<li><a href="players.php" {selected_menu_players}>{menu_players}</a></li>
