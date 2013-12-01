@@ -9,41 +9,47 @@ use FileListPoker\Main\FLPokerException;
 
 try {
     $site = new Site();
-
-    $htmlout = $site->getHeader('statistics.php');
-
-    $htmlout .= '<div id="title">' . $site->getWord('menu_statistics') . '</div>
-                <div id="content">';
-
+    
     $statisticsPage = new StatisticsPage();
 
+    $generalContent = $statisticsPage->getGeneralStatistics();
+    $tournamentsContent = $statisticsPage->getTournamentsGraph();
+    $registrationsContent = $statisticsPage->getRegistrationsGraph();
+    
+    $pageContent = file_get_contents('templates/statistics/statistics.tpl');
+    
+    $pageContent = str_replace(
+        array(
+            '{statistics_tab_general}',
+            '{statistics_tab_tournaments}',
+            '{statistics_tab_registrations}'
+        ),
+        array(
+            $site->getWord('statistics_tab_general'),
+            $site->getWord('statistics_tab_tournaments'),
+            $site->getWord('statistics_tab_registrations')
+        ),
+        $pageContent
+    );
+    
+    $generalTpl = file_get_contents('templates/statistics/general.tpl');
+    $tournamentsTpl = file_get_contents('templates/statistics/tournament.graph.tpl');
+    $registrationsTpl = file_get_contents('templates/statistics/registrations.graph.tpl');
+    
     $renderer = new StatisticsRenderer($site);
+    
+    $general = $renderer->renderGeneral($generalTpl, $generalContent);
+    $tournaments = $renderer->renderTournamentGraph($tournamentsTpl, $tournamentsContent);
+    $registrations = $renderer->renderRegistrationsGraph($registrationsTpl, $registrationsContent);
+    
+    $pageContent = str_replace(
+        array('{generalStatistics}', '{tournamentsGraph}', '{registrationsGraph}'),
+        array($general, $tournaments, $registrations),
+        $pageContent
+    );
 
-    $tournaments = $renderer->renderTournamentGraph($statisticsPage->getTournamentsGraph());
-    $registrations = $renderer->renderRegistrationsGraph($statisticsPage->getRegistrationsGraph());
-    $general = $renderer->renderGeneral($statisticsPage->getGeneralStatistics());
-
-    $htmlout .=
-        '<div id="tabs">
-            <ul>
-                <li><a href="#tabs-1">' . $site->getWord('statistics_tab_general') . '</a></li>
-                <li><a href="#tabs-2">' . $site->getWord('statistics_tab_tournaments') . '</a></li>
-                <li><a href="#tabs-3">' . $site->getWord('statistics_tab_registrations') . '</a></li>
-            </ul>
-            <div id="tabs-1">
-                ' . $general . '
-            </div>
-            <div id="tabs-2">
-                <p>' . $site->getWord('statistics_tournaments_text') . '</p>
-                ' . $tournaments . '
-                <div id="hcc" style="width:90%; height: 450px; margin: 0 auto;"></div>
-            </div>
-            <div id="tabs-3">
-                <p>' . $site->getWord('statistics_registrations_text') . '</p>
-                ' . $registrations . '
-                <div id="highc-reg" style="width:90%; height: 450px; margin: 0 auto;"></div>
-            </div>
-        </div>';
+    $htmlout = $site->getFullPageTemplate('statistics.php');
+    
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
         case FLPokerException::ERROR:
@@ -60,17 +66,17 @@ try {
     }
 }
 
-$htmlout .= '</div>';
-    
-$htmlout .= $site->getFooter();
-
-$htmlout .=
+$bottomScript =
     '<script>
         $(function() {
             $("#tabs").tabs();
         });
     </script>';
 
-$htmlout .= '</body></html>';
-    
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content', $pageContent, $bottomScript),
+    $htmlout
+);
+
 echo $htmlout;
