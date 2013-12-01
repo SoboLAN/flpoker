@@ -77,15 +77,19 @@ try {
     switch ($ex->getType()) {
         case FLPokerException::ERROR:
             header('Location: 500.shtml');
+			exit();
             break;
         case FLPokerException::INVALID_REQUEST:
             header('Location: 400.shtml');
+			exit();
             break;
         case FLPokerException::SITE_DOWN:
             header('Location: maintenance.shtml');
+			exit();
             break;
         default:
             header('Location: 500.shtml');
+			exit();
     }
 }
 

@@ -35,6 +35,7 @@ try {
     if ($insertSt->rowCount () !== 1) {
         Logger::log('adding tournament failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
         header('Location: 500.shtml');
+		exit();
     }
     
     $getIdStatement = $db->prepare ('SELECT MAX(tournament_id) AS tournament_id FROM tournaments');
@@ -44,6 +45,7 @@ try {
 } catch (\PDOException $e) {
     Logger::log('adding tournament failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
+	exit();
 }
 
 echo "Added tournament with ID $id ({$_POST['tournamentdate']}).";

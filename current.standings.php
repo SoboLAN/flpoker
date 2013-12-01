@@ -21,6 +21,7 @@ try {
 } catch (\PDOException $e) {
     Logger::log('accessing current.standings.php failed');
     header('Location: 500.shtml');
+	exit();
 }
 
 $rows = array();

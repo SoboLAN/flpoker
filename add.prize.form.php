@@ -17,6 +17,7 @@ try {
 } catch (FLPokerException $ex) {
     Logger::log("rendering add.bonus.form failed: " . $e->getMessage());
     header('Location: 500.shtml');
+	exit();
 }
 
 echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
@@ -53,6 +54,7 @@ try {
 } catch (\PDOException $e) {
     Logger::log('rendering add.prize.form failed: ' . $e->getMessage());
     header('Location: 500.shtml');
+	exit();
 }
 
 $names = array();

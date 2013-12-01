@@ -12,7 +12,7 @@ use FileListPoker\Main\FLPokerException;
  */
 class Site
 {
-    private static $siteVersion = '1.1.12';
+    private static $siteVersion = '1.1.13';
     
     //keys represent the list of valid pages
     //the values represent the keys used for obtaining menu strings from the dictionary

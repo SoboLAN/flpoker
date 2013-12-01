@@ -45,6 +45,7 @@ try {
 } catch (\PDOException $e) {
     Logger::log('adding bonus failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
+	exit();
 }
 
 echo "Added $rows bonus(es)";
