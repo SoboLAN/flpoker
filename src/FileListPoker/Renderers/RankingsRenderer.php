@@ -14,18 +14,26 @@ class RankingsRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function renderMostActivePlayers($content)
+    public function renderMostActivePlayers($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
-            <tr>
-            <th><strong>Nr.</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_mostactive_player') . '</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_mostactive_count') . '</strong></th>
-            </tr>';
+        $mostActiveTpl = str_replace(
+            array(
+                '{statistics_most_active_text}',
+                '{statistics_mostactive_player}',
+                '{statistics_mostactive_count}'
+            ),
+            array(
+                $this->site->getWord('statistics_most_active_text'),
+                $this->site->getWord('statistics_mostactive_player'),
+                $this->site->getWord('statistics_mostactive_count')
+            ),
+            $template
+        );
 
+        $mostActiveList = '';
         $i = 1;
         foreach ($content as $player) {
-            $out .=
+            $mostActiveList .=
             '<tr>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
@@ -35,21 +43,28 @@ class RankingsRenderer extends GeneralRenderer
             $i++;
         }
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{topMostActiveList}', $mostActiveList, $mostActiveTpl);
     }
     
-    public function renderTopAllTime($content)
+    public function renderTopAllTime($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:90%; margin: 0 auto">
-            <tr>
-            <th><strong>Nr</strong></th>
-            <th><strong>' . $this->site->getWord('players_pokerstars_name') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_filelist_name') . '</strong></th>
-            <th><strong>' . $this->site->getWord('players_points_all_time') . '</strong></th>
-            </tr>';
+        $allTimeTpl = str_replace(
+            array(
+                '{statistics_top_all_time_text}',
+                '{players_pokerstars_name}',
+                '{players_filelist_name}',
+                '{players_points_all_time}'
+            ),
+            array(
+                $this->site->getWord('statistics_top_all_time_text'),
+                $this->site->getWord('players_pokerstars_name'),
+                $this->site->getWord('players_filelist_name'),
+                $this->site->getWord('players_points_all_time')
+            ),
+            $template
+        );
 
+        $topAllTimeList = '';
         $i = 1;
         foreach ($content as $player) {
             $namePokerStars = (is_null($player['name_pokerstars']) or empty($player['name_pokerstars'])) ?
@@ -65,7 +80,7 @@ class RankingsRenderer extends GeneralRenderer
                         $nameFilelist . '</a>';
             }
             
-            $out .=
+            $topAllTimeList .=
             '<tr>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $namePokerStars . '</a></td>
@@ -76,23 +91,29 @@ class RankingsRenderer extends GeneralRenderer
             $i++;
         }
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{topAllTime}', $topAllTimeList, $allTimeTpl);
     }
     
-    public function render6Months($content)
+    public function render6Months($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
-            <tr>
-            <th><strong>Nr</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_6months_player') . '</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_6months_points') . '</strong></th>
-            </tr>';
+        $sixMonthsTpl = str_replace(
+            array(
+                '{statistics_top_6_months_text}',
+                '{statistics_6months_player}',
+                '{statistics_6months_points}'
+            ),
+            array(
+                $this->site->getWord('statistics_top_6_months_text'),
+                $this->site->getWord('statistics_6months_player'),
+                $this->site->getWord('statistics_6months_points')
+            ),
+            $template
+        );
 
+        $sixMonthsList = '';
         $i = 1;
         foreach ($content as $player) {
-            $out .=
+            $sixMonthsList .=
             '<tr>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
@@ -102,23 +123,29 @@ class RankingsRenderer extends GeneralRenderer
             $i++;
         }
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{topSixMonthsList}', $sixMonthsList, $sixMonthsTpl);
     }
     
-    public function renderFinalTables($content)
+    public function renderFinalTables($template, $content)
     {
-        $out = '<table class="presentation-table" style="width:70%; margin: 0 auto">
-            <tr>
-            <th><strong>Nr</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_final_tables_player') . '</strong></th>
-            <th><strong>' . $this->site->getWord('statistics_final_tables_tables') . '</strong></th>
-            </tr>';
+        $fTablesTpl = str_replace(
+            array(
+                '{statistics_final_tables_text}',
+                '{statistics_final_tables_player}',
+                '{statistics_final_tables_tables}'
+            ),
+            array(
+                $this->site->getWord('statistics_final_tables_text'),
+                $this->site->getWord('statistics_final_tables_player'),
+                $this->site->getWord('statistics_final_tables_tables')
+            ),
+            $template
+        );
 
+        $finalTablesList = '';
         $i = 1;
         foreach ($content as $player) {
-            $out .=
+            $finalTablesList .=
             '<tr>
                 <td>' . $i . '</td>
                 <td><a href="player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a></td>
@@ -128,8 +155,6 @@ class RankingsRenderer extends GeneralRenderer
             $i++;
         }
 
-        $out .= '</table>';
-
-        return $out;
+        return str_replace('{topFinalTablesList}', $finalTablesList, $fTablesTpl);
     }
 }

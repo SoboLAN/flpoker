@@ -10,45 +10,51 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
 
-    $htmlout = $site->getHeader('rankings.php');
-
-    $htmlout .= '<div id="title">' . $site->getWord('menu_rankings') . '</div>
-                 <div id="content-narrower">';
-
     $rankingsPage = new RankingsPage();
+    
+    $topAllTimeContent = $rankingsPage->getTopPlayersAllTime();
+    $topMostActiveContent = $rankingsPage->getMostActive50Players();
+    $topSixMonthsContent = $rankingsPage->getTop40Players6Months();
+    $topFinalTablesContent = $rankingsPage->getTop50FinalTables();
+    
+    $pageContent = file_get_contents('templates/rankings/rankings.tpl');
 
+    $pageContent = str_replace(
+        array(
+            '{statistics_tab_top_all_time}',
+            '{statistics_tab_top_6_months}',
+            '{statistics_tab_most_active}',
+            '{statistics_tab_final_tables}'
+        ),
+        array(
+            $site->getWord('statistics_tab_top_all_time'),
+            $site->getWord('statistics_tab_top_6_months'),
+            $site->getWord('statistics_tab_most_active'),
+            $site->getWord('statistics_tab_final_tables')
+        ),
+        $pageContent
+    );
+    
+    $allTimeTpl = file_get_contents('templates/rankings/top.all.time.tpl');
+    $sixMonthsTpl = file_get_contents('templates/rankings/top.six.months.tpl');
+    $mostActiveTpl = file_get_contents('templates/rankings/top.most.active.tpl');
+    $finalTablesTpl = file_get_contents('templates/rankings/top.final.tables.tpl');
+    
     $renderer = new RankingsRenderer($site);
-
-    $topAllTime = $renderer->renderTopAllTime($rankingsPage->getTopPlayersAllTime());
-    $mostActive = $renderer->renderMostActivePlayers($rankingsPage->getMostActive50Players());
-    $top6Months = $renderer->render6Months($rankingsPage->getTop40Players6Months());
-    $finalTables = $renderer->renderFinalTables($rankingsPage->getTop50FinalTables());
-
-    $htmlout .=
-        '<div id="tabs">
-            <ul>
-                <li><a href="#tabs-1">' . $site->getWord('statistics_tab_top_all_time') . '</a></li>
-                <li><a href="#tabs-2">' . $site->getWord('statistics_tab_top_6_months') . '</a></li>
-                <li><a href="#tabs-3">' . $site->getWord('statistics_tab_most_active') . '</a></li>
-                <li><a href="#tabs-4">' . $site->getWord('statistics_tab_final_tables') . '</a></li>
-            </ul>
-            <div id="tabs-1">
-                <p>' . $site->getWord('statistics_top_all_time_text') . '</p>
-                ' . $topAllTime . '
-            </div>
-            <div id="tabs-2">
-                <p>' . $site->getWord('statistics_top_6_months_text') . '</p>
-                ' . $top6Months . '
-            </div>
-            <div id="tabs-3">
-                <p>' . $site->getWord('statistics_most_active_text') . '</p>
-                ' . $mostActive . '
-            </div>
-            <div id="tabs-4">
-                <p>' . $site->getWord('statistics_final_tables_text') . '</p>
-                ' . $finalTables . '
-            </div>
-        </div>';
+    
+    $topAllTime = $renderer->renderTopAllTime($allTimeTpl, $topAllTimeContent);
+    $topSixMonths = $renderer->render6Months($sixMonthsTpl, $topSixMonthsContent);
+    $topMostActive = $renderer->renderMostActivePlayers($mostActiveTpl, $topMostActiveContent);
+    $topFinalTables = $renderer->renderFinalTables($finalTablesTpl, $topFinalTablesContent);
+    
+    $pageContent = str_replace(
+        array('{rankings_tab_alltime}', '{rankings_tab_6months}', '{rankings_tab_mostactive}', '{rankings_tab_ftables}'),
+        array($topAllTime, $topSixMonths, $topMostActive, $topFinalTables),
+        $pageContent
+    );
+    
+    $htmlout = $site->getFullPageTemplate('rankings.php');
+    
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
         case FLPokerException::ERROR:
@@ -65,17 +71,17 @@ try {
     }
 }
 
-$htmlout .= '</div>';
-    
-$htmlout .= $site->getFooter();
-
-$htmlout .=
+$bottomScript =
     '<script>
         $(function() {
-            $( "#tabs" ).tabs();
+            $("#tabs").tabs();
         });
     </script>';
 
-$htmlout .= '</body></html>';
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content-narrower', $pageContent, $bottomScript),
+    $htmlout
+);
     
 echo $htmlout;
