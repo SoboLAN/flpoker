@@ -10,48 +10,50 @@ use FileListPoker\Main\Logger;
 
 try {
     $site = new Site();
-
-    $htmlout = $site->getHeader('tournaments.php');
-
-    $htmlout .= '<div id="title">' . $site->getWord('menu_tournaments') . '</div>
-                <div id="content-narrower">';
-
+    
     if (! isset($_GET['id'])) {
         $message = 'No tournament ID specified when accessing tournament.php';
         Logger::log($message);
         throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
-    }
-    //eliminate some junk... (people can put all sorts of stuff in this thing)...
-    else if (strlen ($_GET['id']) > 4 ||
-            ! is_numeric ($_GET['id']) ||
-            strpos ($_GET['id'], '.') !== FALSE ||
-            strpos ($_GET['id'], "'") !== FALSE)
-    {
+    } elseif (! $site->isValidID($_GET['id'])) {
         $message = 'Invalid tournament ID specified when acccessing tournament.php';
         Logger::log($message);
         throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
     }
-
+    
     $tid = $_GET['id'];
-
+    
     $tournamentPage = new TournamentPage();
+    
     $details = $tournamentPage->getTournamentDetails($tid);
-    $results = $tournamentPage->getTournamentResults($tid);
-    $bonuses = $tournamentPage->getTournamentBonuses($tid);
-
     if (! isset($details['id'])) {
         $message = 'Non-existent tournament ID specified when acccessing tournament.php';
         Logger::log($message);
         throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
     }
     
+    $results = $tournamentPage->getTournamentResults($tid);
+    $bonuses = $tournamentPage->getTournamentBonuses($tid);
+    
+    $pageContent = file_get_contents('templates/tournament/tournament.tpl');
+    
     $renderer = new TournamentRenderer($site);
-
-    $htmlout .= $renderer->renderDetails($details);
-
-    $htmlout .= $renderer->renderResults($results);
-
-    $htmlout .= $renderer->renderBonuses($bonuses);
+    
+    $detailsTpl = file_get_contents('templates/tournament/details.tpl');
+    $resultsTpl = file_get_contents('templates/tournament/results.tpl');
+    $bonusesTpl = file_get_contents('templates/tournament/bonuses.tpl');
+    
+    $detailsTpl = $renderer->renderDetails($detailsTpl, $details);
+    $resultsTpl = $renderer->renderResults($resultsTpl, $results);
+    $bonusesTpl = $renderer->renderBonuses($bonusesTpl, $bonuses);
+    
+    $pageContent = str_replace(
+        array('{tournament_details}', '{tournament_results}', '{tournament_bonuses}'),
+        array($detailsTpl, $resultsTpl, $bonusesTpl),
+        $pageContent
+    );
+    
+    $htmlout = $site->getFullPageTemplate('tournaments.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getType()) {
@@ -69,10 +71,10 @@ try {
     }
 }
 
-$htmlout .= '</div>';
-    
-$htmlout .= $site->getFooter();
+$htmlout = str_replace(
+    array('{content_type_id}', '{page_content}', '{bottom_page_scripts}'),
+    array('content-narrower', $pageContent, ''),
+    $htmlout
+);
 
-$htmlout .= '</body></html>';
-    
 echo $htmlout;

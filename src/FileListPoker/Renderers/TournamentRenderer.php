@@ -14,7 +14,7 @@ class TournamentRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function renderDetails($content)
+    public function renderDetails($template, $content)
     {
         if (empty ($content)) {
             return '';
@@ -30,52 +30,65 @@ class TournamentRenderer extends GeneralRenderer
         
         $type = $content['type'] == 'regular' ? $this->site->getWord('tournament_regular') :
                                                 $this->site->getWord('tournament_special');
-
-        $out =
-            '<p>
-                <span class="subtitle">' . $this->site->getWord('tournament_details') . '</span>
-            </p>
-            <p>
-                <span class="bigger_label">' . $this->site->getWord('tournament_date') . ': ' .
-                    $tournamentDate . '</span>
-            </p>
-            <p>
-                <span class="bigger_label">' . $this->site->getWord('tournament_type') . ': ' .
-                    $type . '</span>
-            </p>
-            <p>
-                <span class="bigger_label">' . $this->site->getWord('tournament_nrplayers') . ': ' .
-                    $content['participants'] . '</span>
-            </p>';
         
         if (! empty($content['duration_hours']) and ! empty($content['duration_minutes'])) {
-            $out .=
-            '<p>
-                <span class="bigger_label">' . $this->site->getWord('tournament_duration') . ': ' .
-                    $content['duration_hours'] . 'h, ' . $content['duration_minutes'] . 'min</span>
-            </p>';
+            $durationValue = $content['duration_hours'] . 'h, ' . $content['duration_minutes'] . 'min';
+        } else {
+            $durationValue = '<span class="bigger_label faded">unknown</span>';
         }
         
-        return $out;
+        $detailsTpl = str_replace(
+            array(
+                '{tournament_details}',
+                '{tournament_date}',
+                '{tournamentDate}',
+                '{tournament_type}',
+                '{type}',
+                '{tournament_nrplayers}',
+                '{participants}',
+                '{tournament_duration}',
+                '{durationValue}'
+            ),
+            array(
+                $this->site->getWord('tournament_details'),
+                $this->site->getWord('tournament_date'),
+                $tournamentDate,
+                $this->site->getWord('tournament_type'),
+                $type,
+                $this->site->getWord('tournament_nrplayers'),
+                $content['participants'],
+                $this->site->getWord('tournament_duration'),
+                $durationValue
+            ),
+            $template
+        );
+
+        return $detailsTpl;
     }
     
-    public function renderResults($content)
+    public function renderResults($template, $content)
     {
         if (empty ($content)) {
             return '';
         }
         
-        $out = '<p>
-                <span class="subtitle">' . $this->site->getWord('tournament_results') . '</span>
-            </p>';
-        
-        $out .= '<table class="presentation-table" style="width:100%">
-            <tr>
-            <th><strong>' . $this->site->getWord('tournament_position') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournament_player') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournament_points') . '</strong></th>
-            </tr>';
+        $resultsTpl = str_replace(
+            array(
+                '{tournament_results}',
+                '{tournament_position}',
+                '{tournament_player}',
+                '{tournament_points}'
+            ),
+            array(
+                $this->site->getWord('tournament_results'),
+                $this->site->getWord('tournament_position'),
+                $this->site->getWord('tournament_player'),
+                $this->site->getWord('tournament_points')
+            ),
+            $template
+        );
 
+        $resultsList = '';
         foreach ($content as $result) {
             if (isset ($result['player_id']) and isset ($result['name_pokerstars'])) {
                 $player = '<a href="player.php?id=' . $result['player_id'] . '">' . $result['name_pokerstars'] . '</a>';
@@ -87,7 +100,7 @@ class TournamentRenderer extends GeneralRenderer
                         '<span class="faded">unknown</span>' :
                         $result['position'];
 
-            $out .=
+            $resultsList .=
             '<tr>
                 <td>' . $position . '</td>
                 <td>' . $player . '</td>
@@ -95,28 +108,32 @@ class TournamentRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $out .= '</table>';
-        
-        return $out;
+        return str_replace('{resultsList}', $resultsList, $resultsTpl);
     }
     
-    public function renderBonuses ($content)
+    public function renderBonuses($template, $content)
     {
         if (empty ($content)) {
             return '';
         }
         
-        $out = '<p>
-                <span class="subtitle">' . $this->site->getWord('tournament_bonuses') . '</span>
-            </p>';
-        
-        $out .= '<table class="presentation-table" style="width:100%">
-            <tr>
-            <th><strong>' . $this->site->getWord('tournament_player') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournament_bonus') . '</strong></th>
-            <th><strong>' . $this->site->getWord('tournament_bonus_description') . '</strong></th>
-            </tr>';
+        $bonusesTpl = str_replace(
+            array(
+                '{tournament_bonuses}',
+                '{tournament_player}',
+                '{tournament_bonus}',
+                '{tournament_bonus_description}'
+            ),
+            array(
+                $this->site->getWord('tournament_bonuses'),
+                $this->site->getWord('tournament_player'),
+                $this->site->getWord('tournament_bonus'),
+                $this->site->getWord('tournament_bonus_description')
+            ),
+            $template
+        );
 
+        $bonusList = '';
         foreach ($content as $bonus) {
             $descr = isset ($bonus['bonus_description']) ?
                             $bonus['bonus_description'] :
@@ -124,7 +141,7 @@ class TournamentRenderer extends GeneralRenderer
             
             $player = '<a href="player.php?id=' . $bonus['player_id'] . '">' . $bonus['name_pokerstars'] . '</a>';
             
-            $out .=
+            $bonusList .=
             '<tr>
                 <td>' . $player . '</td>
                 <td>' . $bonus['bonus_value'] . '</td>
@@ -132,8 +149,6 @@ class TournamentRenderer extends GeneralRenderer
             </tr>';
         }
 
-        $out .= '</table>';
-        
-        return $out;
+        return str_replace('{bonusList}', $bonusList, $bonusesTpl);
     }
 }
