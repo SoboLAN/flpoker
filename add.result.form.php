@@ -4,7 +4,6 @@ require_once 'autoload.php';
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Logger;
-use FileListPoker\Main\FLPokerException;
 
 if (! Config::getValue('online')) {
     header('Location: maintenance.shtml');
@@ -23,8 +22,8 @@ try {
         'FROM players ' .
         'WHERE name_pokerstars IS NOT NULL ' .
         'ORDER BY name_pokerstars ASC');
-    
-} catch (FLPokerException $ex) {
+
+} catch (\Exception $ex) {
     Logger::log("rendering add.result.form failed: " . $ex->getMessage());
     header('Location: 500.shtml');
 	exit();
