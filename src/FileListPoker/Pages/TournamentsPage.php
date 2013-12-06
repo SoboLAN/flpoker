@@ -6,6 +6,10 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
+/**
+ * This class contains functions that return information about all the tournaments.
+ * @author Radu Murzea <radu.murzea@gmail.com>
+ */
 class TournamentsPage
 {
     public function getContent()

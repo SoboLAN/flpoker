@@ -4,9 +4,12 @@ namespace FileListPoker\Main;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\CacheInterface;
+use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
  * Implements caching functionality using a database to store the cached objects.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class CacheDB implements CacheInterface
 {
@@ -51,6 +54,7 @@ class CacheDB implements CacheInterface
         $entryTime = $row->entry_time;
         $lifeTime = $row->lifetime;
         
+        //if cache entry is expired, delete it
         if (time() - $entryTime > $lifeTime) {
             $this->flush($key);
             return false;
@@ -104,6 +108,8 @@ class CacheDB implements CacheInterface
      */
     public function save($key, $value, $lifetime)
     {
+        //this particular operation is performed within a transaction in order to minimize
+        //the potential issues caused by concurrent cache writes of the same item
         $this->DB->beginTransaction();
         
         $statement = $this->DB->prepare(

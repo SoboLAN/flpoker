@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Renderers;
 
+/**
+ * @author Radu Murzea <radu.murzea@gmail.com>
+ */
 abstract class GeneralRenderer
 {
     /**

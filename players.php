@@ -30,7 +30,7 @@ try {
             header('Location: 400.shtml');
 			exit();
             break;
-        case FLPokerException::SITE_DOWN:
+        case FLPokerException::SITE_OFFLINE:
             header('Location: maintenance.shtml');
 			exit();
             break;

@@ -5,6 +5,9 @@ namespace FileListPoker\Renderers;
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 
+/**
+ * @author Radu Murzea <radu.murzea@gmail.com>
+ */
 class PlayerRenderer extends GeneralRenderer
 {
     private $site;
@@ -36,35 +39,51 @@ class PlayerRenderer extends GeneralRenderer
             }
         }
         
-        $result = $template;
-        
-        $result = str_replace('{player_tab_general_pname}', $this->site->getWord('player_tab_general_pname'), $result);
-        $result = str_replace('{pname}', $namePokerStars, $result);
-        
-        $result = str_replace('{player_tab_general_fname}', $this->site->getWord('player_tab_general_fname'), $result);
-        $result = str_replace('{flname}', $nameFilelist, $result);
-        $result = str_replace('{flid}', $content['id_filelist'], $result);
-        
-        $result = str_replace('{player_tab_general_regdate}', $this->site->getWord('player_tab_general_regdate'), $result);
-        $result = str_replace('{regdate}', $regDate, $result);
-        
-        $result = str_replace('{player_tab_general_points}', $this->site->getWord('player_tab_general_points'), $result);
-        $result = str_replace('{general_points}', $content['points'], $result);
-        
-        $result = str_replace('{player_tab_general_allpoints}', $this->site->getWord('player_tab_general_allpoints'), $result);
-        $result = str_replace('{all_points}', $content['points_all_time'], $result);
-        
-        $result = str_replace('{player_tab_general_ftables}', $this->site->getWord('player_tab_general_ftables'), $result);
-        $result = str_replace('{ftables}', $content['final_tables'], $result);
-        
-        $result = str_replace('{player_tab_general_gmedals}', $this->site->getWord('player_tab_general_gmedals'), $result);
-        $result = str_replace('{gmedals}', $content['gold_medals'], $result);
-        
-        $result = str_replace('{player_tab_general_smedals}', $this->site->getWord('player_tab_general_smedals'), $result);
-        $result = str_replace('{smedals}', $content['silver_medals'], $result);
-        
-        $result = str_replace('{player_tab_general_bmedals}', $this->site->getWord('player_tab_general_bmedals'), $result);
-        $result = str_replace('{bmedals}', $content['bronze_medals'], $result);
+        $result = str_replace(
+            array(
+                '{player_tab_general_pname}',
+                '{pname}',
+                '{player_tab_general_fname}',
+                '{flname}',
+                '{flid}',
+                '{player_tab_general_regdate}',
+                '{regdate}',
+                '{player_tab_general_points}',
+                '{general_points}',
+                '{player_tab_general_allpoints}',
+                '{all_points}',
+                '{player_tab_general_ftables}',
+                '{ftables}',
+                '{player_tab_general_gmedals}',
+                '{gmedals}',
+                '{player_tab_general_smedals}',
+                '{smedals}',
+                '{player_tab_general_bmedals}',
+                '{bmedals}'
+            ),
+            array(
+                $this->site->getWord('player_tab_general_pname'),
+                $namePokerStars,
+                $this->site->getWord('player_tab_general_fname'),
+                $nameFilelist,
+                $content['id_filelist'],
+                $this->site->getWord('player_tab_general_regdate'),
+                $regDate,
+                $this->site->getWord('player_tab_general_points'),
+                $content['points'],
+                $this->site->getWord('player_tab_general_allpoints'),
+                $content['points_all_time'],
+                $this->site->getWord('player_tab_general_ftables'),
+                $content['final_tables'],
+                $this->site->getWord('player_tab_general_gmedals'),
+                $content['gold_medals'],
+                $this->site->getWord('player_tab_general_smedals'),
+                $content['silver_medals'],
+                $this->site->getWord('player_tab_general_bmedals'),
+                $content['bronze_medals']
+            ),
+            $template
+        );
         
         return $result;
     }

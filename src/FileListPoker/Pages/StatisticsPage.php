@@ -8,6 +8,10 @@ use FileListPoker\Main\CacheDB;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
+/**
+ * This class contains function that will return various statistics about the club.
+ * @author Radu Murzea <radu.murzea@gmail.com>
+ */
 class StatisticsPage
 {
     private $cache;

@@ -5,6 +5,9 @@ namespace FileListPoker\Renderers;
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 
+/**
+ * @author Radu Murzea <radu.murzea@gmail.com>
+ */
 class PlayersMonthRenderer extends GeneralRenderer
 {
     private $site;

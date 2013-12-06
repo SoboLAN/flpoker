@@ -8,6 +8,7 @@ use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about the Players of the Month.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class PlayersMonthPage
 {

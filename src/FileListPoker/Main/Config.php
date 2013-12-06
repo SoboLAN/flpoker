@@ -7,9 +7,11 @@ use FileListPoker\Main\Logger;
 
 /**
  * This class contains configuration options for the site.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Config
 {
+    //location of config file
     private static $configPath = 'config/main.config.json';
     
     //array containing configuration options
@@ -23,6 +25,7 @@ class Config
      */
     public static function getValue($key)
     {
+        //the configuration options must only be read once (save speed by reducing IO operations)
         if (is_null(self::$siteConfig)) {
             
             if (! is_readable(self::$configPath)) {
@@ -33,6 +36,8 @@ class Config
             
             self::$siteConfig = json_decode(file_get_contents(self::$configPath), true);
             
+            //json_decode returns NULL if provided string cannot be decoded
+            //this almost always means a corrupt file
             if (is_null(self::$siteConfig)) {
                 $ex = new FLPokerException('config file is corrupt', FLPokerException::ERROR);
                 Logger::log($ex->getMessage());
@@ -40,6 +45,7 @@ class Config
             }
         }
         
+        //return option or null if invalid key was provided
         return array_key_exists($key, self::$siteConfig) ? self::$siteConfig[$key] : null;
     }
 }

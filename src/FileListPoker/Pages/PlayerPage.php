@@ -10,6 +10,7 @@ use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about a particular player.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class PlayerPage
 {

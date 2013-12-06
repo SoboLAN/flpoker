@@ -10,6 +10,7 @@ use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return various rankings of players.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class RankingsPage
 {

@@ -5,14 +5,17 @@ namespace FileListPoker\Main;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Dictionary;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Main\Logger;
 
 /**
- * Main class of the site. Handles logic about language, dependencies, Google Analytics
- * and is responsible for rendering the header and the footer of the site.
+ * Main class of the site. Handles dependencies, Google Analytics
+ * and is responsible for rendering the common blocks of the site
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Site
 {
-    private static $siteVersion = '1.1.13';
+    //current version of the site
+    private static $siteVersion = '1.1.14';
     
     //keys represent the list of valid pages
     //the values represent the keys used for obtaining menu strings from the dictionary
@@ -26,6 +29,7 @@ class Site
         'players.month.php' => 'menu_players_of_the_month'
     );
     
+    //specifies which pages must have jQuery AND jQueryUI as dependency
     private static $jQueryDependency = array (
         'index.php'         => false,
         'players.php'       => true,
@@ -35,6 +39,7 @@ class Site
         'players.month.php' => false
     );
     
+    //specifies which pages must have HighCharts as dependency
     private static $highChartsDependency = array (
         'index.php'         => false,
         'players.php'       => false,
@@ -44,16 +49,19 @@ class Site
         'players.month.php' => false
     );
     
+    //current language of the site
     private $lang;
     
     public function __construct()
     {
         if (! Config::getValue('online')) {
-            throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_DOWN);
+            throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_OFFLINE);
         }
 
         $cookieName = Config::getValue('lang_cookie_name');
     
+        //read language from the cookie or use default language and write it to the cookie to be used
+        //on the next request
         if (isset ($_COOKIE[$cookieName]) and Dictionary::isValidLanguage($_COOKIE[$cookieName])) {
             $this->lang = $_COOKIE[$cookieName];
         } else {
@@ -65,16 +73,31 @@ class Site
         }
     }
     
+    /**
+     * Get the language the site is currently using.
+     * @return string a valid language
+     */
     public function getLanguage()
     {
         return $this->lang;
     }
     
+    /**
+     * Get the word specified by the key in the site's current language.
+     * @param string $key the word key
+     * @return mixed a string representing the desired word or null if it doesn't exist.
+     */
     public function getWord($key)
     {
         return Dictionary::getWord($key, $this->lang);
     }
     
+    /**
+     * Returns the site's main template with the most important blocks already filled in. This content
+     * of those blocks depends on the specified page (the title, whether or not jQuery is included etc.)
+     * @param string $page the page you're currently on.
+     * @return string the main template.
+     */
     public function getFullPageTemplate($page)
     {
         if (! in_array($page, array_keys(self::$pages))) {
@@ -102,19 +125,22 @@ class Site
             }
         }
         
-        $tpl = str_replace('{css_files}', $cssFiles, $tpl);
-        $tpl = str_replace('{js_files}', $scriptFiles, $tpl);
+        $analyticsScript = Config::getValue('enable_google_analytics') ?
+                            file_get_contents('templates/google_analytics.tpl') :
+                            '';
         
-        if (Config::getValue('enable_google_analytics')) {
-            $tpl = str_replace('{google_analytics_script}', file_get_contents('templates/google_analytics.tpl'), $tpl);     
-        } else {
-            $tpl = str_replace('{google_analytics_script}', '', $tpl);
-        }
+        $tpl = str_replace(
+            array('{css_files}', '{js_files}', '{google_analytics_script}'),
+            array($cssFiles, $scriptFiles, $analyticsScript),
+            $tpl
+        );
         
         foreach (self::$pages as $key => $value) {
-            $tpl = str_replace('{' . $value . '}', Dictionary::getWord($value, $this->lang), $tpl);
-            
-            $tpl = str_replace('{selected_' . $value . '}', ($page == $key) ? 'class="selected"' : '', $tpl);
+            $tpl = str_replace(
+                array('{' . $value . '}', '{selected_' . $value . '}'),
+                array(Dictionary::getWord($value, $this->lang), ($page == $key) ? 'class="selected"' : ''),
+                $tpl
+            );
         }
 
         $langPanel = '';
@@ -134,15 +160,21 @@ class Site
             ';
         }
         
-        $tpl = str_replace('{language_panel_content}', $langPanel, $tpl);
-        
-        $tpl = str_replace('{title}', Dictionary::getWord(self::$pages[$page], $this->lang), $tpl);
-        
-        $tpl = str_replace('{version}', self::$siteVersion, $tpl);
+        $tpl = str_replace(
+            array('{language_panel_content}', '{title}', '{version}'),
+            array($langPanel, Dictionary::getWord(self::$pages[$page], $this->lang), self::$siteVersion),
+            $tpl
+        );
         
         return $tpl;
     }
     
+    /**
+     * Utility function that tells you whether the specified ID is valid.
+     * A valid ID is made up only of digits, maximum 4 of them.
+     * @param int $id the ID.
+     * @return bool true if the specified ID is valid, false otherwise.
+     */
     public function isValidID($id)
     {
         return (strlen($id) <= 4 and ctype_digit($id));

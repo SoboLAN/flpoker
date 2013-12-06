@@ -6,10 +6,12 @@ use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
 /**
- * Handles the construction of an object capable of performing database operations.
+ * Handles the construction of a PDO object capable of performing database operations.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Database
 {
+    //database access information is found in this file (user, pass, database name, port etc.)
     private static $configPath = 'config/db.config.json';
     
     //the database connection object
@@ -19,7 +21,7 @@ class Database
      * Returns a database connection object. Always the same one.
      * @return object a database connection object.
      */
-    public static function getConnection ()
+    public static function getConnection()
     {
         if (is_null(self::$connection)) {
             self::buildConnection();
@@ -79,8 +81,9 @@ class Database
             $emulate_prepares = (version_compare($serverversion, $emulate_prepares_below_version, '<'));
             self::$connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
         } catch (\PDOException $e) {
-            $ex = new FLPokerException($e->getMessage(), FLPokerException::ERROR);
-            Logger::log($ex->getMessage());
+            $message = 'There was an error while connecting to the database';
+            $ex = new FLPokerException($message, FLPokerException::ERROR);
+            Logger::log("$message: " . $ex->getMessage());
             throw $ex;
         }
     }

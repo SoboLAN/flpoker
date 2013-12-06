@@ -4,6 +4,7 @@ namespace FileListPoker\Main;
 
 /**
  * Interface for classes that implement caching functionality.
+ * @author Radu Murzea <radu.murzea@gmail.com>
  */
 interface CacheInterface
 {
