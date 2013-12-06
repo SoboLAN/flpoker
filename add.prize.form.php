@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>FileList Poker Add Prize</title>
- 
 <?php
 
 require_once 'autoload.php';
@@ -10,15 +5,34 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Logger;
 
+if (! Config::getValue('online')) {
+    header('Location: maintenance.shtml');
+    exit();
+}
+
 try {
     $jQueryPath = Config::getValue('path_jquery');
     $jQueryUIPath = Config::getValue('path_jqueryui');
     $jQueryCSSPath = Config::getValue('path_jqueryui_css');
-} catch (FLPokerException $ex) {
-    Logger::log("rendering add.bonus.form failed: " . $e->getMessage());
+    
+    $db = Database::getConnection();
+    
+    $result = $db->query (
+        'SELECT name_filelist ' .
+        'FROM players ' .
+        'WHERE name_filelist IS NOT NULL ' .
+        'ORDER BY name_filelist ASC');
+
+} catch (\Exception $ex) {
+    Logger::log("rendering add.prize.form failed: " . $ex->getMessage());
     header('Location: 500.shtml');
 	exit();
 }
+
+echo '<!DOCTYPE html>
+<html>
+<head>
+<title>FileList Poker Add Prize</title>';
 
 echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";
@@ -42,20 +56,6 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 </head>
 
 <?php
-
-try {
-    $db = Database::getConnection();
-    
-    $result = $db->query (
-        'SELECT name_filelist ' .
-        'FROM players ' .
-        'WHERE name_filelist IS NOT NULL ' .
-        'ORDER BY name_filelist ASC');
-} catch (\PDOException $e) {
-    Logger::log('rendering add.prize.form failed: ' . $e->getMessage());
-    header('Location: 500.shtml');
-	exit();
-}
 
 $names = array();
 foreach ($result as $name) {

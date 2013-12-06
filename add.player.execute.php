@@ -1,5 +1,15 @@
 <?php
 
+require_once 'autoload.php';
+use FileListPoker\Main\Database;
+use FileListPoker\Main\Logger;
+use FileListPoker\Main\Config;
+
+if (! Config::getValue('online')) {
+    header('Location: maintenance.shtml');
+    exit();
+}
+
 if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myflpass1234do') {
     die ('nice try.');
 }
@@ -11,10 +21,6 @@ if (! isset ($_POST['registrationdate']) or
 {
     die ('Some data is missing.');
 }
-
-require_once 'autoload.php';
-use FileListPoker\Main\Database;
-use FileListPoker\Main\Logger;
 
 try {
     $db = Database::getConnection();

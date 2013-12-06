@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>FileList Poker Add Player</title>
-
 <?php
 
 require_once 'autoload.php';
@@ -10,15 +5,25 @@ use FileListPoker\Main\Config;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
+if (! Config::getValue('online')) {
+    header('Location: maintenance.shtml');
+    exit();
+}
+
 try {
     $jQueryPath = Config::getValue('path_jquery');
     $jQueryUIPath = Config::getValue('path_jqueryui');
     $jQueryCSSPath = Config::getValue('path_jqueryui_css');
 } catch (FLPokerException $ex) {
-    Logger::log("rendering add.bonus.form failed: " . $e->getMessage());
+    Logger::log("rendering add.player.form failed: " . $ex->getMessage());
     header('Location: 500.shtml');
 	exit();
 }
+
+echo '<!DOCTYPE html>
+<html>
+<head>
+<title>FileList Poker Add Player</title>';
 
 echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";

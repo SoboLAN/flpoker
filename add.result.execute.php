@@ -1,12 +1,17 @@
 <?php
 
-if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myfladminpass8uhb') {
-    die ('nice try.');
-}
-
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
+
+if (! Config::getValue('online')) {
+    header('Location: maintenance.shtml');
+    exit();
+}
+
+if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myfladminpass8uhb') {
+    die ('nice try.');
+}
 
 try {
     $db = Database::getConnection();
