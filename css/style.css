@@ -57,35 +57,22 @@ body {
 	margin: 0 auto;
 }
 
-#content p {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-#content a {
-	text-decoration: none;
-}
-
-#content a:hover {
-	text-decoration: underline;
-}
-
 #content-narrower {
 	padding: 10px;
 	width: 1000px;
 	margin: 0 auto;
 }
 
-#content-narrower p {
+#content p, #content-narrower p {
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
-#content-narrower a {
+#content a, #content-narrower a {
 	text-decoration: none;
 }
 
-#content-narrower a:hover {
+#content a:hover, #content-narrower a:hover {
 	text-decoration: underline;
 }
 
@@ -107,7 +94,7 @@ body {
 	color: #A68F8F;
 }
 
-ul.claybricks { /* main menu UL */
+#navigation-menu { /* main menu UL */
 	font-weight: bold;
 	width: 1000px;
 	background: #2C1F1F;
@@ -118,11 +105,7 @@ ul.claybricks { /* main menu UL */
 	border-bottom-left-radius: 10px;
 }
 
-ul.claybricks li {
-	display: inline;
-}
-
-ul.claybricks li a {
+#navigation-menu a {
 	color: #FADD82;
 	padding: 6px 8px 4px 8px; /* padding of the 4 sides of each menu link */
 	margin-right: 40px; /* spacing between each menu link */
@@ -131,15 +114,15 @@ ul.claybricks li a {
 	font-weight: bold;
 }
 
-ul.claybricks li a:hover, ul.claybricks li a.selected {
+#navigation-menu a:hover, #navigation-menu a.selected {
 	color:#E1D022;
-	background: #c61d1d;
-	background: -moz-linear-gradient(top, #5d4137 0%, #41251b 12%, #1579A9 100%); /* moz syntax for CSS3 gradient */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5d4137), color-stop(12%,#41251b), color-stop(100%,#1579A9));
-	background: -webkit-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%); /* webkit syntax for CSS3 gradient */
-	background: -o-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%); /* opera syntax for CSS3 gradient */
-	background: -ms-linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%);
-	background: linear-gradient(top, #5d4137 0%,#41251b 12%,#1579A9 100%);
+	background: #C61D1D;
+	background: -moz-linear-gradient(top, #5D4137 0%, #41251B 12%, #1579A9 100%); /* moz syntax for CSS3 gradient */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5D4137), color-stop(12%,#41251B), color-stop(100%,#1579A9));
+	background: -webkit-linear-gradient(top, #5D4137 0%,#41251B 12%,#1579A9 100%); /* webkit syntax for CSS3 gradient */
+	background: -o-linear-gradient(top, #5D4137 0%,#41251B 12%,#1579A9 100%); /* opera syntax for CSS3 gradient */
+	background: -ms-linear-gradient(top, #5D4137 0%,#41251B 12%,#1579A9 100%);
+	background: linear-gradient(top, #5D4137 0%,#41251B 12%,#1579A9 100%);
 	-moz-box-shadow: 0 0 5px #595959; /* moz syntax for CSS3 box shadows */
 	-webkit-box-shadow: 0 0 5px #595959;
 	box-shadow: 0 0 5px #595959;
@@ -178,7 +161,15 @@ ul.claybricks li a:hover, ul.claybricks li a.selected {
 	background-color: #96EC2D;
 }
 
-#footer {
+#admin-marker-legend {
+	font-size: 15px;
+	background-color: #96EC2D;
+	padding-left: 40px;
+	border: 1px solid black;
+	overflow: hidden
+}
+
+footer {
    margin-top: 40px;
    text-align:left;
    padding:20px;

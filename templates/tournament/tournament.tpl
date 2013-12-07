@@ -1,5 +1,11 @@
-{tournament_details}
+<section id="tournament_details">
+	{tournament_details}
+</section>
 
-{tournament_results}
+<section id="tournament_results">
+	{tournament_results}
+</section>
 
-{tournament_bonuses}
+<section id="tournament_bonuses">
+	{tournament_bonuses}
+</section>

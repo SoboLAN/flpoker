@@ -11,6 +11,5 @@
 </table>
 
 <p>
-	<span style="font-size:15px; font-family:Tahoma; background-color:#96EC2D; padding-left:40px; border:1px solid black; overflow:hidden">&nbsp;</span>
-    &#61; FileList Poker Administrator
+	<span id="admin-marker-legend">&nbsp;</span>&nbsp;&#61;&nbsp;FileList Poker Administrator
 </p>
