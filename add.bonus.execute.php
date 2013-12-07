@@ -10,7 +10,9 @@ if (! Config::getValue('online')) {
     exit();
 }
 
-if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== 'myflpass1234do') {
+$adminPass = Config::getValue('admin_pass');
+
+if (! isset($_POST['flpokerpassword']) or $_POST['flpokerpassword'] !== $adminPass) {
     die ('nice try.');
 }
 
