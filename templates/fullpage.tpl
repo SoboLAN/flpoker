@@ -29,7 +29,7 @@
 			{page_content}
 		</div>
 		<footer>
-			FileList Poker v{version} (currently in feature freeze).
+			FileList Poker v{version}
 			<br />
 			Copyright &copy; 2013 Radu Murzea.
 			<br />
