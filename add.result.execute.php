@@ -3,6 +3,7 @@
 require_once 'autoload.php';
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
+use FileListPoker\Main\Config;
 
 if (! Config::getValue('online')) {
     header('Location: maintenance.shtml');
