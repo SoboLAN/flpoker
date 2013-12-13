@@ -15,13 +15,14 @@ use FileListPoker\Main\Logger;
 class Site
 {
     //current version of the site
-    private static $siteVersion = '1.1.17';
+    private static $siteVersion = '1.2.0';
     
     //keys represent the list of valid pages
     //the values represent the keys used for obtaining menu strings from the dictionary
     //and also used in the templates. so they have a double role. be careful when changing them
     private static $pages = array (
         'index.php'         => 'menu_home',
+        'status.php'        => 'menu_status',
         'players.php'       => 'menu_players',
         'tournaments.php'   => 'menu_tournaments',
         'rankings.php'      => 'menu_rankings',
@@ -32,6 +33,7 @@ class Site
     //specifies which pages must have jQuery AND jQueryUI as dependency
     private static $jQueryDependency = array (
         'index.php'         => false,
+        'status.php'        => true,
         'players.php'       => true,
         'tournaments.php'   => false,
         'rankings.php'      => true,
@@ -42,6 +44,7 @@ class Site
     //specifies which pages must have HighCharts as dependency
     private static $highChartsDependency = array (
         'index.php'         => false,
+        'status.php'        => false,
         'players.php'       => false,
         'tournaments.php'   => false,
         'rankings.php'      => false,

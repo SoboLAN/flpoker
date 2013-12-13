@@ -14,6 +14,7 @@
 			<div id="logo"><img src="images/logofl.png" alt="Logo" /></div>
 				<nav id="navigation-menu">
 					<a href="index.php" {selected_menu_home}>{menu_home}</a>
+					<a href="status.php" {selected_menu_status}>{menu_status}</a>
 					<a href="players.php" {selected_menu_players}>{menu_players}</a>
 					<a href="tournaments.php" {selected_menu_tournaments}>{menu_tournaments}</a>
 					<a href="rankings.php" {selected_menu_rankings}>{menu_rankings}</a>
