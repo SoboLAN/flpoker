@@ -21,6 +21,7 @@ $redirpage = '';
 switch($_GET['returnpage'])
 {
     case 'index.php':            $redirpage = 'index.php'; break;
+    case 'status.php':          $redirpage = 'status.php'; break;
     case 'players.php':            $redirpage = 'players.php'; break;
     case 'tournaments.php':        $redirpage = 'tournaments.php'; break;
     case 'rankings.php':        $redirpage = 'rankings.php'; break;
