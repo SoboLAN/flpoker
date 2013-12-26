@@ -49,6 +49,7 @@ class StatisticsPage
                 'FROM tournaments internal ' .
                 'WHERE internal.tournament_id <= ext.tournament_id) AS average_participants ' .
                 'FROM tournaments ext ' .
+				'WHERE tournament_type=\'regular\'' .
                 'ORDER BY tournament_id ASC'
             );
         } catch (\PDOException $e) {
