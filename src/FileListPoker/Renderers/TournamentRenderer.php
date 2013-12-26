@@ -34,8 +34,10 @@ class TournamentRenderer extends GeneralRenderer
         $type = $content['type'] == 'regular' ? $this->site->getWord('tournament_regular') :
                                                 $this->site->getWord('tournament_special');
         
-        if (! empty($content['duration_hours']) and ! empty($content['duration_minutes'])) {
-            $durationValue = $content['duration_hours'] . 'h, ' . $content['duration_minutes'] . 'min';
+        if (! empty($content['duration'])) {
+            $hours = (int) ($content['duration'] / 60);
+            $minutes = $content['duration'] % 60;
+            $durationValue = $hours . 'h, ' . $minutes . 'min';
         } else {
             $durationValue = '<span class="bigger_label faded">unknown</span>';
         }

@@ -21,6 +21,7 @@
     "statistics_tab_most_active": "Most Active 50 Players",
     "statistics_tab_top_bonus": "Top Players by Bonus",
     "statistics_tab_tournaments": "Tournaments",
+	"statistics_tab_aggresion": "Aggression Evolution",
     "statistics_tab_registrations": "Club Registrations",
     "statistics_tab_final_tables": "Top 50 Final Tables",
     "statistics_general_totalpoints": "Total Points Accumulated in the Club",
@@ -103,5 +104,9 @@
     "statistics_registrations_text": "Here, you can see how the number of club registrations evolved over time. The evolution is on a per month basis.",
     "statistics_registrations_charttitle": "Players Registration Evolution",
     "statistics_registrations_chartsubtitle": "The evolution of the number of players that joined the club each month",
-    "statistics_registrations_nrplayersline": "Number of Registered Players"
+    "statistics_registrations_nrplayersline": "Number of Registered Players",
+	"statistics_aggresion_text": "Here, you can see how the evolution of the aggression factor in time. The aggression factor is the average number of players eliminated per hour in a tournament. The evolution is on a per month basis.",
+    "statistics_aggresion_charttitle": "Aggression Factor Evolution",
+    "statistics_aggresion_chartsubtitle": "The evolution of the aggression factor",
+    "statistics_aggresion_avgaggressionfactor": "Average Aggression Factor per Month"
 }

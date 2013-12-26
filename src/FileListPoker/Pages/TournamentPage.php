@@ -20,7 +20,7 @@ class TournamentPage
             $tournamentSt = $db->prepare(
                 'SELECT tournament_id, YEAR(tournament_date) AS year, ' .
                 'MONTH(tournament_date) AS month, DAYOFMONTH(tournament_date) AS day, ' .
-                'tournament_type, participants, duration_hours, duration_minutes ' .
+                'tournament_type, participants, duration ' .
                 'FROM tournaments ' .
                 'WHERE tournament_id=?'
             );
@@ -44,8 +44,7 @@ class TournamentPage
             'month' => $tournament->month,
             'year' => $tournament->year,
             'type' => $tournament->tournament_type,
-            'duration_hours' => $tournament->duration_hours,
-            'duration_minutes' => $tournament->duration_minutes,
+            'duration' => $tournament->duration,
             'participants' => $tournament->participants
         );
     }

@@ -91,7 +91,7 @@ class StatisticsRenderer extends GeneralRenderer
 
         return $tournamentsTpl;
     }
-    
+        
     public function renderRegistrationsGraph($template, $content)
     {
         $clubRegistrants = array();
@@ -123,5 +123,38 @@ class StatisticsRenderer extends GeneralRenderer
         );
         
         return $registrationsTpl;
+    }
+    
+    public function renderAggressionGraph($template, $content)
+    {
+        $aggressionFactors = array();
+        foreach ($content as $factor) {
+            $aggressionFactors[] =
+            "[Date.UTC({$factor['tournament_year']}, {$factor['tournament_month']} - 1, 1), {$factor['aggression_factor']}]";
+        }
+        
+        $aggressionFactors = implode(",\n", $aggressionFactors);
+        
+        $aggressionTpl = str_replace(
+            array(
+                '{statistics_aggresion_text}',
+                '{statistics_aggresion_charttitle}',
+                '{statistics_aggresion_chartsubtitle}',
+                '{statistics_aggresion_avgaggressionfactor}',
+                '{statistics_aggresion_avgaggressionfactor}',
+                '{aggressionFactors}'
+            ),
+            array(
+                $this->site->getWord('statistics_aggresion_text'),
+                $this->site->getWord('statistics_aggresion_charttitle'),
+                $this->site->getWord('statistics_aggresion_chartsubtitle'),
+                $this->site->getWord('statistics_aggresion_avgaggressionfactor'),
+                $this->site->getWord('statistics_aggresion_avgaggressionfactor'),
+                $aggressionFactors
+            ),
+            $template
+        );
+        
+        return $aggressionTpl;
     }
 }

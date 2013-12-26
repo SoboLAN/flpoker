@@ -29,14 +29,13 @@ try {
     
     $insertSt = $db->prepare (
         'INSERT INTO tournaments (tournament_id, tournament_date, tournament_type, participants, ' .
-        'duration_hours, duration_minutes) ' .
+        'duration) ' .
         'VALUES ' .
-        '(NULL, ?, \'regular\', ?, ?, ?)');
+        '(NULL, ?, \'regular\', ?, ?)');
     
     $insertSt->bindParam (1, $_POST['tournamentdate'], \PDO::PARAM_STR);
     $insertSt->bindParam (2, $_POST['participants'], \PDO::PARAM_INT);
-    $insertSt->bindParam (3, $_POST['hours'], \PDO::PARAM_INT);
-    $insertSt->bindParam (4, $_POST['minutes'], \PDO::PARAM_INT);
+    $insertSt->bindParam (3, 60 * $_POST['hours'] + $_POST['minutes'], \PDO::PARAM_INT);
     
     $insertSt->execute ();
 
