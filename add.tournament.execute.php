@@ -32,10 +32,12 @@ try {
         'duration) ' .
         'VALUES ' .
         '(NULL, ?, \'regular\', ?, ?)');
+		
+	$duration = 60 * $_POST['hours'] + $_POST['minutes'];
     
     $insertSt->bindParam (1, $_POST['tournamentdate'], \PDO::PARAM_STR);
     $insertSt->bindParam (2, $_POST['participants'], \PDO::PARAM_INT);
-    $insertSt->bindParam (3, 60 * $_POST['hours'] + $_POST['minutes'], \PDO::PARAM_INT);
+    $insertSt->bindParam (3, $duration, \PDO::PARAM_INT);
     
     $insertSt->execute ();
 
