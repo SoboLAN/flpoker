@@ -55,17 +55,12 @@ class StatisticsRenderer extends GeneralRenderer
     public function renderTournamentGraph($template, $content)
     {
         $tournamentParticipants = array();
-        $tournamentAverage = array();
         foreach ($content as $tournament) {
-            $tournamentParticipants[] = "[Date.UTC({$tournament['year']}, {$tournament['month']} - 1, " .
-                "{$tournament['day']}), {$tournament['participants']}]";
-            
-            $tournamentAverage[] = "[Date.UTC({$tournament['year']}, {$tournament['month']} - 1, " .
-                "{$tournament['day']}), {$tournament['average_participants']}]";
+            $tournamentParticipants[] =
+                "[Date.UTC({$tournament['year']}, {$tournament['month']} - 1, 1), {$tournament['average_participants']}]";
         }
 
         $tournamentParticipants = implode(",\n", $tournamentParticipants);
-        $tournamentAverage = implode(",\n", $tournamentAverage);
         
         $tournamentsTpl = str_replace(
             array(
@@ -73,18 +68,14 @@ class StatisticsRenderer extends GeneralRenderer
                 '{statistics_tournaments_charttitle}',
                 '{statistics_tournaments_chartsubtitle}',
                 '{statistics_tournaments_playersline}',
-                '{tournamentParticipants}',
-                '{statistics_tournaments_averageline}',
-                '{tournamentAverage}'
+                '{tournamentParticipants}'
             ),
             array(
                 $this->site->getWord('statistics_tournaments_text'),
                 $this->site->getWord('statistics_tournaments_charttitle'),
                 $this->site->getWord('statistics_tournaments_chartsubtitle'),
                 $this->site->getWord('statistics_tournaments_playersline'),
-                $tournamentParticipants,
-                $this->site->getWord('statistics_tournaments_averageline'),
-                $tournamentAverage
+                $tournamentParticipants
             ),
             $template
         );

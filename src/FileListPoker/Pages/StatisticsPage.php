@@ -43,14 +43,13 @@ class StatisticsPage
         
         try {
             $tmpresults = $db->query(
-                'SELECT ext.tournament_id, ext.participants, MONTH(ext.tournament_date) AS month, ' .
-                'YEAR(ext.tournament_date) AS year, DAYOFMONTH(ext.tournament_date) AS day, ' .
-                '(SELECT avg(internal.participants) ' .
-                'FROM tournaments internal ' .
-                'WHERE internal.tournament_id <= ext.tournament_id) AS average_participants ' .
-                'FROM tournaments ext ' .
-				'WHERE tournament_type=\'regular\'' .
-                'ORDER BY tournament_id ASC'
+                'SELECT ROUND(AVG(participants), 2) AS average_participants, ' .
+                'MONTH(tournament_date) AS month, YEAR(tournament_date) AS year, ' .
+                'CONCAT(MONTH(tournament_date), \'-\', YEAR(tournament_date)) AS tournament_interval ' .
+                'FROM tournaments ' .
+                'WHERE tournament_type=\'regular\' ' .
+                'GROUP BY tournament_interval ' .
+                'ORDER BY year ASC, month ASC'
             );
         } catch (\PDOException $e) {
             $message = "calling StatisticsPage::getTournamentsGraph failed";
@@ -61,9 +60,6 @@ class StatisticsPage
         $results = array();
         foreach ($tmpresults as $r) {
             $results[] = array(
-                'tournament_id' => $r->tournament_id,
-                'participants' => $r->participants,
-                'day' => $r->day,
                 'month' => $r->month,
                 'year' => $r->year,
                 'average_participants' => $r->average_participants

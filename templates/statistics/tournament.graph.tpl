@@ -27,19 +27,14 @@
             tooltip: {
 				formatter: function() {
 					return '<b>'+ this.series.name +'</b><br/>'+
-                            Highcharts.dateFormat('%e %b %Y', this.x) +': '+ this.y;
+                            Highcharts.dateFormat('%b %Y', this.x) +': '+ this.y;
 				}
 			},
 			series: [{
 				name: '{statistics_tournaments_playersline}',
 				// Note that in JavaScript, months start at 0 for January, 1 for February etc.
                 data: [ {tournamentParticipants} ]
-                },
-				{
-                    name: '{statistics_tournaments_averageline}',
-                    data: [ {tournamentAverage} ]
-                }
-			]
+            }]
 		});
 	});
 </script>
