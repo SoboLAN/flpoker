@@ -24,7 +24,8 @@ class StatusPage
                 '(SELECT t.tournament_id ' .
                 'FROM tournaments t ' .
                 'WHERE MONTH(t.tournament_date) = MONTH(NOW()) ' .
-                'AND YEAR(t.tournament_date) = YEAR(NOW())) ' .
+                'AND YEAR(t.tournament_date) = YEAR(NOW()) ' .
+				'AND t.tournament_type=\'regular\') ' .
                 'GROUP BY p.player_id ' .
                 'ORDER BY points DESC'
             );
@@ -82,13 +83,14 @@ class StatusPage
         
         try {
             $result = $db->query('SELECT r.player_id, p.name_pokerstars, ' .
-                'COUNT( t.tournament_id ) AS final_tables ' .
+                'COUNT(t.tournament_id) AS final_tables ' .
                 'FROM results r ' .
                 'JOIN players p ON r.player_id = p.player_id ' .
                 'JOIN tournaments t ON r.tournament_id = t.tournament_id ' .
                 'WHERE r.position <= 9 ' .
                 'AND MONTH(t.tournament_date) = MONTH(NOW()) ' .
                 'AND YEAR(t.tournament_date) = YEAR(NOW()) ' .
+				'AND t.tournament_type=\'regular\' ' .
                 'GROUP BY r.player_id ' .
                 'HAVING final_tables > 1 ' .
                 'ORDER BY final_tables DESC'
