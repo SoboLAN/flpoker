@@ -32,7 +32,7 @@
 		<footer>
 			FileList Poker v{version}
 			<br />
-			Copyright &copy; 2013 Radu Murzea.
+			Copyright &copy; 2013 - 2014 Radu Murzea.
 			<br />
 			Project Author and Site Design: Radu Murzea.
 		</footer>
