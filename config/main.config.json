@@ -30,9 +30,9 @@
     "cache_key_registrations_graph": "registrations_graph",
     "cache_key_final_tables": "final_tables",
 	"path_general_css": "css/style.css",
-	"path_jqueryui_css": "css/jquery-ui-1.10.3.custom.css",
-	"path_jquery": "js/jquery-2.0.3.js",
-	"path_jqueryui": "js/jquery-ui-1.10.3.custom.js",
+	"path_jqueryui_css": "css/jquery-ui-1.10.4.custom.css",
+	"path_jquery": "js/jquery-2.1.js",
+	"path_jqueryui": "js/jquery-ui-1.10.4.custom.js",
 	"path_highcharts": "js/highcharts/highcharts.src.js",
 	"path_highcharts_export": "js/highcharts/modules/exporting.src.js"
 }
