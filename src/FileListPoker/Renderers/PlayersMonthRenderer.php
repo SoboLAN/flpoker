@@ -49,7 +49,7 @@ class PlayersMonthRenderer extends GeneralRenderer
             }
 
             $playersList .=
-            '<tr>
+            '<tr' . ($award['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
                 <td><a href="player.php?id=' . $award['id'] . '">' . $award['name_pokerstars'] . '</a></td>
                 <td>
                     <a href="http://filelist.ro/userdetails.php?id=' . $award['id_filelist'] . '">' .

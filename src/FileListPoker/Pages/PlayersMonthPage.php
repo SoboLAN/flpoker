@@ -31,7 +31,7 @@ class PlayersMonthPage
         try {
             $players = $db->query(
                 'SELECT m.player_id, m.award_month, m.award_year, ' .
-                'p.id_filelist, p.name_filelist, p.name_pokerstars, ' .
+                'p.id_filelist, p.name_filelist, p.name_pokerstars, p.member_type, ' .
                     '(SELECT SUM(r.points) ' .
                     'FROM results r ' .
                     'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
@@ -56,6 +56,7 @@ class PlayersMonthPage
                 'id_filelist' => $player->id_filelist,
                 'name_filelist' => $player->name_filelist,
                 'name_pokerstars' => $player->name_pokerstars,
+                'member_type' => $player->member_type,
                 'month' => $player->award_month,
                 'year' => $player->award_year,
                 'points' => $player->points

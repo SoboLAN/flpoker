@@ -7,3 +7,7 @@
 	</tr>	
 	{players_of_the_month_list}
 </table>
+
+<p>
+	<span id="admin-marker-legend">&nbsp;</span>&nbsp;&#61;&nbsp;FileList Poker Administrator
+</p>
