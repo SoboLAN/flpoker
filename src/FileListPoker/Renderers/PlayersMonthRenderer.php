@@ -27,12 +27,14 @@ class PlayersMonthRenderer extends GeneralRenderer
             array(
                 '{players_month_pokerstars}',
                 '{players_month_filelist}',
-                '{players_month_date}'
+                '{players_month_date}',
+                '{players_month_points}'
             ),
             array(
                 $this->site->getWord('players_month_pokerstars'),
                 $this->site->getWord('players_month_filelist'),
-                $this->site->getWord('players_month_date')
+                $this->site->getWord('players_month_date'),
+                $this->site->getWord('players_month_points')
             ),
             $template
         );
@@ -54,6 +56,7 @@ class PlayersMonthRenderer extends GeneralRenderer
                     $award['name_filelist'] . '</a>
                 </td>
                 <td>' . $awardDate . '</td>
+                <td>' . $award['points'] . '</td>
             </tr>';
         }
 

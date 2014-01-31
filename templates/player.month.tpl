@@ -3,6 +3,7 @@
 		<th><strong>{players_month_pokerstars}</strong></th>
 	    <th><strong>{players_month_filelist}</strong></th>
         <th><strong>{players_month_date}</strong></th>
+		<th><strong>{players_month_points}</strong></th>
 	</tr>	
 	{players_of_the_month_list}
 </table>

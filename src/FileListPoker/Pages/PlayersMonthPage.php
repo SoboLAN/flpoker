@@ -31,10 +31,16 @@ class PlayersMonthPage
         try {
             $players = $db->query(
                 'SELECT m.player_id, m.award_month, m.award_year, ' .
-                'p.id_filelist, p.name_filelist, p.name_pokerstars ' .
+                'p.id_filelist, p.name_filelist, p.name_pokerstars, ' .
+                    '(SELECT SUM(r.points) ' .
+                    'FROM results r ' .
+                    'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
+                    'WHERE MONTH(t.tournament_date)=m.award_month ' .
+                    'AND YEAR(t.tournament_date)=m.award_year ' .
+                    'AND r.player_id=m.player_id) AS points ' .
                 'FROM players_of_the_month m ' .
                 'JOIN players p ON m.player_id = p.player_id ' .
-                'ORDER BY award_year DESC , award_month DESC'
+                'ORDER BY m.award_year DESC, m.award_month DESC'
             );
         } catch (\PDOException $e) {
             $message = "calling PlayersMonthPage::getContent failed";
@@ -51,7 +57,8 @@ class PlayersMonthPage
                 'name_filelist' => $player->name_filelist,
                 'name_pokerstars' => $player->name_pokerstars,
                 'month' => $player->award_month,
-                'year' => $player->award_year
+                'year' => $player->award_year,
+                'points' => $player->points
             );
         }
         

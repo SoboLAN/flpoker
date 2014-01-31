@@ -81,6 +81,7 @@
     "players_month_pokerstars": "PokerStars Name",
     "players_month_filelist": "FileList Name",
     "players_month_date": "For Month",
+	"players_month_points": "Points that month",
 	"status_tab_standings_title": "Standings This Month",
 	"status_tab_ftables_title": "Final Tables This Month",
 	"status_standings_text": "This table shows you the Top 5 players of this month",
