@@ -39,12 +39,16 @@ class PlayerRenderer extends GeneralRenderer
             }
         }
         
+        $memberType = $this->translateMemberType($content['member_type'], $this->site->getLanguage());
+        
         $result = str_replace(
             array(
                 '{player_tab_general_pname}',
                 '{pname}',
                 '{player_tab_general_fname}',
                 '{flname}',
+                '{player_tab_general_membertype}',
+                '{member_type}',
                 '{flid}',
                 '{player_tab_general_regdate}',
                 '{regdate}',
@@ -66,6 +70,8 @@ class PlayerRenderer extends GeneralRenderer
                 $namePokerStars,
                 $this->site->getWord('player_tab_general_fname'),
                 $nameFilelist,
+                $this->site->getWord('player_tab_general_membertype'),
+                $memberType,
                 $content['id_filelist'],
                 $this->site->getWord('player_tab_general_regdate'),
                 $regDate,

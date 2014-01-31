@@ -61,6 +61,7 @@
     "player_tab_prizes_title": "Prizes",
     "player_tab_general_pname": "PokerStars Name",
     "player_tab_general_fname": "FileList Name",
+	"player_tab_general_membertype": "Member Type",
     "player_tab_general_regdate": "Club Registration Date",
     "player_tab_general_points": "Points",
     "player_tab_general_allpoints": "Points All-Time",

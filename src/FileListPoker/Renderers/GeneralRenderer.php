@@ -90,4 +90,22 @@ abstract class GeneralRenderer
         
         return $newDate;
     }
+    
+    protected function translateMemberType($memberType, $lang)
+    {
+        if ($lang == 'ro') {
+            if ($memberType == 'admin') {
+                return 'Administrator';
+            } elseif ($memberType == 'regular') {
+                return 'Cont obișnuit';
+            }
+        } elseif ($lang == 'en') {
+            if ($memberType == 'admin') {
+                return 'Administrator';
+            } elseif ($memberType == 'regular') {
+                return 'Regular Member';
+            }
+        }
+        
+    }
 }

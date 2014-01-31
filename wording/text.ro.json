@@ -65,6 +65,7 @@
     "player_tab_prizes_text": "Here you can see Prizes",
     "player_tab_general_pname": "Nume pe PokerStars",
     "player_tab_general_fname": "Nume pe FileList",
+	"player_tab_general_membertype": "Clasă",
     "player_tab_general_regdate": "Data înregistrării în club",
     "player_tab_general_points": "Puncte",
     "player_tab_general_allpoints": "Puncte All-Time",
