@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 26, 2013 at 03:26 PM
+-- Generation Time: Jan 31, 2014 at 10:05 PM
 -- Server version: 5.1.72-cll
 -- PHP Version: 5.3.17
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=314 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=351 ;
 
 --
 -- Dumping data for table `bonus_points`
@@ -354,7 +354,44 @@ INSERT INTO `bonus_points` (`bonus_id`, `player_id`, `bonus_value`, `tournament_
 (310, 142, 30, 128, 'Un mic bonus si mie, ca merit', '2013-11-21'),
 (311, 76, 2, 136, 'Straight Flush', '2013-12-19'),
 (312, 83, 2, 136, 'Straight Flush', '2013-12-19'),
-(313, 11, 2, 136, 'Straight Flush', '2013-12-19');
+(313, 11, 2, 136, 'Straight Flush', '2013-12-19'),
+(314, 76, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(315, 79, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(316, 142, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(317, 51, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(318, 34, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(319, 169, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(320, 10, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(321, 83, 5, 139, '2 Final Tables in December 2013', '2013-12-30'),
+(322, 229, 10, 139, '3 Final Tables in December 2013', '2013-12-30'),
+(323, 679, 10, 139, '3 Final Tables in December 2013', '2013-12-30'),
+(324, 7, 10, 139, '3 Final Tables in December 2013', '2013-12-30'),
+(325, 204, 10, 139, '3 Final Tables in December 2013', '2013-12-30'),
+(326, 154, 20, 139, '4 Final Tables in December 2013', '2013-12-30'),
+(327, 12, 20, 139, '4 Final Tables in December 2013', '2013-12-30'),
+(328, 890, 30, 139, '5 Final Tables in December 2013', '2013-12-30'),
+(329, 890, 20, 139, 'Player of the Month in December 2013', '2013-12-30'),
+(330, 59, 2, 140, 'Straight Flush', '2014-01-02'),
+(331, 876, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(332, 175, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(333, 3, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(334, 890, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(335, 896, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(336, 47, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(337, 887, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(338, 12, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(339, 53, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(340, 895, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(341, 10, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(342, 73, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(343, 1, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(344, 204, 5, 148, '2 Final Tables in January 2014', '2014-01-30'),
+(345, 76, 10, 148, '3 Final Tables in January 2014', '2014-01-30'),
+(346, 116, 10, 148, '3 Final Tables in January 2014', '2014-01-30'),
+(347, 154, 20, 148, '4 Final Tables in January 2014', '2014-01-30'),
+(348, 840, 30, 148, '6 Final Tables in January 2014', '2014-01-30'),
+(349, 679, 30, 148, '6 Final Tables in January 2014', '2014-01-30'),
+(350, 840, 20, 148, 'Player of the Month in January 2014', '2014-01-30');
 
 -- --------------------------------------------------------
 
@@ -369,6 +406,7 @@ CREATE TABLE IF NOT EXISTS `cache` (
   `lifetime` int(10) unsigned NOT NULL,
   UNIQUE KEY `cache_key` (`cache_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Table structure for table `players`
@@ -385,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `join_date` date DEFAULT NULL,
   `is_member_of_club` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=920 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=930 ;
 
 --
 -- Dumping data for table `players`
@@ -403,7 +441,7 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (9, 'Robinhon1', 'Robinhon1', 88071, 'admin', 249, 270, '2011-07-18', 1),
 (10, 'ovidiugrecia', 'ovidiugrecia', 815756, 'regular', 29, 0, '2012-07-01', 1),
 (11, 'constanti441', 'constantin31', 329286, 'regular', 65, 0, '2012-07-10', 1),
-(12, 'C.A''1905', '1905', 532230, 'regular', 0, 0, '2013-01-01', 1),
+(12, 'C.A''1905', 'ForeverBlue', 532230, 'regular', 0, 0, '2013-01-01', 1),
 (13, 'y2kkk', 'y2kkk', 42217, 'regular', 169, 250, '2011-10-27', 1),
 (14, 'aragornflro', 'stalker18', 844961, 'regular', 450, 270, '2011-07-18', 1),
 (15, 'bratu uzzy', 'bratu94', 933736, 'regular', 38, 0, '2012-05-08', 1),
@@ -464,7 +502,7 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (70, 'KmN92', 'KmN', 741691, 'regular', 19, 0, '2012-02-09', 1),
 (71, 'prikindika', 'flavius216', 487963, 'regular', 144, 0, '2011-08-17', 1),
 (72, 'valy93T', 'valy93t', 598867, 'regular', 142, 0, '2011-10-18', 1),
-(73, 'Autentificar', 'avioncumotor', 213575, 'regular', 137, 0, '2011-12-05', 1),
+(73, 'Pum26', 'avioncumotor', 213575, 'regular', 137, 0, '2011-12-05', 1),
 (74, 'adimarica', 'adimarica', 454039, 'regular', 49, 0, '2011-08-04', 1),
 (75, 'HighStake18', 'WhoAmI', 290509, 'regular', 61, 0, '2012-06-20', 1),
 (76, 'VooDooTM', 'VooDoo_DE', 887340, 'regular', 10, 0, '2012-08-02', 1),
@@ -560,7 +598,7 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (166, '16.nxt', 'ON', 533743, 'regular', 52, 0, '2011-07-24', 1),
 (167, 'gLitcH86', 'gLitcH', 826858, 'regular', 20, 0, '2012-01-09', 1),
 (168, 'skeciu007', 'skeciu007', 483659, 'regular', 271, 25, '2011-09-01', 1),
-(169, 'Jst.Adrian', 'Biosh0ck', 470461, 'regular', 0, 0, '2013-01-10', 1),
+(169, 'Jst.Adrian', 'Biosh0ck', 470461, 'admin', 0, 0, '2013-01-10', 1),
 (170, 'silviu_1784', 'silviu1784', 412199, 'regular', 45, 20, '2011-07-20', 1),
 (171, 'iic19', 'iic19', 209471, 'regular', 51, 0, '2012-02-28', 1),
 (172, 'bizarro11', 'chelseaAK47', 559518, 'regular', 0, 0, '2013-04-16', 1),
@@ -1306,7 +1344,17 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (916, 'Dennys9107', 'lovingDenis', 355029, 'regular', 0, 0, '2013-12-07', 1),
 (917, 'bad_wolf250', 'Joker_ccu', 1127166, 'regular', 0, 0, '2013-12-07', 1),
 (918, 'AMG * Freakz', 'AMG13', 714936, 'regular', 0, 0, '2013-12-18', 1),
-(919, 'valeria.2014', 'martupanca', 414195, 'regular', 0, 0, '2013-12-23', 1);
+(919, 'valeria.2014', 'martupanca', 414195, 'regular', 0, 0, '2013-12-23', 1),
+(920, 'SMihaitza', 'PiXxX', 7593078, 'regular', 0, 0, '2013-12-26', 1),
+(921, 'Syncpp', 'FragersCreative', 462612, 'regular', 0, 0, '2014-01-02', 1),
+(922, 'ZUZU1308', 'Zuzu1308', 1128790, 'regular', 0, 0, '2014-01-09', 1),
+(923, 'YelllouClaw', 'mielubuc', 710274, 'regular', 0, 0, '2014-01-12', 1),
+(924, 'kristh507', 'Kristh', 987135, 'regular', 0, 0, '2014-01-12', 1),
+(925, 'Cojoc@riuFlx', 'cojocariufl', 885037, 'regular', 0, 0, '2014-01-23', 1),
+(926, 'shuz89', 'ayase', 217841, 'regular', 0, 0, '2014-01-30', 1),
+(927, 'Senzatiefac', 'bgeo', 536569, 'regular', 0, 0, '2014-01-30', 1),
+(928, 'czfrn', 'florinx', 34342, 'regular', 0, 0, '2014-01-30', 1),
+(929, 'yooooo28', 'yooooo28', 8323168, 'regular', 0, 0, '2014-01-30', 1);
 
 -- --------------------------------------------------------
 
@@ -1321,7 +1369,7 @@ CREATE TABLE IF NOT EXISTS `players_of_the_month` (
   `award_year` year(4) NOT NULL,
   PRIMARY KEY (`player_of_the_month_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `players_of_the_month`
@@ -1338,7 +1386,9 @@ INSERT INTO `players_of_the_month` (`player_of_the_month_id`, `player_id`, `awar
 (8, 76, 8, 2013),
 (9, 154, 9, 2013),
 (10, 133, 10, 2013),
-(11, 27, 11, 2013);
+(11, 27, 11, 2013),
+(12, 890, 12, 2013),
+(13, 840, 1, 2014);
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1405,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=114 ;
 
 --
 -- Dumping data for table `prizes`
@@ -1471,7 +1521,10 @@ INSERT INTO `prizes` (`prize_id`, `player_id`, `prize`, `cost`, `date_bought`, `
 (107, 25, 'Vip Permanent', 400, '2013-11-13', 'new'),
 (108, 20, 'Vip Permanent', 400, '2013-11-23', 'new'),
 (109, 154, 'FileList Account Name Change', 200, '2013-12-17', 'new'),
-(110, 45, 'FileList Account Name Change', 200, '2013-12-21', 'new');
+(110, 45, 'FileList Account Name Change', 200, '2013-12-21', 'new'),
+(111, 169, 'Permanent VIP', 400, '2014-01-15', 'new'),
+(112, 16, 'Permanent VIP', 400, '2014-01-17', 'new'),
+(113, 12, 'FileList Account Name Change', 200, '2014-01-22', 'new');
 
 -- --------------------------------------------------------
 
@@ -4132,7 +4185,212 @@ INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUE
 (53, 137, 0, 6),
 (13, 137, 0, 7),
 (98, 137, 0, 8),
-(10, 137, 0, 9);
+(10, 137, 0, 9),
+(876, 138, 30, 1),
+(83, 138, 27, 2),
+(112, 138, 25, 3),
+(59, 138, 23, 4),
+(73, 138, 21, 5),
+(154, 138, 19, 6),
+(890, 138, 17, 7),
+(116, 138, 15, 8),
+(25, 138, 13, 9),
+(840, 138, 10, 10),
+(9, 138, 9, 11),
+(12, 138, 8, 12),
+(204, 138, 7, 13),
+(861, 138, 6, 14),
+(679, 138, 5, 15),
+(97, 138, 4, 16),
+(142, 138, 3, 18),
+(42, 138, 2, 19),
+(27, 138, 1, 20),
+(42, 139, 30, 1),
+(169, 139, 27, 2),
+(887, 139, 25, 3),
+(12, 139, 23, 4),
+(154, 139, 21, 5),
+(76, 139, 19, 6),
+(679, 139, 17, 7),
+(204, 139, 15, 8),
+(142, 139, 13, 9),
+(899, 139, 10, 10),
+(2, 139, 9, 11),
+(16, 139, 8, 12),
+(98, 139, 7, 13),
+(133, 139, 6, 15),
+(59, 139, 5, 16),
+(890, 139, 4, 17),
+(33, 139, 3, 18),
+(18, 139, 2, 19),
+(876, 139, 1, 20),
+(3, 140, 21, 1),
+(79, 140, 19, 2),
+(53, 140, 17, 3),
+(890, 140, 15, 4),
+(204, 140, 13, 5),
+(154, 140, 10, 6),
+(679, 140, 9, 7),
+(76, 140, 8, 8),
+(13, 140, 7, 9),
+(142, 140, 6, 10),
+(27, 140, 5, 11),
+(83, 140, 4, 12),
+(41, 140, 3, 15),
+(876, 140, 2, 16),
+(504, 140, 1, 17),
+(858, 141, 30, 1),
+(47, 141, 27, 2),
+(116, 141, 25, 3),
+(73, 141, 23, 4),
+(6, 141, 21, 5),
+(840, 141, 19, 6),
+(154, 141, 17, 7),
+(76, 141, 15, 8),
+(31, 141, 13, 9),
+(235, 141, 10, 11),
+(899, 141, 9, 12),
+(1, 141, 8, 13),
+(27, 141, 7, 14),
+(51, 141, 6, 15),
+(11, 141, 5, 16),
+(83, 141, 4, 17),
+(890, 141, 3, 18),
+(169, 141, 2, 19),
+(142, 141, 1, 20),
+(76, 142, 30, 1),
+(679, 142, 27, 2),
+(890, 142, 25, 3),
+(895, 142, 23, 4),
+(25, 142, 21, 5),
+(47, 142, 19, 6),
+(112, 142, 17, 7),
+(8, 142, 15, 8),
+(41, 142, 13, 9),
+(79, 142, 10, 11),
+(873, 142, 9, 12),
+(183, 142, 8, 13),
+(421, 142, 7, 14),
+(876, 142, 6, 15),
+(840, 142, 5, 16),
+(172, 142, 4, 17),
+(861, 142, 3, 18),
+(82, 142, 2, 19),
+(235, 142, 1, 20),
+(27, 143, 30, 1),
+(1, 143, 27, 3),
+(10, 143, 25, 4),
+(154, 143, 23, 5),
+(886, 143, 21, 6),
+(876, 143, 19, 7),
+(679, 143, 17, 8),
+(73, 143, 15, 9),
+(41, 143, 13, 10),
+(895, 143, 10, 11),
+(175, 143, 9, 12),
+(33, 143, 8, 13),
+(25, 143, 7, 14),
+(169, 143, 6, 15),
+(16, 143, 5, 16),
+(258, 143, 4, 17),
+(2, 143, 3, 18),
+(890, 143, 2, 19),
+(840, 143, 1, 20),
+(840, 144, 30, 1),
+(1, 144, 27, 2),
+(16, 144, 25, 3),
+(887, 144, 23, 4),
+(37, 144, 21, 5),
+(83, 144, 19, 6),
+(53, 144, 17, 7),
+(2, 144, 15, 8),
+(25, 144, 13, 10),
+(175, 144, 10, 11),
+(73, 144, 9, 12),
+(41, 144, 8, 13),
+(11, 144, 7, 14),
+(204, 144, 6, 15),
+(27, 144, 5, 16),
+(172, 144, 4, 17),
+(43, 144, 3, 18),
+(679, 144, 2, 19),
+(154, 144, 1, 20),
+(861, 145, 30, 1),
+(175, 145, 27, 2),
+(51, 145, 25, 3),
+(204, 145, 23, 4),
+(116, 145, 21, 5),
+(12, 145, 19, 6),
+(905, 145, 17, 7),
+(10, 145, 15, 8),
+(840, 145, 13, 9),
+(42, 145, 10, 10),
+(8, 145, 9, 11),
+(41, 145, 8, 12),
+(856, 145, 7, 13),
+(11, 145, 6, 14),
+(134, 145, 5, 15),
+(16, 145, 4, 17),
+(896, 145, 3, 18),
+(73, 145, 2, 19),
+(887, 145, 1, 20),
+(169, 146, 30, 1),
+(61, 146, 27, 2),
+(142, 146, 25, 3),
+(895, 146, 23, 4),
+(679, 146, 21, 5),
+(271, 146, 19, 6),
+(840, 146, 17, 7),
+(154, 146, 15, 8),
+(32, 146, 13, 9),
+(899, 146, 10, 10),
+(172, 146, 9, 11),
+(42, 146, 8, 12),
+(76, 146, 7, 13),
+(880, 146, 6, 14),
+(171, 146, 5, 15),
+(890, 146, 4, 16),
+(73, 146, 3, 17),
+(79, 146, 2, 18),
+(887, 146, 1, 19),
+(116, 147, 30, 1),
+(42, 147, 27, 2),
+(896, 147, 25, 3),
+(840, 147, 23, 4),
+(679, 147, 21, 5),
+(876, 147, 19, 6),
+(133, 147, 17, 7),
+(887, 147, 15, 8),
+(175, 147, 13, 9),
+(59, 147, 10, 10),
+(79, 147, 9, 11),
+(327, 147, 8, 12),
+(204, 147, 7, 13),
+(53, 147, 6, 15),
+(916, 147, 5, 16),
+(25, 147, 4, 17),
+(12, 147, 3, 18),
+(154, 147, 2, 19),
+(10, 147, 1, 20),
+(511, 148, 30, 1),
+(59, 148, 27, 2),
+(11, 148, 25, 3),
+(12, 148, 23, 4),
+(679, 148, 21, 5),
+(3, 148, 19, 6),
+(840, 148, 17, 7),
+(97, 148, 15, 8),
+(896, 148, 13, 9),
+(169, 148, 10, 10),
+(142, 148, 9, 11),
+(116, 148, 8, 12),
+(119, 148, 7, 13),
+(874, 148, 6, 14),
+(25, 148, 5, 15),
+(154, 148, 4, 17),
+(10, 148, 3, 18),
+(876, 148, 2, 20),
+(53, 148, 1, 21);
 
 -- --------------------------------------------------------
 
@@ -4147,7 +4405,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `participants` smallint(5) unsigned DEFAULT NULL,
   `duration` smallint(5) unsigned DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=138 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=149 ;
 
 --
 -- Dumping data for table `tournaments`
@@ -4284,7 +4542,18 @@ INSERT INTO `tournaments` (`tournament_id`, `tournament_date`, `tournament_type`
 (134, '2013-12-12', 'regular', 56, 188),
 (135, '2013-12-17', 'regular', 55, 231),
 (136, '2013-12-19', 'regular', 58, 215),
-(137, '2013-12-23', 'special', 38, 194);
+(137, '2013-12-23', 'special', 38, 194),
+(138, '2013-12-27', 'regular', 38, 206),
+(139, '2013-12-30', 'regular', 37, 195),
+(140, '2014-01-02', 'regular', 36, 232),
+(141, '2014-01-07', 'regular', 54, 206),
+(142, '2014-01-09', 'regular', 60, 246),
+(143, '2014-01-14', 'regular', 48, 182),
+(144, '2014-01-16', 'regular', 52, 245),
+(145, '2014-01-21', 'regular', 53, 186),
+(146, '2014-01-23', 'regular', 54, 234),
+(147, '2014-01-28', 'regular', 54, 202),
+(148, '2014-01-30', 'regular', 53, 196);
 
 --
 -- Constraints for dumped tables
