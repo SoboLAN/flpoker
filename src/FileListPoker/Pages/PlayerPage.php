@@ -98,10 +98,15 @@ class PlayerPage
                 'WHERE player_id=?'
             );
 
-            $finalTablesSt = $db->prepare(
-                'SELECT COUNT(*) AS final_tables ' .
-                'FROM results ' .
-                'WHERE position <= 9 AND player_id=?'
+            $tournamentCountSt = $db->prepare(
+                'SELECT tournaments.tcount, final_tables.fcount ' .
+                'FROM ' .
+                    '(SELECT COUNT(*) AS tcount ' .
+                     'FROM results ' .
+                     'WHERE player_id=?) tournaments, ' .
+                    '(SELECT COUNT(*) AS fcount ' .
+                     'FROM results ' .
+                     'WHERE player_id=? AND position <= 9) final_tables'
             );
 
             $medalsSt = $db->prepare(
@@ -136,9 +141,12 @@ class PlayerPage
             $prizesSt->execute();
             $prizes = $prizesSt->fetch(\PDO::FETCH_OBJ)->cost;
             
-            $finalTablesSt->bindParam(1, $pid, \PDO::PARAM_INT);
-            $finalTablesSt->execute();
-            $finalTables = $finalTablesSt->fetch(\PDO::FETCH_OBJ)->final_tables;
+            $tournamentCountSt->bindParam(1, $pid, \PDO::PARAM_INT);
+            $tournamentCountSt->bindParam(2, $pid, \PDO::PARAM_INT);
+            $tournamentCountSt->execute();
+            $tCountRow = $tournamentCountSt->fetch(\PDO::FETCH_OBJ);
+            $tournamentCount = $tCountRow->tcount;
+            $finalTables = $tCountRow->fcount;
             
             $medalsSt->bindParam(1, $pid, \PDO::PARAM_INT);
             $medalsSt->bindParam(2, $pid, \PDO::PARAM_INT);
@@ -171,6 +179,7 @@ class PlayerPage
             'year' => $playerInfo->year,
             'member_type' => $playerInfo->member_type,
             'points' => $points,
+            'tournament_count' => $tournamentCount,
             'final_tables' => $finalTables,
             'gold_medals' => $gold_medals,
             'silver_medals' => $silver_medals,
