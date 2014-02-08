@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\StatusPage;
+use FileListPoker\Content\StatusContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\StatusRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
 
-    $statusPage = new StatusPage();
+    $statusPage = new StatusContent();
     
     $standingsContent = $statusPage->getCurrentStandings();
     $fTablesContent = $statusPage->getFinalTables();

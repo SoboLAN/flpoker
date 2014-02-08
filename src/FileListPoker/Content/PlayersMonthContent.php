@@ -1,6 +1,6 @@
 <?php
 
-namespace FileListPoker\Pages;
+namespace FileListPoker\Content;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\Logger;
  * This class contains functions that will return information about the Players of the Month.
  * @author Radu Murzea <radu.murzea@gmail.com>
  */
-class PlayersMonthPage
+class PlayersMonthContent
 {
     /**
      * Returns an associative array of information about all the players of the month.

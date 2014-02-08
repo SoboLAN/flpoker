@@ -1,6 +1,6 @@
 <?php
 
-namespace FileListPoker\Pages;
+namespace FileListPoker\Content;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
@@ -12,7 +12,7 @@ use FileListPoker\Main\Logger;
  * This class contains functions that will return various rankings of players.
  * @author Radu Murzea <radu.murzea@gmail.com>
  */
-class RankingsPage
+class RankingsContent
 {
     private $cache;
     

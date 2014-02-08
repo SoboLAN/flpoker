@@ -1,6 +1,6 @@
 <?php
 
-namespace FileListPoker\Pages;
+namespace FileListPoker\Content;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\Logger;
  * This class contains functions that will return everything there is to know about a specific tournament.
  * @author Radu Murzea <radu.murzea@gmail.com>
  */
-class TournamentPage
+class TournamentContent
 {
     public function getTournamentDetails($tid)
     {

@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\RankingsPage;
+use FileListPoker\Content\RankingsContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\RankingsRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
 
-    $rankingsPage = new RankingsPage();
+    $rankingsPage = new RankingsContent();
     
     $topAllTimeContent = $rankingsPage->getTopPlayersAllTime();
     $topMostActiveContent = $rankingsPage->getMostActive50Players();

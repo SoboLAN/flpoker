@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\PlayersMonthPage;
+use FileListPoker\Content\PlayersMonthContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\PlayersMonthRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
 
-    $playersMonthPage = new PlayersMonthPage();
+    $playersMonthPage = new PlayersMonthContent();
     $players = $playersMonthPage->getContent();
     
     $renderer = new PlayersMonthRenderer($site);

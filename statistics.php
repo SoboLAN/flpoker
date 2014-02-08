@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\StatisticsPage;
+use FileListPoker\Content\StatisticsContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\StatisticsRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -10,7 +10,7 @@ use FileListPoker\Main\FLPokerException;
 try {
     $site = new Site();
     
-    $statisticsPage = new StatisticsPage();
+    $statisticsPage = new StatisticsContent();
 
     $generalContent = $statisticsPage->getGeneralStatistics();
     $tournamentsContent = $statisticsPage->getTournamentsGraph();

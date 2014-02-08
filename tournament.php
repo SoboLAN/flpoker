@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\TournamentPage;
+use FileListPoker\Content\TournamentContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\TournamentRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -23,7 +23,7 @@ try {
     
     $tid = $_GET['id'];
     
-    $tournamentPage = new TournamentPage();
+    $tournamentPage = new TournamentContent();
     
     $details = $tournamentPage->getTournamentDetails($tid);
     if (! isset($details['id'])) {

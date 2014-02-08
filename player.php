@@ -2,7 +2,7 @@
 
 require_once 'autoload.php';
 
-use FileListPoker\Pages\PlayerPage;
+use FileListPoker\Content\PlayerContent;
 use FileListPoker\Main\Site;
 use FileListPoker\Renderers\PlayerRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -23,7 +23,7 @@ try {
 
     $player_id = $_GET['id'];
 
-    $playerPage = new PlayerPage();
+    $playerPage = new PlayerContent();
 
     $general = $playerPage->getGeneral($player_id);
 
