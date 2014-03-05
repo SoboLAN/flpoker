@@ -57,7 +57,7 @@ class StatisticsRenderer extends GeneralRenderer
         $tournamentParticipants = array();
         foreach ($content as $tournament) {
             $tournamentParticipants[] =
-                "[Date.UTC({$tournament['year']}, {$tournament['month']} - 1, 1), {$tournament['average_participants']}]";
+                "[Date.UTC({$tournament['year']}, {$tournament['month']} - 1, 15), {$tournament['average_participants']}]";
         }
 
         $tournamentParticipants = implode(",\n", $tournamentParticipants);
@@ -88,7 +88,7 @@ class StatisticsRenderer extends GeneralRenderer
         $clubRegistrants = array();
         foreach ($content as $record) {
             $clubRegistrants[] =
-            "[Date.UTC({$record['join_year']}, {$record['join_month']} - 1, 1), {$record['nr_players']}]";
+            "[Date.UTC({$record['join_year']}, {$record['join_month']} - 1, 15), {$record['nr_players']}]";
         }
         
         $clubRegistrants = implode(",\n", $clubRegistrants);
@@ -121,7 +121,7 @@ class StatisticsRenderer extends GeneralRenderer
         $aggressionFactors = array();
         foreach ($content as $factor) {
             $aggressionFactors[] =
-            "[Date.UTC({$factor['tournament_year']}, {$factor['tournament_month']} - 1, 1), {$factor['aggression_factor']}]";
+            "[Date.UTC({$factor['tournament_year']}, {$factor['tournament_month']} - 1, 15), {$factor['aggression_factor']}]";
         }
         
         $aggressionFactors = implode(",\n", $aggressionFactors);
