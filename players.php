@@ -6,6 +6,7 @@ use FileListPoker\Content\PlayersContent;
 use FileListPoker\Renderers\Paginator;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
+use FileListPoker\Main\Logger;
 use FileListPoker\Renderers\PlayersRenderer;
 use FileListPoker\Renderers\PaginationRenderer;
 use FileListPoker\Main\FLPokerException;
@@ -36,8 +37,16 @@ try {
     $playersPage = new PlayersContent();
     $players = $playersPage->getContent($page, $perPage);
     
+    if (count($players) == 0) {
+        $message = 'Non-existent page specified when acccessing players.php';
+        Logger::log($message);
+        throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
+    }
+    
+    $totalPlayers = $playersPage->getPlayersCount();
+    
     //get pagination
-    $paginator = new Paginator(count($players), $perPage, $page, $paginationWidth);
+    $paginator = new Paginator($totalPlayers, $perPage, $page, $paginationWidth);
     $pagination = $paginator->getPagination();
     
     //build renderers
@@ -45,10 +54,10 @@ try {
     $paginationRenderer = new PaginationRenderer($site);
     
     //render players
-    $playersContent = $renderer->render(playersTpl, $players);
+    $playersContent = $playersRenderer->render($playersTpl, $players);
     
     //render pagination
-    $paginationContent = $paginationRenderer->render($blockTpl, $elementTpl, $pagination);
+    $paginationContent = $paginationRenderer->render($paginationBlockTpl, $paginationElementTpl, $pagination);
     
     $htmlout = $site->getFullPageTemplate('players.php');
 

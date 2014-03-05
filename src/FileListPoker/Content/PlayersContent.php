@@ -41,7 +41,11 @@ class PlayersContent
     }
     
     /**
-     * Returns an associative array of information about all the players.
+     * Returns an associative array of information about the players Not all players will be
+     * returned, since the pagination parameters will probably eliminate most of them from
+     * the result set.
+     * @param int $page which page of players to return.
+     * @param int $perPage how many players per page.
      * @return array an array of information about the players. Will contain:
      * <ul>
      * <li>player's ID</li>
@@ -52,10 +56,10 @@ class PlayersContent
      * <li>current points</li>
      * </ul>
      */
-    public function getContent()
+    public function getContent($page, $perPage)
     {
         if (! is_null($this->cache)) {
-            $key = Config::getValue('cache_key_players');
+            $key = $this->buildCacheKey(Config::getValue('cache_key_players'), $page, $perPage);
             
             if ($this->cache->contains($key)) {
                 $content = json_decode($this->cache->getContent($key), true);
@@ -123,10 +127,14 @@ class PlayersContent
             );
         }
         
+        //the players must be sorted based on the number of points they have
         $this->arraySortByColumn($final_result, 'points');
         
+        //only part of the players is returned, based on the pagination parameters given
+        $final_result = array_slice($final_result, ($page - 1) * $perPage, $perPage);
+        
         if (! is_null($this->cache)) {
-            $key = Config::getValue('cache_key_players');
+            $key = $this->buildCacheKey(Config::getValue('cache_key_players'), $page, $perPage);
             
             $lifetime = Config::getValue('cache_lifetime_players');
             
@@ -134,6 +142,26 @@ class PlayersContent
         }
         
         return $final_result;
+    }
+    
+    public function getPlayersCount()
+    {
+        $db = Database::getConnection();
+        
+        try {
+            $players = $db->query('SELECT COUNT(*) AS players FROM players');
+
+        } catch (\PDOException $e) {
+            $message = "calling PlayersPage::getPlayersCount failed";
+            Logger::log("$message: " . $e->getMessage());
+            throw new FLPokerException($message, FLPokerException::ERROR);
+        }
+        
+        foreach ($players as $row) {
+            $count = $row->players;
+        }
+        
+        return $count;
     }
     
     //this is literally the stupidest thing about PDO.
@@ -184,5 +212,10 @@ class PlayersContent
         }
        
         return 0;
+    }
+    
+    private function buildCacheKey($mainKey, $page, $perPage)
+    {
+        return $mainKey . $page . '_' . $perPage;
     }
 }

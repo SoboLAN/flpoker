@@ -110,5 +110,11 @@
 	"statistics_aggresion_text": "Here, you can see how the evolution of the aggression factor in time. The aggression factor is the average number of players eliminated per hour in a tournament. The evolution is on a per month basis.",
     "statistics_aggresion_charttitle": "Aggression Factor Evolution",
     "statistics_aggresion_chartsubtitle": "The evolution of the aggression factor",
-    "statistics_aggresion_avgaggressionfactor": "Average Aggression Factor per Month"
+    "statistics_aggresion_avgaggressionfactor": "Average Aggression Factor per Month",
+	"pagination_normal_title": "Switch to this page",
+	"pagination_current_title": "Current page",
+	"pagination_prev_title": "Go to previous page",
+	"pagination_next_title": "Go to next page",
+	"pagination_prev_text": "Previous",
+	"pagination_next_text": "Next"
 }

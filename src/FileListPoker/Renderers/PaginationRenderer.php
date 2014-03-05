@@ -2,6 +2,8 @@
 
 namespace FileListPoker\Renderers;
 
+use FileListPoker\Main\Site;
+
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
  */
@@ -16,6 +18,46 @@ class PaginationRenderer
     
     public function render($blockTpl, $elementTpl, $content)
     {
+        $elements = array();
+        for ($i = 0; $i < count($content); $i++) {
+            
+            switch($content[$i]['type']) {
+                case 'normal':
+                    $current = '';
+                    $title = $this->site->getWord('pagination_normal_title');
+                    $page = $content[$i]['page'];
+                    $text = $content[$i]['page'];
+                    break;
+                    
+                case 'current':
+                    $current = 'class="current"';
+                    $title = $this->site->getWord('pagination_current_title');
+                    $page = $content[$i]['page'];
+                    $text = $content[$i]['page'];
+                    break;
+                    
+                case 'prev':
+                    $current = '';
+                    $title = $this->site->getWord('pagination_prev_title');
+                    $page = $content[$i]['page'];
+                    $text = $this->site->getWord('pagination_prev_text');
+                    break;
+                    
+                case 'next':
+                    $current = '';
+                    $title = $this->site->getWord('pagination_next_title');
+                    $page = $content[$i]['page'];
+                    $text = $this->site->getWord('pagination_next_text');
+                    break;
+            }
+            
+            $elements[$i] = str_replace(
+                array('{current}', '{title}', '{page}', '{text}'),
+                array($current, $title, $page, $text),
+                $elementTpl
+            );
+        }
         
+        return str_replace('{elements}', implode("\n", $elements), $blockTpl);
     }
 }
