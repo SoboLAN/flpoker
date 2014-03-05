@@ -1,0 +1,1 @@
+<a {current} title="{title}" href="players.php?page={page}">{text}</a>

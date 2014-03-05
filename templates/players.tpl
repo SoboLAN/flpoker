@@ -1,3 +1,5 @@
+{pagination}
+
 <table class="presentation-table" style="width:100%">
 	<tr>
 		<th><strong>Nr.</strong></th>
@@ -9,6 +11,8 @@
 	{players_list}
 
 </table>
+
+{pagination}
 
 <p>
 	<span id="admin-marker-legend">&nbsp;</span>&nbsp;&#61;&nbsp;FileList Poker Administrator

@@ -158,12 +158,12 @@ body {
 }
 
 .admin-marker {
-	background-color: #96EC2D;
+	background-color: #E1D022;
 }
 
 #admin-marker-legend {
 	font-size: 15px;
-	background-color: #96EC2D;
+	background-color: #E1D022;
 	padding-left: 40px;
 	border: 1px solid black;
 	overflow: hidden
@@ -176,3 +176,30 @@ footer {
    font:11px Verdana,sans-serif;
    border-top:1px solid #666666; 
 }
+
+
+.pagination
+{
+	font-family: Verdana,sans-serif;
+	font-size: 80%;
+	height: 1%; /* IE tweak (holly hack) */
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.pagination a, .pagination a:link, .pagination a:visited, .pagination a:active
+{
+	display: block;
+	float: left;
+	font-weight: bold;
+	text-decoration: none;
+	color: #E1D022;
+	margin-right: 8px;
+	padding: 0.5em;
+	background-color: #7EA3B5;
+	border: 1px solid #777;
+}
+
+.pagination a.current { background-color: #5D4137; font-weight: bold; text-decoration: none; }
+.pagination a:hover { background-color: #5D4137; color: #fff; text-decoration: none; }
