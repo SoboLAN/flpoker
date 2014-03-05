@@ -14,6 +14,8 @@
 
 {pagination}
 
-<p style="display: block">
+<div class="clearer"></div>
+
+<div class="legend">
 	<span id="admin-marker-legend">&nbsp;</span>&nbsp;&#61;&nbsp;FileList Poker Administrator
-</p>
+</div>

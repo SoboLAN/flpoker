@@ -161,6 +161,10 @@ body {
 	background-color: #E1D022;
 }
 
+.legend {
+	display: block;
+}
+
 #admin-marker-legend {
 	font-size: 15px;
 	background-color: #E1D022;
@@ -191,6 +195,7 @@ footer {
 	display: block;
 	float: left;
 	font-weight: bold;
+	text-decoration: none;
 	color: #E1D022;
 	margin-right: 8px;
 	margin-bottom: 10px;
@@ -200,13 +205,20 @@ footer {
 }
 
 .pagination a.current {
-	background-color: #5D4137;
-	font-weight: bold;
 	text-decoration: none;
+	background-color: #5D4137;
 }
 
 .pagination a:hover {
+	text-decoration: none !important;
 	background-color: #5D4137;
-	color: #fff;
-	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.pagination {
+    margin-bottom: 20px;    
+}
+
+.clearer {
+    clear: both;
 }
