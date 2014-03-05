@@ -17,7 +17,7 @@ class PlayersRenderer extends GeneralRenderer
         $this->site = $site;
     }
     
-    public function render($template, $content)
+    public function render($template, $content, $page, $perPage)
     {
         if (empty ($content)) {
             return '';
@@ -38,7 +38,7 @@ class PlayersRenderer extends GeneralRenderer
         );
         
         $playersList = '';
-        $i = 1;
+        $i = ($page - 1) * $perPage + 1;
         foreach ($content as $player) {
             $namePokerStars = (is_null($player['name_pokerstars']) or empty($player['name_pokerstars'])) ?
                             '<span class="faded">unknown</span>' :

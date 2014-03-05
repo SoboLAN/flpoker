@@ -15,16 +15,14 @@ try {
     $site = new Site();
     
     //validate page
-    if (! isset($_GET['page'])) {
-        $page = 1;
-    } elseif (! $site->isValidID($_GET['page'])) {
+    if (isset($_GET['page']) && ! $site->isValidID($_GET['page'])) {
         $message = 'Invalid page specified when acccessing players.php';
         Logger::log($message);
         throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
     }
 
     //build parameters
-    $page = $_GET['page'];
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $perPage = Config::getValue('players_pagination_page_size');
     $paginationWidth = Config::getValue('players_pagination_width');
     
@@ -54,7 +52,7 @@ try {
     $paginationRenderer = new PaginationRenderer($site);
     
     //render players
-    $playersContent = $playersRenderer->render($playersTpl, $players);
+    $playersContent = $playersRenderer->render($playersTpl, $players, $page, $perPage);
     
     //render pagination
     $paginationContent = $paginationRenderer->render($paginationBlockTpl, $paginationElementTpl, $pagination);
