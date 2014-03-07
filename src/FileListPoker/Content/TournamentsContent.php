@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Content;
 
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
@@ -28,19 +31,19 @@ class TournamentsContent
                 'LIMIT ?, ?'
             );
             
-            $tmptournamentsSt->bindParam(1, $limitStart, \PDO::PARAM_INT);
-            $tmptournamentsSt->bindParam(2, $perPage, \PDO::PARAM_INT);
+            $tmptournamentsSt->bindParam(1, $limitStart, PDO::PARAM_INT);
+            $tmptournamentsSt->bindParam(2, $perPage, PDO::PARAM_INT);
             
             $tmptournamentsSt->execute();
             
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling TournamentsContent::getContent failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
 
         $final_result = array();
-        while ($row = $tmptournamentsSt->fetch(\PDO::FETCH_OBJ)) {
+        while ($row = $tmptournamentsSt->fetch(PDO::FETCH_OBJ)) {
             $final_result[] = array(
                 'id' => $row->tournament_id,
                 'day' => $row->day,
@@ -61,7 +64,7 @@ class TournamentsContent
         try {
             $tournaments = $db->query('SELECT COUNT(*) AS t_count FROM tournaments');
 
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling TournamentsContent::getTournamentCount failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

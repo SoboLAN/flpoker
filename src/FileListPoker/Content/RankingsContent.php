@@ -2,6 +2,8 @@
 
 namespace FileListPoker\Content;
 
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
@@ -77,7 +79,7 @@ class RankingsContent
                 'GROUP BY player_id ' .
                 'ORDER BY player_id ASC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling RankingsContent::getTopPlayersAllTime failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -160,7 +162,7 @@ class RankingsContent
                 'JOIN players p ON p.player_id=r.player_id ' .
                 'LIMIT 50'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling RankingsContent::getMostActive50Players failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -223,7 +225,7 @@ class RankingsContent
                 'LIMIT 40'
             );
             
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling RankingsContent::getTop40Players6Months failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -285,7 +287,7 @@ class RankingsContent
                 'LIMIT 50'
             );
             
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling RankingsContent::getTop50FinalTables failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

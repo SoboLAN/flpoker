@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Content;
 
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
@@ -25,10 +28,10 @@ class TournamentContent
                 'WHERE tournament_id=?'
             );
             
-            $tournamentSt->bindParam(1, $tid, \PDO::PARAM_INT);
+            $tournamentSt->bindParam(1, $tid, PDO::PARAM_INT);
             $tournamentSt->execute();
-            $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(\PDO::FETCH_OBJ);
-        } catch (\PDOException $e) {
+            $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
             $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -62,14 +65,14 @@ class TournamentContent
                 'ORDER BY r.position ASC'
             );
             
-            $resultsSt->bindParam(1, $tid, \PDO::PARAM_INT);
+            $resultsSt->bindParam(1, $tid, PDO::PARAM_INT);
             $resultsSt->execute();
             
             $results = array();
-            while ($row = $resultsSt->fetch(\PDO::FETCH_OBJ)) {
+            while ($row = $resultsSt->fetch(PDO::FETCH_OBJ)) {
                 $results[] = $row;
             }
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling TournamentContent::getTournamentResults with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -101,11 +104,11 @@ class TournamentContent
                 'ORDER BY b.bonus_value ASC'
             );
             
-            $bonusesSt->bindParam(1, $tid, \PDO::PARAM_INT);
+            $bonusesSt->bindParam(1, $tid, PDO::PARAM_INT);
             $bonusesSt->execute();
             
             $bonuses = array();
-            while ($row = $bonusesSt->fetch(\PDO::FETCH_OBJ)) {
+            while ($row = $bonusesSt->fetch(PDO::FETCH_OBJ)) {
                 $bonuses[] = array(
                     'player_id' => $row->player_id,
                     'name_pokerstars' => $row->name_pokerstars,
@@ -113,7 +116,7 @@ class TournamentContent
                     'bonus_description' => $row->bonus_description
                 );
             }
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

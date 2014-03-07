@@ -2,6 +2,8 @@
 
 namespace FileListPoker\Content;
 
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
@@ -100,7 +102,7 @@ class PlayersContent
                 'GROUP BY player_id ' .
                 'ORDER BY player_id ASC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling PlayersContent::getPlayers failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -151,7 +153,7 @@ class PlayersContent
         try {
             $players = $db->query('SELECT COUNT(*) AS players FROM players');
 
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling PlayersContent::getPlayersCount failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

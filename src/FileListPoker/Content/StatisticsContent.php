@@ -2,6 +2,8 @@
 
 namespace FileListPoker\Content;
 
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
@@ -51,7 +53,7 @@ class StatisticsContent
                 'GROUP BY tournament_interval ' .
                 'ORDER BY year ASC, month ASC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatisticsContent::getTournamentsGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -101,7 +103,7 @@ class StatisticsContent
                 'GROUP BY glued ' .
                 'ORDER BY join_year ASC, join_month ASC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatisticsContent::getRegistrationsGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -155,7 +157,7 @@ class StatisticsContent
                 'GROUP BY tournament_period ' .
                 'ORDER BY tournament_year ASC, tournament_month ASC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatisticsContent::getAggressionGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -214,7 +216,7 @@ class StatisticsContent
             $tmpspent1 = $db->query('SELECT SUM(initial_spent_points) AS players_spent FROM players');
             
             $tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatisticsContent::getGeneralStatistics failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

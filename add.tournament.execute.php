@@ -1,6 +1,10 @@
 <?php
 
 require_once 'autoload.php';
+
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
 use FileListPoker\Main\Config;
@@ -35,9 +39,9 @@ try {
 		
 	$duration = 60 * $_POST['hours'] + $_POST['minutes'];
     
-    $insertSt->bindParam (1, $_POST['tournamentdate'], \PDO::PARAM_STR);
-    $insertSt->bindParam (2, $_POST['participants'], \PDO::PARAM_INT);
-    $insertSt->bindParam (3, $duration, \PDO::PARAM_INT);
+    $insertSt->bindParam (1, $_POST['tournamentdate'], PDO::PARAM_STR);
+    $insertSt->bindParam (2, $_POST['participants'], PDO::PARAM_INT);
+    $insertSt->bindParam (3, $duration, PDO::PARAM_INT);
     
     $insertSt->execute ();
 
@@ -50,8 +54,8 @@ try {
     $getIdStatement = $db->prepare ('SELECT MAX(tournament_id) AS tournament_id FROM tournaments');
     $getIdStatement->execute ();
     
-    $id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->tournament_id;
-} catch (\PDOException $e) {
+    $id = $getIdStatement->fetch (PDO::FETCH_OBJ)->tournament_id;
+} catch (PDOException $e) {
     Logger::log('adding tournament failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
 	exit();

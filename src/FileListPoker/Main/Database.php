@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Main;
 
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
 
@@ -57,13 +60,13 @@ class Database
 
         // connection options I like
         $options = array (
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
         );
 
         // connection charset handling for old php versions
         if ($dsnarr['charset'] and version_compare(PHP_VERSION, '5.3.6', '<')) {
-            $options[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES '.$dsnarr['charset'];
+            $options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES '.$dsnarr['charset'];
         }
         $dsnpairs = array();
         foreach ($dsnarr as $k => $v) {
@@ -74,13 +77,13 @@ class Database
 
         try {
             $dsn = 'mysql:' . implode(';', $dsnpairs);
-            self::$connection = new \PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
+            self::$connection = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
 
             //set prepared statement emulation depending on server version
-            $serverversion = self::$connection->getAttribute(\PDO::ATTR_SERVER_VERSION);
+            $serverversion = self::$connection->getAttribute(PDO::ATTR_SERVER_VERSION);
             $emulate_prepares = (version_compare($serverversion, $emulate_prepares_below_version, '<'));
-            self::$connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
-        } catch (\PDOException $e) {
+            self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
+        } catch (PDOException $e) {
             $message = 'There was an error while connecting to the database';
             $ex = new FLPokerException($message, FLPokerException::ERROR);
             Logger::log("$message: " . $ex->getMessage());

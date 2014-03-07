@@ -2,6 +2,8 @@
 
 namespace FileListPoker\Content;
 
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
@@ -42,7 +44,7 @@ class PlayersMonthContent
                 'JOIN players p ON m.player_id = p.player_id ' .
                 'ORDER BY m.award_year DESC, m.award_month DESC'
             );
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling PlayersMonthContent::getPlayersOfTheMonth failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

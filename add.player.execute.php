@@ -1,6 +1,10 @@
 <?php
 
 require_once 'autoload.php';
+
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
 use FileListPoker\Main\Config;
@@ -29,9 +33,9 @@ try {
     
     $getSt = $db->prepare ('SELECT 1 FROM players WHERE name_pokerstars=? OR name_filelist=? OR id_filelist=?');
     
-    $getSt->bindParam (1, $_POST['nameps'], \PDO::PARAM_STR);
-    $getSt->bindParam (2, $_POST['namefl'], \PDO::PARAM_STR);
-    $getSt->bindParam (3, $_POST['idfl'], \PDO::PARAM_INT);
+    $getSt->bindParam (1, $_POST['nameps'], PDO::PARAM_STR);
+    $getSt->bindParam (2, $_POST['namefl'], PDO::PARAM_STR);
+    $getSt->bindParam (3, $_POST['idfl'], PDO::PARAM_INT);
     
     $getSt->execute ();
     
@@ -46,10 +50,10 @@ try {
         '(NULL, ?, ?, ?, \'regular\', 0, 0, ?, 1)'
     );
     
-    $insertSt->bindParam (1, $_POST['nameps'], \PDO::PARAM_STR);
-    $insertSt->bindParam (2, $_POST['namefl'], \PDO::PARAM_STR);
-    $insertSt->bindParam (3, $_POST['idfl'], \PDO::PARAM_INT);
-    $insertSt->bindParam (4, $_POST['registrationdate'], \PDO::PARAM_STR);
+    $insertSt->bindParam (1, $_POST['nameps'], PDO::PARAM_STR);
+    $insertSt->bindParam (2, $_POST['namefl'], PDO::PARAM_STR);
+    $insertSt->bindParam (3, $_POST['idfl'], PDO::PARAM_INT);
+    $insertSt->bindParam (4, $_POST['registrationdate'], PDO::PARAM_STR);
     
     $insertSt->execute ();
 
@@ -60,8 +64,8 @@ try {
     $getIdStatement = $db->prepare ('SELECT MAX(player_id) AS player_id FROM players');
     $getIdStatement->execute ();
     
-    $id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->player_id;
-} catch (\PDOException $e) {
+    $id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
+} catch (PDOException $e) {
     Logger::log('adding player failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
 	exit();

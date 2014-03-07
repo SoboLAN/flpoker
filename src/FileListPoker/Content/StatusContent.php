@@ -2,6 +2,9 @@
 
 namespace FileListPoker\Content;
 
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
@@ -32,7 +35,7 @@ class StatusContent
             
             $standings = array();
             
-            while($row = $result->fetch(\PDO::FETCH_OBJ)) {
+            while($row = $result->fetch(PDO::FETCH_OBJ)) {
                 $standings[] = array(
                     'player_id' => $row->player_id,
                     'name_pokerstars' => $row->name_pokerstars,
@@ -40,7 +43,7 @@ class StatusContent
                 );
             }
             
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatusContent::getCurrentStandings failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -98,7 +101,7 @@ class StatusContent
             
             $finalTables = array();
             
-            while($row = $result->fetch(\PDO::FETCH_OBJ)) {
+            while($row = $result->fetch(PDO::FETCH_OBJ)) {
                 $finalTables[] = array(
                     'player_id' => $row->player_id,
                     'name_pokerstars' => $row->name_pokerstars,
@@ -106,7 +109,7 @@ class StatusContent
                 );
             }
             
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             $message = "calling StatusContent::getFinalTables failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);

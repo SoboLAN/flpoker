@@ -1,6 +1,10 @@
 <?php
 
 require_once 'autoload.php';
+
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
 use FileListPoker\Main\Config;
@@ -28,27 +32,27 @@ try {
     $db = Database::getConnection();
     
     $getIdStatement = $db->prepare ('SELECT player_id FROM players WHERE name_filelist=?');
-    $getIdStatement->bindParam (1, $_POST['player'], \PDO::PARAM_STR);
+    $getIdStatement->bindParam (1, $_POST['player'], PDO::PARAM_STR);
     $getIdStatement->execute ();
 
     if ($getIdStatement->rowCount () !== 1) {
         die('player does not exist');
     } else {
-        $pid = $getIdStatement->fetch (\PDO::FETCH_OBJ)->player_id;
+        $pid = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
     }
 
     $insertSt = $db->prepare ('INSERT INTO prizes (prize_id, player_id, prize, cost, date_bought, prize_type) ' .
                             'VALUES ' .
                             '(NULL, ?, ?, ?, ?, \'new\')');
 
-    $insertSt->bindParam (1, $pid, \PDO::PARAM_INT);
-    $insertSt->bindParam (2, $_POST['prize'], \PDO::PARAM_STR);
-    $insertSt->bindParam (3, $_POST['cost'], \PDO::PARAM_INT);
-    $insertSt->bindParam (4, $_POST['purchasedate'], \PDO::PARAM_STR);
+    $insertSt->bindParam (1, $pid,\PDO::PARAM_INT);
+    $insertSt->bindParam (2, $_POST['prize'], PDO::PARAM_STR);
+    $insertSt->bindParam (3, $_POST['cost'], PDO::PARAM_INT);
+    $insertSt->bindParam (4, $_POST['purchasedate'], PDO::PARAM_STR);
 
     $insertSt->execute ();
     $rows = $insertSt->rowCount ();
-} catch (\PDOException $e) {
+} catch (PDOException $e) {
     Logger::log('adding prize failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
 	exit();

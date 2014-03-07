@@ -1,6 +1,10 @@
 <?php
 
 require_once 'autoload.php';
+
+use PDO;
+use PDOException;
+
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Logger;
 use FileListPoker\Main\Config;
@@ -31,13 +35,13 @@ try {
         if ($_POST["player$i"] == 'NULL') {
             $id = 'NULL';
         } else {
-            $getIdStatement->bindParam (1, $_POST["player$i"], \PDO::PARAM_STR);
+            $getIdStatement->bindParam (1, $_POST["player$i"], PDO::PARAM_STR);
             $getIdStatement->execute ();
 
             if ($getIdStatement->rowCount () !== 1) {
                 break;
             } else {
-                $id = $getIdStatement->fetch (\PDO::FETCH_OBJ)->player_id;
+                $id = $getIdStatement->fetch (PDO::FETCH_OBJ)->player_id;
             }
             
             $getIdStatement->closeCursor();
@@ -54,7 +58,7 @@ try {
     $result = $db->exec ('INSERT INTO results(player_id, tournament_id, points, position) ' .
                         'VALUES ' .
                         implode (',', $insertResults));
-} catch (\PDOException $e) {
+} catch (PDOException $e) {
     Logger::log('adding result failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
 	exit();
