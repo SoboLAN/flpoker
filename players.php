@@ -33,7 +33,7 @@ try {
     
     //get the players
     $playersPage = new PlayersContent();
-    $players = $playersPage->getContent($page, $perPage);
+    $players = $playersPage->getPlayers($page, $perPage);
     
     if (count($players) == 0) {
         $message = 'Non-existent page specified when acccessing players.php';
@@ -52,10 +52,15 @@ try {
     $paginationRenderer = new PaginationRenderer($site);
     
     //render players
-    $playersContent = $playersRenderer->render($playersTpl, $players, $page, $perPage);
+    $renderedPlayers = $playersRenderer->render($playersTpl, $players, $page, $perPage);
     
     //render pagination
-    $paginationContent = $paginationRenderer->render($paginationBlockTpl, $paginationElementTpl, $pagination);
+    $renderedPagination = $paginationRenderer->render(
+        $paginationBlockTpl,
+        $paginationElementTpl,
+        $pagination,
+        'players.php'
+    );
     
     $htmlout = $site->getFullPageTemplate('players.php');
 
@@ -81,7 +86,7 @@ try {
 
 $htmlout = str_replace(
     array('{content_type_id}', '{page_content}', '{pagination}', '{bottom_page_scripts}'),
-    array('content-narrower', $playersContent, $paginationContent, ''),
+    array('content-narrower', $renderedPlayers, $renderedPagination, ''),
     $htmlout
 );
     

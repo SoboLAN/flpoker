@@ -1,1 +1,1 @@
-<a {current} title="{title}" href="players.php?page={page}">{text}</a>
+<a {current} title="{title}" href="{file}?page={page}">{text}</a>

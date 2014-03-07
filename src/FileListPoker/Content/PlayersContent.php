@@ -56,7 +56,7 @@ class PlayersContent
      * <li>current points</li>
      * </ul>
      */
-    public function getContent($page, $perPage)
+    public function getPlayers($page, $perPage)
     {
         if (! is_null($this->cache)) {
             $key = $this->buildCacheKey(Config::getValue('cache_key_players'), $page, $perPage);

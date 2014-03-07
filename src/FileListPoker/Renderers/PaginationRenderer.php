@@ -16,7 +16,7 @@ class PaginationRenderer
         $this->site = $site;
     }
     
-    public function render($blockTpl, $elementTpl, $content)
+    public function render($blockTpl, $elementTpl, $content, $file)
     {
         $elements = array();
         for ($i = 0; $i < count($content); $i++) {
@@ -52,8 +52,8 @@ class PaginationRenderer
             }
             
             $elements[$i] = str_replace(
-                array('{current}', '{title}', '{page}', '{text}'),
-                array($current, $title, $page, $text),
+                array('{current}', '{title}', '{file}', '{page}', '{text}'),
+                array($current, $title, $file, $page, $text),
                 $elementTpl
             );
         }
