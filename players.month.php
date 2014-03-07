@@ -11,7 +11,7 @@ try {
     $site = new Site();
 
     $playersMonthPage = new PlayersMonthContent();
-    $players = $playersMonthPage->getContent();
+    $players = $playersMonthPage->getPlayersOfTheMonth();
     
     $renderer = new PlayersMonthRenderer($site);
 

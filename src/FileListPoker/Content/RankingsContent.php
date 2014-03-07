@@ -78,7 +78,7 @@ class RankingsContent
                 'ORDER BY player_id ASC'
             );
         } catch (\PDOException $e) {
-            $message = "calling RankingsPage::getTopPlayersAllTime failed";
+            $message = "calling RankingsContent::getTopPlayersAllTime failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -161,7 +161,7 @@ class RankingsContent
                 'LIMIT 50'
             );
         } catch (\PDOException $e) {
-            $message = "calling RankingsPage::getMostActive50Players failed";
+            $message = "calling RankingsContent::getMostActive50Players failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -224,7 +224,7 @@ class RankingsContent
             );
             
         } catch (\PDOException $e) {
-            $message = "calling RankingsPage::getTop40Players6Months failed";
+            $message = "calling RankingsContent::getTop40Players6Months failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -286,7 +286,7 @@ class RankingsContent
             );
             
         } catch (\PDOException $e) {
-            $message = "calling RankingsPage::getTop50FinalTables failed";
+            $message = "calling RankingsContent::getTop50FinalTables failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

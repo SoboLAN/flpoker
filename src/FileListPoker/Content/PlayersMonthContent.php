@@ -24,7 +24,7 @@ class PlayersMonthContent
      * <li>year of obtaining the distinction</li>
      * </ul>
      */
-    public function getContent()
+    public function getPlayersOfTheMonth()
     {
         $db = Database::getConnection();
 
@@ -43,7 +43,7 @@ class PlayersMonthContent
                 'ORDER BY m.award_year DESC, m.award_month DESC'
             );
         } catch (\PDOException $e) {
-            $message = "calling PlayersMonthPage::getContent failed";
+            $message = "calling PlayersMonthContent::getPlayersOfTheMonth failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

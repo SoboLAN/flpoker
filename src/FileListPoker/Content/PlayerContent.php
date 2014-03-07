@@ -157,7 +157,7 @@ class PlayerContent
             $silver_medals = $medalsObj->silver_medals;
             $bronze_medals = $medalsObj->bronze_medals;
         } catch (\PDOException $e) {
-            $message = "calling PlayerPage::getGeneral with player id $pid failed";
+            $message = "calling PlayerContent::getGeneral with player id $pid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -237,7 +237,7 @@ class PlayerContent
                 $history[] = $row;
             }
         } catch (\PDOException $e) {
-            $message = "calling PlayerPage::getTournamentHistory with player id $pid failed";
+            $message = "calling PlayerContent::getTournamentHistory with player id $pid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -298,7 +298,7 @@ class PlayerContent
                 $bonuses[] = $row;
             }
         } catch (\PDOException $e) {
-            $message = "calling PlayerPage::getBonuses with player id $pid failed";
+            $message = "calling PlayerContent::getBonuses with player id $pid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -356,7 +356,7 @@ class PlayerContent
                 $prizes[] = $row;
             }
         } catch (\PDOException $e) {
-            $message = "calling PlayerPage::getPrizes with player id $pid failed";
+            $message = "calling PlayerContent::getPrizes with player id $pid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

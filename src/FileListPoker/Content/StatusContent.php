@@ -41,7 +41,7 @@ class StatusContent
             }
             
         } catch (\PDOException $e) {
-            $message = "calling StatusPage::getCurrentStandings failed";
+            $message = "calling StatusContent::getCurrentStandings failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -107,7 +107,7 @@ class StatusContent
             }
             
         } catch (\PDOException $e) {
-            $message = "calling StatusPage::getFinalTables failed";
+            $message = "calling StatusContent::getFinalTables failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

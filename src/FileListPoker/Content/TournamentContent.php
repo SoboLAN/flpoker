@@ -29,7 +29,7 @@ class TournamentContent
             $tournamentSt->execute();
             $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(\PDO::FETCH_OBJ);
         } catch (\PDOException $e) {
-            $message = "calling TournamentPage::getTournamentDetails with tournament id $tid failed";
+            $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -70,7 +70,7 @@ class TournamentContent
                 $results[] = $row;
             }
         } catch (\PDOException $e) {
-            $message = "calling TournamentPage::getTournamentResults with tournament id $tid failed";
+            $message = "calling TournamentContent::getTournamentResults with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -114,7 +114,7 @@ class TournamentContent
                 );
             }
         } catch (\PDOException $e) {
-            $message = "calling TournamentPage::getTournamentBonuses with tournament id $tid failed";
+            $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

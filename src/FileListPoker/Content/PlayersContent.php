@@ -101,7 +101,7 @@ class PlayersContent
                 'ORDER BY player_id ASC'
             );
         } catch (\PDOException $e) {
-            $message = "calling PlayersPage::getContent failed";
+            $message = "calling PlayersContent::getPlayers failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -152,7 +152,7 @@ class PlayersContent
             $players = $db->query('SELECT COUNT(*) AS players FROM players');
 
         } catch (\PDOException $e) {
-            $message = "calling PlayersPage::getPlayersCount failed";
+            $message = "calling PlayersContent::getPlayersCount failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }

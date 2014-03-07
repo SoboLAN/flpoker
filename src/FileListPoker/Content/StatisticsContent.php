@@ -52,7 +52,7 @@ class StatisticsContent
                 'ORDER BY year ASC, month ASC'
             );
         } catch (\PDOException $e) {
-            $message = "calling StatisticsPage::getTournamentsGraph failed";
+            $message = "calling StatisticsContent::getTournamentsGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -102,7 +102,7 @@ class StatisticsContent
                 'ORDER BY join_year ASC, join_month ASC'
             );
         } catch (\PDOException $e) {
-            $message = "calling StatisticsPage::getRegistrationsGraph failed";
+            $message = "calling StatisticsContent::getRegistrationsGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -156,7 +156,7 @@ class StatisticsContent
                 'ORDER BY tournament_year ASC, tournament_month ASC'
             );
         } catch (\PDOException $e) {
-            $message = "calling StatisticsPage::getAggressionGraph failed";
+            $message = "calling StatisticsContent::getAggressionGraph failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
@@ -215,7 +215,7 @@ class StatisticsContent
             
             $tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
         } catch (\PDOException $e) {
-            $message = "calling StatisticsPage::getGeneralStatistics failed";
+            $message = "calling StatisticsContent::getGeneralStatistics failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
