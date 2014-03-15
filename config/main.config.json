@@ -35,7 +35,7 @@
 	"path_jqueryui": "js/jquery-ui-1.10.4.custom.js",
 	"path_highcharts": "js/highcharts/highcharts.src.js",
 	"path_highcharts_export": "js/highcharts/modules/exporting.src.js",
-	"players_pagination_page_size": 200,
+	"players_pagination_page_size": 300,
 	"players_pagination_width": 5,
 	"tournaments_pagination_page_size": 50,
 	"tournaments_pagination_width": 3
