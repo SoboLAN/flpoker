@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 27, 2014 at 11:48 PM
+-- Generation Time: Apr 20, 2014 at 03:41 PM
 -- Server version: 5.1.73-cll
 -- PHP Version: 5.4.23
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=396 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=398 ;
 
 --
 -- Dumping data for table `bonus_points`
@@ -436,7 +436,9 @@ INSERT INTO `bonus_points` (`bonus_id`, `player_id`, `bonus_value`, `tournament_
 (392, 116, 20, 164, '4 Final Tables in March 2014', '2014-03-27'),
 (393, 1, 20, 164, '4 Final Tables in March 2014', '2014-03-27'),
 (394, 175, 30, 164, '5 Final Tables in March 2014', '2014-03-27'),
-(395, 116, 20, 164, 'Player of the Month in March 2014', '2014-03-27');
+(395, 116, 20, 164, 'Player of the Month in March 2014', '2014-03-27'),
+(396, 283, 2, 165, 'Straight Flush', '2014-04-01'),
+(397, 51, 2, 166, 'Straight Flush', '2014-04-03');
 
 -- --------------------------------------------------------
 
@@ -452,6 +454,7 @@ CREATE TABLE IF NOT EXISTS `cache` (
   UNIQUE KEY `cache_key` (`cache_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `players`
@@ -468,7 +471,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `join_date` date DEFAULT NULL,
   `is_member_of_club` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=945 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
 
 --
 -- Dumping data for table `players`
@@ -1376,19 +1379,19 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (903, 'cncosmin', 'cncosmin', 854412, 'regular', 0, 0, '2013-11-02', 1),
 (904, 'ALEX_rey', 'alexstelistu95', 1125817, 'regular', 0, 0, '2013-11-05', 1),
 (905, 'Kse7en7', 'Kseven', 67718, 'regular', 0, 0, '2013-11-05', 1),
-(906, 'adelu806', 'adrian2', 720825, 'regular', 0, 0, '2013-11-08', 1),
+(906, 'adelu806', 'adrian2', 720825, 'regular', 0, 0, '2013-11-05', 1),
 (907, 'D4N3L93', 'ManiackMFD', 173360, 'regular', 0, 0, '2013-11-08', 1),
-(908, 'dracmic', 'dracmic', 274248, 'regular', 0, 0, '2013-11-08', 1),
-(909, 'gugucris', 'gugucoca', 560600, 'regular', 0, 0, '2013-11-08', 1),
-(910, 'DeFuZe_MW2', 'Alberto94', 173340, 'regular', 0, 0, '2013-11-15', 1),
-(911, 'verdey2000', 'joker199', 1124179, 'regular', 0, 0, '2013-11-25', 1),
-(912, 'Ubisoft_fl', 'Ubisoft', 1126452, 'regular', 0, 0, '2013-11-27', 1),
+(908, 'dracmic', 'dracmic', 274248, 'regular', 0, 0, '2013-11-05', 1),
+(909, 'gugucris', 'gugucoca', 560600, 'regular', 0, 0, '2013-11-01', 1),
+(910, 'DeFuZe_MW2', 'Alberto94', 173340, 'regular', 0, 0, '2013-11-14', 1),
+(911, 'verdey2000', 'joker199', 1124179, 'regular', 0, 0, '2013-12-10', 1),
+(912, 'Ubisoft_fl', 'Ubisoft', 1126452, 'regular', 0, 0, '2013-11-26', 1),
 (913, 'CostyZZZ', 'Lil_wizzy94', 515778, 'regular', 0, 0, '2013-11-28', 1),
 (914, 'scorpion13th', 'fardetrabant', 341381, 'regular', 0, 0, '2013-12-03', 1),
 (915, 'alexandrukol', 'alexandrukol93', 1125778, 'regular', 0, 0, '2013-12-03', 1),
 (916, 'Dennys9107', 'lovingDenis', 355029, 'regular', 0, 0, '2013-12-07', 1),
 (917, 'bad_wolf250', 'Joker_ccu', 1127166, 'regular', 0, 0, '2013-12-07', 1),
-(918, 'AMG * Freakz', 'AMG13', 714936, 'regular', 0, 0, '2013-12-18', 1),
+(918, 'AMG * Freakz', 'AMG13', 714936, 'regular', 0, 0, '2013-12-17', 1),
 (919, 'valeria.2014', 'martupanca', 414195, 'regular', 0, 0, '2013-12-23', 1),
 (920, 'SMihaitza', 'PiXxX', 7593078, 'regular', 0, 0, '2013-12-26', 1),
 (921, 'Syncpp', 'FragersCreative', 462612, 'regular', 0, 0, '2014-01-02', 1),
@@ -1400,21 +1403,26 @@ INSERT INTO `players` (`player_id`, `name_pokerstars`, `name_filelist`, `id_file
 (927, 'Senzatiefac', 'bgeo', 536569, 'regular', 0, 0, '2014-01-30', 1),
 (928, 'czfrn', 'florinx', 34342, 'regular', 0, 0, '2014-01-30', 1),
 (929, 'yooooo28', 'yooooo28', 8323168, 'regular', 0, 0, '2014-01-30', 1),
-(930, 'rebelzone21', 'rebelzone21', 860194, 'regular', 0, 0, '2014-02-05', 1),
-(931, '2xf_viorel', 'fviorel', 1115194, 'regular', 0, 0, '2014-02-15', 1),
-(932, 'andreyka3008', 'amfisa', 643991, 'regular', 0, 0, '2014-02-15', 1),
-(933, 'ProAlecks', 'ElectronicBoy11', 538227, 'regular', 0, 0, '2014-02-15', 1),
-(934, 'RaduCGeorge', 'RaduGeorgee', 1122678, 'regular', 0, 0, '2014-02-15', 1),
+(930, 'rebelzone21', 'rebelzone21', 860194, 'regular', 0, 0, '2014-01-30', 1),
+(931, '2xf_viorel', 'fviorel', 1115194, 'regular', 0, 0, '2014-01-05', 1),
+(932, 'andreyka3008', 'amfisa', 643991, 'regular', 0, 0, '2014-01-31', 1),
+(933, 'ProAlecks', 'ElectronicBoy11', 538227, 'regular', 0, 0, '2014-01-09', 1),
+(934, 'RaduCGeorge', 'RaduGeorgee', 1122678, 'regular', 0, 0, '2014-01-10', 1),
 (935, 'ReluTM', 'relucu88', 957133, 'regular', 0, 0, '2014-02-15', 1),
-(936, 'Warrchief', 'Idy', 596210, 'regular', 0, 0, '2014-02-20', 1),
-(937, 'Crsbanimaker', 'KCristian', 591803, 'regular', 0, 0, '2014-02-26', 1),
+(936, 'Warrchief', 'Idy', 596210, 'regular', 0, 0, '2014-02-18', 1),
+(937, 'Crsbanimaker', 'KCristian', 591803, 'regular', 0, 0, '2014-02-25', 1),
 (938, 'TommelRO', 'Tommel', 461838, 'regular', 0, 0, '2014-02-28', 1),
 (939, 'CocorMarian', 'Yuukimaru', 892239, 'regular', 0, 0, '2014-03-04', 1),
-(940, 'CryGhostCry', 'GhostCry', 311970, 'regular', 0, 0, '2014-03-13', 1),
+(940, 'CryGhostCry', 'GhostCry', 311970, 'regular', 0, 0, '2014-03-12', 1),
 (941, 'Stresszu', 'raygner', 166991, 'regular', 0, 0, '2014-03-15', 1),
-(942, 'a3dess', 'a3dess', 343640, 'regular', 0, 0, '2014-03-15', 1),
+(942, 'a3dess', 'a3dess', 343640, 'regular', 0, 0, '2014-02-18', 1),
 (943, 'pokerstarlle', 'lucianman11', 546726, 'regular', 0, 0, '2014-03-25', 1),
-(944, 'EagleC95', 'catalin100000', 452288, 'regular', 0, 0, '2014-03-27', 1);
+(944, 'EagleC95', 'catalin100000', 452288, 'regular', 0, 0, '2014-03-26', 1),
+(945, 'Lord.Alex9', 'PopShop', 1128440, 'regular', 0, 0, '2014-04-09', 1),
+(946, '47zmeu', 'george93bb', 923564, 'regular', 0, 0, '2014-03-18', 1),
+(947, 'DUDU130788', 'madlain', 405323, 'regular', 0, 0, '2014-03-31', 1),
+(948, 'wickeddog69', 'wickeddog', 323950, 'regular', 0, 0, '2014-04-06', 1),
+(949, 'BlueGun11', 'andrey0510', 593179, 'regular', 0, 0, '2014-04-18', 1);
 
 -- --------------------------------------------------------
 
@@ -1468,7 +1476,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=120 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- Dumping data for table `prizes`
@@ -1581,18 +1589,25 @@ INSERT INTO `prizes` (`prize_id`, `player_id`, `prize`, `cost`, `date_bought`, `
 (104, 10, '1 TB Upload', 200, '2013-11-05', 'new'),
 (105, 32, 'Permanent VIP', 400, '2013-11-05', 'new'),
 (106, 15, 'Permanent VIP', 400, '2013-11-07', 'new'),
-(107, 25, 'Vip Permanent', 400, '2013-11-13', 'new'),
-(108, 20, 'Vip Permanent', 400, '2013-11-23', 'new'),
+(107, 25, 'Permanent VIP', 400, '2013-11-13', 'new'),
+(108, 20, 'Permanent VIP', 400, '2013-11-23', 'new'),
 (109, 154, 'FileList Account Name Change', 200, '2013-12-17', 'new'),
 (110, 45, 'FileList Account Name Change', 200, '2013-12-21', 'new'),
 (111, 169, 'Permanent VIP', 400, '2014-01-15', 'new'),
 (112, 16, 'Permanent VIP', 400, '2014-01-17', 'new'),
 (113, 12, 'FileList Account Name Change', 200, '2014-01-22', 'new'),
 (114, 840, 'Permanent VIP', 400, '2014-02-01', 'new'),
-(115, 10, '2TB Upload', 300, '2014-02-09', 'new'),
-(116, 18, '2 invitatii pe cont', 50, '2014-02-24', 'new'),
+(115, 10, '2 TB Upload', 300, '2014-02-09', 'new'),
+(116, 18, '2 Invitations', 50, '2014-02-24', 'new'),
 (117, 77, 'FileList Account Name Change', 200, '2014-02-26', 'new'),
-(119, 511, '1 TB upload', 200, '2014-03-22', 'new');
+(119, 511, '1 TB Upload', 200, '2014-03-22', 'new'),
+(120, 204, '2 TB Upload', 300, '2014-04-02', 'new'),
+(121, 182, '100 GB Upload', 40, '2014-04-06', 'new'),
+(122, 1, '6 TB upload', 900, '2014-04-09', 'new'),
+(123, 248, '2 invitatii pe cont', 50, '2014-04-13', 'new'),
+(124, 880, 'Trimiterea unei invitatii pe un tracker privat extern', 100, '2014-04-18', 'new'),
+(125, 37, 'Trimiterea unei invitatii pe un tracker privat extern', 100, '2014-04-18', 'new'),
+(126, 33, '2 TB upload', 300, '2014-04-18', 'new');
 
 -- --------------------------------------------------------
 
@@ -4758,7 +4773,118 @@ INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUE
 (899, 164, 4, 12),
 (1, 164, 3, 13),
 (880, 164, 2, 14),
-(23, 164, 1, 15);
+(23, 164, 1, 15),
+(204, 165, 30, 1),
+(97, 165, 27, 2),
+(899, 165, 25, 3),
+(890, 165, 23, 4),
+(25, 165, 21, 5),
+(131, 165, 19, 6),
+(930, 165, 17, 7),
+(2, 165, 15, 8),
+(17, 165, 13, 9),
+(873, 165, 10, 10),
+(10, 165, 9, 11),
+(42, 165, 8, 12),
+(169, 165, 7, 13),
+(141, 165, 6, 14),
+(283, 165, 5, 15),
+(46, 165, 4, 16),
+(943, 165, 3, 17),
+(83, 165, 2, 18),
+(886, 165, 1, 19),
+(8, 166, 30, 1),
+(51, 166, 27, 2),
+(97, 166, 25, 3),
+(651, 166, 23, 4),
+(27, 166, 21, 5),
+(10, 166, 19, 6),
+(283, 166, 17, 7),
+(555, 166, 15, 8),
+(890, 166, 13, 9),
+(42, 166, 10, 10);
+INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUES
+(12, 166, 9, 11),
+(880, 166, 8, 12),
+(16, 166, 7, 13),
+(204, 166, 6, 14),
+(175, 166, 5, 15),
+(887, 166, 4, 16),
+(212, 166, 3, 17),
+(116, 166, 2, 18),
+(169, 166, 1, 19),
+(10, 167, 30, 2),
+(42, 167, 27, 3),
+(283, 167, 25, 4),
+(41, 167, 23, 5),
+(874, 167, 21, 6),
+(876, 167, 19, 7),
+(891, 167, 17, 8),
+(899, 167, 15, 9),
+(25, 167, 13, 11),
+(2, 167, 10, 12),
+(83, 167, 9, 13),
+(82, 167, 8, 14),
+(873, 167, 7, 15),
+(93, 167, 6, 17),
+(193, 167, 5, 18),
+(154, 167, 4, 19),
+(1, 167, 3, 20),
+(6, 167, 2, 21),
+(890, 167, 1, 22),
+(17, 168, 30, 1),
+(10, 168, 27, 2),
+(679, 168, 25, 3),
+(876, 168, 23, 4),
+(891, 168, 21, 5),
+(506, 168, 19, 6),
+(216, 168, 17, 7),
+(899, 168, 15, 8),
+(12, 168, 13, 9),
+(169, 168, 10, 10),
+(890, 168, 9, 11),
+(97, 168, 8, 12),
+(154, 168, 7, 13),
+(53, 168, 6, 14),
+(2, 168, 5, 15),
+(887, 168, 4, 16),
+(83, 168, 3, 17),
+(42, 168, 2, 18),
+(43, 168, 1, 19),
+(16, 169, 30, 1),
+(880, 169, 27, 2),
+(42, 169, 25, 3),
+(34, 169, 23, 4),
+(53, 169, 21, 5),
+(37, 169, 19, 6),
+(876, 169, 17, 7),
+(43, 169, 15, 9),
+(137, 169, 13, 10),
+(142, 169, 10, 11),
+(1, 169, 9, 12),
+(11, 169, 8, 13),
+(41, 169, 7, 14),
+(12, 169, 6, 15),
+(31, 169, 5, 16),
+(17, 169, 4, 18),
+(83, 169, 3, 19),
+(13, 169, 2, 20),
+(890, 169, 1, 21),
+(116, 170, 21, 1),
+(511, 170, 19, 2),
+(12, 170, 17, 3),
+(27, 170, 15, 4),
+(34, 170, 13, 6),
+(880, 170, 10, 7),
+(16, 170, 9, 8),
+(9, 170, 8, 9),
+(97, 170, 7, 10),
+(10, 170, 6, 11),
+(146, 170, 5, 12),
+(11, 170, 4, 13),
+(154, 170, 3, 14),
+(204, 170, 2, 15),
+(930, 170, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -4773,7 +4899,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `participants` smallint(5) unsigned DEFAULT NULL,
   `duration` smallint(5) unsigned DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=165 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=171 ;
 
 --
 -- Dumping data for table `tournaments`
@@ -4937,7 +5063,13 @@ INSERT INTO `tournaments` (`tournament_id`, `tournament_date`, `tournament_type`
 (161, '2014-03-18', 'regular', 47, 152),
 (162, '2014-03-20', 'regular', 47, 147),
 (163, '2014-03-25', 'regular', 47, 200),
-(164, '2014-03-27', 'regular', 35, 168);
+(164, '2014-03-27', 'regular', 35, 168),
+(165, '2014-04-01', 'regular', 48, 200),
+(166, '2014-04-03', 'regular', 44, 174),
+(167, '2014-04-08', 'regular', 49, 184),
+(168, '2014-04-10', 'regular', 49, 205),
+(169, '2014-04-15', 'regular', 43, 152),
+(170, '2014-04-17', 'regular', 32, 187);
 
 --
 -- Constraints for dumped tables
