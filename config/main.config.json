@@ -7,7 +7,6 @@
     "lang_cookie_name": "lang",
     "lang_cookie_duration": 2592000,
 	"enable_logging": true,
-    "contact_email": "contact@flpoker.javafling.org",
 	"admin_pass": "myflpass1234do",
     "cache_lifetime_players": 60,
     "cache_lifetime_player_general": 60,
