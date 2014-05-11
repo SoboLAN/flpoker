@@ -7,7 +7,7 @@
     "lang_cookie_name": "lang",
     "lang_cookie_duration": 2592000,
 	"enable_logging": true,
-	"admin_pass": "myflpass1234do",
+	"admin_pass": "the_admin_pass",
     "cache_lifetime_players": 60,
     "cache_lifetime_player_general": 60,
     "cache_lifetime_players_alltime": 60,
