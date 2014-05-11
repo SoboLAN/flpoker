@@ -29,7 +29,6 @@ class Paginator
      * @param int $pageLength how many of the elements must be displayed in a page.
      * @param int $currentPage the requested page.
      * @param int $paginationWidth how many page links will be displayed.
-     * As you can see, the current page (4) is in the center.
      */
     public function __construct($totalElements, $pageLength, $currentPage, $paginationWidth)
     {
