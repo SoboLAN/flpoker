@@ -2,8 +2,8 @@
 
 namespace FileListPoker\Main;
 
-use PDO;
-use PDOException;
+use PDO as PDO;
+use PDOException as PDOException;
 
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;

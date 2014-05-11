@@ -15,7 +15,7 @@ use FileListPoker\Main\Logger;
 class Site
 {
     //current version of the site
-    private static $siteVersion = '1.3.3';
+    private static $siteVersion = '1.3.4';
     
     //keys represent the list of valid pages
     //the values represent the keys used for obtaining menu strings from the dictionary

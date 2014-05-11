@@ -2,8 +2,8 @@
 
 require_once 'autoload.php';
 
-use PDO;
-use PDOException;
+use PDO as PDO;
+use PDOException as PDOException;
 
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Database;

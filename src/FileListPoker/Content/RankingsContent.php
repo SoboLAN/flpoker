@@ -2,7 +2,7 @@
 
 namespace FileListPoker\Content;
 
-use PDOException;
+use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
