@@ -6,7 +6,6 @@ Description
 - Website dedicated to the FileList.ro poker club.
 - Published under the GPL v3 license.
 - Production version can be found at http://flpoker.javafling.org
-- Some pages/files have been removed from this repo for security reasons.
 
 Technical stuff
 
