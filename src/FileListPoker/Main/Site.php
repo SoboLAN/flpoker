@@ -124,7 +124,7 @@ class Site
             if (self::$highChartsDependency[$page]) {
                 $scriptFiles .= '<script src="' . Config::getValue('path_highcharts') . '"></script>';
                 $scriptFiles .= '<script src=' . Config::getValue('path_highcharts_export') . '></script>';
-                $scriptFiles .= '<script src="js/highcharts/themes/dark-blue.js"></script>';
+                $scriptFiles .= '<script src="js/highcharts/themes/dark-green.js"></script>';
             }
         }
         
