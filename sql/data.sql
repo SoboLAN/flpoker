@@ -456,13 +456,16 @@ INSERT INTO `bonus_points` (`bonus_id`, `player_id`, `bonus_value`, `tournament_
 (452, 13, 5, 189, '2 Final Tables in June 2014', '2014-06-26'),
 (453, 83, 5, 189, '2 Final Tables in June 2014', '2014-06-26'),
 (454, 887, 10, 189, '3 Final Tables in June 2014', '2014-06-26'),
-(455, 97, 10, 189, '3 Final Tables in June 2014', '2014-06-26'),
+(455, 97, 20, 189, '4 Final Tables in June 2014', '2014-06-26'),
 (456, 876, 10, 189, '3 Final Tables in June 2014', '2014-06-26'),
-(457, 12, 20, 189, '4 Final Tables in June 2014', '2014-06-26'),
-(458, 2, 20, 189, '4 Final Tables in June 2014', '2014-06-26'),
+(457, 12, 30, 189, '5 Final Tables in June 2014', '2014-06-26'),
+(458, 2, 30, 189, '5 Final Tables in June 2014', '2014-06-26'),
 (459, 204, 20, 189, '4 Final Tables in June 2014', '2014-06-26'),
 (460, 10, 30, 189, '5 Final Tables in June 2014', '2014-06-26'),
-(461, 2, 20, 189, 'Player of the Month in June 2014', '2014-06-26');
+(461, 2, 20, 189, 'Player of the Month in June 2014', '2014-06-26'),
+(462, 958, 5, 189, '2 Final Tables in June 2014', '2014-06-26'),
+(463, 59, 5, 189, '2 Final Tables in June 2014', '2014-06-26'),
+(464, 1, 5, 189, '2 Final Tables in June 2014', '2014-06-26');
 
 --
 -- Dumping data for table `players`
@@ -5133,7 +5136,19 @@ INSERT INTO `results` (`player_id`, `tournament_id`, `points`, `position`) VALUE
 (899, 189, 4, 9),
 (1, 189, 3, 10),
 (116, 189, 2, 11),
-(8, 189, 1, 12);
+(8, 189, 1, 12),
+(59, 190, 15, 1),
+(958, 190, 13, 2),
+(97, 190, 10, 3),
+(379, 190, 9, 4),
+(2, 190, 8, 5),
+(1, 190, 7, 6),
+(116, 190, 6, 7),
+(12, 190, 5, 9),
+(27, 190, 4, 10),
+(10, 190, 3, 11),
+(79, 190, 2, 12),
+(169, 190, 1, 13);
 
 --
 -- Dumping data for table `tournaments`
@@ -5322,4 +5337,5 @@ INSERT INTO `tournaments` (`tournament_id`, `tournament_date`, `tournament_type`
 (186, '2014-06-12', 'regular', 24, 131),
 (187, '2014-06-17', 'regular', 23, 170),
 (188, '2014-06-19', 'regular', 30, 194),
-(189, '2014-06-26', 'regular', 26, 146);
+(189, '2014-06-26', 'regular', 26, 146),
+(190, '2014-06-24', 'regular', 24, 150);
