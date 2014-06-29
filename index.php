@@ -9,7 +9,7 @@ try {
     $htmlout = $site->getFullPageTemplate('index.php');
 
 } catch (FLPokerException $ex) {
-    switch ($ex->getType()) {
+    switch ($ex->getCode()) {
         case FLPokerException::ERROR:
             header('Location: 500.shtml');
 			exit();

@@ -21,7 +21,7 @@ try {
     $htmlout = $site->getFullPageTemplate('players.month.php');
 
 } catch (FLPokerException $ex) {
-    switch ($ex->getType()) {
+    switch ($ex->getCode()) {
         case FLPokerException::ERROR:
             header('Location: 500.shtml');
 			exit();

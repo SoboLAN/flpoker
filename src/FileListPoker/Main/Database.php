@@ -86,7 +86,7 @@ class Database
         } catch (PDOException $e) {
             $message = 'There was an error while connecting to the database';
             $ex = new FLPokerException($message, FLPokerException::ERROR);
-            Logger::log("$message: " . $ex->getMessage());
+            Logger::log("$message: " . $e->getMessage());
             throw $ex;
         }
     }

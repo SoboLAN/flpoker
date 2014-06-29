@@ -17,17 +17,8 @@ class FLPokerException extends \Exception
     //use when the site is offline
     const SITE_OFFLINE = 3;
     
-    private $type;
-    
-    public function __construct($message, $type)
+    public function __construct($message, $code)
     {
-        parent::__construct($message, null, null);
-        
-        $this->type = $type;
-    }
-    
-    public function getType()
-    {
-        return $this->type;
+        parent::__construct($message, $code, null);
     }
 }
