@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=398 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=507 ;
 
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `join_date` date DEFAULT NULL,
   `is_member_of_club` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=950 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=976 ;
 
 --
 -- Table structure for table `players_of_the_month`
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `players_of_the_month` (
   `award_year` year(4) NOT NULL,
   PRIMARY KEY (`player_of_the_month_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Table structure for table `prizes`
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=152 ;
 
 --
 -- Table structure for table `results`
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `participants` smallint(5) unsigned DEFAULT NULL,
   `duration` smallint(5) unsigned DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=171 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=209 ;
 
 --
 -- Constraints for dumped tables
