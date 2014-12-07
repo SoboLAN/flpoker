@@ -75,10 +75,18 @@ $(document).ready(function()
         <label>Duration Minutes: </label>
         <input type="text" name="minutes" id="minutes" value="" />
     </div>
+    <div>
+        <label>Type: </label>
+        <select name="type">
+            <option value="regular" selected>Regular</option>
+            <option value="special">Special</option>
+        </select>
+    </div>
     <p>
         <label>Password: </label>
         <input type='password' name='flpokerpassword' id='flpokerpassword' value ='' />
     </p>
+    
     <input type='submit' value='Submit' id='submitbutton' />
 </form>
 <h2 style="font-weight:bold; color: red">WARNING: This cannot be undone. Be VERY SURE before submitting.</h2>
