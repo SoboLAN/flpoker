@@ -89,7 +89,6 @@ $(document).ready(function()
     
     <input type='submit' value='Submit' id='submitbutton' />
 </form>
-<h2 style="font-weight:bold; color: red">WARNING: This cannot be undone. Be VERY SURE before submitting.</h2>
 
 </body>
 </html>
