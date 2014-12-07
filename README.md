@@ -1,13 +1,12 @@
-FileList Poker
-=======
+# FileList Poker
 
-Description
+## Description
 
 - Website dedicated to the FileList.ro poker club.
 - Published under the GPL v3 license.
 - Production version can be found at http://flpoker.javafling.org
 
-Technical stuff
+## Technical stuff
 
 - Works with a MySQL database in the backend.
 - Requires at least version 5.3.x of PHP to work.
