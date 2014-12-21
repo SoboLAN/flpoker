@@ -27,7 +27,7 @@ try {
 } catch (\Exception $ex) {
     Logger::log("rendering add.player_month.form failed: " . $ex->getMessage());
     header('Location: 500.shtml');
-	exit();
+    exit();
 }
 
 echo '<!DOCTYPE html>

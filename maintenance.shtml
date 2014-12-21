@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>FileList Poker - Currently in Maintenance</title>
-		<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
-		<style type="text/css">
-			body {
-				background-color: #BCD5E1;
-				font: 0.85em Verdana;
-			}
-		</style>
-	</head>
-	<body>
-		<p>We're sorry, but the site is currently offline for maintenance operations.</p>
-		<p>Come back soon, these things don't usually take very long.</p>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>FileList Poker - Currently in Maintenance</title>
+        <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+        <style type="text/css">
+            body {
+                background-color: #BCD5E1;
+                font: 0.85em Verdana;
+            }
+        </style>
+    </head>
+    <body>
+        <p>We're sorry, but the site is currently offline for maintenance operations.</p>
+        <p>Come back soon, these things don't usually take very long.</p>
+    </body>
 </html>

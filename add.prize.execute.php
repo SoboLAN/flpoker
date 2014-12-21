@@ -55,7 +55,7 @@ try {
 } catch (PDOException $e) {
     Logger::log('adding prize failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
-	exit();
+    exit();
 }
 
 echo "Added $rows prize(s)";

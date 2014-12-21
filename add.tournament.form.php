@@ -17,7 +17,7 @@ try {
 } catch (FLPokerException $ex) {
     Logger::log("rendering add.tournament.form failed: " . $e->getMessage());
     header('Location: 500.shtml');
-	exit();
+    exit();
 }
 
 echo '<!DOCTYPE html>

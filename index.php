@@ -12,15 +12,15 @@ try {
     switch ($ex->getCode()) {
         case FLPokerException::ERROR:
             header('Location: 500.shtml');
-			exit();
+            exit();
             break;
         case FLPokerException::SITE_OFFLINE:
             header('Location: maintenance.shtml');
-			exit();
+            exit();
             break;
         default:
             header('Location: 500.shtml');
-			exit();
+            exit();
     }
 }
 

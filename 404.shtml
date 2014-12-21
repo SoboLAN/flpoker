@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>FileList Poker - Not Found</title>
-		<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
-		<style type="text/css">
-			body {
-				background-color: #BCD5E1;
-				font: 0.85em Verdana;
-			}
-		</style>
-	</head>
-	<body>
-		<h1>404 - Not Found</h1>
-		<p>You tried to access a resource on this site that doesn't exist.</p>
-		<p>If you believe this is incorrect and the resource should exist, contact the
-		webmaster and inform him of the situation.</p>
-		<p>It would be best to provide as many details as possible, including the exact
-		time when you made the request.</p>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>FileList Poker - Not Found</title>
+        <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+        <style type="text/css">
+            body {
+                background-color: #BCD5E1;
+                font: 0.85em Verdana;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>404 - Not Found</h1>
+        <p>You tried to access a resource on this site that doesn't exist.</p>
+        <p>If you believe this is incorrect and the resource should exist, contact the
+        webmaster and inform him of the situation.</p>
+        <p>It would be best to provide as many details as possible, including the exact
+        time when you made the request.</p>
+    </body>
 </html>

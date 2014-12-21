@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>FileList Poker - Server Error</title>
-		<link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
-		<style type="text/css">
-			body {
-				background-color: #BCD5E1;
-				font: 0.85em Verdana;
-			}
-		</style>
-	</head>
-	<body>
-		<h1>500 - Server Error</h1>
-		<p>The server encountered an error while processing your request.</p>
-		<p>The webmaster has been automatically informed about this and will try
-		to solve the problem as fast as possible.</p>
-		<p>You can try coming back later, it's likely the problem will be solved by then.</p>
-	</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>FileList Poker - Server Error</title>
+        <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+        <style type="text/css">
+            body {
+                background-color: #BCD5E1;
+                font: 0.85em Verdana;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>500 - Server Error</h1>
+        <p>The server encountered an error while processing your request.</p>
+        <p>The webmaster has been automatically informed about this and will try
+        to solve the problem as fast as possible.</p>
+        <p>You can try coming back later, it's likely the problem will be solved by then.</p>
+    </body>
 </html>

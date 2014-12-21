@@ -60,7 +60,7 @@ try {
 } catch (PDOException $e) {
     Logger::log('adding player of the month failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
-	exit();
+    exit();
 }
 
 echo "Added $rows player(s) of the month";

@@ -42,8 +42,8 @@ try {
         'VALUES ' .
         '(NULL, ?, ?, ?, ?)'
     );
-		
-	$duration = 60 * $_POST['hours'] + $_POST['minutes'];
+        
+    $duration = 60 * $_POST['hours'] + $_POST['minutes'];
     
     $insertSt->bindParam(1, $_POST['tournamentdate'], PDO::PARAM_STR);
     $insertSt->bindParam(2, $_POST['type'], PDO::PARAM_STR);
@@ -55,7 +55,7 @@ try {
     if ($insertSt->rowCount() !== 1) {
         Logger::log('adding tournament failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
         header('Location: 500.shtml');
-		exit();
+        exit();
     }
     
     $getIdStatement = $db->prepare('SELECT MAX(tournament_id) AS tournament_id FROM tournaments');
@@ -65,7 +65,7 @@ try {
 } catch (PDOException $e) {
     Logger::log('adding tournament failed with $_POST = ' . print_r($_POST, true) . ': ' . $e->getMessage());
     header('Location: 500.shtml');
-	exit();
+    exit();
 }
 
 echo "Added tournament with ID $id ({$_POST['tournamentdate']}).";

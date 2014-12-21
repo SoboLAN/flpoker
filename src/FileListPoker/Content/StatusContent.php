@@ -28,7 +28,7 @@ class StatusContent
                 'FROM tournaments t ' .
                 'WHERE MONTH(t.tournament_date) = MONTH(NOW()) ' .
                 'AND YEAR(t.tournament_date) = YEAR(NOW()) ' .
-				'AND t.tournament_type=\'regular\') ' .
+                'AND t.tournament_type=\'regular\') ' .
                 'GROUP BY p.player_id ' .
                 'ORDER BY points DESC'
             );
@@ -93,7 +93,7 @@ class StatusContent
                 'WHERE r.position <= 9 ' .
                 'AND MONTH(t.tournament_date) = MONTH(NOW()) ' .
                 'AND YEAR(t.tournament_date) = YEAR(NOW()) ' .
-				'AND t.tournament_type=\'regular\' ' .
+                'AND t.tournament_type=\'regular\' ' .
                 'GROUP BY r.player_id ' .
                 'HAVING final_tables > 1 ' .
                 'ORDER BY final_tables DESC'
