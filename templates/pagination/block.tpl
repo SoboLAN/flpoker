@@ -1,3 +1,3 @@
 <div class="pagination">
-	{elements}
+    {elements}
 </div>
