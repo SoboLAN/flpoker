@@ -1,6 +1,7 @@
 {
     "online": true,
     "default_lang": "ro",
+    "site_url": "http://localhost/flpoker/",
     "enable_google_analytics": false,
     "enable_cache": true,
     "cache_type": "db",

@@ -4,6 +4,7 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
+use FileListPoker\Main\Config;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -73,13 +74,14 @@ class StatusRenderer extends GeneralRenderer
         );
         
         $bonusList = '';
+        $siteURL = Config::getValue('site_url');
         for ($i = 0; $i < count($content); $i++) {
         
             if (count($content[$i]) > 1) {
 
                 $currentPlayers = array();
                 foreach ($content[$i] as $player) {
-                    $currentPlayers[] = '<a href="http://flpoker.javafling.org/player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a>';
+                    $currentPlayers[] = '<a href="' . $siteURL . 'player.php?id=' . $player['player_id'] . '">' . $player['name_pokerstars'] . '</a>';
                 }
 
                 $bonusList .= '<tr>
@@ -90,7 +92,7 @@ class StatusRenderer extends GeneralRenderer
             } else {
                 $bonusList .= '<tr>
                 <td>' . ($i + 1) . '</td>
-                <td><a href="http://flpoker.javafling.org/player.php?id=' . $content[$i][0]['player_id'] . '">' . $content[$i][0]['name_pokerstars'] . '</a></td>
+                <td><a href="' . $siteURL . 'player.php?id=' . $content[$i][0]['player_id'] . '">' . $content[$i][0]['name_pokerstars'] . '</a></td>
                 <td>' . $content[$i][0]['points'] . '</td></tr>';
             }
         }
