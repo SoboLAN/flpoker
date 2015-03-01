@@ -39,7 +39,7 @@ class TournamentsRenderer extends GeneralRenderer
         
         $tournamentsList = '';
         foreach ($content as $tournament) {
-            $typeLabelKey = $tournament['type'] == 'regular' ? 'tournaments_regular' : 'tournaments_special';
+            $typeLabelKey = $tournament['tournament_type'] == 'regular' ? 'tournaments_regular' : 'tournaments_special';
 
             $tournamentTime = mktime(0, 0, 0, $tournament['month'], $tournament['day'], $tournament['year']);
             $tournamentDate = date('l, j F Y', $tournamentTime);
@@ -55,7 +55,7 @@ class TournamentsRenderer extends GeneralRenderer
                 <td>' . $this->site->getWord($typeLabelKey) . '</td>
                 <td>' . $tournament['participants'] . '</td>
                 <td>
-                    <a href="tournament.php?id=' . $tournament['id'] . '">' .
+                    <a href="tournament.php?id=' . $tournament['tournament_id'] . '">' .
                         $this->site->getWord('tournaments_more_details') . '
                     </a>
                 </td>

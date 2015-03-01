@@ -30,7 +30,7 @@ class TournamentContent
             
             $tournamentSt->bindParam(1, $tid, PDO::PARAM_INT);
             $tournamentSt->execute();
-            $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(PDO::FETCH_OBJ);
+            $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed";
             Logger::log("$message: " . $e->getMessage());
@@ -38,18 +38,10 @@ class TournamentContent
         }
         
         if (! $tournament) {
-            return array ();
+            return array();
         }
         
-        return array(
-            'id' => $tournament->tournament_id,
-            'day' => $tournament->day,
-            'month' => $tournament->month,
-            'year' => $tournament->year,
-            'type' => $tournament->tournament_type,
-            'duration' => $tournament->duration,
-            'participants' => $tournament->participants
-        );
+        return $tournament;
     }
     
     public function getTournamentResults($tid)
@@ -69,7 +61,7 @@ class TournamentContent
             $resultsSt->execute();
             
             $results = array();
-            while ($row = $resultsSt->fetch(PDO::FETCH_OBJ)) {
+            while ($row = $resultsSt->fetch(PDO::FETCH_ASSOC)) {
                 $results[] = $row;
             }
         } catch (PDOException $e) {
@@ -78,17 +70,7 @@ class TournamentContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $final_result = array();
-        foreach ($results as $result) {
-            $final_result[] = array(
-                'player_id' => $result->player_id,
-                'name_pokerstars' => $result->name_pokerstars,
-                'points' => $result->points,
-                'position' => $result->position
-            );
-        }
-        
-        return $final_result;
+        return $results;
     }
     
     public function getTournamentBonuses($tid)
@@ -108,13 +90,8 @@ class TournamentContent
             $bonusesSt->execute();
             
             $bonuses = array();
-            while ($row = $bonusesSt->fetch(PDO::FETCH_OBJ)) {
-                $bonuses[] = array(
-                    'player_id' => $row->player_id,
-                    'name_pokerstars' => $row->name_pokerstars,
-                    'bonus_value' => $row->bonus_value,
-                    'bonus_description' => $row->bonus_description
-                );
+            while ($row = $bonusesSt->fetch(PDO::FETCH_ASSOC)) {
+                $bonuses[] = $row;
             }
         } catch (PDOException $e) {
             $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed";

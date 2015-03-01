@@ -59,24 +59,15 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmpresults as $r) {
-            $results[] = array(
-                'month' => $r->month,
-                'year' => $r->year,
-                'average_participants' => $r->average_participants
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_tournament_graph');
             
             $lifetime = Config::getValue('cache_lifetime_tournament_graph');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmpresults), $lifetime);
         }
         
-        return $results;
+        return $tmpresults;
     }
     
     public function getRegistrationsGraph()
@@ -109,24 +100,15 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmpresults as $r) {
-            $results[] = array(
-                'nr_players' => $r->nr_players,
-                'join_year' => $r->join_year,
-                'join_month' => $r->join_month
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_registrations_graph');
             
             $lifetime = Config::getValue('cache_lifetime_registrations_graph');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmpresults), $lifetime);
         }
         
-        return $results;
+        return $tmpresults;
     }
     
     public function getAggressionGraph()
@@ -163,24 +145,15 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmpresults as $r) {
-            $results[] = array(
-                'aggression_factor' => $r->aggression_factor,
-                'tournament_year' => $r->tournament_year,
-                'tournament_month' => $r->tournament_month
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_aggresion_graph');
             
             $lifetime = Config::getValue('cache_lifetime_aggresion_graph');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmpresults), $lifetime);
         }
         
-        return $results;
+        return $tmpresults;
     }
     
     public function getGeneralStatistics()
@@ -224,26 +197,26 @@ class StatisticsContent
         
         $totalPlayers = 0;
         foreach ($tmpplayercount as $pCount) {
-            $totalPlayers = $pCount->count;
+            $totalPlayers = $pCount['count'];
         }
         
         $totalTournaments = 0;
         foreach ($tmptournamentcount as $tCount) {
-            $totalTournaments = $tCount->count;
+            $totalTournaments = $tCount['count'];
         }
         
         $totalSpent = 0;
         foreach ($tmpspent1 as $spent) {
-            $totalSpent += $spent->players_spent;
+            $totalSpent += $spent['players_spent'];
         }
         
         foreach ($tmpspent2 as $spent) {
-            $totalSpent += $spent->cost;
+            $totalSpent += $spent['cost'];
         }
         
         foreach ($tmpallpoints as $r) {
             $results = array(
-                'total_points' => $r->total_points,
+                'total_points' => $r['total_points'],
                 'total_players' => $totalPlayers,
                 'total_tournaments' => $totalTournaments,
                 'total_spent' => $totalSpent

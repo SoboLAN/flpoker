@@ -79,29 +79,14 @@ class PlayersMonthContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $final_result = array();
-        
-        foreach ($players as $player) {
-            $final_result[] = array(
-                'id' => $player->player_id,
-                'id_filelist' => $player->id_filelist,
-                'name_filelist' => $player->name_filelist,
-                'name_pokerstars' => $player->name_pokerstars,
-                'member_type' => $player->member_type,
-                'month' => $player->award_month,
-                'year' => $player->award_year,
-                'points' => $player->points
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_of_the_month');
             
             $lifetime = Config::getValue('cache_lifetime_players_of_the_month');
             
-            $this->cache->save($key, json_encode($final_result), $lifetime);
+            $this->cache->save($key, json_encode($players), $lifetime);
         }
         
-        return $final_result;
+        return $players;
     }
 }

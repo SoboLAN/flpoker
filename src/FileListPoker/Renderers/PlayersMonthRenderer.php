@@ -41,7 +41,7 @@ class PlayersMonthRenderer extends GeneralRenderer
         
         $playersList = '';
         foreach ($content as $award) {
-            $awardTime = mktime(0, 0, 0, $award['month'], 2, $award['year']);
+            $awardTime = mktime(0, 0, 0, $award['award_month'], 2, $award['award_year']);
             $awardDate = date('F Y', $awardTime);
             
             if ($this->site->getLanguage() !== 'en') {
@@ -50,7 +50,7 @@ class PlayersMonthRenderer extends GeneralRenderer
 
             $playersList .=
             '<tr' . ($award['member_type'] == 'admin' ? ' class="admin-marker"' : '') . '>
-                <td><a href="player.php?id=' . $award['id'] . '">' . $award['name_pokerstars'] . '</a></td>
+                <td><a href="player.php?id=' . $award['player_id'] . '">' . $award['name_pokerstars'] . '</a></td>
                 <td>
                     <a href="http://filelist.ro/userdetails.php?id=' . $award['id_filelist'] . '">' .
                     $award['name_filelist'] . '</a>

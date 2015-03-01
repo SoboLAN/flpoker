@@ -174,9 +174,9 @@ class PlayerRenderer extends GeneralRenderer
                 $bDate = $this->translateDate($bDate, $this->site->getLanguage());
             }
             
-            $description = (is_null($bonus['description']) or empty($bonus['description'])) ?
+            $description = (is_null($bonus['bonus_description']) or empty($bonus['bonus_description'])) ?
                             '<span class="faded">unknown</span>' :
-                            $bonus['description'];
+                            $bonus['bonus_description'];
 
             $bonusList .=
             '<tr>

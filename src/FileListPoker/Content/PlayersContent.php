@@ -113,19 +113,19 @@ class PlayersContent
         $final_result = array();
         
         foreach ($players as $player) {
-            $currentResults = $this->arrayBinarySearch($this->results, 'points', $player->player_id);
-            $currentBonuses = $this->arrayBinarySearch($this->bonuses, 'bonus_value', $player->player_id);
-            $currentPrizes = $this->arrayBinarySearch($this->prizes, 'cost', $player->player_id);
+            $currentResults = $this->arrayBinarySearch($this->results, 'points', $player['player_id']);
+            $currentBonuses = $this->arrayBinarySearch($this->bonuses, 'bonus_value', $player['player_id']);
+            $currentPrizes = $this->arrayBinarySearch($this->prizes, 'cost', $player['player_id']);
 
-            $playerPoints = $player->initial_accumulated_points + $currentResults + $currentBonuses - $currentPrizes;
+            $points = $player['initial_accumulated_points'] + $currentResults + $currentBonuses - $currentPrizes;
             
             $final_result[] = array(
-                'player_id' => $player->player_id,
-                'id_filelist' => $player->id_filelist,
-                'name_pokerstars' => $player->name_pokerstars,
-                'name_filelist' => $player->name_filelist,
-                'member_type' => $player->member_type,
-                'points' => $playerPoints
+                'player_id' => $player['player_id'],
+                'id_filelist' => $player['id_filelist'],
+                'name_pokerstars' => $player['name_pokerstars'],
+                'name_filelist' => $player['name_filelist'],
+                'member_type' => $player['member_type'],
+                'points' => $points
             );
         }
         
@@ -160,7 +160,7 @@ class PlayersContent
         }
         
         foreach ($players as $row) {
-            $count = $row->players;
+            $count = $row['players'];
         }
         
         return $count;
@@ -204,12 +204,12 @@ class PlayersContent
         $bot = 0;
         while ($top >= $bot) {
             $p = floor(($top + $bot) / 2);
-            if ($array[$p]->player_id < $elem) {
+            if ($array[$p]['player_id'] < $elem) {
                 $bot = $p + 1;
-            } elseif ($array[$p]->player_id > $elem) {
+            } elseif ($array[$p]['player_id'] > $elem) {
                 $top = $p - 1;
             } else {
-                return $array[$p]->$type;
+                return $array[$p][$type];
             }
         }
        

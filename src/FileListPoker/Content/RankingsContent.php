@@ -97,17 +97,17 @@ class RankingsContent
         $final_result = array();
         
         foreach ($players as $player) {
-            $currentResults = $this->arrayBinarySearch($results, 'points', $player->player_id);
-            $currentBonuses = $this->arrayBinarySearch($bonuses, 'bonus_value', $player->player_id);
+            $currentResults = $this->arrayBinarySearch($results, 'points', $player['player_id']);
+            $currentBonuses = $this->arrayBinarySearch($bonuses, 'bonus_value', $player['player_id']);
 
-            $playerPoints = $player->initial_accumulated_points + $player->initial_spent_points +
+            $playerPoints = $player['initial_accumulated_points'] + $player['initial_spent_points'] +
                             $currentResults + $currentBonuses;
             
             $final_result[] = array(
-                'player_id' => $player->player_id,
-                'id_filelist' => $player->id_filelist,
-                'name_pokerstars' => $player->name_pokerstars,
-                'name_filelist' => $player->name_filelist,
+                'player_id' => $player['player_id'],
+                'id_filelist' => $player['id_filelist'],
+                'name_pokerstars' => $player['name_pokerstars'],
+                'name_filelist' => $player['name_filelist'],
                 'points' => $playerPoints
             );
         }
@@ -168,24 +168,15 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmpactive as $r) {
-            $results[] = array(
-                'player_id' => $r->player_id,
-                'name_pokerstars' => $r->name_pokerstars,
-                'count' => $r->count
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_mostactive');
             
             $lifetime = Config::getValue('cache_lifetime_players_mostactive');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmpactive), $lifetime);
         }
         
-        return $results;
+        return $tmpactive;
     }
     
     /**
@@ -231,24 +222,15 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmp6months as $r) {
-            $results[] = array(
-                'player_id' => $r->player_id,
-                'name_pokerstars' => $r->name_pokerstars,
-                'totalp' => $r->totalp
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_6months');
             
             $lifetime = Config::getValue('cache_lifetime_players_6months');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmp6months), $lifetime);
         }
         
-        return $results;
+        return $tmp6months;
     }
     
     /**
@@ -293,24 +275,15 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        foreach ($tmpfinaltables as $r) {
-            $results[] = array(
-                'player_id' => $r->player_id,
-                'name_pokerstars' => $r->name_pokerstars,
-                'final_tables' => $r->final_tables
-            );
-        }
-        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_final_tables');
             
             $lifetime = Config::getValue('cache_lifetime_final_tables');
             
-            $this->cache->save($key, json_encode($results), $lifetime);
+            $this->cache->save($key, json_encode($tmpfinaltables), $lifetime);
         }
         
-        return $results;
+        return $tmpfinaltables;
     }
     
     //This function will sort the associative array $arr by the column $col in the $dir direction.
@@ -333,12 +306,12 @@ class RankingsContent
         $bot = 0;
         while ($top >= $bot) {
             $p = floor(($top + $bot) / 2);
-            if ($array[$p]->player_id < $elem) {
+            if ($array[$p]['player_id'] < $elem) {
                 $bot = $p + 1;
-            } elseif ($array[$p]->player_id > $elem) {
+            } elseif ($array[$p]['player_id'] > $elem) {
                 $top = $p - 1;
             } else {
-                return $array[$p]->$type;
+                return $array[$p][$type];
             }
         }
        

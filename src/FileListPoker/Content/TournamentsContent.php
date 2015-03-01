@@ -43,15 +43,8 @@ class TournamentsContent
         }
 
         $final_result = array();
-        while ($row = $tmptournamentsSt->fetch(PDO::FETCH_OBJ)) {
-            $final_result[] = array(
-                'id' => $row->tournament_id,
-                'day' => $row->day,
-                'month' => $row->month,
-                'year' => $row->year,
-                'type' => $row->tournament_type,
-                'participants' => $row->participants
-            );
+        while ($row = $tmptournamentsSt->fetch(PDO::FETCH_ASSOC)) {
+            $final_result[] = $row;
         }
 
         return $final_result;
@@ -71,7 +64,7 @@ class TournamentsContent
         }
         
         foreach ($tournaments as $row) {
-            $count = $row->t_count;
+            $count = $row['t_count'];
         }
         
         return $count;

@@ -26,7 +26,7 @@ try {
     $tournamentPage = new TournamentContent();
     
     $details = $tournamentPage->getTournamentDetails($tid);
-    if (! isset($details['id'])) {
+    if (! isset($details['tournament_id'])) {
         $message = 'Non-existent tournament ID specified when acccessing tournament.php';
         Logger::log($message);
         throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);

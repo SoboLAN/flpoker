@@ -130,7 +130,7 @@ class PlayerContent
             
             $playerInfoSt->bindParam(1, $pid, PDO::PARAM_INT);
             $playerInfoSt->execute();
-            $playerInfo = $playerInfoSt->rowCount() == 0 ? false : $playerInfoSt->fetch(PDO::FETCH_OBJ);
+            $playerInfo = $playerInfoSt->rowCount() == 0 ? false : $playerInfoSt->fetch(PDO::FETCH_ASSOC);
             
             $resultsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $resultsSt->execute();
@@ -147,18 +147,18 @@ class PlayerContent
             $tournamentCountSt->bindParam(1, $pid, PDO::PARAM_INT);
             $tournamentCountSt->bindParam(2, $pid, PDO::PARAM_INT);
             $tournamentCountSt->execute();
-            $tCountRow = $tournamentCountSt->fetch(PDO::FETCH_OBJ);
-            $tournamentCount = $tCountRow->tcount;
-            $finalTables = $tCountRow->fcount;
+            $tCountRow = $tournamentCountSt->fetch(PDO::FETCH_ASSOC);
+            $tournamentCount = $tCountRow['tcount'];
+            $finalTables = $tCountRow['fcount'];
             
             $medalsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $medalsSt->bindParam(2, $pid, PDO::PARAM_INT);
             $medalsSt->bindParam(3, $pid, PDO::PARAM_INT);
             $medalsSt->execute();
-            $medalsObj = $medalsSt->fetch(PDO::FETCH_OBJ);
-            $gold_medals = $medalsObj->gold_medals;
-            $silver_medals = $medalsObj->silver_medals;
-            $bronze_medals = $medalsObj->bronze_medals;
+            $medalsObj = $medalsSt->fetch(PDO::FETCH_ASSOC);
+            $gold_medals = $medalsObj['gold_medals'];
+            $silver_medals = $medalsObj['silver_medals'];
+            $bronze_medals = $medalsObj['bronze_medals'];
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getGeneral with player id $pid failed";
             Logger::log("$message: " . $e->getMessage());
@@ -169,25 +169,21 @@ class PlayerContent
             return array();
         }
 
-        $points = $playerInfo->initial_accumulated_points + $results + $bonuses - $prizes;
-        $pointsAllTime = $playerInfo->initial_accumulated_points + $playerInfo->initial_spent_points +
+        $points = $playerInfo['initial_accumulated_points'] + $results + $bonuses - $prizes;
+        $pointsAllTime = $playerInfo['initial_accumulated_points'] + $playerInfo['initial_spent_points'] +
                             $results + $bonuses;
         
-        $final_result = array (
-            'id_filelist' => $playerInfo->id_filelist,
-            'name_pokerstars' => $playerInfo->name_pokerstars,
-            'name_filelist' => $playerInfo->name_filelist,
-            'month' => $playerInfo->month,
-            'day' => $playerInfo->day,
-            'year' => $playerInfo->year,
-            'member_type' => $playerInfo->member_type,
-            'points' => $points,
-            'tournament_count' => $tournamentCount,
-            'final_tables' => $finalTables,
-            'gold_medals' => $gold_medals,
-            'silver_medals' => $silver_medals,
-            'bronze_medals' => $bronze_medals,
-            'points_all_time' => $pointsAllTime
+        $final_result = array_merge(
+            $playerInfo,
+            array(
+                'points' => $points,
+                'tournament_count' => $tournamentCount,
+                'final_tables' => $finalTables,
+                'gold_medals' => $gold_medals,
+                'silver_medals' => $silver_medals,
+                'bronze_medals' => $bronze_medals,
+                'points_all_time' => $pointsAllTime
+            )
         );
         
         if (! is_null($this->cache)) {
@@ -236,7 +232,7 @@ class PlayerContent
             $historySt->execute();
             
             $history = array();
-            while ($row = $historySt->fetch(PDO::FETCH_OBJ)) {
+            while ($row = $historySt->fetch(PDO::FETCH_ASSOC)) {
                 $history[] = $row;
             }
         } catch (PDOException $e) {
@@ -245,21 +241,7 @@ class PlayerContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $final_result = array();
-        
-        foreach ($history as $tournament) {
-            $final_result[] = array (
-                'tournament_id' => $tournament->tournament_id,
-                'day' => $tournament->day,
-                'month' => $tournament->month,
-                'year' => $tournament->year,
-                'points' => $tournament->points,
-                'position' => $tournament->position
-                            
-            );
-        }
-        
-        return $final_result;
+        return $history;
     }
     
     /**
@@ -297,7 +279,7 @@ class PlayerContent
             $bonusesSt->execute();
             
             $bonuses = array();
-            while ($row = $bonusesSt->fetch(PDO::FETCH_OBJ)) {
+            while ($row = $bonusesSt->fetch(PDO::FETCH_ASSOC)) {
                 $bonuses[] = $row;
             }
         } catch (PDOException $e) {
@@ -306,20 +288,7 @@ class PlayerContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $final_result = array();
-        
-        foreach ($bonuses as $bonus) {
-            $final_result[] = array(
-                'tournament_id' => $bonus->tournament_id,
-                'day' => $bonus->day,
-                'month' => $bonus->month,
-                'year' => $bonus->year,
-                'bonus_value' => $bonus->bonus_value,
-                'description' => $bonus->bonus_description
-            );
-        }
-        
-        return $final_result;
+        return $bonuses;
     }
     
     /**
@@ -355,7 +324,7 @@ class PlayerContent
             $prizesSt->execute();
             
             $prizes = array();
-            while ($row = $prizesSt->fetch(PDO::FETCH_OBJ)) {
+            while ($row = $prizesSt->fetch(PDO::FETCH_ASSOC)) {
                 $prizes[] = $row;
             }
         } catch (PDOException $e) {
@@ -364,18 +333,6 @@ class PlayerContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $final_result = array();
-        
-        foreach ($prizes as $prize) {
-            $final_result[] = array (
-                'prize' => $prize->prize,
-                'day' => $prize->day,
-                'month' => $prize->month,
-                'year' => $prize->year,
-                'cost' => $prize->cost
-            );
-        }
-        
-        return $final_result;
+        return $prizes;
     }
 }

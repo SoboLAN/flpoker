@@ -20,7 +20,7 @@ class StatusContent
         $db = Database::getConnection();
         
         try {
-            $result = $db->query('SELECT p.player_id, p.name_pokerstars, SUM(r.points) AS points ' .
+            $results = $db->query('SELECT p.player_id, p.name_pokerstars, SUM(r.points) AS points ' .
                 'FROM players p ' .
                 'JOIN results r ON p.player_id = r.player_id ' .
                 'WHERE r.tournament_id IN ' .
@@ -33,41 +33,35 @@ class StatusContent
                 'ORDER BY points DESC'
             );
             
-            $standings = array();
-            
-            while($row = $result->fetch(PDO::FETCH_OBJ)) {
-                $standings[] = array(
-                    'player_id' => $row->player_id,
-                    'name_pokerstars' => $row->name_pokerstars,
-                    'points' => $row->points
-                );
-            }
-            
         } catch (PDOException $e) {
             $message = "calling StatusContent::getCurrentStandings failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        if (count($standings) == 0) {
+        if (count($results) == 0) {
             return array();
         }
         
+        $resultsArray = array();
+        foreach ($results as $result) {
+            $resultsArray[] = $result;
+        }
+        
         $finalResult = array();
-
-        for ($i = 0, $position = 0; $i < count($standings); $i++) {
+        for ($i = 0, $position = 0; $i < count($resultsArray); $i++) {
 
             $finalResult[$position] = array();
 
-            $finalResult[$position][] = $standings[$i];
+            $finalResult[$position][] = $resultsArray[$i];
 
             //if there is a next player (we maybe on the last) and that player has the
             //same number of points as the current one, then it means that the 2 players
             //occupy the same position
-            while (isset($standings[$i]) and
-                    isset($standings[$i + 1]) and
-                    $standings[$i]['points'] == $standings[$i + 1]['points']) {
-                $finalResult[$position][] = $standings[$i + 1];
+            while (isset($resultsArray[$i]) and
+                    isset($resultsArray[$i + 1]) and
+                    $resultsArray[$i]['points'] == $resultsArray[$i + 1]['points']) {
+                $finalResult[$position][] = $resultsArray[$i + 1];
                 $i++;
             }
 
@@ -99,22 +93,12 @@ class StatusContent
                 'ORDER BY final_tables DESC'
             );
             
-            $finalTables = array();
-            
-            while($row = $result->fetch(PDO::FETCH_OBJ)) {
-                $finalTables[] = array(
-                    'player_id' => $row->player_id,
-                    'name_pokerstars' => $row->name_pokerstars,
-                    'final_tables' => $row->final_tables
-                );
-            }
-            
         } catch (PDOException $e) {
             $message = "calling StatusContent::getFinalTables failed";
             Logger::log("$message: " . $e->getMessage());
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        return $finalTables;
+        return $result;
     }
 }

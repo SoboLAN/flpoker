@@ -31,8 +31,8 @@ class TournamentRenderer extends GeneralRenderer
             $tournamentDate = $this->translateDay($tournamentDate, $this->site->getLanguage());
         }
         
-        $type = $content['type'] == 'regular' ? $this->site->getWord('tournament_regular') :
-                                                $this->site->getWord('tournament_special');
+        $type = $content['tournament_type'] == 'regular' ? $this->site->getWord('tournament_regular') :
+                                                           $this->site->getWord('tournament_special');
         
         if (! empty($content['duration'])) {
             $hours = (int) ($content['duration'] / 60);
