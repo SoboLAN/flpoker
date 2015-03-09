@@ -1,24 +1,15 @@
 <?php
 
 require_once 'autoload.php';
+
+use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
-use FileListPoker\Main\FLPokerException;
 
-if (! Config::getValue('online')) {
-    header('Location: maintenance.shtml');
-    exit();
-}
+$site = new Site();
 
-try {
-    $jQueryPath = Config::getValue('path_jquery');
-    $jQueryUIPath = Config::getValue('path_jqueryui');
-    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
-} catch (FLPokerException $ex) {
-    Logger::log("rendering add.tournament.form failed: " . $e->getMessage());
-    header('Location: 500.shtml');
-    exit();
-}
+$jQueryPath = Config::getValue('path_jquery');
+$jQueryUIPath = Config::getValue('path_jqueryui');
+$jQueryCSSPath = Config::getValue('path_jqueryui_css');
 
 echo '<!DOCTYPE html>
 <html>
@@ -54,7 +45,7 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
  
 $(document).ready(function()
 {
-    $('#tournamentdate').datepicker ({dateFormat: 'yy-mm-dd'});
+    $('#tournamentdate').datepicker ({dateFormat: 'yy-mm-dd', firstDay: 1});
 });
 </script>
 

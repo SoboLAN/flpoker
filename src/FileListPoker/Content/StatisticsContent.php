@@ -8,7 +8,6 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains function that will return various statistics about the club.
@@ -54,8 +53,7 @@ class StatisticsContent
                 'ORDER BY year ASC, month ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getTournamentsGraph failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatisticsContent::getTournamentsGraph failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -95,8 +93,7 @@ class StatisticsContent
                 'ORDER BY join_year ASC, join_month ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getRegistrationsGraph failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatisticsContent::getRegistrationsGraph failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -140,8 +137,7 @@ class StatisticsContent
                 'ORDER BY tournament_year ASC, tournament_month ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getAggressionGraph failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatisticsContent::getAggressionGraph failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -190,8 +186,7 @@ class StatisticsContent
             
             $tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getGeneralStatistics failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatisticsContent::getGeneralStatistics failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

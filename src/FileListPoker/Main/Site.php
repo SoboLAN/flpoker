@@ -2,9 +2,7 @@
 
 namespace FileListPoker\Main;
 
-use FileListPoker\Main\Config;
-use FileListPoker\Main\Dictionary;
-use FileListPoker\Main\FLPokerException;
+use Exception as Exception;
 
 /**
  * Main class of the site. Handles dependencies, Google Analytics
@@ -18,6 +16,8 @@ class Site
     
     public function __construct()
     {
+        set_exception_handler(array($this, 'exceptionHandler'));
+        
         if (! Config::getValue('online')) {
             throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_OFFLINE);
         }
@@ -65,5 +65,43 @@ class Site
     public function isValidID($id)
     {
         return (strlen($id) <= 4 and ctype_digit($id));
+    }
+    
+    /**
+     * Global exception handler. This function will log all exceptions
+     * and redirect the user to the appropiate error page, depending on the situation.
+     * It's registered in this class's constructor, so it would be ideal to that the first thing
+     * every page does is create an instance of this class.
+     * 
+     * @param Exception $e the thrown Exception.
+     */
+    public function exceptionHandler(Exception $e)
+    {
+        Logger::log($e->getMessage());
+        
+        if ($e instanceof FLPokerException) {
+            switch ($e->getCode()) {
+                case FLPokerException::ERROR:
+                    header('HTTP/1.1 500 Internal Server Error');
+                    header('Location: 500.shtml');
+                    exit();
+                case FLPokerException::INVALID_REQUEST:
+                    header('HTTP/1.1 400 Bad Request');
+                    header('Location: 400.shtml');
+                    exit();
+                case FLPokerException::SITE_OFFLINE:
+                    header('HTTP/1.1 503 Service Unavailable');
+                    header('Location: maintenance.shtml');
+                    exit();
+                default:
+                    header('HTTP/1.1 500 Internal Server Error');
+                    header('Location: 500.shtml');
+                    exit();
+            }
+        } else {
+            header('HTTP/1.1 500 Internal Server Error');
+            header('Location: 500.shtml');
+            exit();
+        }
     }
 }

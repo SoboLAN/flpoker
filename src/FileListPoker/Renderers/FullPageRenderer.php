@@ -6,7 +6,6 @@ use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Dictionary;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -42,9 +41,7 @@ class FullPageRenderer extends GeneralRenderer
     public function renderPage($page)
     {
         if (! in_array($page, array_keys($this->pages))) {
-            $message = "Site::getFullPageTemplate received an invalid page: $page";
-            Logger::log($message);
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException("Site::getFullPageTemplate received an invalid page: $page", FLPokerException::ERROR);
         }
         
         $tpl = file_get_contents('templates/fullpage.tpl');

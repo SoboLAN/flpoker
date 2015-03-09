@@ -6,7 +6,6 @@ use PDO as PDO;
 use PDOException as PDOException;
 
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * Handles the construction of a PDO object capable of performing database operations.
@@ -44,7 +43,6 @@ class Database
     {
         if (! is_readable(self::$configPath)) {
             $ex = new FLPokerException('config file is inaccessible', FLPokerException::ERROR);
-            Logger::log($ex->getMessage());
             throw $ex;
         }
         
@@ -53,7 +51,6 @@ class Database
         
         if (is_null($dbConfig)) {
              $ex = new FLPokerException('config file is corrupt', FLPokerException::ERROR);
-             Logger::log($ex->getMessage());
              throw $ex;
         }
         
@@ -87,10 +84,8 @@ class Database
             $emulate_prepares = version_compare($serverversion, self::EMULATE_PREPARES_BELOW_VERSION, '<');
             self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
         } catch (PDOException $e) {
-            $message = 'There was an error while connecting to the database';
-            $ex = new FLPokerException($message, FLPokerException::ERROR);
-            Logger::log("$message: " . $e->getMessage());
-            throw $ex;
+            $message = 'There was an error while connecting to the database: ' . $e->getMessage();
+            throw new FLPokerException($message, FLPokerException::ERROR);
         }
     }
 }

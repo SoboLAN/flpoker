@@ -3,7 +3,6 @@
 namespace FileListPoker\Main;
 
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * Class that handles wording functionality a.k.a. labels of different languages on the site.
@@ -37,17 +36,13 @@ class Dictionary
             $fileName = str_replace('{lang}', $lang, self::$wordPath);
             
             if (! is_readable($fileName)) {
-                $ex = new FLPokerException('translation file is inaccessible', FLPokerException::ERROR);
-                Logger::log($ex->getMessage());
-                throw $ex;
+                throw new FLPokerException('translation file is inaccessible', FLPokerException::ERROR);
             }
             
             self::$words[$lang] = json_decode(file_get_contents($fileName), true);
             
             if (is_null(self::$words[$lang])) {
-                $ex = new FLPokerException('translation file is corrupt', FLPokerException::ERROR);
-                Logger::log($ex->getMessage());
-                throw $ex;
+                throw new FLPokerException('translation file is corrupt', FLPokerException::ERROR);
             }
         }
         

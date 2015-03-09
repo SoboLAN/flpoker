@@ -1,33 +1,25 @@
 <?php
 
 require_once 'autoload.php';
+
+use FileListPoker\Main\Site;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
 
-if (! Config::getValue('online')) {
-    header('Location: maintenance.shtml');
-    exit();
-}
+$site = new Site();
 
-try {
-    $jQueryPath = Config::getValue('path_jquery');
-    $jQueryUIPath = Config::getValue('path_jqueryui');
-    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
-    
-    $db = Database::getConnection();
-    
-    $result = $db->query (
-        'SELECT name_pokerstars ' .
-        'FROM players ' .
-        'WHERE name_pokerstars IS NOT NULL ' .
-        'ORDER BY name_pokerstars ASC');
+$jQueryPath = Config::getValue('path_jquery');
+$jQueryUIPath = Config::getValue('path_jqueryui');
+$jQueryCSSPath = Config::getValue('path_jqueryui_css');
 
-} catch (\Exception $ex) {
-    Logger::log("rendering add.result.form failed: " . $ex->getMessage());
-    header('Location: 500.shtml');
-    exit();
-}
+$db = Database::getConnection();
+
+$result = $db->query(
+    'SELECT name_pokerstars ' .
+    'FROM players ' .
+    'WHERE name_pokerstars IS NOT NULL ' .
+    'ORDER BY name_pokerstars ASC'
+);
 
 echo '<!DOCTYPE html>
 <html>
@@ -59,7 +51,7 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 
 $names = array();
 foreach ($result as $name) {
-    $names[] = $name->name_pokerstars;
+    $names[] = $name['name_pokerstars'];
 }
 
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';

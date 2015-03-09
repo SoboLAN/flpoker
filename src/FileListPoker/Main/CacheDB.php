@@ -8,7 +8,6 @@ use PDOException as PDOException;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\CacheInterface;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * Implements caching functionality using a database to store the cached objects.
@@ -40,16 +39,14 @@ class CacheDB implements CacheInterface
             $statement = $this->DB->prepare('SELECT entry_time, lifetime FROM cache WHERE cache_key=?');
             $statement->execute(array($key));
         } catch (PDOException $e) {
-            $message = "calling CacheDB::contains failed for key $key";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling CacheDB::contains failed for key $key: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
         if ($statement->rowCount() == 0) {
             return false;
         } elseif ($statement->rowCount() > 1) {
-            $message = "calling CacheDB::contains returned multiple rows for key $key";
-            Logger::log($message);
+            $message = "calling CacheDB::contains returned multiple rows for key $key: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -76,8 +73,7 @@ class CacheDB implements CacheInterface
             $statement = $this->DB->prepare('DELETE FROM cache WHERE cache_key=?');
             $statement->execute(array($key));
         } catch (PDOException $e) {
-            $message = "calling CacheDB::flush failed with key $key";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling CacheDB::flush failed with key $key: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
     }
@@ -93,8 +89,7 @@ class CacheDB implements CacheInterface
             $statement = $this->DB->prepare('SELECT value FROM cache WHERE cache_key=?');
             $statement->execute(array($key));
         } catch (PDOException $e) {
-            $message = "calling CacheDB::getContent failed with key $key";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling CacheDB::getContent failed with key $key: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -124,8 +119,7 @@ class CacheDB implements CacheInterface
             
             $this->DB->commit();
         } catch (PDOException $e) {
-            $message = "calling CacheDB::save failed with key $key, $value value, lifetime $lifetime";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling CacheDB::save failed with key $key, $value value, lifetime $lifetime: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
     }

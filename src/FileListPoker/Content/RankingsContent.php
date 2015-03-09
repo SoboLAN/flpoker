@@ -8,7 +8,6 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return various rankings of players.
@@ -80,8 +79,7 @@ class RankingsContent
                 'ORDER BY player_id ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTopPlayersAllTime failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling RankingsContent::getTopPlayersAllTime failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -163,8 +161,7 @@ class RankingsContent
                 'LIMIT 50'
             );
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getMostActive50Players failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling RankingsContent::getMostActive50Players failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -217,8 +214,7 @@ class RankingsContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTop40Players6Months failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling RankingsContent::getTop40Players6Months failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -270,8 +266,7 @@ class RankingsContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTop50FinalTables failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling RankingsContent::getTop50FinalTables failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

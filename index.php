@@ -3,30 +3,12 @@
 require_once 'autoload.php';
 
 use FileListPoker\Main\Site;
-use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\FullPageRenderer;
 
-try {
-    $site = new Site();
-    $renderer = new FullPageRenderer($site);
-    
-    $htmlout = $renderer->renderPage('index.php');
+$site = new Site();
+$renderer = new FullPageRenderer($site);
 
-} catch (FLPokerException $ex) {
-    switch ($ex->getCode()) {
-        case FLPokerException::ERROR:
-            header('Location: 500.shtml');
-            exit();
-            break;
-        case FLPokerException::SITE_OFFLINE:
-            header('Location: maintenance.shtml');
-            exit();
-            break;
-        default:
-            header('Location: 500.shtml');
-            exit();
-    }
-}
+$htmlout = $renderer->renderPage('index.php');
 
 if ($site->getLanguage() == 'ro')
 {

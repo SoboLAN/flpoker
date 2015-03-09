@@ -3,7 +3,6 @@
 namespace FileListPoker\Main;
 
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains configuration options for the site.
@@ -30,7 +29,6 @@ class Config
             
             if (! is_readable(self::$configPath)) {
                 $ex = new FLPokerException('config file is inaccessible', FLPokerException::ERROR);
-                Logger::log($ex->getMessage());
                 throw $ex;
             }
             
@@ -40,7 +38,6 @@ class Config
             //this almost always means a corrupt file
             if (is_null(self::$siteConfig)) {
                 $ex = new FLPokerException('config file is corrupt', FLPokerException::ERROR);
-                Logger::log($ex->getMessage());
                 throw $ex;
             }
         }

@@ -7,7 +7,6 @@ use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return everything there is to know about a specific tournament.
@@ -32,8 +31,7 @@ class TournamentContent
             $tournamentSt->execute();
             $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -65,8 +63,7 @@ class TournamentContent
                 $results[] = $row;
             }
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentResults with tournament id $tid failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling TournamentContent::getTournamentResults with tournament id $tid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -94,8 +91,7 @@ class TournamentContent
                 $bonuses[] = $row;
             }
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

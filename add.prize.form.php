@@ -1,33 +1,25 @@
 <?php
 
 require_once 'autoload.php';
+
+use FileListPoker\Main\Site;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
 
-if (! Config::getValue('online')) {
-    header('Location: maintenance.shtml');
-    exit();
-}
+$site = new Site();
 
-try {
-    $jQueryPath = Config::getValue('path_jquery');
-    $jQueryUIPath = Config::getValue('path_jqueryui');
-    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
-    
-    $db = Database::getConnection();
-    
-    $result = $db->query (
-        'SELECT name_filelist ' .
-        'FROM players ' .
-        'WHERE name_filelist IS NOT NULL ' .
-        'ORDER BY name_filelist ASC');
+$jQueryPath = Config::getValue('path_jquery');
+$jQueryUIPath = Config::getValue('path_jqueryui');
+$jQueryCSSPath = Config::getValue('path_jqueryui_css');
 
-} catch (\Exception $ex) {
-    Logger::log("rendering add.prize.form failed: " . $ex->getMessage());
-    header('Location: 500.shtml');
-    exit();
-}
+$db = Database::getConnection();
+
+$result = $db->query(
+    'SELECT name_filelist ' .
+    'FROM players ' .
+    'WHERE name_filelist IS NOT NULL ' .
+    'ORDER BY name_filelist ASC'
+);
 
 echo '<!DOCTYPE html>
 <html>
@@ -59,7 +51,7 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 
 $names = array();
 foreach ($result as $name) {
-    $names[] = $name->name_filelist;
+    $names[] = $name['name_filelist'];
 }
 
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
@@ -78,7 +70,7 @@ $(document).ready(function()
 
     $('#player').autocomplete({source: availableNames});
     
-    $('#purchasedate').datepicker ({dateFormat: 'yy-mm-dd'});
+    $('#purchasedate').datepicker ({dateFormat: 'yy-mm-dd', firstDay: 1});
 });
 </script>
 

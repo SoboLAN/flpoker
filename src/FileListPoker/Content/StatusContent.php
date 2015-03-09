@@ -2,12 +2,10 @@
 
 namespace FileListPoker\Content;
 
-use PDO as PDO;
-use PDOException as PDOException;
-
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
+
+use PDOException as PDOException;
 
 /**
  * This class contains functions that will return the status of the current month
@@ -34,8 +32,7 @@ class StatusContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling StatusContent::getCurrentStandings failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatusContent::getCurrentStandings failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -94,8 +91,7 @@ class StatusContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling StatusContent::getFinalTables failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling StatusContent::getFinalTables failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

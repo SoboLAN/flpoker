@@ -7,7 +7,6 @@ use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that return information about all the tournaments.
@@ -37,8 +36,7 @@ class TournamentsContent
             $tmptournamentsSt->execute();
             
         } catch (PDOException $e) {
-            $message = "calling TournamentsContent::getContent failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling TournamentsContent::getContent failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
 
@@ -58,8 +56,7 @@ class TournamentsContent
             $tournaments = $db->query('SELECT COUNT(*) AS t_count FROM tournaments');
 
         } catch (PDOException $e) {
-            $message = "calling TournamentsContent::getTournamentCount failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling TournamentsContent::getTournamentCount failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

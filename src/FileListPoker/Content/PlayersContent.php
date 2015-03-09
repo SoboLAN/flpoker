@@ -8,7 +8,6 @@ use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 
 /**
  * This class contains functions that will return information about all the players.
@@ -103,8 +102,7 @@ class PlayersContent
                 'ORDER BY player_id ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling PlayersContent::getPlayers failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling PlayersContent::getPlayers failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
@@ -154,8 +152,7 @@ class PlayersContent
             $players = $db->query('SELECT COUNT(*) AS players FROM players');
 
         } catch (PDOException $e) {
-            $message = "calling PlayersContent::getPlayersCount failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling PlayersContent::getPlayersCount failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         

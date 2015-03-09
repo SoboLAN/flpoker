@@ -2,37 +2,25 @@
 
 require_once 'autoload.php';
 
+use FileListPoker\Main\Site;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
 
-use Exception as Exception;
+$site = new Site();
 
-if (! Config::getValue('online')) {
-    header('Location: maintenance.shtml');
-    exit();
-}
+$jQueryPath = Config::getValue('path_jquery');
+$jQueryUIPath = Config::getValue('path_jqueryui');
+$jQueryCSSPath = Config::getValue('path_jqueryui_css');
 
-try {
-    $jQueryPath = Config::getValue('path_jquery');
-    $jQueryUIPath = Config::getValue('path_jqueryui');
-    $jQueryCSSPath = Config::getValue('path_jqueryui_css');
-    
-    $db = Database::getConnection();
-    
-    $result = $db->query(
-        'SELECT player_id, name_pokerstars ' .
-        'FROM players ' .
-        'WHERE name_pokerstars IS NOT NULL ' .
-        'AND LENGTH(name_pokerstars) > 0 ' .
-        'ORDER BY name_filelist ASC'
-    );
-    
-} catch (Exception $ex) {
-    Logger::log('rendering edit.player.form failed: ' . $ex->getMessage());
-    header('Location: 500.shtml');
-    exit();
-}
+$db = Database::getConnection();
+
+$result = $db->query(
+    'SELECT player_id, name_pokerstars ' .
+    'FROM players ' .
+    'WHERE name_pokerstars IS NOT NULL ' .
+    'AND LENGTH(name_pokerstars) > 0 ' .
+    'ORDER BY name_filelist ASC'
+);
 
 echo '<!DOCTYPE html>
 <html>
@@ -66,8 +54,8 @@ echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 $players = array();
 $names = array();
 foreach ($result as $player) {
-    $players[] = '{name: "' . $player->name_pokerstars . '", id: ' . $player->player_id . '}';
-    $names[] = $player->name_pokerstars;
+    $players[] = '{name: "' . $player['name_pokerstars'] . '", id: ' . $player['player_id'] . '}';
+    $names[] = $player['name_pokerstars'];
 }
 
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';

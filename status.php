@@ -4,68 +4,46 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\StatusContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\StatusRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
-try {
-    $site = new Site();
+$site = new Site();
 
-    $statusPage = new StatusContent();
-    
-    $standingsContent = $statusPage->getCurrentStandings();
-    $fTablesContent = $statusPage->getFinalTables();
-    
-    $pageContent = file_get_contents('templates/status/status.tpl');
+$statusPage = new StatusContent();
 
-    $pageContent = str_replace(
-        array(
-            '{status_tab_standings_title}',
-            '{status_tab_ftables_title}'
-        ),
-        array(
-            $site->getWord('status_tab_standings_title'),
-            $site->getWord('status_tab_ftables_title')
-        ),
-        $pageContent
-    );
-    
-    $standingsTpl = file_get_contents('templates/status/standings.tpl');
-    $fTablesTpl = file_get_contents('templates/status/final.tables.tpl');
-    
-    $renderer = new StatusRenderer($site);
-    
-    $standings = $renderer->renderCurrentStandings($standingsTpl, $standingsContent);
-    $finalTables = $renderer->rendererFinalTables($fTablesTpl, $fTablesContent);
-    
-    $pageContent = str_replace(
-        array('{status_tab_standings_content}', '{status_tab_ftables_content}'),
-        array($standings, $finalTables),
-        $pageContent
-    );
-    
-    $mainRenderer = new FullPageRenderer($site);
-    $htmlout = $mainRenderer->renderPage('status.php');
-    
-} catch (FLPokerException $ex) {
-    switch ($ex->getCode()) {
-        case FLPokerException::ERROR:
-            header('Location: 500.shtml');
-            exit();
-            break;
-        case FLPokerException::INVALID_REQUEST:
-            header('Location: 400.shtml');
-            exit();
-            break;
-        case FLPokerException::SITE_OFFLINE:
-            header('Location: maintenance.shtml');
-            exit();
-            break;
-        default:
-            header('Location: 500.shtml');
-            exit();
-    }
-}
+$standingsContent = $statusPage->getCurrentStandings();
+$fTablesContent = $statusPage->getFinalTables();
+
+$pageContent = file_get_contents('templates/status/status.tpl');
+
+$pageContent = str_replace(
+    array(
+        '{status_tab_standings_title}',
+        '{status_tab_ftables_title}'
+    ),
+    array(
+        $site->getWord('status_tab_standings_title'),
+        $site->getWord('status_tab_ftables_title')
+    ),
+    $pageContent
+);
+
+$standingsTpl = file_get_contents('templates/status/standings.tpl');
+$fTablesTpl = file_get_contents('templates/status/final.tables.tpl');
+
+$renderer = new StatusRenderer($site);
+
+$standings = $renderer->renderCurrentStandings($standingsTpl, $standingsContent);
+$finalTables = $renderer->rendererFinalTables($fTablesTpl, $fTablesContent);
+
+$pageContent = str_replace(
+    array('{status_tab_standings_content}', '{status_tab_ftables_content}'),
+    array($standings, $finalTables),
+    $pageContent
+);
+
+$mainRenderer = new FullPageRenderer($site);
+$htmlout = $mainRenderer->renderPage('status.php');
 
 $bottomScript =
     '<script>

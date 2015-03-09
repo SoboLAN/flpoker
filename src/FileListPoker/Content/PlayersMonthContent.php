@@ -6,7 +6,6 @@ use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\FLPokerException;
-use FileListPoker\Main\Logger;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\CacheDB;
 
@@ -74,8 +73,7 @@ class PlayersMonthContent
                 'ORDER BY m.award_year DESC, m.award_month DESC'
             );
         } catch (PDOException $e) {
-            $message = "calling PlayersMonthContent::getPlayersOfTheMonth failed";
-            Logger::log("$message: " . $e->getMessage());
+            $message = "calling PlayersMonthContent::getPlayersOfTheMonth failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
