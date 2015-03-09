@@ -4,8 +4,9 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\RankingsContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\RankingsRenderer;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\RankingsRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -53,7 +54,8 @@ try {
         $pageContent
     );
     
-    $htmlout = $site->getFullPageTemplate('rankings.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('rankings.php');
     
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

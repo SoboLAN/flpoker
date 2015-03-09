@@ -6,9 +6,10 @@ use FileListPoker\Content\TournamentsContent;
 use FileListPoker\Renderers\Paginator;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
+use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\TournamentsRenderer;
 use FileListPoker\Renderers\PaginationRenderer;
-use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -61,7 +62,8 @@ try {
         'tournaments.php'
     );
 
-    $htmlout = $site->getFullPageTemplate('tournaments.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('tournaments.php');
     
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

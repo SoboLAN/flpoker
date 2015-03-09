@@ -4,9 +4,10 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\PlayerContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\PlayerRenderer;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
+use FileListPoker\Renderers\PlayerRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -71,7 +72,9 @@ try {
         $pageContent
     );
     
-    $htmlout = $site->getFullPageTemplate('players.php');
+    $mainRenderer = new FullPageRenderer($site);
+    
+    $htmlout = $mainRenderer->renderPage('players.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

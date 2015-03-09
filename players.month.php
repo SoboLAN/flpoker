@@ -4,8 +4,9 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\PlayersMonthContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\PlayersMonthRenderer;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\PlayersMonthRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -18,7 +19,8 @@ try {
     $pageContent = file_get_contents('templates/player.month.tpl');
     $pageContent = $renderer->render($pageContent, $players);
     
-    $htmlout = $site->getFullPageTemplate('players.month.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('players.month.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

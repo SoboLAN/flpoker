@@ -4,9 +4,10 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\TournamentContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\TournamentRenderer;
 use FileListPoker\Main\FLPokerException;
 use FileListPoker\Main\Logger;
+use FileListPoker\Renderers\TournamentRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -53,7 +54,8 @@ try {
         $pageContent
     );
     
-    $htmlout = $site->getFullPageTemplate('tournaments.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('tournaments.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

@@ -7,9 +7,11 @@ use FileListPoker\Renderers\Paginator;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Logger;
+use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\PlayersRenderer;
 use FileListPoker\Renderers\PaginationRenderer;
-use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\FullPageRenderer;
+
 
 try {
     $site = new Site();
@@ -62,7 +64,8 @@ try {
         'players.php'
     );
     
-    $htmlout = $site->getFullPageTemplate('players.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('players.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

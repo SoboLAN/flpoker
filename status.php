@@ -4,8 +4,9 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\StatusContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\StatusRenderer;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\StatusRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -43,7 +44,8 @@ try {
         $pageContent
     );
     
-    $htmlout = $site->getFullPageTemplate('status.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('status.php');
     
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

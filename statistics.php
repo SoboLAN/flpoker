@@ -4,8 +4,9 @@ require_once 'autoload.php';
 
 use FileListPoker\Content\StatisticsContent;
 use FileListPoker\Main\Site;
-use FileListPoker\Renderers\StatisticsRenderer;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\StatisticsRenderer;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
@@ -53,7 +54,8 @@ try {
         $pageContent
     );
 
-    $htmlout = $site->getFullPageTemplate('statistics.php');
+    $mainRenderer = new FullPageRenderer($site);
+    $htmlout = $mainRenderer->renderPage('statistics.php');
     
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {

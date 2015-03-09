@@ -1,12 +1,16 @@
 <?php
+
 require_once 'autoload.php';
+
 use FileListPoker\Main\Site;
 use FileListPoker\Main\FLPokerException;
+use FileListPoker\Renderers\FullPageRenderer;
 
 try {
     $site = new Site();
-
-    $htmlout = $site->getFullPageTemplate('index.php');
+    $renderer = new FullPageRenderer($site);
+    
+    $htmlout = $renderer->renderPage('index.php');
 
 } catch (FLPokerException $ex) {
     switch ($ex->getCode()) {
