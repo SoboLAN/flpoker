@@ -14,6 +14,13 @@ use FileListPoker\Main\Logger;
  */
 class Database
 {
+    //versions of MySQL older than this don't support prepared statements.
+    //they have to be simulated by PDO
+    const EMULATE_PREPARES_BELOW_VERSION = '5.1.17';
+    
+    //connection charset handling for old php versions
+    const HANDLE_CONNECTION_CHARSET_BELOW_VERSION = '5.3.6';
+    
     //database access information is found in this file (user, pass, database name, port etc.)
     private static $configPath = 'config/db.config.json';
     
@@ -50,10 +57,6 @@ class Database
              throw $ex;
         }
         
-        //versions of MySQL older than this don't support prepared statements.
-        //they have to be simulated by PDO
-        $emulate_prepares_below_version = '5.1.17';
-
         $dsndefaults = array_fill_keys(array('host', 'port', 'unix_socket', 'dbname', 'charset'), null);
         $dsnarr = array_intersect_key($dbConfig, $dsndefaults);
         $dsnarr += $dsndefaults;
@@ -64,9 +67,9 @@ class Database
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         );
 
-        // connection charset handling for old php versions
-        if ($dsnarr['charset'] and version_compare(PHP_VERSION, '5.3.6', '<')) {
-            $options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES '.$dsnarr['charset'];
+        
+        if ($dsnarr['charset'] && version_compare(PHP_VERSION, self::HANDLE_CONNECTION_CHARSET_BELOW_VERSION, '<')) {
+            $options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $dsnarr['charset'];
         }
         $dsnpairs = array();
         foreach ($dsnarr as $k => $v) {
@@ -81,7 +84,7 @@ class Database
 
             //set prepared statement emulation depending on server version
             $serverversion = self::$connection->getAttribute(PDO::ATTR_SERVER_VERSION);
-            $emulate_prepares = (version_compare($serverversion, $emulate_prepares_below_version, '<'));
+            $emulate_prepares = version_compare($serverversion, self::EMULATE_PREPARES_BELOW_VERSION, '<');
             self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
         } catch (PDOException $e) {
             $message = 'There was an error while connecting to the database';
