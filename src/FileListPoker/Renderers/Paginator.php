@@ -95,11 +95,13 @@ class Paginator
         if ($this->page - $halfLength >= 1 && $this->page + $halfLength <= $this->maxPage) {
             $this->start = $this->page - $halfLength;
             $this->end = $this->page + $halfLength;
+            
         //the second case is when the current page is among the first pages, sufficiently
         //close to 1 that it causes it to slide to the left
         } elseif ($this->page - $halfLength < 1) {
             $this->start = 1;
             $this->end = min($this->width, $this->maxPage);
+            
         //the last case is when the current page is among the last pages, sufficiently
         //close to maximum that it causes it to slide to the right
         } elseif ($this->page + $halfLength > $this->maxPage) {

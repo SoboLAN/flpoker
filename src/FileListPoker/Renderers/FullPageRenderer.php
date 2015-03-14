@@ -51,7 +51,7 @@ class FullPageRenderer extends GeneralRenderer
         $this->fillCSSFiles($tpl, $page);
         $this->fillGoogleAnalyticsScript($tpl);
         $this->fillMenuItems($tpl, $page);
-        $this->fillLanguagePanel($tpl, $page);
+        $this->fillLanguagePanel($tpl);
         $this->fillVersion($tpl);
         
         return $tpl;
@@ -123,20 +123,21 @@ class FullPageRenderer extends GeneralRenderer
         }
     }
     
-    private function fillLanguagePanel(&$tpl, $forPage)
+    private function fillLanguagePanel(&$tpl)
     {
         $langPanel = '';
         $language = $this->site->getLanguage();
+        $returnPage = $_SERVER['REQUEST_URI'];
         
-        if ($language == 'ro') {
+        if ($language == Dictionary::LANG_RO) {
             $langPanel .= '
                 <img class="active_lang" src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro', $language) .'" alt="' . Dictionary::getWord('langpanel_ro', $language) .'" />
-            <a href="lang_switch.php?lang=en&amp;returnpage=' . $forPage . '">' .
+            <a href="lang_switch.php?lang=en&amp;returnpage=' . $returnPage . '">' .
                 '<img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $language) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $language) . '" />' .
             '</a>';
-        } elseif ($language == 'en') {
+        } elseif ($language == Dictionary::LANG_EN) {
             $langPanel .= '
-            <a href="lang_switch.php?lang=&amp;returnpage=' . $forPage . '">' .
+            <a href="lang_switch.php?lang=&amp;returnpage=' . $returnPage . '">' .
                 '<img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $language) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $language) .'" />' .
             '</a>
             <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $language) . '" alt="' . Dictionary::getWord('langpanel_en', $language) . '" />

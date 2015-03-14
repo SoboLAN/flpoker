@@ -3,6 +3,7 @@
 require_once 'autoload.php';
 
 use FileListPoker\Main\Site;
+use FileListPoker\Main\Dictionary;
 use FileListPoker\Renderers\FullPageRenderer;
 
 $site = new Site();
@@ -10,7 +11,7 @@ $renderer = new FullPageRenderer($site);
 
 $htmlout = $renderer->renderPage('index.php');
 
-if ($site->getLanguage() == 'ro')
+if ($site->getLanguage() == Dictionary::LANG_RO)
 {
     $text =
     '<article><p>Acest site conține toate informațiile legate de clubul de poker FileList.
@@ -19,7 +20,7 @@ if ($site->getLanguage() == 'ro')
     totalul punctelor cheltuite de către toți membrii.</p>
     <p>Puteți răsfoi în voie. Enjoy.</p></article>';
 }
-else if ($site->getLanguage() == 'en')
+else if ($site->getLanguage() == Dictionary::LANG_EN)
 {
     $text =
     '<article><p>This site contains all the informations regarding the FileList poker club.

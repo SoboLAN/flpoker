@@ -1,11 +1,15 @@
 <?php
 
 require_once 'autoload.php';
+
+use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
+use FileListPoker\Main\Dictionary;
+
+$site = new Site();
 
 //if language is not OK, go away
-if ($_GET['lang'] !== 'ro' && $_GET['lang'] !== 'en')
-{
+if (! Dictionary::isValidLanguage($_GET['lang'])) {
     header('Location: index.php');
 }
 
@@ -17,18 +21,9 @@ $cookieDuration = Config::getValue('lang_cookie_duration');
 setcookie($cookieName, $_GET['lang'], time() + $cookieDuration);
 
 //figure out where the user is so you can send him back to the same page
-$redirpage = '';
-switch($_GET['returnpage'])
-{
-    case 'index.php':            $redirpage = 'index.php'; break;
-    case 'status.php':          $redirpage = 'status.php'; break;
-    case 'players.php':            $redirpage = 'players.php'; break;
-    case 'tournaments.php':        $redirpage = 'tournaments.php'; break;
-    case 'rankings.php':        $redirpage = 'rankings.php'; break;
-    case 'statistics.php':        $redirpage = 'statistics.php'; break;
-    case 'players.month.php':    $redirpage = 'players.month.php'; break;
-    default:                    $redirpage = 'index.php';
-}
+$sp = strtolower($_SERVER['SERVER_PROTOCOL']);
+$protocol = substr($sp, 0, strpos($sp, '/')) . (! empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '');
+$redirpage = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_GET['returnpage'];
 
 //redirect the user
 header("Location: $redirpage");

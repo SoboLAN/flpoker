@@ -26,7 +26,7 @@ class Site
     
         //read language from the cookie or use default language and write it to the cookie to be used
         //on the next request
-        if (isset ($_COOKIE[$cookieName]) and Dictionary::isValidLanguage($_COOKIE[$cookieName])) {
+        if (isset ($_COOKIE[$cookieName]) && Dictionary::isValidLanguage($_COOKIE[$cookieName])) {
             $this->lang = $_COOKIE[$cookieName];
         } else {
             $this->lang = Config::getValue('default_lang');

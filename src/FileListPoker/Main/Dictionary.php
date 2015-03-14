@@ -10,7 +10,8 @@ use FileListPoker\Main\FLPokerException;
  */
 class Dictionary
 {
-    private static $availableLangs = array('en', 'ro');
+    const LANG_RO = 'ro';
+    const LANG_EN = 'en';
     
     private static $wordPath = 'wording/text.{lang}.json';
     
@@ -56,6 +57,6 @@ class Dictionary
      */
     public static function isValidLanguage($lang)
     {
-        return in_array($lang, self::$availableLangs);
+        return in_array($lang, array(self::LANG_EN, self::LANG_RO));
     }
 }

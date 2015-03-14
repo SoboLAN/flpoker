@@ -4,6 +4,7 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
+use FileListPoker\Main\Dictionary;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -34,7 +35,7 @@ class PlayerRenderer extends GeneralRenderer
         } else {
             $regDate = date('j F Y', mktime(0, 0, 0, $content['month'], $content['day'], $content['year']));
             
-            if ($this->site->getLanguage() !== 'en') {
+            if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
                 $regDate = $this->translateDate($regDate, $this->site->getLanguage());
             }
         }
@@ -125,7 +126,7 @@ class PlayerRenderer extends GeneralRenderer
             $tTime = mktime(0, 0, 0, $tournament['month'], $tournament['day'], $tournament['year']);
             $tDate = date('j F Y', $tTime);
             
-            if ($this->site->getLanguage() !== 'en') {
+            if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
                 $tDate = $this->translateDate($tDate, $this->site->getLanguage());
             }
             
@@ -170,7 +171,7 @@ class PlayerRenderer extends GeneralRenderer
         foreach ($content as $bonus) {
             $bDate = date('j F Y', mktime(0, 0, 0, $bonus['month'], $bonus['day'], $bonus['year']));
             
-            if ($this->site->getLanguage() !== 'en') {
+            if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
                 $bDate = $this->translateDate($bDate, $this->site->getLanguage());
             }
             
@@ -219,7 +220,7 @@ class PlayerRenderer extends GeneralRenderer
             } else {
                 $pDate = date('j F Y', mktime(0, 0, 0, $prize['month'], $prize['day'], $prize['year']));
                 
-                if ($this->site->getLanguage() !== 'en') {
+                if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
                     $pDate = $this->translateDate($pDate, $this->site->getLanguage());
                 }
             }

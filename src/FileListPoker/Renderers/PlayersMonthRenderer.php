@@ -4,6 +4,7 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
+use FileListPoker\Main\Dictionary;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -44,7 +45,7 @@ class PlayersMonthRenderer extends GeneralRenderer
             $awardTime = mktime(0, 0, 0, $award['award_month'], 2, $award['award_year']);
             $awardDate = date('F Y', $awardTime);
             
-            if ($this->site->getLanguage() !== 'en') {
+            if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
                 $awardDate = $this->translateDate($awardDate, $this->site->getLanguage());
             }
 

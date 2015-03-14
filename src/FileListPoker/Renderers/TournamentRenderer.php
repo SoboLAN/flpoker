@@ -4,6 +4,7 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
+use FileListPoker\Main\Dictionary;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -26,7 +27,7 @@ class TournamentRenderer extends GeneralRenderer
         $tournamentTime = mktime(0, 0, 0, $content['month'], $content['day'], $content['year']);
         $tournamentDate = date('l, j F Y', $tournamentTime);
         
-        if ($this->site->getLanguage() !== 'en') {
+        if ($this->site->getLanguage() !== Dictionary::LANG_EN) {
             $tournamentDate = $this->translateDate($tournamentDate, $this->site->getLanguage());
             $tournamentDate = $this->translateDay($tournamentDate, $this->site->getLanguage());
         }

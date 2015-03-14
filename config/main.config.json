@@ -1,15 +1,20 @@
 {
     "online": true,
-    "default_lang": "ro",
     "site_url": "http://localhost/flpoker/",
     "site_version": "1.4.0",
     "enable_google_analytics": false,
-    "enable_cache": false,
-    "cache_type": "db",
-    "lang_cookie_name": "lang",
-    "lang_cookie_duration": 300,
     "enable_logging": true,
     "admin_pass": "the_admin_pass",
+    
+    "enable_cache": false,
+    "cache_type": "db",
+    
+    "lang_ro_name": "ro",
+    "lang_en_name": "en",
+    "default_lang": "ro",
+    "lang_cookie_name": "lang",
+    "lang_cookie_duration": 300,
+    
     "cache_lifetime_players": 60,
     "cache_lifetime_player_general": 60,
     "cache_lifetime_players_alltime": 60,
@@ -21,6 +26,7 @@
     "cache_lifetime_registrations_graph": 60,
     "cache_lifetime_final_tables": 60,
     "cache_lifetime_players_of_the_month": 60,
+    
     "cache_key_players": "players_",
     "cache_key_player_general": "player_general_",
     "cache_key_players_alltime": "players_alltime",
@@ -32,6 +38,7 @@
     "cache_key_registrations_graph": "registrations_graph",
     "cache_key_final_tables": "final_tables",
     "cache_key_players_of_the_month": "players_of_the_month",
+    
     "path_general_css": "css/style.css",
     "path_jqueryui_css": "css/jquery-ui-1.11.2.custom.css",
     "path_jquery": "js/jquery-2.1.3.js",
@@ -39,6 +46,7 @@
     "path_highcharts": "js/highcharts/highcharts.src.js",
     "path_highcharts_export": "js/highcharts/modules/exporting.src.js",
     "path_highcharts_theme": "js/highcharts/themes/dark-green.js",
+    
     "players_pagination_page_size": 300,
     "players_pagination_width": 5,
     "tournaments_pagination_page_size": 50,

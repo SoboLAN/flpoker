@@ -101,14 +101,4 @@ class Dependency
     {
         return $this->type;
     }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
 }

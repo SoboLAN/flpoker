@@ -5,7 +5,6 @@ require_once 'autoload.php';
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\Logger;
 
 $site = new Site();
 
