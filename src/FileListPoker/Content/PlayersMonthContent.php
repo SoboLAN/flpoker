@@ -59,7 +59,7 @@ class PlayersMonthContent
         $db = Database::getConnection();
 
         try {
-            $players = $db->query(
+            $playersSt = $db->query(
                 'SELECT m.player_id, m.award_month, m.award_year, ' .
                 'p.id_filelist, p.name_filelist, p.name_pokerstars, p.member_type, ' .
                     '(SELECT SUM(r.points) ' .
@@ -76,6 +76,8 @@ class PlayersMonthContent
             $message = "calling PlayersMonthContent::getPlayersOfTheMonth failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
+        
+        $players = $playersSt->fetchAll();
         
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_of_the_month');

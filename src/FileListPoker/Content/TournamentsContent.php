@@ -40,11 +40,8 @@ class TournamentsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
 
-        $final_result = array();
-        while ($row = $tmptournamentsSt->fetch(PDO::FETCH_ASSOC)) {
-            $final_result[] = $row;
-        }
-
+        $final_result = $tmptournamentsSt->fetchAll();
+        
         return $final_result;
     }
     
@@ -53,17 +50,15 @@ class TournamentsContent
         $db = Database::getConnection();
         
         try {
-            $tournaments = $db->query('SELECT COUNT(*) AS t_count FROM tournaments');
+            $tournamentsSt = $db->query('SELECT COUNT(*) AS t_count FROM tournaments');
 
         } catch (PDOException $e) {
             $message = "calling TournamentsContent::getTournamentCount failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        foreach ($tournaments as $row) {
-            $count = $row['t_count'];
-        }
+        $tournaments = $tournamentsSt->fetch();
         
-        return $count;
+        return $tournaments['t_count'];
     }
 }

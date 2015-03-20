@@ -17,19 +17,11 @@ class PlayersContent
 {
     private $cache;
     
-    private $results;
-    private $bonuses;
-    private $prizes;
-
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->results = array();
-        $this->bonuses = array();
-        $this->prizes = array();
-        
         //set cache field with an apropiate cache instance (based on type), but only
         //if caching is enabled
         if (Config::getValue('enable_cache')) {
@@ -106,14 +98,16 @@ class PlayersContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $this->fillArrays($tmpresults, $tmpbonuses, $tmpprizes);
+        $results = $tmpresults->fetchAll();
+        $bonuses = $tmpbonuses->fetchAll();
+        $prizes = $tmpprizes->fetchAll();
         
         $final_result = array();
         
         foreach ($players as $player) {
-            $currentResults = $this->arrayBinarySearch($this->results, 'points', $player['player_id']);
-            $currentBonuses = $this->arrayBinarySearch($this->bonuses, 'bonus_value', $player['player_id']);
-            $currentPrizes = $this->arrayBinarySearch($this->prizes, 'cost', $player['player_id']);
+            $currentResults = $this->arrayBinarySearch($results, 'points', $player['player_id']);
+            $currentBonuses = $this->arrayBinarySearch($bonuses, 'bonus_value', $player['player_id']);
+            $currentPrizes = $this->arrayBinarySearch($prizes, 'cost', $player['player_id']);
 
             $points = $player['initial_accumulated_points'] + $currentResults + $currentBonuses - $currentPrizes;
             
@@ -161,24 +155,6 @@ class PlayersContent
         }
         
         return $count;
-    }
-    
-    //this is literally the stupidest thing about PDO.
-    //apparently, the result set is actually a Traversable.
-    //you must copy it into an array of your own before you can have all
-    //sorts of manipulations on it... foreach() is too rigid for that.
-    //FUCKING IDIOTS !!!!!!!
-    private function fillArrays($tmpresults, $tmpbonuses, $tmpprizes)
-    {
-        foreach ($tmpresults as $tmpresult) {
-            $this->results[] = $tmpresult;
-        }
-        foreach ($tmpbonuses as $tmpbonus) {
-            $this->bonuses[] = $tmpbonus;
-        }
-        foreach ($tmpprizes as $tmpprize) {
-            $this->prizes[] = $tmpprize;
-        }
     }
     
     //This function will sort the associative array $arr by the column $col in the $dir direction.

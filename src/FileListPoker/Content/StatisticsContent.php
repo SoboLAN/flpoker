@@ -57,15 +57,17 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $result = $tmpresults->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_tournament_graph');
             
             $lifetime = Config::getValue('cache_lifetime_tournament_graph');
             
-            $this->cache->save($key, json_encode($tmpresults), $lifetime);
+            $this->cache->save($key, json_encode($result), $lifetime);
         }
         
-        return $tmpresults;
+        return $result;
     }
     
     public function getRegistrationsGraph()
@@ -97,15 +99,17 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $result = $tmpresults->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_registrations_graph');
             
             $lifetime = Config::getValue('cache_lifetime_registrations_graph');
             
-            $this->cache->save($key, json_encode($tmpresults), $lifetime);
+            $this->cache->save($key, json_encode($result), $lifetime);
         }
         
-        return $tmpresults;
+        return $result;
     }
     
     public function getAggressionGraph()
@@ -141,15 +145,17 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $result = $tmpresults->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_aggresion_graph');
             
             $lifetime = Config::getValue('cache_lifetime_aggresion_graph');
             
-            $this->cache->save($key, json_encode($tmpresults), $lifetime);
+            $this->cache->save($key, json_encode($result), $lifetime);
         }
         
-        return $tmpresults;
+        return $result;
     }
     
     public function getGeneralStatistics()
@@ -190,31 +196,17 @@ class StatisticsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $totalPlayers = 0;
-        foreach ($tmpplayercount as $pCount) {
-            $totalPlayers = $pCount['count'];
-        }
-        
-        $totalTournaments = 0;
-        foreach ($tmptournamentcount as $tCount) {
-            $totalTournaments = $tCount['count'];
-        }
-        
-        $totalSpent = 0;
-        foreach ($tmpspent1 as $spent) {
-            $totalSpent += $spent['players_spent'];
-        }
-        
-        foreach ($tmpspent2 as $spent) {
-            $totalSpent += $spent['cost'];
-        }
+        $totalPlayers = $tmpplayercount->fetch();
+        $totalTournaments = $tmptournamentcount->fetch();
+        $spent1 = $tmpspent1->fetch();
+        $spent2 = $tmpspent2->fetch();
         
         foreach ($tmpallpoints as $r) {
             $results = array(
                 'total_points' => $r['total_points'],
-                'total_players' => $totalPlayers,
-                'total_tournaments' => $totalTournaments,
-                'total_spent' => $totalSpent
+                'total_players' => $totalPlayers['count'],
+                'total_tournaments' => $totalTournaments['count'],
+                'total_spent' => $spent1['players_spent'] + $spent2['cost']
             );
         }
         

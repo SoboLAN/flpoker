@@ -40,10 +40,7 @@ class StatusContent
             return array();
         }
         
-        $resultsArray = array();
-        foreach ($results as $result) {
-            $resultsArray[] = $result;
-        }
+        $resultsArray = $results->fetchAll();
         
         $finalResult = array();
         for ($i = 0, $position = 0; $i < count($resultsArray); $i++) {
@@ -95,6 +92,6 @@ class StatusContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        return $result;
+        return $result->fetchAll();
     }
 }

@@ -128,7 +128,7 @@ class PlayerContent
             
             $playerInfoSt->bindParam(1, $pid, PDO::PARAM_INT);
             $playerInfoSt->execute();
-            $playerInfo = $playerInfoSt->rowCount() == 0 ? false : $playerInfoSt->fetch(PDO::FETCH_ASSOC);
+            $playerInfo = $playerInfoSt->rowCount() == 0 ? false : $playerInfoSt->fetch();
             
             $resultsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $resultsSt->execute();
@@ -145,7 +145,7 @@ class PlayerContent
             $tournamentCountSt->bindParam(1, $pid, PDO::PARAM_INT);
             $tournamentCountSt->bindParam(2, $pid, PDO::PARAM_INT);
             $tournamentCountSt->execute();
-            $tCountRow = $tournamentCountSt->fetch(PDO::FETCH_ASSOC);
+            $tCountRow = $tournamentCountSt->fetch();
             $tournamentCount = $tCountRow['tcount'];
             $finalTables = $tCountRow['fcount'];
             
@@ -153,7 +153,7 @@ class PlayerContent
             $medalsSt->bindParam(2, $pid, PDO::PARAM_INT);
             $medalsSt->bindParam(3, $pid, PDO::PARAM_INT);
             $medalsSt->execute();
-            $medalsObj = $medalsSt->fetch(PDO::FETCH_ASSOC);
+            $medalsObj = $medalsSt->fetch();
             $gold_medals = $medalsObj['gold_medals'];
             $silver_medals = $medalsObj['silver_medals'];
             $bronze_medals = $medalsObj['bronze_medals'];
@@ -228,14 +228,12 @@ class PlayerContent
             $historySt->bindParam(1, $pid, PDO::PARAM_INT);
             $historySt->execute();
             
-            $history = array();
-            while ($row = $historySt->fetch(PDO::FETCH_ASSOC)) {
-                $history[] = $row;
-            }
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getTournamentHistory with player id $pid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
+        
+        $history = $historySt->fetchAll();
         
         return $history;
     }
@@ -274,14 +272,12 @@ class PlayerContent
             $bonusesSt->bindParam(1, $pid, PDO::PARAM_INT);
             $bonusesSt->execute();
             
-            $bonuses = array();
-            while ($row = $bonusesSt->fetch(PDO::FETCH_ASSOC)) {
-                $bonuses[] = $row;
-            }
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getBonuses with player id $pid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
+        
+        $bonuses = $bonusesSt->fetchAll();
         
         return $bonuses;
     }
@@ -318,14 +314,12 @@ class PlayerContent
             $prizesSt->bindParam(1, $pid, PDO::PARAM_INT);
             $prizesSt->execute();
             
-            $prizes = array();
-            while ($row = $prizesSt->fetch(PDO::FETCH_ASSOC)) {
-                $prizes[] = $row;
-            }
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getPrizes with player id $pid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
+        
+        $prizes = $prizesSt->fetchAll();
         
         return $prizes;
     }

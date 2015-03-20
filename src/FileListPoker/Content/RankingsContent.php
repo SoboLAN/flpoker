@@ -83,15 +83,9 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
-        $results = array();
-        $bonuses = array();
-        foreach ($tmpresults as $tmpresult) {
-            $results[] = $tmpresult;
-        }
-        foreach ($tmpbonuses as $tmpbonus) {
-            $bonuses[] = $tmpbonus;
-        }
-
+        $results = $tmpresults->fetchAll();
+        $bonuses = $tmpbonuses->fetchAll();
+        
         $final_result = array();
         
         foreach ($players as $player) {
@@ -165,15 +159,17 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $active = $tmpactive->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_mostactive');
             
             $lifetime = Config::getValue('cache_lifetime_players_mostactive');
             
-            $this->cache->save($key, json_encode($tmpactive), $lifetime);
+            $this->cache->save($key, json_encode($active), $lifetime);
         }
         
-        return $tmpactive;
+        return $active;
     }
     
     /**
@@ -218,15 +214,17 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $sixMonths = $tmp6months->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_6months');
             
             $lifetime = Config::getValue('cache_lifetime_players_6months');
             
-            $this->cache->save($key, json_encode($tmp6months), $lifetime);
+            $this->cache->save($key, json_encode($sixMonths), $lifetime);
         }
         
-        return $tmp6months;
+        return $sixMonths;
     }
     
     /**
@@ -270,15 +268,17 @@ class RankingsContent
             throw new FLPokerException($message, FLPokerException::ERROR);
         }
         
+        $finalTables = $tmpfinaltables->fetchAll();
+        
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_final_tables');
             
             $lifetime = Config::getValue('cache_lifetime_final_tables');
             
-            $this->cache->save($key, json_encode($tmpfinaltables), $lifetime);
+            $this->cache->save($key, json_encode($finalTables), $lifetime);
         }
         
-        return $tmpfinaltables;
+        return $finalTables;
     }
     
     //This function will sort the associative array $arr by the column $col in the $dir direction.
