@@ -86,7 +86,8 @@ CREATE TABLE IF NOT EXISTS `results` (
   `tournament_id` mediumint(8) unsigned NOT NULL,
   `points` smallint(6) NOT NULL,
   `position` smallint(5) unsigned DEFAULT NULL,
-  PRIMARY KEY (`player_id`,`tournament_id`),
+  `kos` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`tournament_id`, `player_id`),
   KEY `tournament_id` (`tournament_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

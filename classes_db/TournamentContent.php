@@ -48,7 +48,7 @@ class TournamentContent
         
         try {
             $resultsSt = $db->prepare(
-                'SELECT r.player_id, p.name_pokerstars, r.points, r.position ' .
+                'SELECT r.player_id, p.name_pokerstars, r.points, r.position, r.kos ' .
                 'FROM results r ' .
                 'LEFT JOIN players p ON r.player_id = p.player_id ' .
                 'WHERE r.tournament_id=? ' .

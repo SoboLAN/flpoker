@@ -83,13 +83,15 @@ class TournamentRenderer extends GeneralRenderer
                 '{tournament_results}',
                 '{tournament_position}',
                 '{tournament_player}',
-                '{tournament_points}'
+                '{tournament_points}',
+                '{tournament_knockouts}'
             ),
             array(
                 $this->site->getWord('tournament_results'),
                 $this->site->getWord('tournament_position'),
                 $this->site->getWord('tournament_player'),
-                $this->site->getWord('tournament_points')
+                $this->site->getWord('tournament_points'),
+                $this->site->getWord('tournament_knockouts')
             ),
             $template
         );
@@ -105,12 +107,17 @@ class TournamentRenderer extends GeneralRenderer
             $position = (is_null($result['position']) or empty($result['position'])) ?
                         '<span class="faded">unknown</span>' :
                         $result['position'];
+            
+            $knockouts = (is_null($result['kos']) || is_null($result['kos'])) ?
+                        '<span class="faded">unknown</span>' :
+                        $result['kos'];
 
             $resultsList .=
             '<tr>
                 <td>' . $position . '</td>
                 <td>' . $player . '</td>
                 <td>' . $result['points'] . '</td>
+                <td>' . $knockouts . '</td>
             </tr>';
         }
 
