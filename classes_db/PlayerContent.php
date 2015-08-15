@@ -52,6 +52,7 @@ class PlayerContent
      * <li>silver medals</li>
      * <li>bronze medals</li>
      * <li>number of final tables reached</li>
+     * <li>number of knocked-out players (in the tournaments where he received points)</li>
      * </ul>
      */
     public function getGeneral($pid)
@@ -100,14 +101,17 @@ class PlayerContent
             );
 
             $tournamentCountSt = $db->prepare(
-                'SELECT tournaments.tcount, final_tables.fcount ' .
+                'SELECT tournaments.tcount, final_tables.fcount, knockouts.koscount ' .
                 'FROM ' .
                     '(SELECT COUNT(*) AS tcount ' .
                      'FROM results ' .
                      'WHERE player_id=?) tournaments, ' .
                     '(SELECT COUNT(*) AS fcount ' .
                      'FROM results ' .
-                     'WHERE player_id=? AND position <= 9) final_tables'
+                     'WHERE player_id=? AND position <= 9) final_tables, ' .
+                    '(SELECT SUM(kos) AS koscount ' .
+                     'FROM results ' .
+                     'WHERE player_id=?) knockouts'
             );
 
             $medalsSt = $db->prepare(
@@ -144,10 +148,12 @@ class PlayerContent
             
             $tournamentCountSt->bindParam(1, $pid, PDO::PARAM_INT);
             $tournamentCountSt->bindParam(2, $pid, PDO::PARAM_INT);
+            $tournamentCountSt->bindParam(3, $pid, PDO::PARAM_INT);
             $tournamentCountSt->execute();
             $tCountRow = $tournamentCountSt->fetch();
             $tournamentCount = $tCountRow['tcount'];
             $finalTables = $tCountRow['fcount'];
+            $knockouts = $tCountRow['koscount'];
             
             $medalsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $medalsSt->bindParam(2, $pid, PDO::PARAM_INT);
@@ -176,6 +182,7 @@ class PlayerContent
                 'points' => $points,
                 'tournament_count' => $tournamentCount,
                 'final_tables' => $finalTables,
+                'knockouts' => $knockouts,
                 'gold_medals' => $gold_medals,
                 'silver_medals' => $silver_medals,
                 'bronze_medals' => $bronze_medals,

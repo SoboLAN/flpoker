@@ -14,6 +14,7 @@
         <p><span class="bigger_label">{player_tab_general_allpoints}: {all_points}</span></p>
         <p><span class="bigger_label">{player_tab_general_tcount}: {tcount}</span></p>
         <p><span class="bigger_label">{player_tab_general_ftables}: {ftables}</span></p>
+        <p><span class="bigger_label">{player_tab_general_kos}: {kos}</span></p>
         <p><span class="bigger_label">{player_tab_general_gmedals}: {gmedals}</span></p>
         <p><span class="bigger_label">{player_tab_general_smedals}: {smedals}</span></p>
         <p><span class="bigger_label">{player_tab_general_bmedals}: {bmedals}</span></p>
