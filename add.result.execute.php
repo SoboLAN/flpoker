@@ -44,14 +44,15 @@ while (true) {
 
     $points = $_POST['points' . $i];
     $position = $_POST['position' . $i];
+    $kos = $_POST['kos' . $i];
 
-    $insertResults[] = "($id, $tid, $points, $position)";
+    $insertResults[] = "($id, $tid, $points, $position, $kos)";
 
     $i++;
 }
 
 $result = $db->exec(
-    'INSERT INTO results(player_id, tournament_id, points, position) ' .
+    'INSERT INTO results(player_id, tournament_id, points, position, kos) ' .
     'VALUES ' .
     implode (',', $insertResults)
 );

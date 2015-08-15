@@ -78,11 +78,13 @@ $(document).ready(function() {
 
         newTextBoxDiv.after().html(
         '<label>Position: </label>' +
-              '<input type="text" name="position' + counter + '" id="position' + counter + '" value="" />' +
-          '<label>Player: </label>' +
-              '<input type="text" name="player' + counter + '" id="player' + counter + '" value="" />' +
-          '<label>Points: </label>' +
-              '<input type="text" name="points' + counter + '" id="points' + counter + '" value="" />');
+            '<input type="text" name="position' + counter + '" id="position' + counter + '" value="" />' +
+        '<label>Player: </label>' +
+            '<input type="text" name="player' + counter + '" id="player' + counter + '" value="" />' +
+        '<label>Points: </label>' +
+            '<input type="text" name="points' + counter + '" id="points' + counter + '" value="" />' +
+        '<label>Knockouts: </label>' +
+            '<input type="text" name="kos' + counter + '" id="kos' + counter + '" value="" />');
 
         newTextBoxDiv.appendTo("#TextBoxesGroup");
         
@@ -106,6 +108,7 @@ $(document).ready(function() {
           msg += "\n Position " + i + ": " + $('#position' + i).val();
           msg += "\n Player " + i + ": " + $('#player' + i).val();
           msg += "\n Points " + i + ": " + $('#points' + i).val();
+          msg += "\n Knockouts " + i + ": " + $('#kos' + i).val();
         }
         alert(msg);
     });
@@ -158,6 +161,8 @@ $(document).ready(function() {
             <input type=\"text\" name=\"player$i\" id=\"player$i\" value=\"\" />
             <label>Points: </label>
             <input type=\"text\" name=\"points$i\" id=\"points$i\" value=\"" . positionToPointsConverter($i) . "\" />
+            <label>Knockouts: </label>
+            <input type=\"text\" name=\"kos$i\" id=\"kos$i\" value=\"0\" />
         </div>";
     }
     
