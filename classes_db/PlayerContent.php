@@ -225,7 +225,7 @@ class PlayerContent
             $historySt = $db->prepare(
                 'SELECT t.tournament_id, DAYOFMONTH(t.tournament_date) AS day, ' .
                 'MONTH(t.tournament_date) AS month, YEAR(t.tournament_date) AS year, ' .
-                'r.points, r.position ' .
+                'r.points, r.position, r.kos ' .
                 'FROM tournaments t ' .
                 'JOIN results r ON t.tournament_id=r.tournament_id ' .
                 'WHERE r.player_id=? ' .

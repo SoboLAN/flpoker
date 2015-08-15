@@ -115,12 +115,14 @@ class PlayerRenderer extends GeneralRenderer
             array(
                 '{player_tournament_tournament}',
                 '{player_tournament_points}',
-                '{player_tournament_position}'
+                '{player_tournament_position}',
+                '{player_tournament_knockouts}'
             ),
             array(
                 $this->site->getWord('player_tournament_tournament'),
                 $this->site->getWord('player_tournament_points'),
-                $this->site->getWord('player_tournament_position')
+                $this->site->getWord('player_tournament_position'),
+                $this->site->getWord('player_tournament_knockouts')
             ),
             $tHistoryTpl
         );
@@ -134,15 +136,18 @@ class PlayerRenderer extends GeneralRenderer
                 $tDate = $this->translateDate($tDate, $this->site->getLanguage());
             }
             
-            $position = (is_null($tournament['position']) or empty($tournament['position'])) ?
-                        '<span class="faded">unknown</span>' :
-                        $tournament['position'];
+            $position = (is_null($tournament['position']) || empty($tournament['position']))
+                ? '<span class="faded">unknown</span>'
+                : $tournament['position'];
+            
+            $knockouts = is_null($tournament['kos']) ? '<span class="faded">unknown</span>' : $tournament['kos'];
 
             $tournamentsList .=
             '<tr>
                 <td><a href="tournament.php?id=' . $tournament['tournament_id'] . '">' . $tDate . '</a></td>
                 <td>' . $tournament['points'] . '</td>
                 <td>' . $position . '</td>
+                <td>' . $knockouts . '</td>
             </tr>';
         }
         

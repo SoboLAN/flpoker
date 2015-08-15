@@ -3,6 +3,7 @@
         <th><strong>{player_tournament_tournament}</strong></th>
         <th><strong>{player_tournament_points}</strong></th>
         <th><strong>{player_tournament_position}</strong></th>
+        <th><strong>{player_tournament_knockouts}</strong></th>
     </tr>
     {player_tournament_list}
 </table>
