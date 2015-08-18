@@ -20,9 +20,9 @@ abstract class GeneralRenderer
     {
         $monthTranslations = array(
             'January' => 'Ianuarie',
-            'February' => 'February',
+            'February' => 'Februarie',
             'March' => 'Martie',
-            'April' => 'April',
+            'April' => 'Aprilie',
             'May' => 'Mai',
             'June' => 'Iunie',
             'July' => 'Iulie',
