@@ -153,7 +153,7 @@ class PlayerContent
             $tCountRow = $tournamentCountSt->fetch();
             $tournamentCount = $tCountRow['tcount'];
             $finalTables = $tCountRow['fcount'];
-            $knockouts = $tCountRow['koscount'];
+            $knockouts = is_null($tCountRow['koscount']) ? 0 : $tCountRow['koscount'];
             
             $medalsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $medalsSt->bindParam(2, $pid, PDO::PARAM_INT);
