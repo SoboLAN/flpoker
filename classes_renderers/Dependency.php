@@ -9,7 +9,6 @@ class Dependency
     const JQUERY_UI = 'path_jqueryui';
     const JQUERY_UI_CSS = 'path_jqueryui_css';
     const HIGHCHARTS = 'path_highcharts';
-    const HIGHCHARTS_EXPORT = 'path_highcharts_export';
     const HIGHCHARTS_THEME = 'path_highcharts_theme';
     
     const TYPE_JS = '<script src="{place}"></script>';
@@ -82,7 +81,6 @@ class Dependency
             new self(self::JQUERY_UI, self::TYPE_JS),
             new self(self::JQUERY_UI_CSS, self::TYPE_CSS),
             new self(self::HIGHCHARTS, self::TYPE_JS),
-            new self(self::HIGHCHARTS_EXPORT, self::TYPE_JS),
             new self(self::HIGHCHARTS_THEME, self::TYPE_JS)
         );
     }
