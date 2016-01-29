@@ -1,19 +1,23 @@
 {
     "menu_home": "Home Page",
     "menu_status": "Current Status",
-    "menu_rankings": "Rankings",
-    "menu_statistics": "Statistics",
     "menu_players": "Players",
     "menu_tournaments": "Tournaments",
     "menu_players_of_the_month": "Players of the Month",
+    "menu_rankings": "Rankings",
+    "menu_statistics": "Statistics",
+    "menu_faq": "FAQ",
+    
     "langpanel_ro": "Romanian",
     "langpanel_ro_switch": "Switch to Romanian",
     "langpanel_en": "English",
     "langpanel_en_switch": "Switch to English",
+    
     "players_pokerstars_name": "PokerStars Name",
     "players_filelist_name": "FileList Name",
     "players_current_points": "Current Points",
     "players_points_all_time": "Points All Time",
+    
     "statistics_tab_general": "General Statistics",
     "statistics_tab_top_all_time": "Top 200 Players All Time",
     "statistics_tab_top_6_months": "Top 40 Players Last 6 Months",
@@ -34,6 +38,7 @@
     "statistics_6months_points": "Points",
     "statistics_final_tables_player": "Player",
     "statistics_final_tables_tables": "Final Tables",
+    
     "tournaments_tournament_date": "Tournament Date",
     "tournaments_type": "Type",
     "tournaments_participants": "Number of Players",
@@ -55,6 +60,7 @@
     "tournament_bonuses": "Bonuses obtained in this tournament",
     "tournament_bonus": "Bonus Value",
     "tournament_bonus_description": "Bonus Description",
+    
     "player_tab_general_title": "General Information",
     "player_tab_thistory_title": "Tournament History",
     "player_tab_bonuses_title": "Bonuses",
@@ -80,10 +86,12 @@
     "player_prize_prize": "Prize",
     "player_prize_date": "Date Bought",
     "player_prize_cost": "Cost",
+    
     "players_month_pokerstars": "PokerStars Name",
     "players_month_filelist": "FileList Name",
     "players_month_date": "For Month",
     "players_month_points": "Points that month",
+    
     "status_tab_standings_title": "Standings This Month",
     "status_tab_ftables_title": "Final Tables This Month",
     "status_standings_text": "This table shows you the Top 5 players of this month",
@@ -93,6 +101,7 @@
     "status_standings_points": "Points",
     "status_ftables_player": "Player",
     "status_ftables_ftables": "Final Tables",
+    
     "statistics_top_all_time_text": "This table shows the players and the total number of points they've earned since they entered the club.",
     "statistics_top_6_months_text": "This table shows the points obtained by the players in the last 6 months.",
     "statistics_top_spending_text": "This table shows the players that are spending the most points on prizes.",
@@ -107,6 +116,7 @@
     "statistics_registrations_charttitle": "Players Registration Evolution",
     "statistics_registrations_chartsubtitle": "The evolution of the number of players that joined the club each month",
     "statistics_registrations_nrplayersline": "Number of Registered Players",
+    
     "pagination_normal_title": "Switch to this page",
     "pagination_current_title": "Current page",
     "pagination_prev_title": "Go to previous page",

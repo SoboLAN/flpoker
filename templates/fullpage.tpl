@@ -17,9 +17,10 @@
                     <a href="status.php" {selected_menu_status}>{menu_status}</a>
                     <a href="players.php" {selected_menu_players}>{menu_players}</a>
                     <a href="tournaments.php" {selected_menu_tournaments}>{menu_tournaments}</a>
+                    <a href="players.month.php" {selected_menu_players_of_the_month}>{menu_players_of_the_month}</a>
                     <a href="rankings.php" {selected_menu_rankings}>{menu_rankings}</a>
                     <a href="statistics.php" {selected_menu_statistics}>{menu_statistics}</a>
-                    <a href="players.month.php" {selected_menu_players_of_the_month}>{menu_players_of_the_month}</a>
+                    <a href="faq.php" {selected_menu_faq}>{menu_faq}</a>
                 </nav>
             <div id="language_panel">
                 {language_panel_content}

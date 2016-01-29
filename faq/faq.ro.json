@@ -1,0 +1,160 @@
+{
+    "Pe ce platformă se joacă turneul ?": [
+        {
+            "type": "row",
+            "content": "Turneele se joacă pe Pokerstars"
+        }
+    ],
+    "De unde pot downloada PokerStars ?": [
+        {
+            "type": "row",
+            "content": "Client-ul se poate descărca de aici: https://www.pokerstars.ro/poker/download"
+        }
+    ],
+    "Cum mă pot înscrie în clubul de poker ?": [
+        {
+            "type": "row",
+            "content": "Trebuie să intraţi în lobby-ul principal, apoi să daţi click pe secţiunea Home Games"
+        },
+        {
+            "type": "row",
+            "content": "Daţi click pe butonul 'Intră într-un Club de poker', introduceţi numărul de ID al clubului: 488267 cu codul de invitaţie 'tournament'"
+        }
+    ],
+    "Când au loc turneele ?": [
+        {
+            "type": "row",
+            "content": "Turneele au loc în fiecare marţi şi joi de la ora 20"
+        },
+        {
+            "type": "row",
+            "content": "Uneori turneele se vor re-programa, în cazuri speciale (sărbători etc.). Aceste cazuri se vor anunţa pe forum-ul FileList"
+        }
+    ],
+    "De ce nu am intrat în puncte ?": [
+        {
+            "type": "row",
+            "content": "Nu ai intrat în puncte din 2 motive posibile: ai stat sit-out peste 15 de minute sau ai fost descalificat."
+        }
+    ],
+    "Am terminat pe locul X. Câte puncte primesc ?": [
+        {
+            "type": "row",
+            "content": "Sub 30 de jucători:"
+        },
+        {
+            "type": "table",
+            "titles": ["Poziţie", "Puncte"],
+            "rows": [
+                ["1", "15"],
+                ["2", "13"],
+                ["3", "10"],
+                ["4", "9"],
+                ["5", "8"],
+                ["6", "7"],
+                ["7", "6"],
+                ["8", "5"],
+                ["9", "4"],
+                ["10", "3"],
+                ["11", "2"],
+                ["12", "1"]
+            ]
+        },
+        {
+            "type": "row",
+            "content": "Între 30 şi 39 de jucători:"
+        },
+        {
+            "type": "table",
+            "titles": ["Poziţie", "Puncte"],
+            "rows": [
+                ["1", "21"],
+                ["2", "19"],
+                ["3", "17"],
+                ["4", "15"],
+                ["5", "13"],
+                ["6", "10"],
+                ["7", "9"],
+                ["8", "8"],
+                ["9", "7"],
+                ["10", "6"],
+                ["11", "5"],
+                ["12", "4"],
+                ["13", "3"],
+                ["14", "2"],
+                ["15", "1"]
+            ]
+        },
+        {
+            "type": "row",
+            "content": "40 de jucători sau mai mult:"
+        },
+        {
+            "type": "table",
+            "titles": ["Poziţie", "Puncte"],
+            "rows": [
+                ["1", "30"],
+                ["2", "27"],
+                ["3", "25"],
+                ["4", "23"],
+                ["5", "21"],
+                ["6", "19"],
+                ["7", "17"],
+                ["8", "15"],
+                ["9", "13"],
+                ["10", "10"],
+                ["11", "9"],
+                ["12", "8"],
+                ["13", "7"],
+                ["14", "6"],
+                ["15", "5"],
+                ["16", "4"],
+                ["17", "3"],
+                ["18", "2"],
+                ["19", "1"]
+            ]
+        }
+    ],
+    "Există ceva bonus-uri ?": [
+        {
+            "type": "row",
+            "content": "Se pot acorda următoarele bonus-uri:"
+        },
+        {
+            "type": "table",
+            "titles": ["Descriere", "Puncte Bonus"],
+            "rows": [
+                ["2 mese finale într-o lună", "5"],
+                ["3 mese finale într-o lună", "10"],
+                ["4 mese finale într-o lună", "15"],
+                ["5 mese finale într-o lună", "20"],
+                ["6 sau mai multe mese finale într-o lună", "25"],
+                ["Mână Straight Flush", "6"],
+                ["Mână Royal Flush", "15"],
+                ["Câştigarea titlului 'Jucătorul Lunii'", "40"]
+            ]
+        }
+    ],
+    "Ce pot face cu punctele câştigate ?": [
+        {
+            "type": "row",
+            "content": "Cu punctele obţinute se pot achiziţiona următoarele premii:"
+        },
+        {
+            "type": "table",
+            "titles": ["Premiu", "Cost"],
+            "rows": [
+                ["100 GB Upload", "90"],
+                ["250 GB Upload", "120"],
+                ["500 GB Upload", "150"],
+                ["1 TB Upload", "230"],
+                ["2 TB Upload", "300"],
+                ["Custom Title", "50"],
+                ["Avatar / Torrent Request", "30"],
+                ["VIP timp de 40 de zile", "350"],
+                ["1 invitatie pe cont (VIP+)", "100"],
+                ["Trimiterea unei invitatii", "100"]
+            ]
+        }
+    ]
+}

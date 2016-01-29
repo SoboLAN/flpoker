@@ -1,19 +1,23 @@
 {
     "menu_home": "Acasă",
    	"menu_status": "Situația Curentă",
-    "menu_rankings": "Clasamente",
-    "menu_statistics": "Statistici",
     "menu_players": "Jucători",
     "menu_tournaments": "Turnee",
     "menu_players_of_the_month": "Jucătorii Lunii",
+    "menu_rankings": "Clasamente",
+    "menu_statistics": "Statistici",
+    "menu_faq": "FAQ",
+    
     "langpanel_ro": "Română",
     "langpanel_ro_switch": "Schimbă în Română",
     "langpanel_en": "Engleză",
     "langpanel_en_switch": "Schimbă în Engleză",
+    
     "players_pokerstars_name": "Nume PokerStars",
     "players_filelist_name": "Nume FileList",
     "players_current_points": "Puncte curente",
     "players_points_all_time": "Total Puncte All Time",
+    
     "statistics_tab_general": "Statistici Generale",
     "statistics_tab_top_all_time": "Top 200 Jucători All Time",
     "statistics_tab_top_6_months": "Top 40 Jucători 6 Luni",
@@ -34,6 +38,7 @@
     "statistics_6months_points": "Puncte",
     "statistics_final_tables_player": "Jucător",
     "statistics_final_tables_tables": "Mese Finale",
+    
     "tournaments_tournament_date": "Data Turneului",
     "tournaments_type": "Tipul Turneului",
     "tournaments_participants": "Numărul de Participanți",
@@ -55,6 +60,7 @@
     "tournament_bonuses": "Bonusuri obținute în acest turneu",
     "tournament_bonus": "Valoarea Bonus-ului",
     "tournament_bonus_description": "Descrierea Bonus-ului",
+    
     "player_tab_general_title": "Informații Generale",
     "player_tab_thistory_title": "Istoria Turneelor",
     "player_tab_bonuses_title": "Bonusuri",
@@ -80,11 +86,13 @@
     "player_prize_prize": "Premiu",
     "player_prize_date": "Data Cumpărării",
     "player_prize_cost": "Cost",
+    
     "players_month_pokerstars": "Nume PokerStars",
     "players_month_filelist": "Nume FileList",
     "players_month_date": "Pentru Luna",
    	"players_month_points": "Puncte acumulate în acea lună",
-   	"status_tab_standings_title": "Clasamente Luna Aceasta",
+   	
+    "status_tab_standings_title": "Clasamente Luna Aceasta",
    	"status_tab_ftables_title": "Mese Finale Luna Aceasta",
    	"status_standings_text": "Acest tabel arată cei 5 jucători cu cele mai multe puncte acumulate luna aceasta.",
    	"status_ftables_text": "Acest tabel arată la câte mese finale au ajuns jucătorii luna aceasta (doar cei cu cel puțin 2 mese finale sunt afișați)",
@@ -93,6 +101,7 @@
    	"status_standings_points": "Puncte",
    	"status_ftables_player": "Jucător",
    	"status_ftables_ftables": "Mese Finale",
+    
     "statistics_top_all_time_text": "Acest tabel arată jucătorii și toate punctele care aceștia le-au obținut de când s-au înregistrat în club.",
     "statistics_top_6_months_text": "Acest tabel conține punctele obținute de către jucători în ultimele 6 luni.",
     "statistics_top_spending_text": "Acest clasament arată care jucători cheltuie cele mai multe puncte.",
@@ -107,7 +116,8 @@
     "statistics_registrations_charttitle": "Evoluția Numărului de Înscrieri ale Jucătorilor",
     "statistics_registrations_chartsubtitle": "Evoluția numărului de jucători care s-au înscris în club în fiecare lună",
     "statistics_registrations_nrplayersline": "Numărul de Jucători Înscriși",
-   	"pagination_normal_title": "Du-te la această pagină",
+   	
+    "pagination_normal_title": "Du-te la această pagină",
    	"pagination_current_title": "Pagina curentă",
    	"pagination_prev_title": "Du-te la pagina precedentă",
    	"pagination_next_title": "Du-te la pagina următoare",

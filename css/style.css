@@ -107,8 +107,8 @@ body {
 
 #navigation-menu a {
 	color: #FADD82;
-	padding: 6px 8px 4px 8px; /* padding of the 4 sides of each menu link */
-	margin-right: 15px; /* spacing between each menu link */
+	padding: 6px 6px 4px 6px; /* padding of the 4 sides of each menu link */
+	margin-right: 10px; /* spacing between each menu link */
 	text-decoration: none;
 	font: 1.1em Verdana;
 	font-weight: bold;

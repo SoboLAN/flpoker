@@ -19,9 +19,10 @@ class Dependency
         'status.php'        => 'getStatus',
         'players.php'       => 'getPlayers',
         'tournaments.php'   => 'getTournaments',
+        'players.month.php' => 'getPlayersOfTheMonth',
         'rankings.php'      => 'getRankings',
         'statistics.php'    => 'getStatistics',
-        'players.month.php' => 'getPlayersOfTheMonth'
+        'faq.php'           => 'getFaq'
     );
     
     private $name;
@@ -88,6 +89,16 @@ class Dependency
     public static function getPlayersOfTheMonth()
     {
         return array(new self(self::GENERAL_CSS, self::TYPE_CSS));
+    }
+    
+    public static function getFaq()
+    {
+        return array(
+            new self(self::GENERAL_CSS, self::TYPE_CSS),
+            new self(self::JQUERY, self::TYPE_JS),
+            new self(self::JQUERY_UI, self::TYPE_JS),
+            new self(self::JQUERY_UI_CSS, self::TYPE_CSS)
+        );
     }
     
     public function getName()

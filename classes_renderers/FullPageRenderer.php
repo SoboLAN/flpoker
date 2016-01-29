@@ -6,6 +6,7 @@ use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Dictionary;
 use FileListPoker\Main\Config;
+use FileListPoker\Main\FLPokerException;
 
 /**
  * @author Radu Murzea <radu.murzea@gmail.com>
@@ -22,9 +23,10 @@ class FullPageRenderer extends GeneralRenderer
         'status.php'        => 'menu_status',
         'players.php'       => 'menu_players',
         'tournaments.php'   => 'menu_tournaments',
+        'players.month.php' => 'menu_players_of_the_month',
         'rankings.php'      => 'menu_rankings',
         'statistics.php'    => 'menu_statistics',
-        'players.month.php' => 'menu_players_of_the_month'
+        'faq.php'           => 'menu_faq'
     );
     
     public function __construct(Site $site)
@@ -41,7 +43,10 @@ class FullPageRenderer extends GeneralRenderer
     public function renderPage($page)
     {
         if (! in_array($page, array_keys($this->pages))) {
-            throw new FLPokerException("Site::getFullPageTemplate received an invalid page: $page", FLPokerException::ERROR);
+            throw new FLPokerException(
+                "Site::getFullPageTemplate received an invalid page: $page",
+                FLPokerException::ERROR
+            );
         }
         
         $tpl = file_get_contents('templates/fullpage.tpl');

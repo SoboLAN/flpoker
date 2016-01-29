@@ -1,0 +1,160 @@
+{
+    "On what gaming platform are the tournaments played ?": [
+        {
+            "type": "row",
+            "content": "The tournaments are played on Pokerstars"
+        }
+    ],
+    "Where can I download PokerStars from ?": [
+        {
+            "type": "row",
+            "content": "The PokerStars client can be downloaded from here: https://www.pokerstars.com/poker/download"
+        }
+    ],
+    "How can I signup to the poker club ?": [
+        {
+            "type": "row",
+            "content": "You need to go to the main lobby in PokerStars, then click on the Home Games section"
+        },
+        {
+            "type": "row",
+            "content": "Click on 'Join a poker club', enter the club ID: 488267 together with the invitation code: 'tournament'"
+        }
+    ],
+    "When do the tournaments take place ?": [
+        {
+            "type": "row",
+            "content": "The tournaments take place every Tuesday and Thursday at 8 PM Romanian Local Time"
+        },
+        {
+            "type": "row",
+            "content": "Sometimes, in the case of special circumstances (holidays etc.), tournaments will be re-scheduled. This will be announced on FileList forum."
+        }
+    ],
+    "Why didn't I get any points in a tournament ?": [
+        {
+            "type": "row",
+            "content": "There are 2 possible reasons for not receiving points: you were sit-out for more than 15 minutes or you were disqualified for some reason."
+        }
+    ],
+    "I finished in the Xth place. How many points do I get ?": [
+        {
+            "type": "row",
+            "content": "Less than 30 players:"
+        },
+        {
+            "type": "table",
+            "titles": ["Position", "Points"],
+            "rows": [
+                ["1", "15"],
+                ["2", "13"],
+                ["3", "10"],
+                ["4", "9"],
+                ["5", "8"],
+                ["6", "7"],
+                ["7", "6"],
+                ["8", "5"],
+                ["9", "4"],
+                ["10", "3"],
+                ["11", "2"],
+                ["12", "1"]
+            ]
+        },
+        {
+            "type": "row",
+            "content": "Between 30 and 39 players:"
+        },
+        {
+            "type": "table",
+            "titles": ["Position", "Points"],
+            "rows": [
+                ["1", "21"],
+                ["2", "19"],
+                ["3", "17"],
+                ["4", "15"],
+                ["5", "13"],
+                ["6", "10"],
+                ["7", "9"],
+                ["8", "8"],
+                ["9", "7"],
+                ["10", "6"],
+                ["11", "5"],
+                ["12", "4"],
+                ["13", "3"],
+                ["14", "2"],
+                ["15", "1"]
+            ]
+        },
+        {
+            "type": "row",
+            "content": "40 players or more:"
+        },
+        {
+            "type": "table",
+            "titles": ["Position", "Points"],
+            "rows": [
+                ["1", "30"],
+                ["2", "27"],
+                ["3", "25"],
+                ["4", "23"],
+                ["5", "21"],
+                ["6", "19"],
+                ["7", "17"],
+                ["8", "15"],
+                ["9", "13"],
+                ["10", "10"],
+                ["11", "9"],
+                ["12", "8"],
+                ["13", "7"],
+                ["14", "6"],
+                ["15", "5"],
+                ["16", "4"],
+                ["17", "3"],
+                ["18", "2"],
+                ["19", "1"]
+            ]
+        }
+    ],
+    "Are there any bonus points ?": [
+        {
+            "type": "row",
+            "content": "You can get the following bonuses:"
+        },
+        {
+            "type": "table",
+            "titles": ["Description", "Bonus Points"],
+            "rows": [
+                ["2 final tables in a month", "5"],
+                ["3 final tables in a month", "10"],
+                ["4 final tables in a month", "15"],
+                ["5 final tables in a month", "20"],
+                ["6 or more final tables in a month", "25"],
+                ["Straight Flush", "6"],
+                ["Royal Flush", "15"],
+                ["Winning 'Player of the Month' title", "40"]
+            ]
+        }
+    ],
+    "What can I do with the points I won ?": [
+        {
+            "type": "row",
+            "content": "With the points you won you can purchase the following prizes:"
+        },
+        {
+            "type": "table",
+            "titles": ["Prize", "Cost"],
+            "rows": [
+                ["100 GB Upload", "90"],
+                ["250 GB Upload", "120"],
+                ["500 GB Upload", "150"],
+                ["1 TB Upload", "230"],
+                ["2 TB Upload", "300"],
+                ["Custom Title", "50"],
+                ["Avatar / Torrent Request", "30"],
+                ["VIP for 40 days", "350"],
+                ["1 invitation (VIP+)", "100"],
+                ["Sending 1 invitation to someone", "100"]
+            ]
+        }
+    ]
+}
