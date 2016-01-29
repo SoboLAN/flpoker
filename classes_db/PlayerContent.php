@@ -113,6 +113,8 @@ class PlayerContent
                      'FROM results ' .
                      'WHERE player_id=?) knockouts'
             );
+            
+            $playerMonthSt = $db->prepare('SELECT COUNT(*) AS pomcount FROM players_of_the_month WHERE player_id=?');
 
             $playerInfoSt->bindParam(1, $pid, PDO::PARAM_INT);
             $playerInfoSt->execute();
@@ -139,6 +141,10 @@ class PlayerContent
             $finalTables = $tCountRow['fcount'];
             $knockouts = is_null($tCountRow['koscount']) ? 0 : $tCountRow['koscount'];
             
+            $playerMonthSt->bindParam(1, $pid, PDO::PARAM_INT);
+            $playerMonthSt->execute();
+            $pomcount = $playerMonthSt->fetch(PDO::FETCH_OBJ)->pomcount;
+            
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getGeneral with player id $pid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -159,7 +165,8 @@ class PlayerContent
                 'tournament_count' => $tournamentCount,
                 'final_tables' => $finalTables,
                 'knockouts' => $knockouts,
-                'points_all_time' => $pointsAllTime
+                'points_all_time' => $pointsAllTime,
+                'pomcount' => $pomcount
             )
         );
         

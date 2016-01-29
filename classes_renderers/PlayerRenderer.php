@@ -20,17 +20,15 @@ class PlayerRenderer extends GeneralRenderer
     
     public function renderGeneral($template, $content)
     {
-        $namePokerStars = (is_null($content['name_pokerstars']) or empty($content['name_pokerstars'])) ?
-                            '<span class="faded">unknown</span>' :
-                            $content['name_pokerstars'];
-            
-        if (is_null($content['name_filelist']) or empty($content['name_filelist'])) {
-            $nameFilelist = '<span class="faded">unknown</span>';
-        } else {
-            $nameFilelist = $content['name_filelist'];
-        }
+        $namePokerStars = empty($content['name_pokerstars'])
+            ? '<span class="faded">unknown</span>'
+            : $content['name_pokerstars'];
         
-        if (is_null($content['month']) or empty($content['month'])) {
+        $nameFilelist = empty($content['name_filelist'])
+            ? '<span class="faded">unknown</span>'
+            : $content['name_filelist'];
+        
+        if (is_null($content['month']) || empty($content['month'])) {
             $regDate = '<span class="faded">unknown</span>';
         } else {
             $regDate = date('j F Y', mktime(0, 0, 0, $content['month'], $content['day'], $content['year']));
@@ -62,7 +60,9 @@ class PlayerRenderer extends GeneralRenderer
                 '{player_tab_general_ftables}',
                 '{ftables}',
                 '{player_tab_general_kos}',
-                '{kos}'
+                '{kos}',
+                '{player_tab_general_pom}',
+                '{nr_pom}'
             ),
             array(
                 $this->site->getWord('player_tab_general_pname'),
@@ -83,7 +83,9 @@ class PlayerRenderer extends GeneralRenderer
                 $this->site->getWord('player_tab_general_ftables'),
                 $content['final_tables'],
                 $this->site->getWord('player_tab_general_kos'),
-                $content['knockouts']
+                $content['knockouts'],
+                $this->site->getWord('player_tab_general_pom'),
+                $content['pomcount']
             ),
             $template
         );
