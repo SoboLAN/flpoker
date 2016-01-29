@@ -132,12 +132,12 @@ class FullPageRenderer extends GeneralRenderer
         if ($language == Dictionary::LANG_RO) {
             $langPanel .= '
                 <img class="active_lang" src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro', $language) .'" alt="' . Dictionary::getWord('langpanel_ro', $language) .'" />
-            <a href="lang_switch.php?lang=en&amp;returnpage=' . $returnPage . '">' .
+            <a href="lang_switch.php?lang=' . Dictionary::LANG_EN . '&amp;returnpage=' . $returnPage . '">' .
                 '<img src="images/us.gif" title="' . Dictionary::getWord('langpanel_en_switch', $language) . '" alt="' . Dictionary::getWord('langpanel_en_switch', $language) . '" />' .
             '</a>';
         } elseif ($language == Dictionary::LANG_EN) {
             $langPanel .= '
-            <a href="lang_switch.php?lang=&amp;returnpage=' . $returnPage . '">' .
+            <a href="lang_switch.php?lang=' . Dictionary::LANG_RO . '&amp;returnpage=' . $returnPage . '">' .
                 '<img src="images/ro.gif" title="' . Dictionary::getWord('langpanel_ro_switch', $language) .'" alt="' . Dictionary::getWord('langpanel_ro_switch', $language) .'" />' .
             '</a>
             <img class="active_lang" src="images/us.gif" title="' . Dictionary::getWord('langpanel_en', $language) . '" alt="' . Dictionary::getWord('langpanel_en', $language) . '" />
