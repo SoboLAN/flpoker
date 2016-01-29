@@ -112,52 +112,6 @@ class StatisticsContent
         return $result;
     }
     
-    public function getAggressionGraph()
-    {
-        if (! is_null($this->cache)) {
-            $key = Config::getValue('cache_key_aggresion_graph');
-            
-            if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
-                
-                return $content;
-            }
-        }
-        
-        $db = Database::getConnection();
-        
-        try {
-            //aggression factor is the average number of players eliminated per hour in a
-            //tournament
-            //query will calculate the average of the aggression factor for a given month
-            $tmpresults = $db->query(
-                'SELECT ROUND(AVG(60 * participants / duration), 2) AS aggression_factor, ' .
-                'MONTH(tournament_date) AS tournament_month, ' .
-                'YEAR(tournament_date) AS tournament_year, ' .
-                'CONCAT(MONTH(tournament_date), \'-\', YEAR(tournament_date)) AS tournament_period ' .
-                'FROM tournaments ' .
-                'WHERE duration IS NOT NULL AND tournament_type=\'regular\' ' .
-                'GROUP BY tournament_period ' .
-                'ORDER BY tournament_year ASC, tournament_month ASC'
-            );
-        } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getAggressionGraph failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
-        }
-        
-        $result = $tmpresults->fetchAll();
-        
-        if (! is_null($this->cache)) {
-            $key = Config::getValue('cache_key_aggresion_graph');
-            
-            $lifetime = Config::getValue('cache_lifetime_aggresion_graph');
-            
-            $this->cache->save($key, json_encode($result), $lifetime);
-        }
-        
-        return $result;
-    }
-    
     public function getGeneralStatistics()
     {
         if (! is_null($this->cache)) {
