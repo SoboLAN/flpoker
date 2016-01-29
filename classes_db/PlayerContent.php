@@ -114,22 +114,6 @@ class PlayerContent
                      'WHERE player_id=?) knockouts'
             );
 
-            $medalsSt = $db->prepare(
-                'SELECT * FROM (' .
-                'SELECT COUNT(*) AS gold_medals ' .
-                'FROM results ' .
-                'WHERE position=1 ' .
-                'AND player_id=?) AS gold_medals, ' .
-                '(SELECT COUNT(*) AS silver_medals ' .
-                'FROM results ' .
-                'WHERE position=2 ' .
-                'AND player_id=?) AS silver_medals, ' .
-                '(SELECT COUNT(*) AS bronze_medals ' .
-                'FROM results ' .
-                'WHERE position=3 ' .
-                'AND player_id=?) AS bronze_medals'
-            );
-            
             $playerInfoSt->bindParam(1, $pid, PDO::PARAM_INT);
             $playerInfoSt->execute();
             $playerInfo = $playerInfoSt->rowCount() == 0 ? false : $playerInfoSt->fetch();
@@ -155,14 +139,6 @@ class PlayerContent
             $finalTables = $tCountRow['fcount'];
             $knockouts = is_null($tCountRow['koscount']) ? 0 : $tCountRow['koscount'];
             
-            $medalsSt->bindParam(1, $pid, PDO::PARAM_INT);
-            $medalsSt->bindParam(2, $pid, PDO::PARAM_INT);
-            $medalsSt->bindParam(3, $pid, PDO::PARAM_INT);
-            $medalsSt->execute();
-            $medalsObj = $medalsSt->fetch();
-            $gold_medals = $medalsObj['gold_medals'];
-            $silver_medals = $medalsObj['silver_medals'];
-            $bronze_medals = $medalsObj['bronze_medals'];
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getGeneral with player id $pid failed: " . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);
@@ -183,9 +159,6 @@ class PlayerContent
                 'tournament_count' => $tournamentCount,
                 'final_tables' => $finalTables,
                 'knockouts' => $knockouts,
-                'gold_medals' => $gold_medals,
-                'silver_medals' => $silver_medals,
-                'bronze_medals' => $bronze_medals,
                 'points_all_time' => $pointsAllTime
             )
         );

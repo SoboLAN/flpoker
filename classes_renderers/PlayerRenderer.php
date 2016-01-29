@@ -62,13 +62,7 @@ class PlayerRenderer extends GeneralRenderer
                 '{player_tab_general_ftables}',
                 '{ftables}',
                 '{player_tab_general_kos}',
-                '{kos}',
-                '{player_tab_general_gmedals}',
-                '{gmedals}',
-                '{player_tab_general_smedals}',
-                '{smedals}',
-                '{player_tab_general_bmedals}',
-                '{bmedals}'
+                '{kos}'
             ),
             array(
                 $this->site->getWord('player_tab_general_pname'),
@@ -89,13 +83,7 @@ class PlayerRenderer extends GeneralRenderer
                 $this->site->getWord('player_tab_general_ftables'),
                 $content['final_tables'],
                 $this->site->getWord('player_tab_general_kos'),
-                $content['knockouts'],
-                $this->site->getWord('player_tab_general_gmedals'),
-                $content['gold_medals'],
-                $this->site->getWord('player_tab_general_smedals'),
-                $content['silver_medals'],
-                $this->site->getWord('player_tab_general_bmedals'),
-                $content['bronze_medals']
+                $content['knockouts']
             ),
             $template
         );
