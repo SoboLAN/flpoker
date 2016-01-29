@@ -11,6 +11,7 @@ $site = new Site();
 //if language is not OK, go away
 if (! Dictionary::isValidLanguage($_GET['lang'])) {
     header('Location: index.php');
+    exit();
 }
 
 //language setting is stored in a cookie. so we need parameters for it
