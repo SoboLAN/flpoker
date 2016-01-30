@@ -8,17 +8,17 @@ use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\TournamentRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 
-if (! isset($_GET['id'])) {
-    $message = 'No tournament ID specified when accessing tournament.php';
-    throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
-} elseif (! $site->isValidID($_GET['id'])) {
+$errors = $site->isValidNumericQueryParameter('id', 3);
+if (count($errors) > 0) {
     $message = 'Invalid tournament ID specified when acccessing tournament.php';
     throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
 }
 
-$tid = $_GET['id'];
+$tid = $site->request->query->get('id');
 
 $tournamentPage = new TournamentContent();
 
@@ -58,4 +58,6 @@ $htmlout = str_replace(
     $htmlout
 );
 
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

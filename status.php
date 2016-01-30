@@ -7,6 +7,8 @@ use FileListPoker\Main\Site;
 use FileListPoker\Renderers\StatusRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 
 $statusPage = new StatusContent();
@@ -58,4 +60,6 @@ $htmlout = str_replace(
     $htmlout
 );
 
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

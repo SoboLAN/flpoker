@@ -11,16 +11,19 @@ use FileListPoker\Renderers\TournamentsRenderer;
 use FileListPoker\Renderers\PaginationRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 
 //validate page
-if (isset($_GET['page']) && ! $site->isValidID($_GET['page'])) {
+$errors = $site->isValidNumericQueryParameter('page', 2, 1);
+if (count($errors) > 0) {
     $message = 'Invalid page specified when acccessing tournaments.php';
     throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
 }
 
 //build parameters
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$page = $site->request->query->get('page', 1);
 $perPage = Config::getValue('tournaments_pagination_page_size');
 $paginationWidth = Config::getValue('tournaments_pagination_width');
 
@@ -68,4 +71,6 @@ $htmlout = str_replace(
     $htmlout
 );
     
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

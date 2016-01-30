@@ -6,7 +6,7 @@
         {
             "name": "Radu Murzea",
             "email": "radu.murzea@gmail.com",
-            "homepage": "http://radumurzea.net",
+            "homepage": "http://radumurzea.net/",
             "role": "Project Manager"
         }
     ],
@@ -19,6 +19,13 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "doctrine/cache": "1.5.*"
+        "doctrine/cache": "1.5.*",
+        "symfony/validator": "2.8.*",
+        "symfony/http-foundation": "2.8.*"
+    },
+    "config": {
+        "platform": {
+            "php": "5.3.9"
+        }
     }
 }

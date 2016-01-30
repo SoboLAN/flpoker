@@ -7,6 +7,8 @@ use FileListPoker\Renderers\FullPageRenderer;
 use FileListPoker\Renderers\FAQRenderer;
 use FileListPoker\Content\FAQContent;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 $renderer = new FullPageRenderer($site);
 
@@ -33,4 +35,6 @@ $htmlout = str_replace(
     $htmlout
 );
 
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

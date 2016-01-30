@@ -8,30 +8,30 @@ use FileListPoker\Main\FLPokerException;
 use FileListPoker\Renderers\PlayerRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 
-if (! isset($_GET['id'])) {
-    $message = 'No player ID specified when accessing player.php';
-    throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
-} elseif (! $site->isValidID($_GET['id'])) {
+$errors = $site->isValidNumericQueryParameter('id', 4);
+if (count($errors) > 0) {
     $message = 'Invalid player ID specified when acccessing player.php';
     throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
 }
 
-$player_id = $_GET['id'];
+$playerId = $site->request->query->get('id');
 
 $playerPage = new PlayerContent();
 
-$general = $playerPage->getGeneral($player_id);
+$general = $playerPage->getGeneral($playerId);
 
 if (count($general) == 0) {
     $message = 'Non-existent player ID specified when acccessing player.php';
     throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
 }
 
-$tournamentHistory = $playerPage->getTournamentHistory($player_id);
-$bonuses = $playerPage->getBonuses($player_id);
-$prizes = $playerPage->getPrizes($player_id);
+$tournamentHistory = $playerPage->getTournamentHistory($playerId);
+$bonuses = $playerPage->getBonuses($playerId);
+$prizes = $playerPage->getPrizes($playerId);
 
 $pageContent = file_get_contents('templates/player/player.tpl');
 $renderer = new PlayerRenderer($site);
@@ -83,4 +83,6 @@ $htmlout = str_replace(
     $htmlout
 );
 
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

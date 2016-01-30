@@ -7,6 +7,8 @@ use FileListPoker\Main\Site;
 use FileListPoker\Renderers\PlayersMonthRenderer;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 
 $playersMonthPage = new PlayersMonthContent();
@@ -25,5 +27,7 @@ $htmlout = str_replace(
     array('content-narrower', $pageContent, ''),
     $htmlout
 );
-    
-echo $htmlout;
+
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

@@ -4,9 +4,13 @@ namespace FileListPoker\Main;
 
 use FileListPoker\Main\FLPokerException;
 
+use Symfony\Component\Validator\ValidatorBuilder;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\NotNull;
+
 /**
  * Class that handles wording functionality a.k.a. labels of different languages on the site.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Dictionary
 {
@@ -19,6 +23,10 @@ class Dictionary
     //will be filled by doing lazy-loading a.k.a. if a word in Italian is never requested, the
     //file that contains Italian words is never read
     private static $words = array();
+    
+    //since validation of language is slightly expensive and, since it's done very often,
+    //this field will "cache" the validation results
+    private static $validatedLanguages = array();
     
     /**
      * Returns the requested word in the specified language.
@@ -57,6 +65,26 @@ class Dictionary
      */
     public static function isValidLanguage($lang)
     {
-        return in_array($lang, array(self::LANG_EN, self::LANG_RO));
+        if (isset(self::$validatedLanguages[$lang])) {
+            return self::$validatedLanguages[$lang];
+        }
+
+        $validatorBuilder = new ValidatorBuilder();
+
+        /* @var $validator ValidatorInterface */
+        $validator = $validatorBuilder->getValidator();
+
+        $choiceConstraint = new Choice();
+        $choiceConstraint->choices = array(self::LANG_EN, self::LANG_RO);
+
+        $notNullConstraint = new NotNull();
+
+        $errors = $validator->validate($lang, array($choiceConstraint, $notNullConstraint));
+
+        $isValid = count($errors) === 0;
+
+        self::$validatedLanguages[$lang] = $isValid;
+
+        return $isValid;
     }
 }

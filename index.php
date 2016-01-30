@@ -6,22 +6,21 @@ use FileListPoker\Main\Site;
 use FileListPoker\Main\Dictionary;
 use FileListPoker\Renderers\FullPageRenderer;
 
+use Symfony\Component\HttpFoundation\Response;
+
 $site = new Site();
 $renderer = new FullPageRenderer($site);
 
 $htmlout = $renderer->renderPage('index.php');
 
-if ($site->getLanguage() == Dictionary::LANG_RO)
-{
+if ($site->getLanguage() == Dictionary::LANG_RO) {
     $text =
     '<article><p>Acest site conține toate informațiile legate de clubul de poker FileList.
     Aici puteți găsi tot: de la numărul de puncte al unui jucător, până la evoluția în timp a
     numărului de participanți a turneelor; de la statistici legate de premii și bonus-uri până la
     totalul punctelor cheltuite de către toți membrii.</p>
     <p>Puteți răsfoi în voie. Enjoy.</p></article>';
-}
-else if ($site->getLanguage() == Dictionary::LANG_EN)
-{
+} else if ($site->getLanguage() == Dictionary::LANG_EN) {
     $text =
     '<article><p>This site contains all the informations regarding the FileList poker club.
     You can find everything here: the number of points of a player, the evolution in time of the
@@ -36,4 +35,6 @@ $htmlout = str_replace(
     $htmlout
 );
 
-echo $htmlout;
+$site->response->setContent($htmlout);
+$site->response->setStatusCode(Response::HTTP_OK);
+$site->response->send();

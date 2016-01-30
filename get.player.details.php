@@ -4,27 +4,38 @@ require_once 'vendor/autoload.php';
 
 use FileListPoker\Main\Config;
 use FileListPoker\Main\Site;
-use FileListPoker\Main\Database;
-use FileListPoker\Main\FLPokerException;
 use FileListPoker\Content\PlayerContent;
+
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 //since this page is called via AJAX, this check is kept in order to maintain correct behaviour
 if (! Config::getValue('online')) {
-    header('HTTP/1.1 503 Service Unavailable');
+    $response = new Response('', Response::HTTP_SERVICE_UNAVAILABLE);
+    $response->send();
     exit();
 }
 
 $site = new Site();
 
-$db = Database::getConnection();
+$errors = $site->isValidNumericQueryParameter('id', 4);
+if (count($errors) > 0) {
+    $response = new Response('', Response::HTTP_BAD_REQUEST);
+    $response->send();
+    exit();
+}
+
+$playerId = $site->request->query->get('id');
 
 $content = new PlayerContent();
 
-$details = $content->getGeneral($_GET['id']);
+$details = $content->getGeneral($playerId);
 
 if (count($details) == 0) {
-    $message = 'Non-existent player ID specified when acccessing get.player.details.php';
-    throw new FLPokerException($message, FLPokerException::INVALID_REQUEST);
+    $response = new Response('', Response::HTTP_BAD_REQUEST);
+    $response->send();
+    exit();
 }
 
-echo json_encode($details);
+$response = new JsonResponse($details, JsonResponse::HTTP_OK);
+$response->send();
