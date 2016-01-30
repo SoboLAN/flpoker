@@ -2,20 +2,24 @@
 
 namespace FileListPoker\Content;
 
+use FileListPoker\Main\Database;
+use FileListPoker\Main\Config;
+use FileListPoker\Main\Cache\CacheFactory;
+use FileListPoker\Main\FLPokerException;
+
+use Doctrine\Common\Cache\CacheProvider;
+
 use PDO as PDO;
 use PDOException as PDOException;
 
-use FileListPoker\Main\Database;
-use FileListPoker\Main\Config;
-use FileListPoker\Main\CacheDB;
-use FileListPoker\Main\FLPokerException;
-
 /**
  * This class contains functions that will return information about a particular player.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class PlayerContent
 {
+    /**
+     * @var CacheProvider
+     */
     private $cache;
     
     /**
@@ -23,37 +27,13 @@ class PlayerContent
      */
     public function __construct()
     {
-        //set cache field with an apropiate cache instance (based on type), but only
-        //if caching is enabled
-        if (Config::getValue('enable_cache')) {
-            $cacheType = Config::getValue('cache_type');
-        
-            if ($cacheType == 'db') {
-                $this->cache = new CacheDB();
-            }
-        }
+        $this->cache = CacheFactory::getCacheInstance();
     }
-    
+
     /**
      * Returns an associative array of information about the player identified by the passed parameter.
      * @param int $pid the ID of the wanted player.
-     * @return array of information about the player. Will contain:
-     * <ul>
-     * <li>FileList ID</li>
-     * <li>FileList Name</li>
-     * <li>PokerStars Name</li>
-     * <li>account Type (regular or admin)</li>
-     * <li>day of join date</li>
-     * <li>month of join date</li>
-     * <li>year of join date</li>
-     * <li>current points</li>
-     * <li>points all time</li>
-     * <li>gold medals</li>
-     * <li>silver medals</li>
-     * <li>bronze medals</li>
-     * <li>number of final tables reached</li>
-     * <li>number of knocked-out players (in the tournaments where he received points)</li>
-     * </ul>
+     * @return array of information about the player.
      */
     public function getGeneral($pid)
     {
@@ -61,7 +41,7 @@ class PlayerContent
             $key = Config::getValue('cache_key_player_general') . $pid;
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 if (is_null($content)) {
                     $message = "cached value for key $key is invalid";
@@ -122,15 +102,15 @@ class PlayerContent
             
             $resultsSt->bindParam(1, $pid, PDO::PARAM_INT);
             $resultsSt->execute();
-            $results = $resultsSt->fetch(PDO::FETCH_OBJ)->points;
+            $results = $resultsSt->fetch();
             
             $bonusesSt->bindParam(1, $pid, PDO::PARAM_INT);
             $bonusesSt->execute();
-            $bonuses = $bonusesSt->fetch(PDO::FETCH_OBJ)->bonus_value;
+            $bonuses = $bonusesSt->fetch();
             
             $prizesSt->bindParam(1, $pid, PDO::PARAM_INT);
             $prizesSt->execute();
-            $prizes = $prizesSt->fetch(PDO::FETCH_OBJ)->cost;
+            $prizes = $prizesSt->fetch();
             
             $tournamentCountSt->bindParam(1, $pid, PDO::PARAM_INT);
             $tournamentCountSt->bindParam(2, $pid, PDO::PARAM_INT);
@@ -143,7 +123,7 @@ class PlayerContent
             
             $playerMonthSt->bindParam(1, $pid, PDO::PARAM_INT);
             $playerMonthSt->execute();
-            $pomcount = $playerMonthSt->fetch(PDO::FETCH_OBJ)->pomcount;
+            $pomCount = $playerMonthSt->fetch();
             
         } catch (PDOException $e) {
             $message = "calling PlayerContent::getGeneral with player id $pid failed: " . $e->getMessage();
@@ -154,11 +134,16 @@ class PlayerContent
             return array();
         }
 
-        $points = $playerInfo['initial_accumulated_points'] + $results + $bonuses - $prizes;
-        $pointsAllTime = $playerInfo['initial_accumulated_points'] + $playerInfo['initial_spent_points'] +
-                            $results + $bonuses;
+        $points = $playerInfo['initial_accumulated_points']
+            + $results['points']
+            + $bonuses['bonus_value']
+            - $prizes['cost'];
+        $pointsAllTime = $playerInfo['initial_accumulated_points']
+            + $playerInfo['initial_spent_points']
+            + $results['points']
+            + $bonuses['bonus_value'];
         
-        $final_result = array_merge(
+        $finalResult = array_merge(
             $playerInfo,
             array(
                 'points' => $points,
@@ -166,7 +151,7 @@ class PlayerContent
                 'final_tables' => $finalTables,
                 'knockouts' => $knockouts,
                 'points_all_time' => $pointsAllTime,
-                'pomcount' => $pomcount
+                'pomcount' => $pomCount['pomcount']
             )
         );
         
@@ -175,26 +160,18 @@ class PlayerContent
             
             $lifetime = Config::getValue('cache_lifetime_player_general');
             
-            $this->cache->save($key, json_encode($final_result), $lifetime);
+            $this->cache->save($key, json_encode($finalResult), $lifetime);
         }
         
-        return $final_result;
+        return $finalResult;
     }
-    
+
     /**
      * Returns an array of associative arrays containing the tournament history of the player
      * identified with the passed parameter.
      * @param int $pid ID of the player.
      * @return array an array of associative arrays containing details about the player's
-     * tournament history. Such an array will contain:
-     * <ul>
-     * <li>the tournament's ID</li>
-     * <li>day the tournament took place</li>
-     * <li>month the tournament took place</li>
-     * <li>year the tournament took place</li>
-     * <li>the points obtained by the player in that tournament</li>
-     * <li>the position the player finished in that tournament</li>
-     * </ul>
+     * tournament history.
      * If the player never got points in any tournaments, an empty array will be returned.
      */
     public function getTournamentHistory($pid)
@@ -224,21 +201,13 @@ class PlayerContent
         
         return $history;
     }
-    
+
     /**
      * Returns an array of associative arrays containing the bonuses of the player
      * identified with the passed parameter.
      * @param int $pid ID of the player.
      * @return array an array of associative arrays containing details about the player's
-     * bonuses. Such an array will contain:
-     * <ul>
-     * <li>the tournament ID in which the bonus was obtained</li>
-     * <li>day the tournament took place</li>
-     * <li>month the tournament took place</li>
-     * <li>year the tournament took place</li>
-     * <li>the value in points of the bonus</li>
-     * <li>a textual description of the bonus</li>
-     * </ul>
+     * bonuses.
      * If the player never got bonuses in any tournaments, an empty array will be returned.
      */
     public function getBonuses($pid)
@@ -268,20 +237,13 @@ class PlayerContent
         
         return $bonuses;
     }
-    
+
     /**
      * Returns an array of associative arrays containing the prizes of the player
      * identified with the passed parameter.
      * @param int $pid ID of the player.
      * @return array an array of associative arrays containing details about the player's
-     * prizes. Such an array will contain:
-     * <ul>
-     * <li>a textual description of the prize</li>
-     * <li>day the prize was bought</li>
-     * <li>month the prize was bought</li>
-     * <li>year the prize was bought</li>
-     * <li>the value in points of the prize's cost</li>
-     * </ul>
+     * prizes.
      * If the player never bought anything, an empty array will be returned.
      */
     public function getPrizes($pid)

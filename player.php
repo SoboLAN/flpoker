@@ -1,6 +1,6 @@
 <?php
 
-require_once 'autoload.php';
+require_once 'vendor/autoload.php';
 
 use FileListPoker\Content\PlayerContent;
 use FileListPoker\Main\Site;

@@ -1,0 +1,24 @@
+{
+    "name": "sobolan/flpoker",
+    "type": "project",
+    "description": "The site dedicated to FileList.ro's PokerStars poker club",
+    "authors": [
+        {
+            "name": "Radu Murzea",
+            "email": "radu.murzea@gmail.com",
+            "homepage": "http://radumurzea.net",
+            "role": "Project Manager"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FileListPoker\\Renderers\\": "classes_renderers/",
+            "FileListPoker\\Main\\": "classes_main/",
+            "FileListPoker\\Content\\": "classes_db/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "doctrine/cache": "1.5.*"
+    }
+}

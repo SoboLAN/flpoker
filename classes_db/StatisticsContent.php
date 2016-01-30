@@ -6,26 +6,27 @@ use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\Cache\CacheFactory;
 use FileListPoker\Main\FLPokerException;
+
+use Doctrine\Common\Cache\CacheProvider;
 
 /**
  * This class contains function that will return various statistics about the club.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class StatisticsContent
 {
+    /**
+     * @var CacheProvider
+     */
     private $cache;
     
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        if (Config::getValue('enable_cache')) {
-            $cacheType = Config::getValue('cache_type');
-        
-            if ($cacheType == 'db') {
-                $this->cache = new CacheDB();
-            }
-        }
+        $this->cache = CacheFactory::getCacheInstance();
     }
     
     public function getTournamentsGraph()
@@ -34,7 +35,7 @@ class StatisticsContent
             $key = Config::getValue('cache_key_tournament_graph');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -53,8 +54,10 @@ class StatisticsContent
                 'ORDER BY year ASC, month ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getTournamentsGraph failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling StatisticsContent::getTournamentsGraph failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $result = $tmpresults->fetchAll();
@@ -76,7 +79,7 @@ class StatisticsContent
             $key = Config::getValue('cache_key_registrations_graph');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -95,8 +98,10 @@ class StatisticsContent
                 'ORDER BY join_year ASC, join_month ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getRegistrationsGraph failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling StatisticsContent::getRegistrationsGraph failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $result = $tmpresults->fetchAll();
@@ -118,7 +123,7 @@ class StatisticsContent
             $key = Config::getValue('cache_key_general_stats');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -146,8 +151,10 @@ class StatisticsContent
             
             $tmpspent2 = $db->query('SELECT SUM(cost) AS cost FROM prizes');
         } catch (PDOException $e) {
-            $message = "calling StatisticsContent::getGeneralStatistics failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling StatisticsContent::getGeneralStatistics failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $totalPlayers = $tmpplayercount->fetch();

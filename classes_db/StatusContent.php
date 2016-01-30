@@ -9,7 +9,6 @@ use PDOException as PDOException;
 
 /**
  * This class contains functions that will return the status of the current month
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class StatusContent
 {
@@ -32,8 +31,10 @@ class StatusContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling StatusContent::getCurrentStandings failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling StatusContent::getCurrentStandings failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         if (count($results) == 0) {
@@ -52,9 +53,10 @@ class StatusContent
             //if there is a next player (we maybe on the last) and that player has the
             //same number of points as the current one, then it means that the 2 players
             //occupy the same position
-            while (isset($resultsArray[$i]) and
-                    isset($resultsArray[$i + 1]) and
-                    $resultsArray[$i]['points'] == $resultsArray[$i + 1]['points']) {
+            while (isset($resultsArray[$i])
+                && isset($resultsArray[$i + 1])
+                && $resultsArray[$i]['points'] == $resultsArray[$i + 1]['points']
+            ) {
                 $finalResult[$position][] = $resultsArray[$i + 1];
                 $i++;
             }
@@ -88,8 +90,10 @@ class StatusContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling StatusContent::getFinalTables failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling StatusContent::getFinalTables failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         return $result->fetchAll();

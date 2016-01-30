@@ -10,7 +10,6 @@ use FileListPoker\Main\FLPokerException;
 
 /**
  * This class contains functions that will return everything there is to know about a specific tournament.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class TournamentContent
 {
@@ -31,8 +30,14 @@ class TournamentContent
             $tournamentSt->execute();
             $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch();
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentDetails with tournament id $tid failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf(
+                    'calling TournamentContent::getTournamentDetails with tournament id %s failed: %s',
+                    $tid,
+                    $e->getMessage()
+                ),
+                FLPokerException::ERROR
+            );
         }
         
         if (! $tournament) {
@@ -59,8 +64,14 @@ class TournamentContent
             $resultsSt->execute();
             
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentResults with tournament id $tid failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf(
+                    'calling TournamentContent::getTournamentResults with tournament id %s failed: %s',
+                    $tid,
+                    $e->getMessage()
+                ),
+                FLPokerException::ERROR
+            );
         }
         
         $results = $resultsSt->fetchAll();
@@ -85,8 +96,14 @@ class TournamentContent
             $bonusesSt->execute();
             
         } catch (PDOException $e) {
-            $message = "calling TournamentContent::getTournamentBonuses with tournament id $tid failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf(
+                    'calling TournamentContent::getTournamentBonuses with tournament id %s failed: %s',
+                    $tid,
+                    $e->getMessage()
+                ),
+                FLPokerException::ERROR
+            );
         }
         
         $bonuses = $bonusesSt->fetchAll();

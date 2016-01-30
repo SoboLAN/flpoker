@@ -10,7 +10,6 @@ use FileListPoker\Main\FLPokerException;
 
 /**
  * This class contains functions that return information about all the tournaments.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class TournamentsContent
 {
@@ -36,8 +35,10 @@ class TournamentsContent
             $tmptournamentsSt->execute();
             
         } catch (PDOException $e) {
-            $message = "calling TournamentsContent::getContent failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling TournamentsContent::getContent failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
 
         $final_result = $tmptournamentsSt->fetchAll();

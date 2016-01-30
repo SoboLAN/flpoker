@@ -1,13 +1,12 @@
 <?php
 
-require_once 'autoload.php';
+require_once 'vendor/autoload.php';
 
 use FileListPoker\Main\Site;
-use FileListPoker\Main\Database;
+use FileListPoker\Main\Cache\CacheFactory;
 
 $site = new Site();
 
-$db = Database::getConnection();
+$cache = CacheFactory::getCacheInstance();
 
-//delete expired cache entries
-$result = $db->query('DELETE FROM cache WHERE entry_time + lifetime < UNIX_TIMESTAMP(NOW())');
+$cache->flushAll();

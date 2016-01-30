@@ -6,8 +6,9 @@
     "enable_logging": true,
     "admin_pass": "the_admin_pass",
     
-    "enable_cache": false,
-    "cache_type": "db",
+    "enable_cache": true,
+    "cache_type": "pdo",
+    "cache_ns": "flpoker",
     
     "lang_ro_name": "ro",
     "lang_en_name": "en",

@@ -64,7 +64,6 @@ class Database
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         );
 
-        
         if ($dsnarr['charset'] && version_compare(PHP_VERSION, self::HANDLE_CONNECTION_CHARSET_BELOW_VERSION, '<')) {
             $options[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $dsnarr['charset'];
         }
@@ -80,9 +79,9 @@ class Database
             self::$connection = new PDO($dsn, $dbConfig['user'], $dbConfig['pass'], $options);
 
             //set prepared statement emulation depending on server version
-            $serverversion = self::$connection->getAttribute(PDO::ATTR_SERVER_VERSION);
-            $emulate_prepares = version_compare($serverversion, self::EMULATE_PREPARES_BELOW_VERSION, '<');
-            self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $emulate_prepares);
+            $serverVersion = self::$connection->getAttribute(PDO::ATTR_SERVER_VERSION);
+            $emulatePrepares = version_compare($serverVersion, self::EMULATE_PREPARES_BELOW_VERSION, '<');
+            self::$connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, $emulatePrepares);
         } catch (PDOException $e) {
             $message = 'There was an error while connecting to the database: ' . $e->getMessage();
             throw new FLPokerException($message, FLPokerException::ERROR);

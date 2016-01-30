@@ -2,19 +2,23 @@
 
 namespace FileListPoker\Content;
 
-use PDOException as PDOException;
-
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\Cache\CacheFactory;
 use FileListPoker\Main\FLPokerException;
+
+use Doctrine\Common\Cache\CacheProvider;
+
+use PDOException as PDOException;
 
 /**
  * This class contains functions that will return information about all the players.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class PlayersContent
 {
+    /**
+     * @var CacheProvider
+     */
     private $cache;
     
     /**
@@ -22,32 +26,16 @@ class PlayersContent
      */
     public function __construct()
     {
-        //set cache field with an apropiate cache instance (based on type), but only
-        //if caching is enabled
-        if (Config::getValue('enable_cache')) {
-            $cacheType = Config::getValue('cache_type');
-        
-            if ($cacheType == 'db') {
-                $this->cache = new CacheDB();
-            }
-        }
+        $this->cache = CacheFactory::getCacheInstance();
     }
-    
+
     /**
      * Returns an associative array of information about the players Not all players will be
      * returned, since the pagination parameters will probably eliminate most of them from
      * the result set.
      * @param int $page which page of players to return.
      * @param int $perPage how many players per page.
-     * @return array an array of information about the players. Will contain:
-     * <ul>
-     * <li>player's ID</li>
-     * <li>FileList ID</li>
-     * <li>FileList Name</li>
-     * <li>PokerStars Name</li>
-     * <li>account Type (regular or admin)</li>
-     * <li>current points</li>
-     * </ul>
+     * @return array an array of information about the players.
      */
     public function getPlayers($page, $perPage)
     {
@@ -55,7 +43,7 @@ class PlayersContent
             $key = $this->buildCacheKey(Config::getValue('cache_key_players'), $page, $perPage);
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -94,8 +82,10 @@ class PlayersContent
                 'ORDER BY player_id ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling PlayersContent::getPlayers failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling PlayersContent::getPlayers failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $results = $tmpresults->fetchAll();
@@ -144,10 +134,11 @@ class PlayersContent
         
         try {
             $players = $db->query('SELECT COUNT(*) AS players FROM players');
-
         } catch (PDOException $e) {
-            $message = "calling PlayersContent::getPlayersCount failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling PlayersContent::getPlayersCount failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         foreach ($players as $row) {
@@ -168,9 +159,15 @@ class PlayersContent
         array_multisort($sort_col, $dir, $arr);
     }
     
-    //this function will do a binary search on the associative array $array.
-    //It will return the value of the $type column if the player_id with the
-    //value $elem is found in $array. If not, it will return 0.
+    /**
+     * This function will do a binary search on the associative array $array.
+     * It will return the value of the $type column if the player_id with the
+     * value $elem is found in $array. If not, it will return 0.
+     * @param array $array
+     * @param string $type
+     * @param string $elem
+     * @return mixed
+     */
     private function arrayBinarySearch($array, $type, $elem)
     {
         $top = sizeof($array) - 1;

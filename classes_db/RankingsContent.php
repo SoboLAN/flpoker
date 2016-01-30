@@ -6,41 +6,33 @@ use PDOException as PDOException;
 
 use FileListPoker\Main\Database;
 use FileListPoker\Main\Config;
-use FileListPoker\Main\CacheDB;
+use FileListPoker\Main\Cache\CacheFactory;
 use FileListPoker\Main\FLPokerException;
+
+use Doctrine\Common\Cache\CacheProvider;
 
 /**
  * This class contains functions that will return various rankings of players.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class RankingsContent
 {
+    /**
+     * @var CacheProvider
+     */
     private $cache;
     
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        //set cache field with an apropiate cache instance (based on type), but only
-        //if caching is enabled
-        if (Config::getValue('enable_cache')) {
-            $cacheType = Config::getValue('cache_type');
-        
-            if ($cacheType == 'db') {
-                $this->cache = new CacheDB();
-            }
-        }
+        $this->cache = CacheFactory::getCacheInstance();
     }
-    
+
     /**
      * Returns an associative array of information about all the players. It will contain
      * the total points that every player has earned ever.
-     * @return array the total points that every player has earned ever. Will contain:
-     * <ul>
-     * <li>player's ID</li>
-     * <li>FileList ID</li>
-     * <li>FileList Name</li>
-     * <li>PokerStars Name</li>
-     * <li>points all time for each player</li>
-     * </ul>
+     * @return array the total points that every player has earned ever.
      */
     public function getTopPlayersAllTime()
     {
@@ -48,7 +40,7 @@ class RankingsContent
             $key = Config::getValue('cache_key_players_alltime');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -79,23 +71,27 @@ class RankingsContent
                 'ORDER BY player_id ASC'
             );
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTopPlayersAllTime failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling RankingsContent::getTopPlayersAllTime failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $results = $tmpresults->fetchAll();
         $bonuses = $tmpbonuses->fetchAll();
         
-        $final_result = array();
+        $finalResult = array();
         
         foreach ($players as $player) {
             $currentResults = $this->arrayBinarySearch($results, 'points', $player['player_id']);
             $currentBonuses = $this->arrayBinarySearch($bonuses, 'bonus_value', $player['player_id']);
 
-            $playerPoints = $player['initial_accumulated_points'] + $player['initial_spent_points'] +
-                            $currentResults + $currentBonuses;
+            $playerPoints = $player['initial_accumulated_points']
+                + $player['initial_spent_points']
+                + $currentResults
+                + $currentBonuses;
             
-            $final_result[] = array(
+            $finalResult[] = array(
                 'player_id' => $player['player_id'],
                 'id_filelist' => $player['id_filelist'],
                 'name_pokerstars' => $player['name_pokerstars'],
@@ -104,31 +100,26 @@ class RankingsContent
             );
         }
         
-        $this->arraySortByColumn($final_result, 'points');
+        $this->arraySortByColumn($finalResult, 'points');
         
-        $final_result = array_slice($final_result, 0, 200, true);
+        $finalResult = array_slice($finalResult, 0, 200, true);
         
         if (! is_null($this->cache)) {
             $key = Config::getValue('cache_key_players_alltime');
             
             $lifetime = Config::getValue('cache_lifetime_players_alltime');
             
-            $this->cache->save($key, json_encode($final_result), $lifetime);
+            $this->cache->save($key, json_encode($finalResult), $lifetime);
         }
         
-        return $final_result;
+        return $finalResult;
     }
-    
+
     /**
      * Returns an associative array of information about the 50 most active players.
      * It will contain the total number of tournaments each of those players have "cashed" in.
      * @return array the total number of tournaments each of the top 50 most active players
-     * "cashed" in. Will contain:
-     * <ul>
-     * <li>player's ID</li>
-     * <li>PokerStars Name</li>
-     * <li>number of tournaments that player cashed in</li>
-     * </ul>
+     * "cashed" in.
      */
     public function getMostActive50Players()
     {
@@ -136,7 +127,7 @@ class RankingsContent
             $key = Config::getValue('cache_key_players_mostactive');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -155,8 +146,10 @@ class RankingsContent
                 'LIMIT 50'
             );
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getMostActive50Players failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling RankingsContent::getMostActive50Players failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $active = $tmpactive->fetchAll();
@@ -171,17 +164,12 @@ class RankingsContent
         
         return $active;
     }
-    
+
     /**
      * Returns an associative array of information about the 40 players that received the
      * most points in the last 6 months. It will contain the total number of points each
      * of those players received in the last 6 months.
-     * @return array will contain:
-     * <ul>
-     * <li>player's ID</li>
-     * <li>PokerStars Name</li>
-     * <li>total points that player received in the last 6 months</li>
-     * </ul>
+     * @return array
      */
     public function getTop40Players6Months()
     {
@@ -189,7 +177,7 @@ class RankingsContent
             $key = Config::getValue('cache_key_players_6months');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -210,8 +198,10 @@ class RankingsContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTop40Players6Months failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling RankingsContent::getTop40Players6Months failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $sixMonths = $tmp6months->fetchAll();
@@ -226,17 +216,12 @@ class RankingsContent
         
         return $sixMonths;
     }
-    
+
     /**
      * Returns an associative array of information about the 50 players that reached the
      * most final tables during their membership. It will contain the total number of final
      * tables each of those players reached at.
-     * @return array will contain:
-     * <ul>
-     * <li>player's ID</li>
-     * <li>PokerStars Name</li>
-     * <li>total number of final tables that player reached at</li>
-     * </ul>
+     * @return array
      */
     public function getTop50FinalTables()
     {
@@ -244,7 +229,7 @@ class RankingsContent
             $key = Config::getValue('cache_key_final_tables');
             
             if ($this->cache->contains($key)) {
-                $content = json_decode($this->cache->getContent($key), true);
+                $content = json_decode($this->cache->fetch($key), true);
                 
                 return $content;
             }
@@ -264,8 +249,10 @@ class RankingsContent
             );
             
         } catch (PDOException $e) {
-            $message = "calling RankingsContent::getTop50FinalTables failed: " . $e->getMessage();
-            throw new FLPokerException($message, FLPokerException::ERROR);
+            throw new FLPokerException(
+                sprintf('calling RankingsContent::getTop50FinalTables failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
         }
         
         $finalTables = $tmpfinaltables->fetchAll();
@@ -292,9 +279,15 @@ class RankingsContent
         array_multisort($sort_col, $dir, $arr);
     }
     
-    //this function will do a binary search on the associative array $array.
-    //It will return the value of the $type column if the player_id with the
-    //value $elem is found in $array. If not, it will return 0.
+    /**
+     * This function will do a binary search on the associative array $array.
+     * It will return the value of the $type column if the player_id with the
+     * value $elem is found in $array. If not, it will return 0.
+     * @param array $array
+     * @param string $type
+     * @param string $elem
+     * @return mixed
+     */
     private function arrayBinarySearch($array, $type, $elem)
     {
         $top = sizeof($array) - 1;
