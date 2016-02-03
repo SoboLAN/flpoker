@@ -110,4 +110,37 @@ class TournamentContent
         
         return $bonuses;
     }
+    
+    public function getNewTournamentDetails($tid)
+    {
+        $db = Database::getConnection();
+        
+        try {
+            $tournamentSt = $db->prepare(
+                'SELECT t.tournament_id, t.participants, COUNT(r.player_id) AS pcount ' .
+                'FROM tournaments t ' .
+                'JOIN results r ON t.tournament_id=r.tournament_id ' .
+                'WHERE t.tournament_id=?'
+            );
+            
+            $tournamentSt->bindParam(1, $tid, PDO::PARAM_INT);
+            $tournamentSt->execute();
+            $tournament = $tournamentSt->rowCount() == 0 ? false : $tournamentSt->fetch();
+        } catch (PDOException $e) {
+            throw new FLPokerException(
+                sprintf(
+                    'calling TournamentContent::getNewTournamentDetails with tournament id %s failed: %s',
+                    $tid,
+                    $e->getMessage()
+                ),
+                FLPokerException::ERROR
+            );
+        }
+        
+        if (is_null($tournament['tournament_id']) || is_null($tournament['participants']) || $tournament['pcount'] > 0) {
+            return array();
+        }
+        
+        return $tournament;
+    }
 }

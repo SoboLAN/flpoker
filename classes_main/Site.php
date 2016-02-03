@@ -75,19 +75,24 @@ class Site
      */
     public function isValidNumericQueryParameter($parameterName, $maximumLength, $default = null)
     {
-        $validatorBuilder = new ValidatorBuilder();
-
-        /* @var $validator ValidatorInterface */
-        $validator = $validatorBuilder->getValidator();
-
-        $constraint = new PositiveNumber();
-        $constraint->maxLength = $maximumLength;
-
-        $parameter = $this->request->query->get($parameterName, $default);
-
-        $errors = $validator->validate($parameter, $constraint);
-        
-        return $errors;
+        return $this->isValidNumericParameter(
+            $this->request->query->get($parameterName, $default),
+            $maximumLength
+        );
+    }
+    
+    /**
+     * Utility function that allows validating numerical parameters passed through request POST parameters
+     * @param string $parameterName
+     * @param int $maximumLength
+     * @param mixed $default
+     */
+    public function isValidNumericPostParameter($parameterName, $maximumLength, $default = null)
+    {
+        return $this->isValidNumericParameter(
+            $this->request->request->get($parameterName, $default),
+            $maximumLength
+        );
     }
     
     /**
@@ -149,5 +154,20 @@ class Site
             
             $this->response->headers->setCookie($cookie);
         }
+    }
+    
+    private function isValidNumericParameter($parameter, $maximumLength)
+    {
+        $validatorBuilder = new ValidatorBuilder();
+
+        /* @var $validator ValidatorInterface */
+        $validator = $validatorBuilder->getValidator();
+
+        $constraint = new PositiveNumber();
+        $constraint->maxLength = $maximumLength;
+
+        $errors = $validator->validate($parameter, $constraint);
+        
+        return $errors;
     }
 }

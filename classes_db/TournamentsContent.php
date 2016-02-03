@@ -62,4 +62,31 @@ class TournamentsContent
         
         return $tournaments['t_count'];
     }
+    
+    public function addTournamentResults($tournamentId, array $results)
+    {
+        $db = Database::getConnection();
+        
+        try {
+            $insertSt = $db->prepare(
+                'INSERT INTO results(player_id, tournament_id, points, position, kos) ' .
+                'VALUES (:pid, :tid, :points, :position, :kos)'
+            );
+            
+            foreach ($results as $result) {
+                $insertSt->execute(
+                    array(
+                        'pid' => $result['player'],
+                        'tid' => $tournamentId,
+                        'points' => $result['points'],
+                        'position' => $result['position'],
+                        'kos' => $result['kos']
+                    )
+                );
+            }
+        } catch (PDOException $e) {
+            $message = "calling TournamentsContent::addTournamentResults failed: " . $e->getMessage();
+            throw new FLPokerException($message, FLPokerException::ERROR);
+        }
+    }
 }

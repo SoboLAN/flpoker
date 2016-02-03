@@ -148,6 +148,32 @@ class PlayersContent
         return $count;
     }
     
+    public function getAllPlayersNames()
+    {
+        $db = Database::getConnection();
+
+        try {
+            $result = $db->query(
+                'SELECT name_pokerstars ' .
+                'FROM players ' .
+                'WHERE name_pokerstars IS NOT NULL ' .
+                'ORDER BY name_pokerstars ASC'
+            );
+        } catch (PDOException $e) {
+            throw new FLPokerException(
+                sprintf('calling PlayersContent::getAllPlayersNames failed: %s', $e->getMessage()),
+                FLPokerException::ERROR
+            );
+        }
+        
+        $names = array();
+        foreach ($result as $name) {
+            $names[] = $name['name_pokerstars'];
+        }
+        
+        return $names;
+    }
+    
     //This function will sort the associative array $arr by the column $col in the $dir direction.
     private function arraySortByColumn(&$arr, $col, $dir = SORT_DESC)
     {
