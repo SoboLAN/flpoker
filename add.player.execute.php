@@ -40,9 +40,9 @@ if ($getSt->rowCount() > 0) {
 
 $insertSt = $db->prepare(
     'INSERT INTO players (player_id, name_pokerstars, name_filelist, id_filelist, member_type, ' .
-    'initial_accumulated_points, initial_spent_points, join_date, is_member_of_club) ' .
+    'initial_accumulated_points, initial_spent_points, join_date) ' .
     'VALUES ' .
-    '(NULL, ?, ?, ?, \'regular\', 0, 0, ?, 1)'
+    '(NULL, ?, ?, ?, \'regular\', 0, 0, ?)'
 );
 
 $insertSt->bindParam(1, $_POST['nameps'], PDO::PARAM_STR);

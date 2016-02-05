@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `bonus_points` (
   PRIMARY KEY (`bonus_id`),
   KEY `player_id` (`player_id`),
   KEY `tournament_id` (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=527 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=918 ;
 
 --
 -- Table structure for table `cache`
@@ -45,9 +45,8 @@ CREATE TABLE IF NOT EXISTS `players` (
   `initial_accumulated_points` mediumint(8) NOT NULL,
   `initial_spent_points` mediumint(8) unsigned NOT NULL,
   `join_date` date DEFAULT NULL,
-  `is_member_of_club` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=989 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1044 ;
 
 --
 -- Table structure for table `players_of_the_month`
@@ -60,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `players_of_the_month` (
   `award_year` year(4) NOT NULL,
   PRIMARY KEY (`player_of_the_month_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
 
 --
 -- Table structure for table `prizes`
@@ -75,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `prizes` (
   `prize_type` enum('new','old') NOT NULL,
   PRIMARY KEY (`prize_id`),
   KEY `player_id` (`player_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=152 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=192 ;
 
 --
 -- Table structure for table `results`
@@ -87,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `results` (
   `points` smallint(6) NOT NULL,
   `position` smallint(5) unsigned DEFAULT NULL,
   `kos` tinyint(3) unsigned DEFAULT NULL,
-  PRIMARY KEY (`tournament_id`, `player_id`),
+  PRIMARY KEY (`tournament_id`,`player_id`),
   KEY `tournament_id` (`tournament_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -102,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `tournaments` (
   `participants` smallint(5) unsigned DEFAULT NULL,
   `duration` smallint(5) unsigned DEFAULT NULL,
   PRIMARY KEY (`tournament_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=220 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=358 ;
 
 --
 -- Constraints for dumped tables
