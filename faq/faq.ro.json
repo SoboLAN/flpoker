@@ -40,79 +40,74 @@
     "Am terminat pe locul X. Câte puncte primesc ?": [
         {
             "type": "row",
-            "content": "Sub 30 de jucători:"
+            "content": "Formula e: X = MIN ( MAX ( CEILING (Y / 2), 12), 19)"
+        },
+        {
+            "type": "row",
+            "content": "unde:"
+        },
+        {
+            "type": "row",
+            "content": "X = numărul de jucători care primesc puncte; şi"
+        },
+        {
+            "type": "row",
+            "content": "Y = numărul total de jucători din turneu"
+        },
+        {
+            "type": "row",
+            "content": "Pusă în cuvinte, formula zice: numărul de jucători premiaţi = aproximativ 50 % din participanţi, dar nu mai puţin de 12 şi nu mai mult de 19."
+        },
+        {
+            "type": "row",
+            "content": "Prin urmare, valorile posibile sunt:"
         },
         {
             "type": "table",
-            "titles": ["Poziţie", "Puncte"],
+            "titles": ["Numărul total de jucători ai turneului", "Poziţii premiate"],
             "rows": [
-                ["1", "15"],
-                ["2", "13"],
-                ["3", "10"],
-                ["4", "9"],
-                ["5", "8"],
-                ["6", "7"],
-                ["7", "6"],
-                ["8", "5"],
-                ["9", "4"],
-                ["10", "3"],
-                ["11", "2"],
-                ["12", "1"]
+                ["24 sau mai puţin", "12"],
+                ["25 sau 26", "13"],
+                ["27 sau 28", "14"],
+                ["29 sau 30", "15"],
+                ["31 sau 32", "16"],
+                ["33 sau 34", "17"],
+                ["35 sau 36", "18"],
+                ["37 sau mai mult", "19"]
             ]
         },
         {
             "type": "row",
-            "content": "Între 30 şi 39 de jucători:"
+            "content": "O dată ce avem numărul corect, îl aplicăm următoarei scări de premiere:"
         },
         {
             "type": "table",
-            "titles": ["Poziţie", "Puncte"],
+            "titles": ["Scară de premiere"],
             "rows": [
-                ["1", "21"],
-                ["2", "19"],
-                ["3", "17"],
-                ["4", "15"],
-                ["5", "13"],
-                ["6", "10"],
-                ["7", "9"],
-                ["8", "8"],
-                ["9", "7"],
-                ["10", "6"],
-                ["11", "5"],
-                ["12", "4"],
-                ["13", "3"],
-                ["14", "2"],
-                ["15", "1"]
+                ["30"],
+                ["27"],
+                ["25"],
+                ["23"],
+                ["21"],
+                ["19"],
+                ["17"],
+                ["15"],
+                ["13"],
+                ["10"],
+                ["9"],
+                ["8"],
+                ["7"],
+                ["6"],
+                ["5"],
+                ["4"],
+                ["3"],
+                ["2"],
+                ["1"]
             ]
         },
         {
             "type": "row",
-            "content": "40 de jucători sau mai mult:"
-        },
-        {
-            "type": "table",
-            "titles": ["Poziţie", "Puncte"],
-            "rows": [
-                ["1", "30"],
-                ["2", "27"],
-                ["3", "25"],
-                ["4", "23"],
-                ["5", "21"],
-                ["6", "19"],
-                ["7", "17"],
-                ["8", "15"],
-                ["9", "13"],
-                ["10", "10"],
-                ["11", "9"],
-                ["12", "8"],
-                ["13", "7"],
-                ["14", "6"],
-                ["15", "5"],
-                ["16", "4"],
-                ["17", "3"],
-                ["18", "2"],
-                ["19", "1"]
-            ]
+            "content": "Exemplu practic: 33 de jucători în turneu -> 17 jucători premiaţi -> aplicăm ultimele 17 rânduri din scara de mai sus primilor 17 jucători din turneu (locul 1 primeşte 25 de puncte, locul 2 primeşte 23 de puncte şamd)."
         }
     ],
     "Există ceva bonus-uri ?": [
