@@ -4,7 +4,6 @@ namespace FileListPoker\Main;
 
 /**
  * Exception class for the FL Poker site.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class FLPokerException extends \Exception
 {

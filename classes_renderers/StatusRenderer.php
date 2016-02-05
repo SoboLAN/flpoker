@@ -6,9 +6,6 @@ use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Config;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 class StatusRenderer extends GeneralRenderer
 {
     private $site;

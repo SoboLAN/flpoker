@@ -2,14 +2,13 @@
 
 namespace FileListPoker\Main;
 
-use PDO as PDO;
-use PDOException as PDOException;
+use \PDO as PDO;
+use \PDOException as PDOException;
 
 use FileListPoker\Main\FLPokerException;
 
 /**
  * Handles the construction of a PDO object capable of performing database operations.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Database
 {

@@ -6,9 +6,6 @@ use FileListPoker\Renderers\GeneralRenderer;
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Dictionary;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 class PlayerRenderer extends GeneralRenderer
 {
     private $site;

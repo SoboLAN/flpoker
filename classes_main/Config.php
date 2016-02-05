@@ -6,7 +6,6 @@ use FileListPoker\Main\FLPokerException;
 
 /**
  * This class contains configuration options for the site.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Config
 {

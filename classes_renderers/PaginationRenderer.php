@@ -4,9 +4,6 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Main\Site;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 class PaginationRenderer
 {
     private $site;

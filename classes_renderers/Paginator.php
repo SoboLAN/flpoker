@@ -2,9 +2,6 @@
 
 namespace FileListPoker\Renderers;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 class Paginator
 {
     private $total;

@@ -8,9 +8,6 @@ use FileListPoker\Main\Dictionary;
 use FileListPoker\Main\Config;
 use FileListPoker\Main\FLPokerException;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 class FullPageRenderer extends GeneralRenderer
 {
     private $site;

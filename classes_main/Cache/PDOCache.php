@@ -11,7 +11,6 @@ use PDOException as PDOException;
 
 /**
  * Implements caching functionality using a database to store the cached objects.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class PDOCache extends CacheProvider
 {

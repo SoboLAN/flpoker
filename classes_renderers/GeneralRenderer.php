@@ -4,9 +4,6 @@ namespace FileListPoker\Renderers;
 
 use FileListPoker\Main\Dictionary;
 
-/**
- * @author Radu Murzea <radu.murzea@gmail.com>
- */
 abstract class GeneralRenderer
 {
     /**

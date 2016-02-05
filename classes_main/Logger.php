@@ -6,7 +6,6 @@ use FileListPoker\Main\Config;
 
 /**
  * Class that handles logging functionality.
- * @author Radu Murzea <radu.murzea@gmail.com>
  */
 class Logger
 {
