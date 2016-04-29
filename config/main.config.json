@@ -1,7 +1,7 @@
 {
     "online": true,
     "site_url": "http://localhost/flpoker/",
-    "site_version": "1.5.2",
+    "site_version": "1.5.3",
     "enable_google_analytics": false,
     "enable_logging": true,
     "admin_pass": "the_admin_pass",
