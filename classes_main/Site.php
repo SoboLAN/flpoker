@@ -37,13 +37,13 @@ class Site
     {
         set_exception_handler(array($this, 'handleException'));
         
-        if (! Config::getValue('online')) {
-            throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_OFFLINE);
-        }
-        
         $this->request = Request::createFromGlobals();
         $this->response = new Response();
         $this->response->setProtocolVersion('1.1');
+
+        if (! Config::getValue('online')) {
+            throw new FLPokerException('The site is currently down for maintenance', FLPokerException::SITE_OFFLINE);
+        }
 
         $this->setSiteLanguage();
     }
