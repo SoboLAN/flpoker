@@ -49,14 +49,8 @@ class PlayersMonthContent
 
         try {
             $playersSt = $db->query(
-                'SELECT m.player_id, m.award_month, m.award_year, ' .
-                'p.id_filelist, p.name_filelist, p.name_pokerstars, p.member_type, ' .
-                    '(SELECT SUM(r.points) ' .
-                    'FROM results r ' .
-                    'JOIN tournaments t ON r.tournament_id=t.tournament_id ' .
-                    'WHERE MONTH(t.tournament_date)=m.award_month ' .
-                    'AND YEAR(t.tournament_date)=m.award_year ' .
-                    'AND r.player_id=m.player_id) AS points ' .
+                'SELECT m.player_id, m.award_month, m.award_year, m.points, ' .
+                'p.id_filelist, p.name_filelist, p.name_pokerstars, p.member_type ' .
                 'FROM players_of_the_month m ' .
                 'JOIN players p ON m.player_id = p.player_id ' .
                 'ORDER BY m.award_year DESC, m.award_month DESC'

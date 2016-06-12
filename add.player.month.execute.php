@@ -16,7 +16,7 @@ if (! isset($_POST['flpokerpassword']) || $_POST['flpokerpassword'] !== $adminPa
     die('nice try.');
 }
 
-if (! isset($_POST['player']) || ! isset($_POST['thedate'])) {
+if (! isset($_POST['player']) || ! isset($_POST['thedate']) || ! isset($_POST['thepoints'])) {
     die('Some data is missing.');
 }
 
@@ -41,14 +41,15 @@ if ($date == false) {
 }
 
 $insertSt = $db->prepare(
-    'INSERT INTO players_of_the_month (player_of_the_month_id, player_id, award_month, award_year) ' .
+    'INSERT INTO players_of_the_month (player_of_the_month_id, player_id, award_month, award_year, points) ' .
     'VALUES ' .
-    '(NULL, ?, ?, ?)'
+    '(NULL, ?, ?, ?, ?)'
 );
 
 $insertSt->bindParam(1, $pid, PDO::PARAM_INT);
 $insertSt->bindParam(2, $month, PDO::PARAM_INT);
 $insertSt->bindParam(3, $year, PDO::PARAM_INT);
+$insertSt->bindParam(4, $_POST['thepoints'], PDO::PARAM_INT);
 
 $insertSt->execute();
 $rows = $insertSt->rowCount();

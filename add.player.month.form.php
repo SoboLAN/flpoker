@@ -30,21 +30,21 @@ echo "<script type=\"text/javascript\" src=\"$jQueryPath\"></script>\n";
 echo "<script type=\"text/javascript\" src=\"$jQueryUIPath\"></script>\n";
 echo "<link rel=\"stylesheet\" href=\"$jQueryCSSPath\" />\n";
 ?>
- 
+
 <style type="text/css">
     div{
         padding:8px;
     }
-    
+
     div label {
         padding: 8px;
     }
-    
+
     body {
         background:#BCD5E1;
     }
 </style>
- 
+
 </head>
 
 <?php
@@ -57,11 +57,11 @@ foreach ($result as $name) {
 $nameList = 'var availableNames = ["' . implode ('", "', $names) . '"];';
 
 ?>
- 
+
 <body>
- 
+
 <h1>FileList Poker Add Player of the Month</h1>
- 
+
 <script type="text/javascript">
 
 $(document).ready(function()
@@ -69,7 +69,7 @@ $(document).ready(function()
     <?php echo $nameList; ?>
 
     $('#player').autocomplete({source: availableNames});
-    
+
     $('#thedate').datepicker ({dateFormat: 'yy-mm', firstDay: 1});
 });
 </script>
@@ -82,6 +82,10 @@ $(document).ready(function()
     <div>
         <label>For Date: </label>
         <input type="text" name="thedate" id="thedate" value="" />
+    </div>
+    <div>
+        <label>Number of points: </label>
+        <input type="text" name="thepoints" id="thepoints" value="" />
     </div>
     <p>
         <label>Password: </label>

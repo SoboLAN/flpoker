@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `players_of_the_month` (
   `player_id` mediumint(8) unsigned NOT NULL,
   `award_month` smallint(5) unsigned NOT NULL,
   `award_year` year(4) NOT NULL,
+  `points` int(11) NOT NULL,
   PRIMARY KEY (`player_of_the_month_id`),
   KEY `player_id` (`player_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
