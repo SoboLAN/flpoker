@@ -120,7 +120,7 @@ class Site
                     break;
                 
                 case FLPokerException::SITE_OFFLINE:
-                    $newLocation = '503.shtml';
+                    $newLocation = 'maintenance.shtml';
                     break;
                 
                 default:
