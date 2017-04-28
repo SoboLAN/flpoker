@@ -35,7 +35,7 @@
             <br />
             Project Author and Site Design: Radu Murzea.
             <br />
-            <a href="https://github.com/SoboLAN/flpoker">GitHub Repository</a>
+            <a href="https://github.com/SoboLAN/flpoker">Site Source Code</a>
         </footer>
     </div>
     {bottom_page_scripts}
