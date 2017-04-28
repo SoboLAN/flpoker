@@ -4,10 +4,9 @@ require_once 'vendor/autoload.php';
 
 use FileListPoker\Main\Site;
 use FileListPoker\Main\Database;
-use FileListPoker\Main\CacheDB;
 use FileListPoker\Main\Config;
 use FileListPoker\Content\PlayerContent;
-
+use FileListPoker\Main\Cache\CacheFactory;
 use PDO as PDO;
 
 $site = new Site();
@@ -87,14 +86,10 @@ if ($updateSt->rowCount () !== 1) {
     die('There was an error while editing the player');
 } elseif (Config::getValue('enable_cache')) {
 
-    $cacheType = Config::getValue('cache_type');
-    if ($cacheType == 'db') {
-        $cache = new CacheDB();
-    }
-
-    if ($cache) {
+    $cache = CacheFactory::getCacheInstance();
+    if (! is_null($cache)) {
         $key = Config::getValue('cache_key_player_general') . $_POST['pid'];
-        $cache->flush($key);
+        $cache->delete($key);
     }
 }
 
