@@ -3,12 +3,10 @@
         {
             "type": "row",
             "content": "The tournaments are played on Pokerstars"
-        }
-    ],
-    "Where can I download PokerStars from ?": [
+        },
         {
             "type": "row",
-            "content": "The PokerStars client can be downloaded from here: https://www.pokerstars.com/poker/download"
+            "content": "The PokerStars client can be downloaded from here: <a href=\"https://www.pokerstars.com/poker/download\">https://www.pokerstars.com/poker/download</a>."
         }
     ],
     "How can I signup to the poker club ?": [
@@ -29,6 +27,12 @@
         {
             "type": "row",
             "content": "Sometimes, in the case of special circumstances (holidays etc.), tournaments will be re-scheduled. This will be announced on FileList forum."
+        }
+    ],
+    "Why does it cost so much (20.000 Play-Money) to register for a tournament?": [
+        {
+            "type": "row",
+            "content": "Unfortunately that is the minimum amount possible for such tournaments. Smaller amounts are not possible because of PokerStars policy."
         }
     ],
     "Why didn't I get any points in a tournament ?": [
@@ -56,7 +60,7 @@
         },
         {
             "type": "row",
-            "content": "In words, the formula says: number of players getting payed = approximately 50 % of participants, but not fewer than 12 and not more than 24."
+            "content": "In other words, the formula says: number of players getting payed = approximately 50 % of participants, but not fewer than 12 and not more than 24."
         },
         {
             "type": "row",
@@ -158,8 +162,21 @@
                 ["Avatar / Torrent Request", "30"],
                 ["VIP for 40 days", "350"],
                 ["1 invitation (VIP+)", "100"],
-                ["Sending 1 invitation to someone", "100"]
+                ["Sending 1 invitation to someone", "100"],
+                ["300 FLCoins", "30"],
+                ["550 FLCoins", "50"],
+                ["1200 FLCoins", "100"],
+                ["3500 FLCoins", "300"],
+                ["6000 FLCoins", "500"],
+                ["8500 FLCoins", "750"],
+                ["12500 FLCoins", "1000"]
             ]
+        }
+    ],
+    "Why is there inconsistent points information between various pageson the site?": [
+        {
+            "type": "row",
+            "content": "The site relies on a caching system for most information. This means the information may take up to 24 or 36 hours to be recalculated/updated."
         }
     ]
 }

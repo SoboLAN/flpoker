@@ -3,12 +3,10 @@
         {
             "type": "row",
             "content": "Turneele se joacă pe Pokerstars"
-        }
-    ],
-    "De unde pot downloada PokerStars ?": [
+        },
         {
             "type": "row",
-            "content": "Client-ul se poate descărca de aici: https://www.pokerstars.ro/poker/download"
+            "content": "Client-ul se poate descărca de aici: <a href=\"https://www.pokerstars.ro/poker/download\">https://www.pokerstars.ro/poker/download</a>."
         }
     ],
     "Cum mă pot înscrie în clubul de poker ?": [
@@ -29,6 +27,12 @@
         {
             "type": "row",
             "content": "Uneori turneele se vor re-programa, în cazuri speciale (sărbători etc.). Aceste cazuri se vor anunţa pe forum-ul FileList"
+        }
+    ],
+    "De ce costă atât de mult (20.000 Play-Money) ca să mă înscriu la un turneu?": [
+        {
+            "type": "row",
+            "content": "Din păcate aceasta e suma minimă pentru astfel de turnee. Sume mai mici nu sunt posibile datorită politicii PokerStars-ului."
         }
     ],
     "De ce nu am intrat în puncte ?": [
@@ -158,8 +162,21 @@
                 ["Avatar / Torrent Request", "30"],
                 ["VIP timp de 40 de zile", "350"],
                 ["1 invitatie pe cont (VIP+)", "100"],
-                ["Trimiterea unei invitatii", "100"]
+                ["Trimiterea unei invitatii", "100"],
+                ["300 FLCoins", "30"],
+                ["550 FLCoins", "50"],
+                ["1200 FLCoins", "100"],
+                ["3500 FLCoins", "300"],
+                ["6000 FLCoins", "500"],
+                ["8500 FLCoins", "750"],
+                ["12500 FLCoins", "1000"]
             ]
+        }
+    ],
+    "De ce sunt inconsistenţe între punctele care le am pe variate pagini ale site-ului?": [
+        {
+            "type": "row",
+            "content": "Site-ul se bazează pe un sistem de caching pentru majoritatea informaţiilor. Asta înseamnă că anumite date vor fi actualizate/recalculate doar o dată la 24 - 36 de ore."
         }
     ]
 }
