@@ -76,7 +76,7 @@ class RankingsRenderer extends GeneralRenderer
                 $flURL = $nameFilelist;
             } else {
                 $nameFilelist = $player['name_filelist'];
-                $flURL = '<a href="http://filelist.ro/userdetails.php?id=' . $player['id_filelist'] . '">' .
+                $flURL = '<a href="http://filelist.io/userdetails.php?id=' . $player['id_filelist'] . '">' .
                         $nameFilelist . '</a>';
             }
             

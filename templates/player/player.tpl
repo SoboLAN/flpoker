@@ -7,7 +7,7 @@
     </ul>
     <section id="tabs-1">
         <p><span class="bigger_label">{player_tab_general_pname}: {pname}</span></p>
-        <p><span class="bigger_label">{player_tab_general_fname}: <a href="http://filelist.ro/userdetails.php?id={flid}">{flname}</a></span></p>
+        <p><span class="bigger_label">{player_tab_general_fname}: <a href="http://filelist.io/userdetails.php?id={flid}">{flname}</a></span></p>
         <p><span class="bigger_label">{player_tab_general_membertype}: {member_type}</span></p>
         <p><span class="bigger_label">{player_tab_general_regdate}: {regdate}</span></p>
         <p><span class="bigger_label">{player_tab_general_points}: {general_points}</span></p>
