@@ -16,13 +16,13 @@
         },
         {
             "type": "row",
-            "content": "Daţi click pe butonul 'Intră într-un Club de poker', introduceţi numărul de ID al clubului: 488267 cu codul de invitaţie 'tournament'"
+            "content": "Daţi click pe butonul 'Intră într-un Club de poker', introduceţi numărul de ID al clubului: 3626300 cu codul de invitaţie 'tournament'"
         }
     ],
     "Când au loc turneele ?": [
         {
             "type": "row",
-            "content": "Turneele au loc în fiecare marţi şi joi de la ora 20"
+            "content": "Turneele au loc în fiecare marţi, joi şi sâmbătă de la ora 20"
         },
         {
             "type": "row",
@@ -137,10 +137,14 @@
                 ["3 mese finale într-o lună", "10"],
                 ["4 mese finale într-o lună", "15"],
                 ["5 mese finale într-o lună", "20"],
-                ["6 sau mai multe mese finale într-o lună", "25"],
+                ["6 mese finale într-o lună", "25"],
+                ["7 mese finale într-o lună", "30"],
+                ["8 mese finale într-o lună", "35"],
+                ["9 mese finale într-o lună", "40"],
+                ["10 sau mai multe mese finale într-o lună", "45"],
                 ["Mână Straight Flush", "6"],
                 ["Mână Royal Flush", "15"],
-                ["Câştigarea titlului 'Jucătorul Lunii'", "40"]
+                ["Câştigarea titlului 'Jucătorul Lunii'", "50"]
             ]
         }
     ],

@@ -16,13 +16,13 @@
         },
         {
             "type": "row",
-            "content": "Click on 'Join a poker club', enter the club ID: 488267 together with the invitation code: 'tournament'"
+            "content": "Click on 'Join a poker club', enter the club ID: 3626300 together with the invitation code: 'tournament'"
         }
     ],
     "When do the tournaments take place ?": [
         {
             "type": "row",
-            "content": "The tournaments take place every Tuesday and Thursday at 8 PM Romanian Local Time"
+            "content": "The tournaments take place every Tuesday, Thursday and Saturday at 8 PM Romanian Local Time"
         },
         {
             "type": "row",
@@ -137,10 +137,14 @@
                 ["3 final tables in a month", "10"],
                 ["4 final tables in a month", "15"],
                 ["5 final tables in a month", "20"],
-                ["6 or more final tables in a month", "25"],
+                ["6 final tables in a month", "25"],
+                ["7 final tables in a month", "30"],
+                ["8 final tables in a month", "35"],
+                ["9 final tables in a month", "40"],
+                ["10 or more final tables in a month", "45"],
                 ["Straight Flush", "6"],
                 ["Royal Flush", "15"],
-                ["Winning 'Player of the Month' title", "40"]
+                ["Winning 'Player of the Month' title", "50"]
             ]
         }
     ],
